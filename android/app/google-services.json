@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "600651705755",
+    "firebase_url": "https://zaap-dc296.firebaseio.com",
+    "project_id": "zaap-dc296",
+    "storage_bucket": "zaap-dc296.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600651705755:android:a43f14ebc4a63c2324c53e",
+        "android_client_info": {
+          "package_name": "com.zaap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600651705755-1jsfkaadst2fi3840rlpujnk2k63g7ii.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zaap",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "600651705755-ua5v3vhufd010oja72b1a7libdk3hogr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLDZdo0ZCCs8y62rctTlw4I6QeOIBh6K4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600651705755-ua5v3vhufd010oja72b1a7libdk3hogr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "600651705755-tt51ifbpvfpca26sgi69g284crvqk1mo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.company.zaap"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <color name="white">#FFFFFF</color>
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!-- <item name="android:editTextBackground">@layout/launch_screen</item> -->
+          <!-- <item name="android:windowBackground">@null</item> -->
+          <item name="android:windowBackground">#808080</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+    </style>
+
+</resources>

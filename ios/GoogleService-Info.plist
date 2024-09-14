@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>600651705755-6t04hn5hc0ndfv72s2k9vf39e248h3nd.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.600651705755-6t04hn5hc0ndfv72s2k9vf39e248h3nd</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>600651705755-1jsfkaadst2fi3840rlpujnk2k63g7ii.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCyRGhK0QCvWGSuqRw3I4LK2CT2WpLA3Us</string>
+	<key>GCM_SENDER_ID</key>
+	<string>600651705755</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.Zaap</string>
+	<key>PROJECT_ID</key>
+	<string>zaap-dc296</string>
+	<key>STORAGE_BUCKET</key>
+	<string>zaap-dc296.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:600651705755:ios:2a7d7a31127ae00e24c53e</string>
+	<key>DATABASE_URL</key>
+	<string>https://zaap-dc296.firebaseio.com</string>
+</dict>
+</plist>
