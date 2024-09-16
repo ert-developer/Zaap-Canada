@@ -27,7 +27,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb732582058911892</string>
+				<string>fb484439831215924</string>
 			</array>
 		</dict>
 		<dict>
@@ -42,9 +42,9 @@
 	<key>CFBundleVersion</key>
 	<string>2</string>
 	<key>FacebookAppID</key>
-	<string>732582058911892</string>
+	<string>484439831215924</string>
 	<key>FacebookClientToken</key>
-	<string>b243a468c49b8daf8434c20f18f08d99</string>
+	<string>b25662b5145da8432b165ff78de5e935</string>
 	<key>FacebookDisplayName</key>
 	<string>zaap</string>
 	<key>LSApplicationQueriesSchemes</key>

@@ -78,9 +78,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.zaap"
+    namespace "com.zaap_canada"
     defaultConfig {
-        applicationId "com.zaap"
+        applicationId "com.zaap_canada"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 3

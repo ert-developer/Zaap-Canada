@@ -1,4 +1,4 @@
-package com.zaap;
+package com.zaap_canada;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

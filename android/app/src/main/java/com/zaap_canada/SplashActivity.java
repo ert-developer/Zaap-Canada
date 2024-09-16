@@ -1,4 +1,4 @@
-// package com.zaap;
+// package com.zaap_canada;
 
 // import androidx.appcompat.app.AppCompatActivity;
 // import android.app.Application;
@@ -33,7 +33,7 @@
 //     }
 // }
 
-package com.zaap;
+package com.zaap_canada;
 
 import android.content.Context;
 import android.content.Intent;

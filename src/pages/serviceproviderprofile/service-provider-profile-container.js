@@ -298,7 +298,7 @@ const ServiceProviderProfileContainer = ({navigation}) => {
           bio: professionBio,
           state: state,
         };
-        // const uploadedImageUrl = uploadImageToServer('file:///data/user/0/com.zaap/cache/rn_image_picker_lib_temp_1d9e8e38-bc6f-4b85-b994-b97dff5ac07a.jpg');
+        // const uploadedImageUrl = uploadImageToServer('file:///data/user/0/com.zaap_canada/cache/rn_image_picker_lib_temp_1d9e8e38-bc6f-4b85-b994-b97dff5ac07a.jpg');
         // console.log('uploadedImageUrl', uploadedImageUrl)
         // // Now, `uploadedImageUrl` contains the HTTPS link to the uploaded image.
         // console.log("HTTPS URL:", uploadedImageUrl);

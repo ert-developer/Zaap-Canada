@@ -30,7 +30,7 @@ const LoginContainer = ({navigation}) => {
 
   useEffect(() => {
     GoogleSignin.configure({
-      webClientId: '600651705755-ua5v3vhufd010oja72b1a7libdk3hogr.apps.googleusercontent.com',
+      webClientId: '849033912129-900hqg5pi670htf7idm8kop2dg8k0bht.apps.googleusercontent.com',
     });
   }, []);
 
