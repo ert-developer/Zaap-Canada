@@ -412,34 +412,44 @@ const PreviousJobsPaymentModal = () => {
       const to = `${employerData?.email}`;
       const subject = 'Booking Cancellation Notification';
       const textMsg = `Hi ${employerData?.displayName},\n\nWe regret to inform you that, due to unforeseen circumstances, your chosen service provider has had to cancel the booking for ${jobDetails.data.jobTitle} scheduled for ${jobDetails.data.startdate}. We sincerely apologize for the inconvenience.\n\nThank you,\nTeam ZAAP`;
+
       const bodyText = `
-      Hi ${employerData?.displayName},
-      We hope you’re doing well.
-      We regret to inform you that, due to unforeseen circumstances, your chosen service provider has had to cancel the booking for ${jobDetails.data.jobTitle} scheduled for ${jobDetails.data.startdate}. We understand that this change may be inconvenient, and we sincerely apologize for the disruption to your plans.
+      <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+        <h2>Booking Cancellation Notification</h2>
+        <p>Hi <strong>${employerData?.displayName}</strong>,</p>
+        
+        <p>We hope you’re doing well.</p>
       
-      Booking Details:
-      ● Service Provider: ${providerStatus[0].legal_name_on_id}
-      ● Service: ${jobDetails.data.jobTitle}
-      ● Scheduled Date: ${jobDetails.data.startdate}
+        <p>We regret to inform you that, due to unforeseen circumstances, your chosen service provider has had to cancel the booking for <strong>${jobDetails.data.jobTitle}</strong> scheduled for <strong>${jobDetails.data.startdate}</strong>. We understand that this change may be inconvenient, and we sincerely apologize for the disruption to your plans.</p>
       
-      Action Taken:
-      In response to this incident, we have taken the following actions against the service provider:
-      ● A formal warning has been issued, emphasizing the importance of honoring bookings and maintaining reliability.
-      ● The service provider's account has been temporarily suspended from our platform while we investigate further.
+        <h3>Booking Details:</h3>
+        <ul>
+          <li><strong>Service Provider:</strong> ${providerStatus[0].legal_name_on_id}</li>
+          <li><strong>Service:</strong> ${jobDetails.data.jobTitle}</li>
+          <li><strong>Scheduled Date:</strong> ${jobDetails.data.startdate}</li>
+        </ul>
       
-      What You Can Do Next:
-      You can easily rehire a new service provider by following these steps:
-      1. Navigate to the “My Jobs” section on your dashboard.
-      2. Select the current job listed under “Live Ads.”
-      3. Click on the dropdown menu and select “Applicants List.”
-      4. Review the list of applicants and check their reviews, ratings, and portfolios.
-      5. Select the service provider who best matches your requirements and preferences.
+        <h3>Action Taken:</h3>
+        <ul>
+          <li>A formal warning has been issued to the service provider, emphasizing the importance of honoring bookings and maintaining reliability.</li>
+          <li>The service provider's account has been temporarily suspended from our platform while we investigate further.</li>
+        </ul>
       
-      If you need any assistance or have questions, reach out to our support team via email at help@zaapondemand.in.
+        <h3>What You Can Do Next:</h3>
+        <ol>
+          <li>Navigate to the “My Jobs” section on your dashboard.</li>
+          <li>Select the current job listed under “Live Ads.”</li>
+          <li>Click on the dropdown menu and select “Applicants List.”</li>
+          <li>Review the list of applicants and check their reviews, ratings, and portfolios.</li>
+          <li>Select the service provider who best matches your requirements and preferences.</li>
+        </ol>
       
-      Thank you for your patience and understanding.
-      Best regards,
-      Team ZAAP
+        <p>If you need any assistance or have questions, reach out to our support team via email at <a href="mailto:help@zaapondemand.in">help@zaapondemand.in</a>.</p>
+      
+        <p>Thank you for your patience and understanding.</p>
+      
+        <p>Best regards,<br/>Team ZAAP</p>
+      </div>
       `;
 
       mailSenter(to, subject, textMsg, bodyText);
@@ -447,31 +457,39 @@ const PreviousJobsPaymentModal = () => {
       const to1 = `${providerStatus[0]?.email_id}`;
       const subject1 = 'Urgent: Consequences of Confirmed Booking Cancellation';
       const textMsg1 = `Hi ${providerStatus[0]?.legal_name_on_id},\n\nWe regret to inform you that your cancellation of a confirmed booking may result in consequences, including account suspension or termination. Please contact us for further assistance.\n\nThank you,\nTeam ZAAP`;
+
       const bodyText1 = `
-Hi ${providerStatus[0]?.legal_name_on_id},
-We hope this message finds you well.
+<div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+  <h2>Urgent: Consequences of Confirmed Booking Cancellation</h2>
+  <p>Hi <strong>${providerStatus[0]?.legal_name_on_id}</strong>,</p>
 
-We are writing to address a recent issue regarding your cancellation of a confirmed booking. Such cancellations after confirmation are not acceptable under our platform’s policies and may result in serious consequences, including account suspension or termination. Honoring bookings is essential to maintaining trust and reliability on our platform.
+  <p>We hope this message finds you well.</p>
 
-Booking Details:
-● Customer Name: ${employerData.displayName}
-● Service: ${jobDetails.data.jobTitle}
-● Scheduled Date: ${jobDetails.data.startdate}
+  <p>We are writing to address a recent issue regarding your <strong>cancellation of a confirmed booking</strong>. Such cancellations after confirmation are not acceptable under our platform’s policies and may result in serious consequences, including <strong>account suspension</strong> or <strong>termination</strong>. Honoring bookings is essential to maintaining trust and reliability on our platform.</p>
 
-Cancellations of confirmed bookings disrupt the service experience for our customers and negatively impact the reliability of our platform. This behavior is taken very seriously.
+  <h3>Booking Details:</h3>
+  <ul>
+    <li><strong>Customer Name:</strong> ${employerData.displayName}</li>
+    <li><strong>Service:</strong> ${jobDetails.data.jobTitle}</li>
+    <li><strong>Scheduled Date:</strong> ${jobDetails.data.startdate}</li>
+  </ul>
 
-Consequences:
-Please be aware that:
-● Immediate Action: This cancellation will be documented.
-● Account Termination: Repeated cancellations or failure to adhere to confirmed bookings could lead to permanent termination of your account on our platform.
+  <p>Cancellations of confirmed bookings disrupt the service experience for our customers and negatively impact the reliability of our platform. This behavior is taken very seriously.</p>
 
-We urge you to adhere to confirmed bookings and avoid unnecessary cancellations. Maintaining a reliable and professional standard is crucial for the integrity of our platform and the satisfaction of our customers.
+  <h3>Consequences:</h3>
+  <ul>
+    <li><strong>Immediate Action:</strong> This cancellation will be documented.</li>
+    <li><strong>Account Termination:</strong> Repeated cancellations or failure to adhere to confirmed bookings could lead to permanent termination of your account on our platform.</li>
+  </ul>
 
-If you have any questions or wish to discuss this matter further, please contact us directly at help@zaapondemand.in.
+  <p>We urge you to adhere to confirmed bookings and avoid unnecessary cancellations. Maintaining a reliable and professional standard is crucial for the integrity of our platform and the satisfaction of our customers.</p>
 
-Thank you for your prompt attention to this matter.
-Best regards,
-Team ZAAP
+  <p>If you have any questions or wish to discuss this matter further, please contact us directly at <a href="mailto:help@zaapondemand.in">help@zaapondemand.in</a>.</p>
+
+  <p>Thank you for your prompt attention to this matter.</p>
+
+  <p>Best regards,<br/>Team ZAAP</p>
+</div>
 `;
 
       mailSenter(to1, subject1, textMsg1, bodyText1);
