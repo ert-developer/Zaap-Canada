@@ -27,8 +27,10 @@ const FeatureCheckBox = ({GetFeaturePaymentAmount, paymentAmount, setPaymentAmou
               <CustomText text={'You save Rs. 51'} style={styles.text} />
             </View>
             <View style={styles.amountContainer}>
-              <RupeeSvgComponent style={styles.rupeeIcon} />
-              <CustomText text={'149'} style={styles.amountText} />
+              <CustomText text={'$200'} style={styles.originalPriceText} />
+            </View>
+            <View style={styles.amountContainer}>
+              <CustomText text={'$149'} style={styles.amountText} />
             </View>
           </View>
         </TouchableOpacity>
@@ -44,8 +46,10 @@ const FeatureCheckBox = ({GetFeaturePaymentAmount, paymentAmount, setPaymentAmou
               <CustomText text={'You save Rs. 101'} style={styles.text} />
             </View>
             <View style={styles.amountContainer}>
-              <RupeeSvgComponent style={styles.rupeeIcon} />
-              <CustomText text={'499'} style={styles.amountText} />
+              <CustomText text={'$600'} style={styles.originalPriceText} />
+            </View>
+            <View style={styles.amountContainer}>
+              <CustomText text={'$499'} style={styles.amountText} />
             </View>
           </View>
         </TouchableOpacity>
@@ -61,8 +65,10 @@ const FeatureCheckBox = ({GetFeaturePaymentAmount, paymentAmount, setPaymentAmou
               <CustomText text={'You save Rs. 201'} style={styles.text} />
             </View>
             <View style={styles.amountContainer}>
-              <RupeeSvgComponent style={styles.rupeeIcon} />
-              <CustomText text={'799'} style={styles.amountText} />
+              <CustomText text={'$1000'} style={styles.originalPriceText} />
+            </View>
+            <View style={styles.amountContainer}>
+              <CustomText text={'$799'} style={styles.amountText} />
             </View>
           </View>
         </TouchableOpacity>
@@ -78,8 +84,10 @@ const FeatureCheckBox = ({GetFeaturePaymentAmount, paymentAmount, setPaymentAmou
               <CustomText text={'You save Rs. 501'} style={styles.text} />
             </View>
             <View style={styles.amountContainer}>
-              <RupeeSvgComponent style={styles.rupeeIcon} />
-              <CustomText text={'1499'} style={styles.amountText} />
+              <CustomText text={'$2000'} style={styles.originalPriceText} />
+            </View>
+            <View style={styles.amountContainer}>
+              <CustomText text={'$1499'} style={styles.amountText} />
             </View>
           </View>
         </TouchableOpacity>
@@ -91,6 +99,13 @@ const FeatureCheckBox = ({GetFeaturePaymentAmount, paymentAmount, setPaymentAmou
 const styles = StyleSheet.create({
   rupeeIcon: {
     marginTop: heightToDp(0.5),
+  },
+  originalPriceText: {
+    textDecorationLine: 'line-through',
+    color: 'grey',
+    fontSize: widthToDp(3),
+    marginLeft: 90,
+    marginTop: 2,
   },
   radioButtonsContainer: {
     borderColor: Color.colorSilver,

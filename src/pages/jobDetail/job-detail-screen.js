@@ -284,7 +284,7 @@ const JobDetail = ({
                     <CustomText text={'Budget'} style={styles.textSTyle} />
                   </View>
                   <View style={styles.desc}>
-                    <CustomText text={`₹ ${price}`} style={styles.dynamicTextStyle} />
+                    <CustomText text={`$ ${price}`} style={styles.dynamicTextStyle} />
                   </View>
                 </View>
               </View>

@@ -27,8 +27,10 @@ const SpotlightCheckBox = ({GetSpotlightPaymentAmount, paymentAmount, setPayment
               <CustomText text={'You save Rs. 51'} style={styles.text} />
             </View>
             <View style={styles.amountContainer}>
-              <RupeeSvgComponent style={styles.rupeeIcon} />
-              <CustomText text={'249'} style={styles.amountText} />
+              <CustomText text={'$300'} style={styles.originalPriceText} />
+            </View>
+            <View style={styles.amountContainer}>
+              <CustomText text={'$249'} style={styles.amountText} />
             </View>
           </View>
         </TouchableOpacity>
@@ -44,8 +46,10 @@ const SpotlightCheckBox = ({GetSpotlightPaymentAmount, paymentAmount, setPayment
               <CustomText text={'You save Rs. 201'} style={styles.text} />
             </View>
             <View style={styles.amountContainer}>
-              <RupeeSvgComponent style={styles.rupeeIcon} />
-              <CustomText text={'699'} style={styles.amountText} />
+              <CustomText text={'$600'} style={styles.originalPriceText} />
+            </View>
+            <View style={styles.amountContainer}>
+              <CustomText text={'$699'} style={styles.amountText} />
             </View>
           </View>
         </TouchableOpacity>
@@ -61,8 +65,10 @@ const SpotlightCheckBox = ({GetSpotlightPaymentAmount, paymentAmount, setPayment
               <CustomText text={'You save Rs. 401'} style={styles.text} />
             </View>
             <View style={styles.amountContainer}>
-              <RupeeSvgComponent style={styles.rupeeIcon} />
-              <CustomText text={'1099'} style={styles.amountText} />
+              <CustomText text={'$900'} style={styles.originalPriceText} />
+            </View>
+            <View style={styles.amountContainer}>
+              <CustomText text={'$1099'} style={styles.amountText} />
             </View>
           </View>
         </TouchableOpacity>
@@ -78,8 +84,10 @@ const SpotlightCheckBox = ({GetSpotlightPaymentAmount, paymentAmount, setPayment
               <CustomText text={'You save Rs. 901'} style={styles.text} />
             </View>
             <View style={styles.amountContainer}>
-              <RupeeSvgComponent style={styles.rupeeIcon} />
-              <CustomText text={'2099'} style={styles.amountText} />
+              <CustomText text={'$1500'} style={styles.originalPriceText} />
+            </View>
+            <View style={styles.amountContainer}>
+              <CustomText text={'$2099'} style={styles.amountText} />
             </View>
           </View>
         </TouchableOpacity>
@@ -125,6 +133,13 @@ const styles = StyleSheet.create({
   },
   amountText: {
     color: 'green',
+  },
+  originalPriceText: {
+    textDecorationLine: 'line-through',
+    color: 'grey',
+    fontSize: widthToDp(3),
+    marginLeft: 90,
+    marginTop: 2,
   },
 });
 

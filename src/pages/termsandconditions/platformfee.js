@@ -30,14 +30,14 @@ const Platformfee = () => {
           </View>
 
           {[
-            {amount: 'Up to ₹100', fee: '10%', minFee: '₹5', maxFee: 'None'},
-            {amount: '₹101 - ₹499', fee: '9%', minFee: '₹5', maxFee: '₹40'},
-            {amount: '₹500 - ₹999', fee: '8%', minFee: '₹40', maxFee: '₹80'},
-            {amount: '₹1,000 - ₹4,999', fee: '7%', minFee: '₹70', maxFee: '₹250'},
-            {amount: '₹5,000 - ₹9,999', fee: '6%', minFee: '₹250', maxFee: '₹500'},
-            {amount: '₹10,000 - ₹19,999', fee: '5%', minFee: '₹500', maxFee: '₹1,000'},
-            {amount: '₹20,000 - ₹49,999', fee: '4%', minFee: '₹800', maxFee: '₹1,500'},
-            {amount: '₹50,000 and above', fee: '3%', minFee: '₹1,500', maxFee: '₹2,000'},
+            {amount: 'Up to $100', fee: '10%', minFee: '$5', maxFee: 'None'},
+            {amount: '$101 - $499', fee: '9%', minFee: '$5', maxFee: '$40'},
+            {amount: '$500 - $999', fee: '8%', minFee: '$40', maxFee: '$80'},
+            {amount: '$1,000 - $4,999', fee: '7%', minFee: '$70', maxFee: '$250'},
+            {amount: '$5,000 - $9,999', fee: '6%', minFee: '$250', maxFee: '$500'},
+            {amount: '$10,000 - $19,999', fee: '5%', minFee: '$500', maxFee: '$1,000'},
+            {amount: '$20,000 - $49,999', fee: '4%', minFee: '$800', maxFee: '$1,500'},
+            {amount: '$50,000 and above', fee: '3%', minFee: '$1,500', maxFee: '$2,000'},
           ].map((row, index) => (
             <View key={index} style={styles.tableRow}>
               <Text style={styles.tableCell}>{row.amount}</Text>

@@ -1090,7 +1090,7 @@ const CustomerSidePaymentModel = () => {
                                 fontSize: heightToDp(2),
                               }}>
                               {showAmount && selectedText === percentage && percentage !== 'Others'
-                                ? `₹${(jobDetails.salary * percentage) / 100}`
+                                ? `$${(jobDetails.salary * percentage) / 100}`
                                 : label}
                             </Text>
                           </View>

@@ -205,8 +205,8 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
                         <CustomText text={`  ${ad.count} AD`} style={styles.adsCountText} />
                       </View>
                       <View style={styles.priceContainer}>
-                        <CustomText text={`₹ ${ad.original}`} style={styles.originalPriceText} />
-                        <CustomText text={`₹ ${ad.price}`} style={styles.adsAmountText} />
+                        <CustomText text={`$ ${ad.original}`} style={styles.originalPriceText} />
+                        <CustomText text={`$ ${ad.price}`} style={styles.adsAmountText} />
                       </View>
                     </TouchableOpacity>
                   ))}
@@ -222,8 +222,8 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
                       <CustomText text={' 10 AD'} style={styles.adsCountText} />
                     </View>
                     <View style={styles.priceContainer}>
-                      <CustomText text={`₹ 2000`} style={styles.originalPriceText} />
-                      <CustomText text={`₹ 1499`} style={styles.adsAmountText} />
+                      <CustomText text={`$ 2000`} style={styles.originalPriceText} />
+                      <CustomText text={`$ 1499`} style={styles.adsAmountText} />
                     </View>
                   </TouchableOpacity>
                 </View>
@@ -250,8 +250,8 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
                         <CustomText text={`  ${ad.count} AD`} style={styles.adsCountText} />
                       </View>
                       <View style={styles.priceContainer}>
-                        <CustomText text={`₹ ${ad.original}`} style={styles.originalPriceText} />
-                        <CustomText text={`₹ ${ad.price}`} style={styles.adsAmountText} />
+                        <CustomText text={`$ ${ad.original}`} style={styles.originalPriceText} />
+                        <CustomText text={`$ ${ad.price}`} style={styles.adsAmountText} />
                       </View>
                     </TouchableOpacity>
                   ))}
@@ -267,8 +267,8 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
                       <CustomText text={' 10 AD'} style={styles.adsCountText} />
                     </View>
                     <View style={styles.priceContainer}>
-                      <CustomText text={`₹ 3000`} style={styles.originalPriceText} />
-                      <CustomText text={`₹ 2099`} style={styles.adsAmountText} />
+                      <CustomText text={`$ 3000`} style={styles.originalPriceText} />
+                      <CustomText text={`$ 2099`} style={styles.adsAmountText} />
                     </View>
                   </TouchableOpacity>
                 </View>

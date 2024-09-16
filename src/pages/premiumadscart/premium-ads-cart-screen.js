@@ -77,9 +77,9 @@ const PremiumAdsCartScreen = ({
                 <CustomText text={'='} style={styles.equalTo} />
                 <View style={styles.priceContainer}>
                   {featuredAdsCount !== 0 ? (
-                    <CustomText text={`₹${featuredAdsCount * 200}`} style={styles.adsAmount} />
+                    <CustomText text={`$${featuredAdsCount * 200}`} style={styles.adsAmount} />
                   ) : (
-                    <CustomText text={`₹${countFeaturedChange * 200}`} style={styles.adsAmount} />
+                    <CustomText text={`$${countFeaturedChange * 200}`} style={styles.adsAmount} />
                   )}
                 </View>
               </View>
@@ -108,9 +108,9 @@ const PremiumAdsCartScreen = ({
                 <CustomText text={'='} style={styles.equalTo} />
                 <View style={styles.priceContainer}>
                   {spotlightAdsCount !== 0 ? (
-                    <CustomText text={`₹${spotlightAdsCount * 300}`} style={styles.adsAmount} />
+                    <CustomText text={`$${spotlightAdsCount * 300}`} style={styles.adsAmount} />
                   ) : (
-                    <CustomText text={`₹${countSpotlightChange * 300}`} style={styles.adsAmount} />
+                    <CustomText text={`$${countSpotlightChange * 300}`} style={styles.adsAmount} />
                   )}
                 </View>
               </View>
@@ -130,16 +130,16 @@ const PremiumAdsCartScreen = ({
             <View style={styles.amountContainer}>
               <View style={styles.amountAndDiscountContainer}>
                 <CustomText text={'Original Price'} style={styles.priceText} />
-                <CustomText text={`₹${originalPrice}`} style={styles.cashText} />
+                <CustomText text={`$${originalPrice}`} style={styles.cashText} />
               </View>
               <View style={styles.amountAndDiscountContainer}>
                 <CustomText text={'Discount'} style={styles.priceText} />
-                <CustomText text={`₹${discount}`} style={styles.cashText} />
+                <CustomText text={`$${discount}`} style={styles.cashText} />
               </View>
             </View>
             <View style={styles.totalAmountContainer}>
               <CustomText text={'Total'} style={styles.totalText} />
-              <CustomText text={`₹${originalPrice - discount}`} style={styles.totalAmount} />
+              <CustomText text={`$${originalPrice - discount}`} style={styles.totalAmount} />
             </View>
           </View>
           <CustomButton
