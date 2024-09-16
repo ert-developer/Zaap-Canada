@@ -11,9 +11,7 @@ const PortfolioDetailsScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const {portfolioDetails, onDeletePortfolio} = route.params;
-  console.log('This is portfolio details :::', portfolioDetails);
   const deletePotfolioId = portfolioDetails.id;
-  console.log('This is portfolio details :::', portfolioDetails.id);
   const [showDeletePortfolioModal, setShowDeletePortfolioModal] = useState(false);
 
   const renderImages = () => {
@@ -52,11 +50,16 @@ const PortfolioDetailsScreen = () => {
     return portfolioDetails.Link && portfolioDetails.Link.length > 0 ? (
       <View style={styles.linkContainer}>
         <CustomText text={'External Links'} style={styles.sectionTitle} />
-        {portfolioDetails.Link.map((link, index) => (
-          <TouchableOpacity key={index} onPress={() => onPressPortfolioLink(link)}>
-            <CustomText text={link} style={styles.linkText} />
-          </TouchableOpacity>
-        ))}
+
+        {typeof portfolioDetails.Link === 'object' ? (
+          portfolioDetails.Link.map((link, index) => (
+            <TouchableOpacity key={index} onPress={() => onPressPortfolioLink(link)}>
+              <CustomText text={link} style={styles.linkText} />
+            </TouchableOpacity>
+          ))
+        ) : (
+          <CustomText text={portfolioDetails.Link} style={styles.linkText} />
+        )}
       </View>
     ) : null;
   };

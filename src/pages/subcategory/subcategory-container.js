@@ -1,7 +1,7 @@
 import SubCategoryScreen from './subcategory-screen';
 import {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
-import {getDocs, collection, where, query} from 'firebase/firestore';
+import {getDocs, collection, where, query, doc} from 'firebase/firestore';
 import {db} from '../../../firebaseDb';
 import {useNavigation} from '@react-navigation/native';
 const SubCategoryContainer = () => {
@@ -14,6 +14,9 @@ const SubCategoryContainer = () => {
       const q = query(collection(db, 'Jobs_dev'), where('data.subCategory', 'array-contains', subcatname));
       const querySnapshot = await getDocs(q);
       const data = querySnapshot.docs.map(doc => doc.data());
+      data.map((item, index) => {
+        item.id = querySnapshot.docs[index].id;
+      });
       setSubCategory(data);
     } catch (error) {
       console.error('Error fetching Completed Jobs data:', error);

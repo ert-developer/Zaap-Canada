@@ -34,7 +34,7 @@ import {mailSenter} from '../../common/mailSender';
 import {collection, query, where, getDocs} from 'firebase/firestore';
 import handlePayment from '../../custom-hooks/payment/useRazorPayPayment';
 import getPlatformFee from '../../common/platformFee';
-import { envConfig } from '../../assets/helpers/envApi';
+import {envConfig} from '../../assets/helpers/envApi';
 
 const ModalComponent = ({isVisible, onClose, userWorking}) => {
   const user = useSelector(state => state.Auth.user);

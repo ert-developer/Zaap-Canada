@@ -30,7 +30,7 @@ const TermsAndConditions = () => {
     'LIMITATIONS OF LIABILITY',
     'INDEMNIFICATION',
     'USER DATA',
-    'ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES',
+    'ELECTRONIC COMMUNICATIONS,\n      TRANSACTIONS AND SIGNATURES',
     'SMS TEXT MESSAGING',
     'MISCELLANEOUS',
     'CONTACT US',
@@ -93,7 +93,6 @@ const TermsAndConditions = () => {
 
   // Function to measure section positions
   const handleLayout = (section, event) => {
-
     const {y} = event.nativeEvent.layout;
     setSectionPositions(prev => ({...prev, [section]: y}));
   };
@@ -156,7 +155,7 @@ const TermsAndConditions = () => {
             );
           })}
         </View>
-        <ScrollView ref={scrollViewRef} style={{backgroundColor: 'lightgrey'}}>
+        <ScrollView ref={scrollViewRef}>
           <View onLayout={event => handleLayout('ourservices', event)}>
             <CustomText text={'1.OUR SERVICES'} style={styles.heading} />
             <CustomText

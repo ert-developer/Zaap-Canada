@@ -329,7 +329,7 @@ const HomeScreen = ({
                       <CustomText text={currentLocation} style={styles.currentLocationText} />
                     </CustomTouchableOpacity>
                   ) : (
-                    <CustomTouchableOpacity onPress={locationPermission}>
+                    <CustomTouchableOpacity onPress={locationPermission} style={{margin: 0, padding: 0}}>
                       <CustomText text="SELECT" style={styles.currentLocationText} />
                     </CustomTouchableOpacity>
                   )}

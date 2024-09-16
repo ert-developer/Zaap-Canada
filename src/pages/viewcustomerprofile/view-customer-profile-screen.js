@@ -10,6 +10,8 @@ import CustomLoader from '../../../src/molecules/customLoader/customLoader';
 const ViewCustomerProfileScreen = ({userDetails, customerPreJobsList, starRatingCount, feedbackData, loader}) => {
   const styles = viewCustomerProfileStyles();
 
+  console.log(customerPreJobsList, 'lll');
+
   return (
     <SafeAreaView>
       <HeaderComponent text={'View Profile'} />
@@ -64,7 +66,9 @@ const ViewCustomerProfileScreen = ({userDetails, customerPreJobsList, starRating
                 <CustomText text={'OTHER ADS POSTED BY THIS USER'} style={styles.customerOtherAddText} />
               </View>
               <FlatList
-                data={customerPreJobsList}
+                data={customerPreJobsList
+                  .slice() // Create a copy to avoid mutating the original list
+                  .sort((a, b) => b.createdOn - a.createdOn)} // Sort by 'createdOn' descending
                 renderItem={({item}) => <JobList item={item} handleJobPress={null} />}
                 keyExtractor={(item, index) => String(index)}
                 onEndReachedThreshold={0.5}

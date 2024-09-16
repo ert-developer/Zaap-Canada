@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/react-in-jsx-scope */
 import {useState} from 'react';
-import {View, TouchableOpacity, Text} from 'react-native';
+import {View, TouchableOpacity, Text, ScrollView} from 'react-native';
 import CustomButton from '../../../atoms/button/buttonComponent';
 import CustomTouchableOpacity from '../../../molecules/touchable-opacity/touchable-opacity-component';
 import CustomImage from '../../../atoms/image/imageComponent';
@@ -45,7 +45,6 @@ import {logoutSuccess} from '../../../redux/auth/action';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {BackArrowSVG} from '../../../assets/svgImage/backArrow';
 import RNRestart from 'react-native-restart';
-import {ScrollView} from 'react-native-gesture-handler';
 import {NativeModules} from 'react-native';
 import RNShare from 'react-native-share';
 import {ToastAndroid} from 'react-native';
@@ -74,7 +73,7 @@ export const ProviderCustomDrawerContent = ({props, state, navigation}) => {
       if (isGoogleLoggedIn) {
         // Google logout
         GoogleSignin.configure({
-          webClientId: '849033912129-900hqg5pi670htf7idm8kop2dg8k0bht.apps.googleusercontent.com',
+          webClientId: '600651705755-ua5v3vhufd010oja72b1a7libdk3hogr.apps.googleusercontent.com',
         });
         await GoogleSignin.signOut();
       }
@@ -350,15 +349,6 @@ export const ProviderCustomDrawerContent = ({props, state, navigation}) => {
           onPress={() => navigation.navigate('myEarnings')}
           isSelected={state.routes[state.index].name === 'myEarnings'}
           style={{backgroundColor: state.routes[state.index].name === 'myEarnings' ? Color.colorLightWhite : 'white'}}
-        />
-        <DrawerItemWithArrow
-          label="Service Standards"
-          icon={() => <ServiceStandardsSVG />}
-          onPress={() => navigation.navigate('serviceStandards')}
-          isSelected={state.routes[state.index].name === 'serviceStandards'}
-          style={{
-            backgroundColor: state.routes[state.index].name === 'serviceStandards' ? Color.colorLightWhite : 'white',
-          }}
         />
         <DrawerItemWithArrow
           label="Update Bank Details"

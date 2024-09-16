@@ -3,13 +3,15 @@ import FeedbackScreen from './feedback-screen';
 import {useSelector} from 'react-redux';
 import firestore from '@react-native-firebase/firestore';
 import {Alert} from 'react-native';
-import { envConfig } from '../../assets/helpers/envApi';
+import {envConfig} from '../../assets/helpers/envApi';
+import {useNavigation} from '@react-navigation/native';
 
 const FeedbackContainer = () => {
   const [formData, setFormData] = useState({name: '', email: '', feedback: ''});
   const [formErrors, setFormErrors] = useState({name: false, email: false, feedback: false});
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
-  const [alreadyexist, setAlreadyExist] = useState(false);
+
+  const navigation = useNavigation();
 
   const user = useSelector(state => state.Auth.user);
 
@@ -79,7 +81,7 @@ const FeedbackContainer = () => {
   //Close the modal
   const onCloseSuccessModal = () => {
     setShowFeedbackModal(false);
-    setAlreadyExist(false);
+    navigation.navigate('HomeScreen');
   };
 
   return (
@@ -90,7 +92,6 @@ const FeedbackContainer = () => {
       onSubmitFeedback={onSubmitFeedback}
       showFeedbackModal={showFeedbackModal}
       onCloseSuccessModal={onCloseSuccessModal}
-      alreadyexist={alreadyexist}
     />
   );
 };

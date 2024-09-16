@@ -16,31 +16,12 @@ const FeedbackScreen = ({
   onSubmitFeedback,
   showFeedbackModal,
   onCloseSuccessModal,
-  alreadyexist,
 }) => {
   const styles = feedbackStyles();
   return (
     <>
       <HeaderComponent text="Feedback" />
       <ScrollView>
-        {/* {alreadyexist && (
-          <Modal isVisible={alreadyexist} onBackdropPress={onCloseSuccessModal}>
-            <View style={styles.modalContainer}>
-              <View style={styles.modalContent}>
-                <FastImage
-                  style={{width: 100, height: 100}}
-                  source={require('../../assets/CancelService.gif')}
-                  resizeMode={FastImage.resizeMode.contain}
-                />
-                <CustomText text={'Feedback Already Submitted!'} style={styles.modalSuccessText} />
-                <CustomText
-                  text={'You have already submitted the feedback. Thank you for your feedback.'}
-                  style={styles.modalSuccessDescriptionText}
-                />
-              </View>
-            </View>
-          </Modal>
-        )} */}
         {showFeedbackModal && (
           <Modal isVisible={showFeedbackModal} onBackdropPress={onCloseSuccessModal}>
             <View style={styles.modalContainer}>

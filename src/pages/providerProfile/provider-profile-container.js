@@ -677,17 +677,11 @@ const ProviderProfileContainer = ({navigation}) => {
         };
 
         let response = await postCollectionDetails(envConfig.Provider, providerDetails);
-        const to = 'tarunmartha75@gmail.com';
+        const to = 'help@zaapondemand.in';
         const subject = 'New Application For Background Verification';
         const textMsg = 'New Application For Background Verification';
         const bodyText = `New Application For Background Verification from ${formData.legal_name_on_id}. Check your dashboard for verification`;
         mailSenter(to, subject, textMsg, bodyText);
-
-        const to1 = user.email;
-        const subject1 = 'Your New Application For Background Verification has been recieved';
-        const textMsg1 = 'Your New Application For Background Verification has been recieved';
-        const bodyText1 = `Your New Application For Background Verification has been recieved. We will be verifying your details and will update the status ASAP`;
-        mailSenter(to1, subject1, textMsg1, bodyText1);
 
         await updateCollectionDetails(envConfig.User, {isServiceProvider: false}, userID);
         const data = {

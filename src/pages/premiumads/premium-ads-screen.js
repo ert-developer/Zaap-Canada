@@ -202,7 +202,7 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
                           value={checkedIndex === index}
                           onValueChange={() => featuredHandleCheckboxPress(index)}
                         />
-                        <CustomText text={`${ad.count} AD`} style={styles.adsCountText} />
+                        <CustomText text={`  ${ad.count} AD`} style={styles.adsCountText} />
                       </View>
                       <View style={styles.priceContainer}>
                         <CustomText text={`₹ ${ad.original}`} style={styles.originalPriceText} />
@@ -219,7 +219,7 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
                         value={checkedIndex === 3}
                         onValueChange={() => featuredHandleCheckboxPress(3)}
                       />
-                      <CustomText text={'10 AD'} style={styles.adsCountText} />
+                      <CustomText text={' 10 AD'} style={styles.adsCountText} />
                     </View>
                     <View style={styles.priceContainer}>
                       <CustomText text={`₹ 2000`} style={styles.originalPriceText} />
@@ -247,7 +247,7 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
                           value={spotLightCheckedIndex === index}
                           onValueChange={() => spotlightHandleCheckboxPress(index)}
                         />
-                        <CustomText text={`${ad.count} AD`} style={styles.adsCountText} />
+                        <CustomText text={`  ${ad.count} AD`} style={styles.adsCountText} />
                       </View>
                       <View style={styles.priceContainer}>
                         <CustomText text={`₹ ${ad.original}`} style={styles.originalPriceText} />
@@ -264,7 +264,7 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
                         value={spotLightCheckedIndex === 3}
                         onValueChange={() => spotlightHandleCheckboxPress(3)}
                       />
-                      <CustomText text={'10 AD'} style={styles.adsCountText} />
+                      <CustomText text={' 10 AD'} style={styles.adsCountText} />
                     </View>
                     <View style={styles.priceContainer}>
                       <CustomText text={`₹ 3000`} style={styles.originalPriceText} />

@@ -9,8 +9,14 @@ import {useNavigation} from '@react-navigation/native';
 import {CancelPopupSvg} from '../../assets/svgImage/bottomDrawer';
 import {CancelPopupTick} from '../../assets/svgImage/bottomDrawer';
 import FastImage from 'react-native-fast-image';
+import {Color} from '../../assets/static/globalStyles';
 
-const Service_CancelPopupAfter_otp = ({cancelPopupAfterOtp, onCancelAfterConfirm, popUpClose, onPressCancelService,}) => {
+const Service_CancelPopupAfter_otp = ({
+  cancelPopupAfterOtp,
+  onCancelAfterConfirm,
+  popUpClose,
+  onPressCancelService,
+}) => {
   const navigation = useNavigation();
 
   const [cancel, setCancel] = useState(false);
@@ -75,7 +81,7 @@ const Service_CancelPopupAfter_otp = ({cancelPopupAfterOtp, onCancelAfterConfirm
               </View>
               <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: heightToDp(1)}}>
                 <Text style={{color: '#000000', fontFamily: 'Roboto', fontSize: heightToDp(1.5)}}>
-                  Attention: Services in progress are non-refundable.
+                  <Text style={{fontWeight: 'bold'}}>Attention:</Text> Services in progress are non-refundable.
                 </Text>
                 <Text style={{color: '#000000', fontFamily: 'Roboto', fontSize: heightToDp(1.5)}}>
                   Please refer to our cancellation policy for details
@@ -115,15 +121,24 @@ const Service_CancelPopupAfter_otp = ({cancelPopupAfterOtp, onCancelAfterConfirm
                 resizeMode={FastImage.resizeMode.contain}
               />
               <CustomText
-                text={'Are you sure you’d like to '}
-                style={{fontFamily: 'Roboto', color: '#464183', fontSize: heightToDp(2.5)}}
+                text={'Hi there! Just confirming: '}
+                style={{color: '#464183', fontFamily: 'Roboto', fontSize: 14}}
               />
               <CustomText
-                text={'cancel your service request? '}
-                style={{fontFamily: 'Roboto', color: '#464183', fontSize: heightToDp(2.5), marginBottom: heightToDp(2)}}
+                text={'Do you wish to cancel the service '}
+                style={{color: '#464183', fontFamily: 'Roboto'}}
               />
+              <CustomText text={"before it's finished?"} style={{color: '#464183', fontFamily: 'Roboto'}} />
+              <View style={{justifyContent: 'center', alignItems: 'center', marginVertical: heightToDp(1)}}>
+                <Text style={{color: '#000000', fontFamily: 'Roboto', fontSize: heightToDp(1.5)}}>
+                  <Text style={{fontWeight: 'bold'}}>Attention:</Text> Services in progress are non-refundable.
+                </Text>
+                <Text style={{color: '#000000', fontFamily: 'Roboto', fontSize: heightToDp(1.5)}}>
+                  Please refer to our cancellation policy for details
+                </Text>
+              </View>
 
-              <View style={{flexDirection : 'row', gap: 20, marginTop: heightToDp(1), marginBottom: heightToDp(2)}}>
+              <View style={{flexDirection: 'row', gap: 20, marginTop: heightToDp(1), marginBottom: heightToDp(2)}}>
                 <CustomButton
                   title={'Rehire'}
                   style={{
@@ -138,7 +153,7 @@ const Service_CancelPopupAfter_otp = ({cancelPopupAfterOtp, onCancelAfterConfirm
                   onPress={() => setShowRehireConfirm(true)} // Trigger Rehire confirmation
                 />
                 <CustomButton
-                  title={'Remove Job'}
+                  title={'Cancel Booking'}
                   style={{
                     padding: heightToDp(1),
                     backgroundColor: '#FF5757',
@@ -149,7 +164,7 @@ const Service_CancelPopupAfter_otp = ({cancelPopupAfterOtp, onCancelAfterConfirm
                   }}
                   textStyle={{fontSize: heightToDp(2)}}
                   onPress={() => setShowRemoveJobConfirm(true)} // Trigger Remove Job confirmation
-              />
+                />
               </View>
 
               {/* <Text style={{color: '#000000', fontSize: heightToDp(1.5), marginTop: heightToDp(2.3), marginBottom: heightToDp(1)}}>
@@ -165,16 +180,29 @@ const Service_CancelPopupAfter_otp = ({cancelPopupAfterOtp, onCancelAfterConfirm
         isVisible={showRehireConfirm}
         style={styles.modalContainer}
         onBackdropPress={() => setShowRehireConfirm(false)}>
-        <View style={styles.modalContent}>
+        <View style={{...styles.modalContent, width: '90%'}}>
+          <View style={{justifyContent: 'center'}}></View>
           <CustomText
-            text={'Are you sure you want to rehire a new person?'}
-            style={{fontFamily: 'Roboto', color: '#464183', fontSize: heightToDp(2.5)}}
+            text={'Are you sure you want \nto rehire a new person?'}
+            style={{fontFamily: 'Roboto', color: '#464183', fontSize: heightToDp(1.9), marginBottom: 10}}
           />
           <CustomText
             text={'This process cannot be undone.'}
-            style={{fontFamily: 'Roboto', color: '#464183', fontSize: heightToDp(2.5), marginBottom: heightToDp(2)}}
+            style={{fontFamily: 'Roboto', fontSize: heightToDp(1.8), marginBottom: heightToDp(2)}}
           />
           <View style={{flexDirection: 'row', gap: 20}}>
+            <CustomButton
+              title={'Confirm'}
+              style={{
+                padding: heightToDp(1),
+                backgroundColor: '#00BF63',
+                fontFamily: 'Roboto',
+                borderRadius: heightToDp(1),
+                width: heightToDp(18),
+              }}
+              textStyle={{fontSize: heightToDp(2)}}
+              onPress={handleRehireConfirm}
+            />
             <CustomButton
               title={'Cancel'}
               style={{
@@ -189,24 +217,15 @@ const Service_CancelPopupAfter_otp = ({cancelPopupAfterOtp, onCancelAfterConfirm
                 setShowRehireConfirm(false);
               }}
             />
-            <CustomButton
-              title={'Confirm'}
-              style={{
-                padding: heightToDp(1),
-                backgroundColor: '#00BF63',
-                fontFamily: 'Roboto',
-                borderRadius: heightToDp(1),
-                width: heightToDp(18),
-              }}
-              textStyle={{fontSize: heightToDp(2)}}
-              onPress={handleRehireConfirm}
-            />
           </View>
         </View>
       </Modal>
 
       {/* Remove Job Confirmation Modal */}
-      <Modal isVisible={showRemoveJobConfirm} style={styles.modalContainer} onBackdropPress={() => setShowRemoveJobConfirm(false)}>
+      <Modal
+        isVisible={showRemoveJobConfirm}
+        style={styles.modalContainer}
+        onBackdropPress={() => setShowRemoveJobConfirm(false)}>
         <View style={styles.modalContent}>
           <FastImage
             style={{width: 100, height: 100}}
@@ -214,7 +233,7 @@ const Service_CancelPopupAfter_otp = ({cancelPopupAfterOtp, onCancelAfterConfirm
             resizeMode={FastImage.resizeMode.contain}
           />
           <CustomText
-            text={'Are you sure you want to remove'}
+            text={'Are you sure you want to'}
             style={{
               fontFamily: 'Roboto',
               color: '#464183',
@@ -224,27 +243,20 @@ const Service_CancelPopupAfter_otp = ({cancelPopupAfterOtp, onCancelAfterConfirm
             }}
           />
           <CustomText
-            text={'this job?'}
+            text={'remove this job?'}
             style={{fontFamily: 'Roboto', color: '#464183', fontSize: heightToDp(2.1), marginBottom: heightToDp(2)}}
           />
           <CustomText
             text={'This process cannot be undone.'}
-            style={{fontFamily: 'Roboto', color: '#464183', fontSize: heightToDp(2.1), marginBottom: heightToDp(2)}}
+            style={{
+              fontFamily: 'Roboto',
+              fontSize: heightToDp(1.9),
+              fontWeight: '400',
+              color: Color.colorBlack,
+              marginBottom: heightToDp(2),
+            }}
           />
           <View style={{flexDirection: 'row', gap: 20}}>
-            <CustomButton
-              title={'Cancel'}
-              style={{
-                padding: heightToDp(1),
-                backgroundColor: '#FF5757',
-                fontFamily: 'Roboto',
-                borderRadius: heightToDp(1),
-                width: heightToDp(18),
-                marginLeft: heightToDp(2),
-              }}
-              textStyle={{fontSize: heightToDp(2)}}
-              onPress={() => setShowRemoveJobConfirm(false)}
-            />
             <CustomButton
               title={'Confirm'}
               style={{
@@ -253,10 +265,23 @@ const Service_CancelPopupAfter_otp = ({cancelPopupAfterOtp, onCancelAfterConfirm
                 fontFamily: 'Roboto',
                 borderRadius: heightToDp(1),
                 width: heightToDp(18),
-                marginRight: heightToDp(2),
+                marginLeft: heightToDp(2),
               }}
               textStyle={{fontSize: heightToDp(2)}}
               onPress={handleRemoveJobConfirm}
+            />
+            <CustomButton
+              title={'Cancel'}
+              style={{
+                padding: heightToDp(1),
+                backgroundColor: '#FF5757',
+                fontFamily: 'Roboto',
+                borderRadius: heightToDp(1),
+                width: heightToDp(18),
+                marginRight: heightToDp(2),
+              }}
+              textStyle={{fontSize: heightToDp(2)}}
+              onPress={() => setShowRemoveJobConfirm(false)}
             />
           </View>
         </View>

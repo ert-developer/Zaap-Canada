@@ -49,15 +49,15 @@ const ServiceCanceldModal = ({isVisible, isClose, onPressCancelService, onCustCa
                 resizeMode={FastImage.resizeMode.contain}
               />
               <CustomText
-                text={'Your Booking Cancellation is '}
+                text={'Your Service Cancellation is '}
                 style={{color: '#464183', fontFamily: 'Roboto', fontSize: heightToDp(2.5)}}
               />
               <CustomText
                 text={'Confirmed!'}
                 style={{color: '#464183', fontFamily: 'Roboto', fontSize: heightToDp(2.5)}}
               />
-              <Text style={{color: '#464183', fontFamily: 'Roboto'}}>Need help with anything before you go?</Text>
-              <Text style={{color: '#464183', fontFamily: 'Roboto'}}>Our support team is here for you</Text>
+              <Text style={{fontFamily: 'Roboto', marginTop: 10}}>Need help with anything before you go?</Text>
+              <Text style={{fontFamily: 'Roboto'}}>Our support team is here for you</Text>
             </View>
           ) : (
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -78,7 +78,7 @@ const ServiceCanceldModal = ({isVisible, isClose, onPressCancelService, onCustCa
                   flexDirection: 'row',
                   textAlign: 'center',
                 }}>
-                Cancellation charges may apply and job will be removed from ZAAP
+                Cancellation charges may apply
               </Text>
               <View style={{flexDirection: 'row', gap: 10}}>
                 <CustomButton

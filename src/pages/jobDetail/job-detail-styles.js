@@ -72,14 +72,15 @@ function JobDetailStyles() {
       justifyContent: 'center',
     },
     popupHeadingCon: {
-      marginTop: widthToDp(5),
+      width: widthToDp(90),
     },
     popupHeadText: {
       color: Color.colorIndigo2,
       fontWeight: 'bold',
       fontSize: widthToDp(4.5),
-      paddingHorizontal: widthToDp(15),
+      paddingHorizontal: widthToDp(10),
       textAlign: 'center',
+      marginBottom: 8,
     },
 
     containerpadding: {

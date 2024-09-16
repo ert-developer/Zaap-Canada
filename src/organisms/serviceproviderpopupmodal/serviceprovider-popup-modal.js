@@ -35,7 +35,7 @@ const ServiceProviderVerificationModal = ({closeModal}) => {
             {/* <CustomText text ={"Expect Your Earning Shortly."} style={styles.firstText}/> */}
             <CustomText
               text={
-                'Our team is reviewing your information Kindly check your email for updates We appreciate your patience'
+                'Our team is reviewing your information \nKindly check your email for updates\n We appreciate your patience'
               }
               style={styles.secondText}
             />

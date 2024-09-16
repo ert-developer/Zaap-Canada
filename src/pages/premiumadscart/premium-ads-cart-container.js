@@ -7,7 +7,7 @@ import {Alert} from 'react-native';
 import usePayment from '../../custom-hooks/payment/usePayment';
 import {useNavigation} from '@react-navigation/native';
 import handlePayment from '../../custom-hooks/payment/useRazorPayPayment';
-import { envConfig } from '../../assets/helpers/envApi';
+import {envConfig} from '../../assets/helpers/envApi';
 
 const PremiumAdsCartContainer = () => {
   const [featuredAdsCount, setFeaturedAdsCount] = useState(0);
@@ -36,26 +36,38 @@ const PremiumAdsCartContainer = () => {
     navigation.navigate('HomeScreen');
   };
 
+  const [countFeaturedChange, setFeaturedCountChange] = useState(purchaseAdsData.featuredAdsCount === 0 ? 0 : 1);
+  const [countSpotlightChange, setSpotlightCountChange] = useState(purchaseAdsData.spotlightAdsCount === 0 ? 0 : 1);
+
   ///////////////////Decrease the Ads Count//////////////////
   const onDecreaseAdsCount = (type, count) => {
     if (type === 'featured') {
       if (count > 0) {
-        setFeaturedAdsCount(featuredAdsCount - 1);
+        setFeaturedCountChange(countFeaturedChange - 1);
       }
     } else {
       if (count > 0) {
-        setSpotlightAdsCount(spotlightAdsCount - 1);
+        setSpotlightCountChange(countSpotlightChange - 1);
       }
     }
   };
   //////////////////Increase the Ads Count///////////////////
   const onIncreaseAdsCount = (type, count) => {
     if (type === 'featured') {
-      setFeaturedAdsCount(featuredAdsCount + 1);
+      setFeaturedCountChange(countFeaturedChange + 1);
     } else {
-      setSpotlightAdsCount(spotlightAdsCount + 1);
+      setSpotlightCountChange(countSpotlightChange + 1);
     }
   };
+
+  // useEffect(() => {
+  //   if (spotlightAdsCount === 0) {
+  //     setSpotlightCountChange(0);
+  //   }
+  //   if (featuredAdsCount === 0) {
+  //     setFeaturedCountChange(0);
+  //   }
+  // }, []);
 
   const purchasePremiumAds = async finalAmount => {
     setLoader(true);
@@ -82,7 +94,6 @@ const PremiumAdsCartContainer = () => {
         setPaymentSuccessModal(true);
         setFeaturedAdsCount(0);
         setSpotlightAdsCount(0);
-        console.log('Premium ads document processed for user:', userId);
       } else {
         Alert.alert('Cancel', 'Canceled Payment.', [{text: 'OK'}]);
       }
@@ -105,6 +116,8 @@ const PremiumAdsCartContainer = () => {
       paymentSuccessModal={paymentSuccessModal}
       onCloseSuccessModal={onCloseSuccessModal}
       loader={loader}
+      countFeaturedChange={countFeaturedChange}
+      countSpotlightChange={countSpotlightChange}
     />
   );
 };

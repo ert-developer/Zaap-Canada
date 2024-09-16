@@ -40,7 +40,6 @@ const AddPortfolioScreen = ({
 
   // Validation states
   const [titleError, setTitleError] = useState('');
-  const [externalLinkError, setExternalLinkError] = useState('');
   const [descriptionError, setDescriptionError] = useState('');
   const [imageError, setImageError] = useState('');
 
@@ -229,8 +228,6 @@ const AddPortfolioScreen = ({
                 {/* <TouchableOpacity onPress={openLinkPopup} style={styles.addLinkButton}>
                   <CustomText text={externalLinks} style={styles.addLinkText} />
                 </TouchableOpacity> */}
-
-                {externalLinkError ? <CustomText text={externalLinkError} style={styles.errorText} /> : null}
               </View>
             </View>
             <View>
@@ -246,6 +243,7 @@ const AddPortfolioScreen = ({
                 maxLength={500}
               />
               {descriptionError ? <CustomText text={descriptionError} style={styles.errorText} /> : null}
+              <CustomText text={`${3000 - portfolioDescription.length} Characters left`} style={styles.charLeftText} />
             </View>
             {portfolioDetails ? (
               <TouchableOpacity style={styles.portfolioSubmitBtn} onPress={onPressUpdatePortfolioBtn}>

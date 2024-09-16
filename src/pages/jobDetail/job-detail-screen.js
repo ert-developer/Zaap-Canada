@@ -166,6 +166,7 @@ const JobDetail = ({
           />
           <View style={styles.popupHeadingCon}>
             <CustomText text={'You have successfully applied.'} style={styles.popupHeadText} />
+            <CustomText text={'Check the status of your application in My Jobs'} style={{textAlign: 'center'}} />
           </View>
         </View>
       </Modal>

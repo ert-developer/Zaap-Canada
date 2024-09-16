@@ -12,7 +12,6 @@ import {SmallExclamationSVG} from '../../assets/svgImage/providerProfile';
 import FastImage from 'react-native-fast-image';
 import Modal from 'react-native-modal';
 import LegalScreen from '../contactUs/legal-scree';
-import firestore from '@react-native-firebase/firestore';
 
 const LoginScreen = ({googleLogin, facebookLogin, toggleModal, modalVisible, setModalVisible, tc, logoutPress}) => {
   const styles = useMemo(() => LoginStyles(), []);
@@ -30,20 +29,6 @@ const LoginScreen = ({googleLogin, facebookLogin, toggleModal, modalVisible, set
       .catch(err => console.error('An error occurred', err));
   };
 
-  const tesingFirebase = async () => {
-    try {
-      let response;
-      if (true) {
-        response = await firestore().collection('user').doc('1131').set({srinivas: true});
-      } else {
-        response = await firestore().collection().add(data);
-      }
-      return response;
-    } catch (error) {
-      console.error('Error adding data to Firestore:', error);
-    }
-  };
-
   return (
     <SafeAreaView style={[styles.safeArea, modalVisible && styles.containerFade]}>
       <Modal isVisible={isModalVisible} onBackdropPress={() => setIsModalVisible(false)}>
@@ -58,7 +43,7 @@ const LoginScreen = ({googleLogin, facebookLogin, toggleModal, modalVisible, set
             <CustomText text={'Need Help?'} style={styles.contactUsHeading} />
             <View style={styles.contactUsDesCon}>
               <CustomText
-                text={'Our dedicated support team is here to help you.'}
+                text={'Our dedicated support team is here to help you.\n Kindly emial your question or concern at'}
                 style={styles.contactUsDesscription}
               />
             </View>
@@ -84,7 +69,6 @@ const LoginScreen = ({googleLogin, facebookLogin, toggleModal, modalVisible, set
           <CustomText text="The trusted community to" style={styles.info} />
           <CustomText text="Hire or Work Locally" style={styles.info} />
         </View>
-        <CustomButton title="Test" onPress={tesingFirebase} />
         <View style={styles.topContent}>
           <TouchableOpacity style={styles.row} onPress={googleLogin}>
             <GoogleIcon style={styles.icon} />

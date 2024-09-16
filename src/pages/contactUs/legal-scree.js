@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import {FlatList, Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import {widthToDp} from '../../responsive/responsive';
-import {ScrollView} from 'react-native-gesture-handler';
 import TermsAndConditions from '../termsandconditions/terms-and-conditions';
 import AcceptableUsePolicy from '../termsandconditions/acceptable-use-policy';
 import Disclaimer from '../termsandconditions/disclaimer';
 import ContractorAgreement from '../termsandconditions/contractor-agreement';
 import Enduseraggrement from '../termsandconditions/enduseraggrement';
 import PrivacyPolicies from '../termsandconditions/privacy-policy';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const termsList = ['Terms and conditions', 'Privacy Policy', 'Disclaimer', 'Acceptable Use Policy'];
 
