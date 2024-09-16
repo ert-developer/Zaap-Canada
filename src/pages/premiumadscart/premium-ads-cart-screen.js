@@ -24,16 +24,15 @@ const PremiumAdsCartScreen = ({
 
   const originalPrice =
     countFeaturedChange *
-      (featuredAdsCount === 10 ? 2000 : featuredAdsCount === 5 ? 1000 : featuredAdsCount === 3 ? 600 : 200) +
+      (featuredAdsCount === 10 ? 249 : featuredAdsCount === 5 ? 124 : featuredAdsCount === 3 ? 74 : 24) +
     countSpotlightChange *
-      (spotlightAdsCount === 10 ? 3000 : spotlightAdsCount === 5 ? 1500 : spotlightAdsCount === 3 ? 900 : 300);
+      (spotlightAdsCount === 10 ? 399 : spotlightAdsCount === 5 ? 199 : spotlightAdsCount === 3 ? 119 : 39);
 
   const price =
     countFeaturedChange *
-      (featuredAdsCount === 10 ? 1499 : featuredAdsCount === 5 ? 799 : featuredAdsCount === 3 ? 499 : 149) +
+      (featuredAdsCount === 10 ? 169 : featuredAdsCount === 5 ? 89 : featuredAdsCount === 3 ? 54 : 19) +
     countSpotlightChange *
-      (spotlightAdsCount === 10 ? 2099 : spotlightAdsCount === 5 ? 1099 : spotlightAdsCount === 3 ? 699 : 249);
-
+      (spotlightAdsCount === 10 ? 229 : spotlightAdsCount === 5 ? 129 : spotlightAdsCount === 3 ? 79 : 29);
   const discount = originalPrice - price;
 
   return (
@@ -77,9 +76,9 @@ const PremiumAdsCartScreen = ({
                 <CustomText text={'='} style={styles.equalTo} />
                 <View style={styles.priceContainer}>
                   {featuredAdsCount !== 0 ? (
-                    <CustomText text={`$${featuredAdsCount * 200}`} style={styles.adsAmount} />
+                    <CustomText text={`$${featuredAdsCount * 19.99}`} style={styles.adsAmount} />
                   ) : (
-                    <CustomText text={`$${countFeaturedChange * 200}`} style={styles.adsAmount} />
+                    <CustomText text={`$${countFeaturedChange * 19.99}`} style={styles.adsAmount} />
                   )}
                 </View>
               </View>
@@ -108,9 +107,9 @@ const PremiumAdsCartScreen = ({
                 <CustomText text={'='} style={styles.equalTo} />
                 <View style={styles.priceContainer}>
                   {spotlightAdsCount !== 0 ? (
-                    <CustomText text={`$${spotlightAdsCount * 300}`} style={styles.adsAmount} />
+                    <CustomText text={`$${spotlightAdsCount * 19.99}`} style={styles.adsAmount} />
                   ) : (
-                    <CustomText text={`$${countSpotlightChange * 300}`} style={styles.adsAmount} />
+                    <CustomText text={`$${countSpotlightChange * 19.99}`} style={styles.adsAmount} />
                   )}
                 </View>
               </View>

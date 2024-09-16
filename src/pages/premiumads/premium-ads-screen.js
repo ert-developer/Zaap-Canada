@@ -188,9 +188,9 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
               <View>
                 <View style={styles.adsAmountMainContainer}>
                   {[
-                    {count: 1, price: 149, original: 200},
-                    {count: 3, price: 499, original: 600},
-                    {count: 5, price: 799, original: 1000},
+                    {count: 1, price: 19.99, original: 24.99},
+                    {count: 3, price: 54.99, original: 74.97},
+                    {count: 5, price: 89.99, original: 124.95},
                   ].map((ad, index) => (
                     <TouchableOpacity
                       key={index}
@@ -222,8 +222,8 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
                       <CustomText text={' 10 AD'} style={styles.adsCountText} />
                     </View>
                     <View style={styles.priceContainer}>
-                      <CustomText text={`$ 2000`} style={styles.originalPriceText} />
-                      <CustomText text={`$ 1499`} style={styles.adsAmountText} />
+                      <CustomText text={`$ 249.90`} style={styles.originalPriceText} />
+                      <CustomText text={`$ 169.99`} style={styles.adsAmountText} />
                     </View>
                   </TouchableOpacity>
                 </View>
@@ -233,9 +233,9 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
               <View>
                 <View style={styles.adsAmountMainContainer}>
                   {[
-                    {count: 1, price: 249, original: 300},
-                    {count: 3, price: 699, original: 900},
-                    {count: 5, price: 1099, original: 1500},
+                    {count: 1, price: 29.99, original: 39.99},
+                    {count: 3, price: 79.99, original: 119.97},
+                    {count: 5, price: 129.99, original: 199.95},
                   ].map((ad, index) => (
                     <TouchableOpacity
                       key={index}
@@ -267,8 +267,8 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
                       <CustomText text={' 10 AD'} style={styles.adsCountText} />
                     </View>
                     <View style={styles.priceContainer}>
-                      <CustomText text={`$ 3000`} style={styles.originalPriceText} />
-                      <CustomText text={`$ 2099`} style={styles.adsAmountText} />
+                      <CustomText text={`$ 229.99`} style={styles.originalPriceText} />
+                      <CustomText text={`$ 399.90`} style={styles.adsAmountText} />
                     </View>
                   </TouchableOpacity>
                 </View>

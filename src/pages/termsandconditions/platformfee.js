@@ -50,7 +50,7 @@ const Platformfee = () => {
 
         <Text style={styles.paragraph}>
           We want to ensure you have a seamless experience. Please reach out to our support team if you have any
-          concerns at <Text style={styles.link}>help@zaapondemand.in</Text>
+          concerns at <Text style={styles.link}>help@zaapondemand.ca</Text>
         </Text>
       </View>
     </ScrollView>

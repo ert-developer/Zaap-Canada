@@ -9,7 +9,7 @@ const Antidiscrimination = () => {
     <ScrollView style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.header}>ZAAP Anti-Discrimination Policy</Text>
-        <Text style={styles.updated}>Last updated August 15, 2024</Text>
+        {/* <Text style={styles.updated}>Last updated August 15, 2024</Text> */}
 
         <Text style={styles.paragraph}>
           At ZAAP - Hire or Work Locally, we are committed to fostering an inclusive and respectful environment for all
@@ -26,6 +26,7 @@ const Antidiscrimination = () => {
         </Text>
 
         <Text style={styles.paragraph}>2. User Conduct Expectations</Text>
+        <Text style={styles.listItem}>All ZAAP - Hire or Work Locally users are expected to:</Text>
         <Text style={styles.listItem}>- Treat others with respect and dignity.</Text>
         <Text style={styles.listItem}>
           - Avoid language or behavior that is offensive, discriminatory, or exclusionary.
@@ -35,6 +36,9 @@ const Antidiscrimination = () => {
         </Text>
 
         <Text style={styles.paragraph}>3. Prohibited Actions</Text>
+        <Text style={styles.listItem}>
+          The following actions are strictly prohibited on ZAAP - Hire or Work Locally:
+        </Text>
         <Text style={styles.listItem}>- Posting discriminatory job listings, service ads, or communications.</Text>
         <Text style={styles.listItem}>- Refusing to work with or hire someone based on discriminatory reasons.</Text>
         <Text style={styles.listItem}>
@@ -54,9 +58,9 @@ const Antidiscrimination = () => {
 
         <Text style={styles.paragraph}>5. Commitment to Diversity and Inclusion</Text>
         <Text style={styles.listItem}>
-          - ZAAP - Hire or Work Locally is committed to creating a platform that celebrates diversity and promotes equal
-          opportunities for all users. We actively encourage an environment where everyone can thrive, regardless of
-          their background or identity.
+          - At ZAAP - Hire or Work Locally is committed to creating a platform that celebrates diversity and promotes
+          equal opportunities for all users. We actively encourage an environment where everyone can regardless their
+          background or identity.
         </Text>
       </View>
     </ScrollView>

@@ -10,7 +10,7 @@ const Enduseraggrement = () => {
       <CustomText text={'End User Agreement'} style={styles.termsCondtionsHeading} />
       <CustomText text={'Last updated August 15, 2024'} />
       <CustomText
-        text={`ZAAP - Hire or Work Locally is licensed to You (End-User) by Zaapr Online Services Private Limited, located and registered at Hyderabad, Telangana, India ('Licensor'), for use only under the terms of this Licence Agreement.`}
+        text={`ZAAP - Hire or Work Locally is licensed to You (End-User) by Zaapr Online Services Private Limited, located and registered at ontori, canada ('Licensor'), for use only under the terms of this Licence Agreement.`}
         style={styles.paragraph}
       />
       <CustomText
@@ -380,7 +380,7 @@ const Enduseraggrement = () => {
       />
       <CustomText text={'16. APPLICABLE LAW'} style={styles.heading} />
       <CustomText
-        text={'This Licence Agreement is governed by the laws of India excluding its conflicts of law rules'}
+        text={'This Licence Agreement is governed by the laws of CANADA excluding its conflicts of law rules'}
         style={styles.paragraph}
       />
       <CustomText text={'17. MISCELLANEOUS'} style={styles.heading} />

@@ -9,7 +9,7 @@ const ContractorAgreement = () => {
         <Text style={styles.paragraph}>
           This Independent Contractor Agreement (“Agreement”) is made and entered into as of the date the Contractor’s
           account is accepted for a ‘Service Provider’ account on the ZAAP - Hire or Work Locally platform, by and
-          between ZAAP - Hire or Work Locally, located at Hyderabad, Telangana, India (“Company”), and the individual or
+          between ZAAP - Hire or Work Locally, located at Toronto, Ontario, Canada (“Company”), and the individual or
           entity registering as a service provider on the ZAAP - Hire or Work platform (“Contractor”).
         </Text>
 
@@ -129,12 +129,12 @@ const ContractorAgreement = () => {
         <Text style={styles.sectionTitle}>9. DISPUTE RESOLUTION</Text>
         <Text style={styles.paragraph}>
           <Text style={styles.subSection}>9.1 Governing Law. </Text>
-          This Agreement shall be governed by and construed in accordance with the laws of India.
+          This Agreement shall be governed by and construed in accordance with the laws of CANADA.
         </Text>
         <Text style={styles.paragraph}>
           <Text style={styles.subSection}>9.2 Dispute Resolution. </Text>
           Any disputes arising out of or related to this Agreement shall be resolved through Informal Negotiations and
-          Arbitration in Hyderabad, India. The parties agree to first engage in good faith informal negotiations before
+          Arbitration in Toronto, Canada. . The parties agree to first engage in good faith informal negotiations before
           proceeding to arbitration.
         </Text>
 
@@ -182,7 +182,7 @@ const ContractorAgreement = () => {
 
         <Text style={styles.paragraph}>
           HOW CAN YOU CONTACT US ABOUT THIS NOTICE? If you have questions or comments about this notice, you may contact
-          our support team by email at help@zaapondemand.in
+          our support team by email at help@zaapondemand.ca
         </Text>
       </View>
     </ScrollView>
