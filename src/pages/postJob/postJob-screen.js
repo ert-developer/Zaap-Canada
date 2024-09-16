@@ -185,7 +185,6 @@ const PostJobScreen = ({
       });
   };
 
-  screenType = 'preview-form';
   return loader ? (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <ActivityIndicator size={32} />
