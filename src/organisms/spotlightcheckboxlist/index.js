@@ -16,78 +16,78 @@ const SpotlightCheckBox = ({GetSpotlightPaymentAmount, paymentAmount, setPayment
   return (
     <RadioButton.Group onValueChange={handleChange} value={paymentAmount}>
       <View style={styles.radioButtonsContainer}>
-        <TouchableOpacity style={styles.row} onPress={() => handleChange('249')}>
-          <CircleCheckbox value={'249'} color={'#5A2DAF'} checked={paymentAmount === '249'} />
+        <TouchableOpacity style={styles.row} onPress={() => handleChange('29.99')}>
+          <CircleCheckbox value={'29.99'} color={'#5A2DAF'} checked={paymentAmount === '29.99'} />
           <View style={styles.featuredAdsContainer}>
             <View>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <CustomText text={'01 Ads'} style={styles.text} />
-                <CustomText text={'  (249/ad)'} style={{fontSize: 10, color: Color.colorIndigo2}} />
+                <CustomText text={'01 Ad'} style={styles.text} />
+                <CustomText text={'  (25% off)'} style={{fontSize: 10, color: Color.colorIndigo2}} />
               </View>
-              <CustomText text={'You save Rs. 51'} style={styles.text} />
+              <CustomText text={'You save $10'} style={styles.text} />
             </View>
             <View style={styles.amountContainer}>
-              <CustomText text={'$300'} style={styles.originalPriceText} />
+              <CustomText text={'$39.99'} style={styles.originalPriceText} />
             </View>
             <View style={styles.amountContainer}>
-              <CustomText text={'$249'} style={styles.amountText} />
+              <CustomText text={'$29.99'} style={styles.amountText} />
             </View>
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.row} onPress={() => handleChange('699')}>
-          <CircleCheckbox value={'699'} color={'#5A2DAF'} checked={paymentAmount === '699'} />
+        <TouchableOpacity style={styles.row} onPress={() => handleChange('79.99')}>
+          <CircleCheckbox value={'79.99'} color={'#5A2DAF'} checked={paymentAmount === '79.99'} />
           <View style={styles.featuredAdsContainer}>
             <View>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <CustomText text={'03 Ads'} style={styles.text} />
-                <CustomText text={'  (233/ad)'} style={{fontSize: 10, color: Color.colorIndigo2}} />
+                <CustomText text={'  (33.3% off)'} style={{fontSize: 10, color: Color.colorIndigo2}} />
               </View>
-              <CustomText text={'You save Rs. 201'} style={styles.text} />
+              <CustomText text={'You save $40'} style={styles.text} />
             </View>
             <View style={styles.amountContainer}>
-              <CustomText text={'$600'} style={styles.originalPriceText} />
+              <CustomText text={'$119.97'} style={styles.originalPriceText} />
             </View>
             <View style={styles.amountContainer}>
-              <CustomText text={'$699'} style={styles.amountText} />
+              <CustomText text={'$79.99'} style={styles.amountText} />
             </View>
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.row} onPress={() => handleChange('1099')}>
-          <CircleCheckbox value={'1099'} color={'#5A2DAF'} checked={paymentAmount === '1099'} />
+        <TouchableOpacity style={styles.row} onPress={() => handleChange('129.99')}>
+          <CircleCheckbox value={'129.99'} color={'#5A2DAF'} checked={paymentAmount === '129.99'} />
           <View style={styles.featuredAdsContainer}>
             <View>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <CustomText text={'05 Ads'} style={styles.text} />
-                <CustomText text={'  (220/ad)'} style={{fontSize: 10, color: Color.colorIndigo2}} />
+                <CustomText text={'  (35% off)'} style={{fontSize: 10, color: Color.colorIndigo2}} />
               </View>
-              <CustomText text={'You save Rs. 401'} style={styles.text} />
+              <CustomText text={'You save $70'} style={styles.text} />
             </View>
             <View style={styles.amountContainer}>
-              <CustomText text={'$900'} style={styles.originalPriceText} />
+              <CustomText text={'$199.95'} style={styles.originalPriceText} />
             </View>
             <View style={styles.amountContainer}>
-              <CustomText text={'$1099'} style={styles.amountText} />
+              <CustomText text={'$129.99'} style={styles.amountText} />
             </View>
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.row} onPress={() => handleChange('2099')}>
-          <CircleCheckbox value={'2099'} color={'#5A2DAF'} checked={paymentAmount === '2099'} />
+        <TouchableOpacity style={styles.row} onPress={() => handleChange('229.99')}>
+          <CircleCheckbox value={'229.99'} color={'#5A2DAF'} checked={paymentAmount === '229.99'} />
           <View style={styles.featuredAdsContainer}>
             <View>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <CustomText text={'10 Ads'} style={styles.text} />
-                <CustomText text={'  (210/ad)'} style={{fontSize: 10, color: Color.colorIndigo2}} />
+                <CustomText text={'  (42.5% off)'} style={{fontSize: 10, color: Color.colorIndigo2}} />
               </View>
-              <CustomText text={'You save Rs. 901'} style={styles.text} />
+              <CustomText text={'You save $170'} style={styles.text} />
             </View>
             <View style={styles.amountContainer}>
-              <CustomText text={'$1500'} style={styles.originalPriceText} />
+              <CustomText text={'$399.90'} style={{...styles.originalPriceText, marginRight: 7}} />
             </View>
             <View style={styles.amountContainer}>
-              <CustomText text={'$2099'} style={styles.amountText} />
+              <CustomText text={'$229.99'} style={styles.amountText} />
             </View>
           </View>
         </TouchableOpacity>

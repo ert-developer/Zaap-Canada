@@ -185,6 +185,7 @@ const PostJobScreen = ({
       });
   };
 
+  screenType = 'preview-form';
   return loader ? (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <ActivityIndicator size={32} />
@@ -294,7 +295,7 @@ const PostJobScreen = ({
                       value={formData.salary.toString()}
                       onHandleChange={text => handleChange('salary', text)}
                       field={'salary'}
-                      placeholder={'eg: $100'}
+                      placeholder={'eg: ₹100'}
                       formErrors={formErrors}
                       firstPicker={styles.firstPicker}
                     />

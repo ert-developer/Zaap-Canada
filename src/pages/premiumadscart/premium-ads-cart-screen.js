@@ -22,18 +22,22 @@ const PremiumAdsCartScreen = ({
 }) => {
   const styles = premiumAdsCartStyles();
 
-  const originalPrice =
+  let originalPrice =
     countFeaturedChange *
-      (featuredAdsCount === 10 ? 249 : featuredAdsCount === 5 ? 124 : featuredAdsCount === 3 ? 74 : 24) +
+      (featuredAdsCount === 10 ? 249.9 : featuredAdsCount === 5 ? 124.95 : featuredAdsCount === 3 ? 74.97 : 24.99) +
     countSpotlightChange *
-      (spotlightAdsCount === 10 ? 399 : spotlightAdsCount === 5 ? 199 : spotlightAdsCount === 3 ? 119 : 39);
+      (spotlightAdsCount === 10 ? 399.9 : spotlightAdsCount === 5 ? 199.95 : spotlightAdsCount === 3 ? 119.97 : 39.99);
 
-  const price =
+  let price =
     countFeaturedChange *
-      (featuredAdsCount === 10 ? 169 : featuredAdsCount === 5 ? 89 : featuredAdsCount === 3 ? 54 : 19) +
+      (featuredAdsCount === 10 ? 169.99 : featuredAdsCount === 5 ? 89.99 : featuredAdsCount === 3 ? 54.99 : 19.99) +
     countSpotlightChange *
-      (spotlightAdsCount === 10 ? 229 : spotlightAdsCount === 5 ? 129 : spotlightAdsCount === 3 ? 79 : 29);
-  const discount = originalPrice - price;
+      (spotlightAdsCount === 10 ? 229.99 : spotlightAdsCount === 5 ? 129.99 : spotlightAdsCount === 3 ? 79.99 : 29.99);
+  let discount = originalPrice - price;
+
+  originalPrice = originalPrice.toFixed(2);
+  price = price.toFixed(2);
+  discount = discount.toFixed(2);
 
   return (
     <SafeAreaView>
@@ -76,9 +80,9 @@ const PremiumAdsCartScreen = ({
                 <CustomText text={'='} style={styles.equalTo} />
                 <View style={styles.priceContainer}>
                   {featuredAdsCount !== 0 ? (
-                    <CustomText text={`$${featuredAdsCount * 19.99}`} style={styles.adsAmount} />
+                    <CustomText text={`$${(featuredAdsCount * 24.99).toFixed(2)}`} style={styles.adsAmount} />
                   ) : (
-                    <CustomText text={`$${countFeaturedChange * 19.99}`} style={styles.adsAmount} />
+                    <CustomText text={`$${(countFeaturedChange * 24.99).toFixed(2)}`} style={styles.adsAmount} />
                   )}
                 </View>
               </View>
@@ -107,9 +111,9 @@ const PremiumAdsCartScreen = ({
                 <CustomText text={'='} style={styles.equalTo} />
                 <View style={styles.priceContainer}>
                   {spotlightAdsCount !== 0 ? (
-                    <CustomText text={`$${spotlightAdsCount * 19.99}`} style={styles.adsAmount} />
+                    <CustomText text={`$${(spotlightAdsCount * 39.99).toFixed(2)}`} style={styles.adsAmount} />
                   ) : (
-                    <CustomText text={`$${countSpotlightChange * 19.99}`} style={styles.adsAmount} />
+                    <CustomText text={`$${(countSpotlightChange * 39.99).toFixed(2)}`} style={styles.adsAmount} />
                   )}
                 </View>
               </View>
@@ -138,7 +142,7 @@ const PremiumAdsCartScreen = ({
             </View>
             <View style={styles.totalAmountContainer}>
               <CustomText text={'Total'} style={styles.totalText} />
-              <CustomText text={`$${originalPrice - discount}`} style={styles.totalAmount} />
+              <CustomText text={`$${(originalPrice - discount).toFixed(2)}`} style={styles.totalAmount} />
             </View>
           </View>
           <CustomButton
