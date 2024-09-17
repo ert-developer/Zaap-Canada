@@ -158,7 +158,7 @@ const JobDetailContainer = ({route, navigation}) => {
     try {
       await RNShare.open(shareOptions);
     } catch (error) {
-      console.error('Error sharing job details:', error);
+      console.log('Error sharing job details:', error);
     }
   };
   const handleButtonClick = async () => {
