@@ -7,7 +7,7 @@ import {Alert} from 'react-native';
 import usePayment from '../../custom-hooks/payment/usePayment';
 import {useNavigation} from '@react-navigation/native';
 import handlePayment from '../../custom-hooks/payment/useRazorPayPayment';
-import { envConfig } from '../../assets/helpers/envApi';
+import {envConfig} from '../../assets/helpers/envApi';
 
 const PremiumAdsCartContainer = () => {
   const [featuredAdsCount, setFeaturedAdsCount] = useState(0);
@@ -61,12 +61,11 @@ const PremiumAdsCartContainer = () => {
     setLoader(true);
     try {
       // Start payment process
-      let response = await handlePayment(parseInt(finalAmount));
-
-      if (response && response.result.status === 'success') {
+      // let response = await handlePayment(parseInt(finalAmount));
+      let response = await handleCheckout(parseInt(finalAmount));
+      if (response && response['_documentPath']) {
         const collectionRef = firestore().collection(envConfig.Premium_ads);
         const docRef = collectionRef.doc(userId); // Use the user's ID as the document ID
-
         // Prepare the data to update or create the document
         const premiumAdsData = {
           creationTime: Date.now(),
@@ -74,10 +73,8 @@ const PremiumAdsCartContainer = () => {
           featuredAds: firestore.FieldValue.increment(featuredAdsCount), // Increment the value
           spotlightAds: firestore.FieldValue.increment(spotlightAdsCount), // Increment the value
         };
-
         // Update or create the document
         await docRef.set(premiumAdsData, {merge: true});
-
         // Reset counts and show success modal
         setPaymentSuccessModal(true);
         setFeaturedAdsCount(0);

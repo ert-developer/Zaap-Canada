@@ -596,8 +596,10 @@ const CustomerSidePaymentModel = () => {
         setPaymentLoader(false);
         return;
       }
-      let response = await handlePayment(parseInt(tipAmount));
-      if (response && response.result.status === 'success') {
+      // let response = await handlePayment(parseInt(tipAmount));
+      let response = await handleCheckout(parseInt(tipAmount));
+
+      if (response && response['_documentPath']) {
         handleServiceCompleted();
         setServiceCompleted(true);
       }

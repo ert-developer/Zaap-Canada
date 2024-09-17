@@ -578,8 +578,8 @@ const PostJobContainer = () => {
         } else {
           try {
             setPaymentLoader(true);
-            let response = await handlePayment(paymentAmount);
-            if (response && response.result.status === 'success') {
+            let response = await handleCheckout(paymentAmount);
+            if (response && response['_documentPath']) {
               await purchasePremiumAds();
               handlePostJob();
             } else {
