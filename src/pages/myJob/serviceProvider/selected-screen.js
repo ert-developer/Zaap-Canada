@@ -38,41 +38,28 @@ const MyJobsSelectd = () => {
 
   // console.log("filteredAppliedJobs",filteredAppliedJobs)
 
-  const handleJobPress = job => {
+  const handleJobPress = item => {
     navigation.navigate('JobDeatil', {
-      // imageSource: job.imageSource[0],
-      // category: job.category,
-      // title: job.jobTitle,
-      // description: job.jobDescription,
-      // price: job.price,
-      // location: job.description,
-      // postedBy: job.postedBy,
-      // id: job.id,
-      // area: job.area,
-
-      // jobAdType: job.jobAds.type,
-      // createdOn: job.createdOn,
-
-      imageSource: [job.imageUrls],
-      category: job.category, //
-      title: job.title,
-      description: job.description, //
-      price: job.price,
-      location: job?.location,
-      postedBy: job.postedBy,
-      id: job.id,
-      jobAdType: job.jobAdType,
-      createdOn: job.createdOn, //
-      starttime: job.starttime,
-      startdate: job.startdate,
-      subCategory: job.subCategory,
-      images: job.images,
-      area: job.area, //
-      lat: job.location.lat,
-      lng: job.location.lng,
-      address: job.address, //
-      userName: job.userName,
-      // IsPaid: job?.IsPaid,
+      imageSource: item.imageUrls[0],
+      category: item.data.category,
+      title: item.data.jobTitle,
+      description: item.data.jobDescription,
+      price: item.data.salary,
+      location: item?.locationDesc?.description,
+      postedBy: item.postedBy,
+      id: item.id,
+      jobAdType: item.jobAds.type,
+      createdOn: item.createdOn,
+      starttime: item.data.starttime,
+      startdate: item.data.startdate,
+      subCategory: item.data.subCategory,
+      images: item.imageUrls,
+      area: item.area,
+      lat: item.location.lat,
+      lng: item.location.lng,
+      address: item.address,
+      userName: item.userName,
+      IsPaid: item.IsPaid ? item.IsPaid : false,
     });
   };
   const renderJobList = ({item}) => {

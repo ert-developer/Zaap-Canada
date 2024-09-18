@@ -897,7 +897,7 @@ const ProviderProfile = ({
   const fetchCities = async text => {
     if (text.length > 0) {
       const API_KEY = envConfig.GOOGLE_API_KEY; //to be changed to "envConfig.GOOGLE_API_KEY" once quota problem of API resolved
-      const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${text}&sensor=false&types=(cities)&components=country:IN&key=${API_KEY}`;
+      const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${text}&sensor=false&types=(cities)&components=country:CA&key=${API_KEY}`;
       try {
         const response = await fetch(url);
         const data = await response.json(); // Parse the response to JSON

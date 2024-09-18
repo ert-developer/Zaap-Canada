@@ -59,9 +59,9 @@ const categoriesOptions = [
       {name: 'Account Type', type: 'picker', totalWidth: true},
       {name: 'Account Number', type: 'text', totalWidth: true},
       {name: 'Confirm Account Number', type: 'text', totalWidth: true},
-      {name: 'IFSC Code', type: 'text', totalWidth: true},
-      // {name: 'Bank Transit Number', type: 'text', totalWidth: true},
-      // {name: 'Institution Number', type: 'text', totalWidth: true},
+      // {name: 'IFSC Code', type: 'text', totalWidth: true},
+      {name: 'Bank Transit Number', type: 'text', totalWidth: true},
+      {name: 'Institution Number', type: 'text', totalWidth: true},
       {name: 'SAVE AND NEXT', type: 'button', totalWidth: true},
     ],
     flag: false,
@@ -127,8 +127,8 @@ const data = [
 ];
 
 const accountType = [
+  {name: 'Checking', value: 'checking'},
   {name: 'Savings', value: 'savings'},
-  {name: 'Current', value: 'current'},
 ];
 
 const indiaGovDocs = [
@@ -582,12 +582,6 @@ const ProviderProfileContainer = ({navigation}) => {
         case 'Institution Number':
           if (!formData.institution_number) {
             formErrors.institution_number = true;
-            return false;
-          }
-          break;
-        case 'IFSC Code':
-          if (!formData.ifsc_code) {
-            formErrors.ifsc_code = true;
             return false;
           }
           break;

@@ -6,6 +6,7 @@ import firestore from '@react-native-firebase/firestore';
 import {postCollectionDetails} from '../../common/collection';
 import {tr} from 'date-fns/locale';
 import {envConfig} from '../../assets/helpers/envApi';
+import {useNavigation} from '@react-navigation/native';
 
 const UpdateBankDetailsContainer = () => {
   const AuthUser = useSelector(state => state.Auth);
@@ -13,6 +14,7 @@ const UpdateBankDetailsContainer = () => {
 
   const [showPopup, setShowPopup] = useState(false);
   const [error, setError] = useState('');
+  const navigation = useNavigation();
 
   const bankDetailsFields = [
     {
@@ -23,9 +25,9 @@ const UpdateBankDetailsContainer = () => {
         {name: 'Account Type', type: 'picker', totalWidth: true},
         {name: 'Account Number', type: 'text', totalWidth: true},
         {name: 'Confirm Account Number', type: 'text', totalWidth: true},
-        {name: 'IFSC Code', type: 'text', totalWidth: true},
-        // {name: 'Bank Transit Number', type: 'text', totalWidth: true},
-        // {name: 'Institution Number', type: 'text', totalWidth: true},
+        // {name: 'IFSC Code', type: 'text', totalWidth: true},
+        {name: 'Bank Transit Number', type: 'text', totalWidth: true},
+        {name: 'Institution Number', type: 'text', totalWidth: true},
       ],
       flag: false,
     },
@@ -45,8 +47,8 @@ const UpdateBankDetailsContainer = () => {
   const [formErrors, setFormErrors] = useState(generateInitialForm(bankDetailsFields, 'errorValidation'));
 
   const accountType = [
+    {name: 'Checking', value: 'checking'},
     {name: 'Savings', value: 'savings'},
-    {name: 'Current', value: 'current'},
   ];
 
   const isInteger = value => /^\d*$/.test(value);
@@ -115,13 +117,6 @@ const UpdateBankDetailsContainer = () => {
           }
           break;
 
-        case 'ifsc_code':
-          if (!formData.ifsc_code) {
-            formErrorss.ifsc_code = true;
-            return false;
-          }
-          break;
-
         default:
           break;
       }
@@ -165,9 +160,8 @@ const UpdateBankDetailsContainer = () => {
       account_type: formData.account_type,
       account_number: formData.account_number,
       confirm_account_number: formData.confirm_account_number,
-      // bank_transit_number: formData.bank_transit_number,
-      // institution_number: formData.institution_number,
-      ifsc_code: formData.ifsc_code,
+      bank_transit_number: formData.bank_transit_number,
+      institution_number: formData.institution_number,
       updatedDateAndTime: new Date(),
     };
 
@@ -191,6 +185,7 @@ const UpdateBankDetailsContainer = () => {
   const onClosePopup = () => {
     setShowPopup(false);
     setError(false);
+    navigation.navigate('HomeScreen');
   };
 
   return (

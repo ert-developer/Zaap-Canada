@@ -110,7 +110,7 @@ const ChatScreenExample = ({data, allChat}) => {
             ? renderAvatar(imageUrl)
             : renderAvatar(serviceProviderDetails[0].imageURL)
           : null}
-        {isServiceProvider !== false
+        {isServiceProvider === true
           ? item.from !== user.userId
             ? renderAvatar(photoURL)
             : renderAvatar(user.imageUrl)

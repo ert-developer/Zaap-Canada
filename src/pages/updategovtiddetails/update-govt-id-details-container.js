@@ -8,6 +8,7 @@ import firestore from '@react-native-firebase/firestore';
 import {useSelector} from 'react-redux';
 import {Alert} from 'react-native';
 import {postCollectionDetails} from '../../common/collection';
+import {useNavigation} from '@react-navigation/native';
 
 const UpdateGovtIdDetailsContainer = () => {
   const AuthUser = useSelector(state => state.Auth);
@@ -20,6 +21,11 @@ const UpdateGovtIdDetailsContainer = () => {
   const [showIdExpirationPicker, setShowIdExpirationPicker] = useState(false);
   const [idExpirationDate, setIdExpirationDate] = useState('');
   const [showPopup, setShowPopup] = useState(false);
+  const [photoLoader, setPhotoLoader] = useState(false);
+  const [frontLoader, setFrontLoader] = useState(false);
+  const [backLoader, setBackLoader] = useState(false);
+
+  const navigation = useNavigation();
 
   let generateInitialForm = (categories, value) => {
     const initialForm = {};
@@ -133,48 +139,57 @@ const UpdateGovtIdDetailsContainer = () => {
       [file]: '',
     }));
   };
+  const handleOpenCamera = (sourceType, fieldName) => {
+    if (fieldName === 'personal_photo') setPhotoLoader(true);
+    if (fieldName === 'front') setFrontLoader(true);
+    if (fieldName === 'back') setBackLoader(true);
 
-  const handleOpenCamera = (sourceType, fieldName, imageIndex) => {
-    uploadImage(sourceType, response => handleImageResponse(response, fieldName, imageIndex), fieldName);
+    uploadImage(sourceType, response => handleImageResponse(response, fieldName), fieldName);
   };
 
+  // Function to handle image response and stop the loader
   const handleImageResponse = (response, fieldName) => {
     if (response.didCancel) {
       console.log('User cancelled image picker');
+      if (fieldName === 'personal_photo') setPhotoLoader(false);
+      if (fieldName === 'front') setFrontLoader(false);
+      if (fieldName === 'back') setBackLoader(false);
     } else if (response.error) {
       console.log('Image picker error: ', response.error);
+      if (fieldName === 'personal_photo') setPhotoLoader(false);
+      if (fieldName === 'front') setFrontLoader(false);
+      if (fieldName === 'back') setBackLoader(false);
     } else {
+      // Assuming the image is uploaded and the URL is set in formData
+      const imageUrls = [];
       if (response.assets && response.assets.length > 0) {
-        const newImages = response.assets.slice(0, 3);
-        const imageUrls = [];
-
-        for (const image of newImages) {
+        response.assets.forEach(image => {
           const storageRef = storage().ref(`verification-images/${Date.now()}-${image.fileName}`);
-
           const uploadTask = storageRef.putFile(image.uri);
-          // Listen for state changes, then get the download URL
+
           uploadTask.on(
             'state_changed',
             snapshot => {
-              // Handle progress, if needed
+              // Handle progress if needed
             },
             error => {
               console.error('Error uploading image to Firebase:', error);
             },
             async () => {
-              // Upload completed successfully, get the download URL
               const downloadURL = await storageRef.getDownloadURL();
               imageUrls.push(downloadURL);
-              // Store the image URLs directly in your formData
               setFormData(prevData => ({
                 ...prevData,
-                [fieldName.toString()]: [...(prevData[fieldName.toString()] || []), ...imageUrls],
+                [fieldName]: [...(prevData[fieldName] || []), ...imageUrls],
               }));
-
-              setFormErrors(prevState => ({...prevState, [fieldName.toString()]: false}));
+              setFormErrors(prevState => ({...prevState, [fieldName]: false}));
+              // Stop the loader
+              if (fieldName === 'personal_photo') setPhotoLoader(false);
+              if (fieldName === 'front') setFrontLoader(false);
+              if (fieldName === 'back') setBackLoader(false);
             },
           );
-        }
+        });
       }
     }
   };
@@ -312,6 +327,7 @@ const UpdateGovtIdDetailsContainer = () => {
 
   const onClosePopup = () => {
     setShowPopup(false);
+    navigation.navigate('HomeScreen');
   };
 
   return (
@@ -336,6 +352,9 @@ const UpdateGovtIdDetailsContainer = () => {
       showPopup={showPopup}
       onClosePopup={onClosePopup}
       indiaGovDocs={indiaGovDocs}
+      photoLoader={photoLoader}
+      frontLoader={frontLoader}
+      backLoader={backLoader}
     />
   );
 };

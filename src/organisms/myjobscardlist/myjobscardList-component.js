@@ -78,8 +78,7 @@ const MyjobsCardList = ({
 
   const handleJobPress = job => {
     navigation.navigate('JobDeatil', {
-      // imageSource: job.imageUrls[0],
-
+      imageSource: job.imageUrls[0],
       title: job.jobTitle,
       category: job.category,
       subCategory: job.subCategory,
@@ -94,13 +93,8 @@ const MyjobsCardList = ({
       area: job.area,
       address: job.address,
       postedBy: job.postedBy,
-
-      // category: job.category,
-      // title: job.jobTitle,
-      // description: job.jobDescription,
-      // price: job.salary,
       location: job?.locationDesc?.description,
-      IsPaid: job?.IsPaid,
+      IsPaid: job?.IsPaid ? job.IsPaid : false,
     });
   };
 

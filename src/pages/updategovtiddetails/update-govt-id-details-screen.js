@@ -15,6 +15,7 @@ import {TouchableOpacity} from 'react-native';
 import Modal from 'react-native-modal';
 import CustomModal from '../../molecules/custommodal';
 import {RightPopupSVG} from '../../assets/svgIcons/premiumads/premium-ads-screen-svgs';
+import {ActivityIndicator} from 'react-native';
 
 const UpdateGovtIdDetailsScreen = ({
   updateGovtIdDetails,
@@ -36,6 +37,9 @@ const UpdateGovtIdDetailsScreen = ({
   showPopup,
   onClosePopup,
   indiaGovDocs,
+  photoLoader,
+  frontLoader,
+  backLoader,
 }) => {
   const styles = updateGovtDetailsStyles();
 
@@ -62,14 +66,20 @@ const UpdateGovtIdDetailsScreen = ({
           <View key={index}>
             {/* Button to add more images */}
             <View style={styles.selfieLabelContainer}>
-              <CustomText text={'Selfie Photo'} style={styles.label} />
+              <CustomText text={'Selfie Ph'} style={styles.label} />
               <ExclamationSVG style={styles.exclamationIconStyles} />
             </View>
             <CustomTouchableOpacity
               style={[styles.totalWidth, formErrors.personal_photo && styles.inputErrorStyles]}
               onPress={() => handleOpenCamera('camera', field.name.toLowerCase().split(' ').join('_'))}>
-              {renderIcon('PHOTO')}
-              <CustomText text={'Upload Photo'} style={styles.textWhite} />
+              {photoLoader ? (
+                <ActivityIndicator size="small" color="#ffffff" />
+              ) : (
+                <>
+                  {renderIcon('PHOTO')}
+                  <CustomText text={'Upload Photo'} style={styles.textWhite} />
+                </>
+              )}
             </CustomTouchableOpacity>
             {/* Iterate over each image in formData.personal_photo */}
             <View style={{flexDirection: 'row'}}>
@@ -193,8 +203,16 @@ const UpdateGovtIdDetailsScreen = ({
                   <CustomTouchableOpacity
                     style={[styles.halfWidth, formErrors.front && styles.inputErrorStyles]}
                     onPress={() => handleOpenCamera('camera', 'front'.toLowerCase().split(' ').join('_'))}>
-                    {renderIcon('FRONT')}
-                    <CustomText text={'Front'} style={styles.textWhite} />
+                    {frontLoader ? (
+                      <>
+                        <ActivityIndicator size="small" color="#ffffff" />
+                      </>
+                    ) : (
+                      <>
+                        {renderIcon('FRONT')}
+                        <CustomText text={'Front'} style={styles.textWhite} />
+                      </>
+                    )}
                   </CustomTouchableOpacity>
 
                   {formData['front'.toLowerCase().split(' ').join('_')] ? (
@@ -215,8 +233,16 @@ const UpdateGovtIdDetailsScreen = ({
                   <CustomTouchableOpacity
                     style={[styles.halfWidth, formErrors.back && styles.inputErrorStyles]}
                     onPress={() => handleOpenCamera('camera', 'back'.toLowerCase().split(' ').join('_'))}>
-                    {renderIcon('BACK')}
-                    <CustomText text={'Back'} style={styles.textWhite} />
+                    {backLoader ? (
+                      <>
+                        <ActivityIndicator size="small" color="#ffffff" />
+                      </>
+                    ) : (
+                      <>
+                        {renderIcon('BACK')}
+                        <CustomText text={'Back'} style={styles.textWhite} />
+                      </>
+                    )}
                   </CustomTouchableOpacity>
 
                   {formData['back'.toLowerCase().split(' ').join('_')] ? (

@@ -5,28 +5,28 @@ const NearMeJobsContainer = ({route}) => {
   const nearMeJobs = route.params;
   const navigation = useNavigation();
 
-  const handleJobPress = job => {
+  const handleJobPress = item => {
     navigation.navigate('JobDeatil', {
-      imageSource: job.imageUrls[0],
-      category: job.data.category, //
-      title: job.data.jobTitle, //
-      description: job.data.jobDescription, //
-      price: job.data.salary, //
-      location: job?.locationDesc?.description, //////////-----
-      postedBy: job.postedBy, //
-      id: job.id, //
-      jobAdType: job.jobAds.type,
-      createdOn: job.createdOn,
-      starttime: job.data.starttime,
-      startdate: job.data.startdate,
-      subCategory: job.data.subCategory,
-      images: job.imageUrls, //
-      area: job.area,
-      lat: job.location.lat,
-      lng: job.location.lng,
-      address: job.address,
-      userName: job.userName,
-      // isPaid: job?.IsPaid,
+      imageSource: item.imageUrls[0],
+      category: item.data.category,
+      title: item.data.jobTitle,
+      description: item.data.jobDescription,
+      price: item.data.salary,
+      location: item?.locationDesc?.description,
+      postedBy: item.postedBy,
+      id: item.id,
+      jobAdType: item.jobAds.type,
+      createdOn: item.createdOn,
+      starttime: item.data.starttime,
+      startdate: item.data.startdate,
+      subCategory: item.data.subCategory,
+      images: item.imageUrls,
+      area: item.area,
+      lat: item.location.lat,
+      lng: item.location.lng,
+      address: item.address,
+      userName: item.userName,
+      IsPaid: item.IsPaid ? item.IsPaid : false,
     });
   };
 
