@@ -72,6 +72,11 @@ const PremiumAdsCartContainer = () => {
   const purchasePremiumAds = async finalAmount => {
     setLoader(true);
     try {
+      if (isNaN(finalAmount) || finalAmount <= 0) {
+        setLoader(false);
+        Alert.alert('Empty Cart!', 'Kindly add items to your cart', [{text: 'OK'}]);
+        return;
+      }
       // Start payment process
       // let response = await handlePayment(parseInt(finalAmount));
       let response = await handleCheckout(parseInt(finalAmount));

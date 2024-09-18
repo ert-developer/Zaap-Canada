@@ -255,7 +255,7 @@ const UpdateGovtIdDetailsScreen = ({
         </View>
       </Modal>
       <HeaderComponent text={'Update Government ID'} />
-      <ScrollView>
+      <ScrollView style={{backgroundColor: '#fff'}}>
         <View style={styles.updateGovtDetailsMainCon}>
           {renderGovtDetailsFields()}
           <TouchableOpacity style={styles.updateBtn} onPress={onSubmitGovtIdDetails}>

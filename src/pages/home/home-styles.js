@@ -417,7 +417,7 @@ function HomeStyles() {
     viewAllText: {
       fontSize: heightToDp(1.85),
       fontFamily: 'Helvetica',
-      alignItems: 'right',
+      alignItems: 'flex-end',
       color: '#000',
       textDecorationColor: Color.colorBlack,
       textDecorationStyle: 'solid',
