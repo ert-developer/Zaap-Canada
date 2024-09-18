@@ -318,7 +318,7 @@ const HomeContainer = ({navigation}) => {
       lng: job.location.lng,
       address: job.address,
       userName: job.userName,
-      IsPaid: job?.IsPaid,
+      IsPaid: job?.IsPaid ? job?.IsPaid : false,
     });
     setSearchText('');
   };

@@ -39,6 +39,7 @@ const SubCategoryContainer = () => {
       userName,
       id,
       createdOn,
+      IsPaid,
     } = item;
     navigation.navigate('JobDeatil', {
       imageSource: imageUrls[0],
@@ -60,6 +61,7 @@ const SubCategoryContainer = () => {
       lng: location.lng,
       address: address,
       userName: userName,
+      IsPaid: IsPaid ? IsPaid : false,
     });
   };
 

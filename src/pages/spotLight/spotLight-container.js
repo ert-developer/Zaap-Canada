@@ -31,13 +31,6 @@ const SpotLightContainer = ({route, navigation}) => {
     incrementAdViews(job.id, user.userId);
 
     navigation.navigate('JobDeatil', {
-      // imageSource: job.imageUrls[0],
-      // category: job.data.category,
-      // title: job.data.jobTitle,
-      // description: job.data.jobDescription,
-      // price: job.data.salary,
-      // where: job.locationDesc.description,
-      // postedBy: job.postedBy,
       imageSource: job.imageUrls[0],
       category: job.data.category,
       title: job.data.jobTitle,
@@ -57,7 +50,7 @@ const SpotLightContainer = ({route, navigation}) => {
       lng: job.location.lng,
       address: job.address,
       userName: job.userName,
-      // IsPaid:job.IsPaid,
+      IsPaid: job.IsPaid ? job.IsPaid : false,
     });
   };
   return <SpotLightScreen spotLigt={spotLight} handleJobPress={handleJobPress} navigation={navigation} />;

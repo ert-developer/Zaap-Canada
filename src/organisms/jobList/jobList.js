@@ -37,7 +37,7 @@ const JobList = ({item, handleJobPress, fav}) => {
       lng: item.location.lng,
       address: item.address,
       userName: item.userName,
-      // IsPaid:item.IsPaid,
+      IsPaid: item.IsPaid ? item.IsPaid : false,
     });
   };
 
