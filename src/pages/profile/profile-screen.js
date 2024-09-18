@@ -294,13 +294,13 @@ const ProfileScreen = ({
             {/* <CustomText text={user?.email} style={styles.value} /> */}
           </View>
           <View style={styles.inputContainer}>
-            <CustomText text="State" style={styles.provinceText} />
+            <CustomText text="Province" style={styles.provinceText} />
             <View style={[styles.input1, styles.provinceDropDown]}>
               <DropdownSearchComponent
                 selectedValue={formData.provinces || ''}
                 onHandleChange={(fieldName, value) => handleProvinceChange(value)}
                 fieldName="provinces"
-                defaultOption={formData.provinces ? formData.provinces : 'Select State'}
+                defaultOption={formData.provinces ? formData.provinces : 'Select Province'}
                 labelField="label"
                 valueField="value"
                 pickerOptions={canadaProvincesOptions}

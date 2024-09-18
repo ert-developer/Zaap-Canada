@@ -294,7 +294,7 @@ const PostJobScreen = ({
                       value={formData.salary.toString()}
                       onHandleChange={text => handleChange('salary', text)}
                       field={'salary'}
-                      placeholder={'eg: ₹100'}
+                      placeholder={'eg: $100'}
                       formErrors={formErrors}
                       firstPicker={styles.firstPicker}
                     />
@@ -306,7 +306,7 @@ const PostJobScreen = ({
                       value={formData.phone}
                       onHandleChange={text => handleChange('phone', text)}
                       field={'phone'}
-                      placeholder={'+91'}
+                      placeholder={'+1'}
                       formErrors={formErrors}
                     />
                   </View>

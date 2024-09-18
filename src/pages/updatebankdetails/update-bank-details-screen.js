@@ -79,7 +79,7 @@ const UpdateBankDetailsScreen = ({
         </View>
       </Modal>
       <HeaderComponent text={'Update Bank Details'} />
-      <ScrollView>
+      <ScrollView style={{backgroundColor: '#fff'}}>
         <View style={styles.updateBankDetailsMainCon}>
           {renderBankDetailsFields()}
           <TouchableOpacity style={styles.bankDetailsUpdateBtn} onPress={() => updateUserBankDetails()}>

@@ -1,7 +1,5 @@
 import CustomText from '../text/textComponent';
 import {View, StyleSheet, Text} from 'react-native';
-import StaticImage from '../../assets/svgImage/static';
-import RupeeSvgComponent from '../../assets/svgIcons/RupeeIcon/rupeeiconsvg';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 import {Border, Color, FontFamily, FontSize, Margin} from '../../assets/static/globalStyles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -60,8 +58,7 @@ const CompletedJobsCard = ({completedJobs, timeAgoo}) => {
                 </Text>
               </View>
               <View style={styles.amountContainer}>
-                <RupeeSvgComponent style={styles.rupeeIcon} />
-                <CustomText text={completedJobs.salary} style={styles.text1} />
+                <CustomText text={`$${completedJobs.salary}`} style={styles.text1} />
               </View>
             </View>
             <View style={styles.DateandRadius}>

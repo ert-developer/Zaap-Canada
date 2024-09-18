@@ -72,24 +72,28 @@ const PremiumAdsCartContainer = () => {
   const purchasePremiumAds = async finalAmount => {
     setLoader(true);
     try {
+      if (isNaN(finalAmount) || finalAmount <= 0) {
+        setLoader(false);
+        Alert.alert('Empty Cart!', 'Kindly add items to your cart', [{text: 'OK'}]);
+        return;
+      }
       // Start payment process
-      let response = await handlePayment(parseInt(finalAmount));
-
-      if (response && response.result.status === 'success') {
+      // let response = await handlePayment(parseInt(finalAmount));
+      let response = await handleCheckout(parseInt(finalAmount));
+      if (response && response['_documentPath']) {
         const collectionRef = firestore().collection(envConfig.Premium_ads);
         const docRef = collectionRef.doc(userId); // Use the user's ID as the document ID
-
         // Prepare the data to update or create the document
+        const featuredFinalCount = purchaseAdsData.featuredAdsCount === 0 ? countFeaturedChange : featuredAdsCount;
+        const spotlightFinalCount = purchaseAdsData.spotlightAdsCount === 0 ? countSpotlightChange : spotlightAdsCount;
         const premiumAdsData = {
           creationTime: Date.now(),
           userId: userId,
-          featuredAds: firestore.FieldValue.increment(featuredAdsCount), // Increment the value
-          spotlightAds: firestore.FieldValue.increment(spotlightAdsCount), // Increment the value
+          featuredAds: firestore.FieldValue.increment(featuredFinalCount), // Increment the value
+          spotlightAds: firestore.FieldValue.increment(spotlightFinalCount), // Increment the value
         };
-
         // Update or create the document
         await docRef.set(premiumAdsData, {merge: true});
-
         // Reset counts and show success modal
         setPaymentSuccessModal(true);
         setFeaturedAdsCount(0);

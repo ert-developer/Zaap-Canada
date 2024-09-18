@@ -58,7 +58,6 @@ import JobList from '../../organisms/jobList/jobList';
 import {CircleIcon, Live, MenuSvg} from '../../assets/svgImage/home';
 import CurrentLocation from '../../organisms/currentLocation/currentLocation';
 import StaticImage from '../../assets/svgImage/static';
-import RupeeSvgComponent from '../../assets/svgIcons/RupeeIcon/rupeeiconsvg';
 import {TouchableOpacity} from '@gorhom/bottom-sheet';
 import BottomHalfModal from '../../organisms/bottomHalfModal/bottomHalfModal';
 import {check, PERMISSIONS, request} from 'react-native-permissions';

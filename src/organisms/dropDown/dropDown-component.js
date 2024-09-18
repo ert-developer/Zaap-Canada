@@ -5,13 +5,12 @@ import {heightToDp, widthToDp} from '../../responsive/responsive';
 import CustomText from '../../atoms/text/textComponent';
 import {FontSize, Margin, Color} from '../../assets/static/globalStyles';
 import CircleCheckbox from '../../atoms/circleCheckbox/circleCheckbox-component';
-import RupeeSvgComponent from '../../assets/svgIcons/RupeeIcon/rupeeiconsvg';
 import FeatureCheckBox from '../featurecheckboxlist';
 import CheckBox from '@react-native-community/checkbox';
 import {useSelector} from 'react-redux';
 import firestore from '@react-native-firebase/firestore';
 import SpotlightCheckBox from '../spotlightcheckboxlist';
-import { envConfig } from '../../assets/helpers/envApi';
+import {envConfig} from '../../assets/helpers/envApi';
 
 const DropdownComponent = ({
   data,

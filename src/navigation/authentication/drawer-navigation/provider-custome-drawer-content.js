@@ -1,35 +1,24 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/react-in-jsx-scope */
-import {useState} from 'react';
-import {View, TouchableOpacity, Text, ScrollView} from 'react-native';
-import CustomButton from '../../../atoms/button/buttonComponent';
+import {useCallback, useState} from 'react';
+import {View, TouchableOpacity, Text, ScrollView, ToastAndroid} from 'react-native';
 import CustomTouchableOpacity from '../../../molecules/touchable-opacity/touchable-opacity-component';
 import CustomImage from '../../../atoms/image/imageComponent';
 import CustomText from '../../../atoms/text/textComponent';
-import ProviderFeedbackContainer from '../../../pages/providerFeedback/provider-feedback-container';
 import {deleteUser} from 'firebase/auth';
 
 import {
   HomeSVG,
-  DarkLightSvg,
-  FaqSVG,
   FavouriteSVG,
-  LeftArrowIcon,
   LogoutSVG,
   DeleteAccountSVG,
   MyaccountSVG,
-  MyadsSVG,
-  PremiumAdsSVG,
-  InvoicesSVG,
   InviteFrndSVG,
-  RareSVG,
-  ChevronRightSvg,
   BlueTick,
   MyJobsSVG,
   MyPublicProfileSVG,
   MyPortfolioSVG,
   MyEarningsSVG,
-  ServiceStandardsSVG,
   BankDetailsSVG,
   GovtIDSVG,
   HelpCenterSVG,
@@ -39,28 +28,22 @@ import {drawerStyles} from './styles';
 import {heightToDp, widthToDp} from '../../../responsive/responsive';
 import {Color} from '../../../assets/static/globalStyles';
 import {useSelector, useDispatch} from 'react-redux';
-import UpdateBankDetailsContainer from '../../../pages/updatebankdetails/update-bank-details-container';
 import auth from '@react-native-firebase/auth';
 import {logoutSuccess} from '../../../redux/auth/action';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {BackArrowSVG} from '../../../assets/svgImage/backArrow';
-import RNRestart from 'react-native-restart';
-import {NativeModules} from 'react-native';
 import RNShare from 'react-native-share';
-import {ToastAndroid} from 'react-native';
 import DeleteAccountModal from '../../../organisms/deletemodal/deletemodal';
 import DeviceInfo from 'react-native-device-info';
 import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
 
 export const ProviderCustomDrawerContent = ({props, state, navigation}) => {
-  //   console.log('state.routes[state.index].name', state.routes[state.index].name);
   const serviceProviderDetails = useSelector(state => state.providerverification.providerDetails);
 
   const styles = drawerStyles();
   const dispatch = useDispatch();
 
   const [myprofile, setMyprofile] = useState(true);
-  const user = useSelector(state => state.Auth.user);
   const [isModalVisible, setModalVisible] = useState(false);
 
   const appVersion = DeviceInfo.getVersion();
@@ -96,37 +79,9 @@ export const ProviderCustomDrawerContent = ({props, state, navigation}) => {
       console.log('Logout error:', error);
     }
   };
-  // const handleLogout = async () => {
-  //   try {
-  //     auth()
-  //       .signOut()
-  //       .then(() => {
-  //         GoogleSignin.revokeAccess();
-  //         dispatch(logoutSuccess());
-  //       });
-  //     // console.log('step 1');
-  //     // console.log('auth()', auth().currentUser);
-  //     // if (auth().currentUser) {
-  //     //   await auth().signOut();
-  //     // }
-  //     // dispatch(logoutSuccess());
 
-  //     // // await auth().signOut();
-  //     // // console.log('step 2');
-  //     // // // await GoogleSignin.revokeAccess();
-  //     // // // console.log('step3');
-  //     // // dispatch(logoutSuccess());
-  //     // console.log('logged out from SP');
-  //     // // NativeModules.DevSettings.reload();
-  //     // // RNRestart.Restart();
-  //   } catch (error) {
-  //     console.error('Error during logout:', error);
-  //     // Optionally, dispatch a logout failure action or show an error message to the user
-  //   }
-  // };
-
-  const DrawerItemWithArrow = ({label, icon, onPress, isSelected, style}) => (
-    <View>
+  const DrawerItemWithArrow = useCallback(
+    ({label, icon, onPress, isSelected, style}) => (
       <TouchableOpacity
         onPress={onPress}
         style={{
@@ -134,17 +89,11 @@ export const ProviderCustomDrawerContent = ({props, state, navigation}) => {
           alignItems: 'center',
           padding: widthToDp(2),
           margin: widthToDp(1),
-          // marginVertical: widthToDp(3),
-          // backgroundColor: Color.colorGray,
-          // backgroundColor: isSelected ? Color.colorIndigo : 'white',
           borderRadius: 10,
-          // ...style,
         }}>
         <View
           style={{
-            // backgroundColor: Color.colorGray,
             padding: widthToDp(1),
-            // marginRight: widthToDp(2),
           }}>
           {icon && icon()}
         </View>
@@ -152,15 +101,14 @@ export const ProviderCustomDrawerContent = ({props, state, navigation}) => {
           style={{
             marginLeft: widthToDp(6),
             flex: 1,
-            // backgroundColor: Color.colorGray,
           }}>
           <Text style={isSelected ? styles.label2 : [styles.label, {color: isSelected ? 'red' : 'black'}]}>
             {label}
           </Text>
         </View>
-        {/* <LeftArrowIcon /> */}
       </TouchableOpacity>
-    </View>
+    ),
+    [],
   );
 
   const ProfileCard = () => {
@@ -232,19 +180,16 @@ export const ProviderCustomDrawerContent = ({props, state, navigation}) => {
     try {
       await RNShare.open(shareOptions);
     } catch (error) {
-      console.error('Error sharing job details:', error);
+      console.log('Error sharing app:', error);
     }
   };
 
   const result = myprofile ? (
     <View style={{padding: 10}}>
-      {/* <CustomTouchableOpacity onPress={() => navigation.goBack()}>
-      <LeftArrowIcon style={styles.back} />
-    </CustomTouchableOpacity> */}
       <ProfileCard />
       <View style={{marginTop: heightToDp(2)}}>
         <DrawerItemWithArrow
-          label="Home"
+          label=" Home"
           icon={() => <HomeSVG />}
           onPress={() => navigation.navigate('HomeScreenStack')}
           isSelected={state.routes[state.index].name === 'HomeScreenStack'}

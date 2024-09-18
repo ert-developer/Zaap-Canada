@@ -40,7 +40,7 @@ const App = () => {
   }, []);
 
   return (
-    <StripeProvider publishableKey="pk_test_51NxP87SGBQTt8xinPdvLHRDLNHUsL1wTZ0e9VrpFPETZc96Fvn9nsklWnUkjMchN7PsQ9Cs8DFf9HmeW57NatYZj00C8wp7IGo">
+    <StripeProvider publishableKey="pk_test_51PwPaRGHwmXpGIGPT6JDGkA1rBP7aHBQFMGFY2wM00HVEBIV875vVr59GVrvRN4K4w2SbPFMcf5SXWtQJQ8oby2x00iQl4fe53">
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <PaperProvider theme={theme}>
