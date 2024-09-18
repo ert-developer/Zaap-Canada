@@ -17,10 +17,7 @@ const PortfolioUpdatePopup = ({portfolioUpdated, setPortfolioUpdated}) => {
 
   return (
     <View>
-      <Modal
-        isVisible={portfolioUpdated}
-        style={styles.modalContainer}
-        onBackdropPress={handleBackdropPress}>
+      <Modal isVisible={portfolioUpdated} style={styles.modalContainer} onBackdropPress={handleBackdropPress}>
         <View style={styles.modalContent}>
           <View style={{width: heightToDp(43)}}>
             <View style={{justifyContent: 'center', alignItems: 'center', padding: heightToDp(1.5)}}>
@@ -30,7 +27,7 @@ const PortfolioUpdatePopup = ({portfolioUpdated, setPortfolioUpdated}) => {
                 resizeMode={FastImage.resizeMode.contain}
               />
               <CustomText
-                text={'Portfolio Updated Successfully !'}
+                text={'Portfolio Updated Successfully!'}
                 style={{
                   color: '#464183',
                   fontFamily: 'Roboto',

@@ -93,7 +93,6 @@ const TermsAndConditions = () => {
 
   // Function to measure section positions
   const handleLayout = (section, event) => {
-
     const {y} = event.nativeEvent.layout;
     setSectionPositions(prev => ({...prev, [section]: y}));
   };
@@ -108,7 +107,7 @@ const TermsAndConditions = () => {
         {/* Add more terms and conditions */}
         <CustomText
           text={
-            "We are Zaapr Online Services Private Limited, doing business as ZAAP - Hire or WorkLocally ('Company', 'we', 'us', or 'our'), a company registered in India at Hyderabad, Telangana."
+            "We are Zaapr Online Services Private Limited, doing business as ZAAP - Hire or WorkLocally ('Company', 'we', 'us', or 'our'), a company registered in Canada at Toronto, Ontario"
           }
           style={styles.paragraph}
         />
@@ -132,7 +131,7 @@ const TermsAndConditions = () => {
         />
         <CustomText
           text={
-            'We will provide you with prior notice of any scheduled changes to the Services you are using. The modified Legal Terms will become effective upon posting or notifying you by info@zaapondemand.in, as stated in the email message. By continuing to use the Services after the effective date of any changes, you agree to be bound by the modified terms.'
+            'We will provide you with prior notice of any scheduled changes to the Services you are using. The modified Legal Terms will become effective upon posting or notifying you by info@zaapondemand.ca, as stated in the email message. By continuing to use the Services after the effective date of any changes, you agree to be bound by the modified terms.'
           }
           style={styles.paragraph}
         />
@@ -176,7 +175,7 @@ const TermsAndConditions = () => {
           />
           <CustomText
             text={
-              'Our Content and Marks are protected by copyright and trademark laws (and various other intellectual property rights and unfair competition laws) and treaties in India and around the world.'
+              'Our Content and Marks are protected by copyright and trademark laws (and various other intellectual property rights and unfair competition laws) and treaties in Canada and around the world.'
             }
             style={styles.paragraph}
           />
@@ -202,7 +201,7 @@ const TermsAndConditions = () => {
           />
           <CustomText
             text={
-              'If you wish to make any use of the Services, Content, or Marks other than as set out in this section or elsewhere in our Legal Terms, please address your request to: help@zaapondemand.in. If we ever grant you the permission to post, reproduce, or publicly display any part of our Services or Content, you must identify us as the owners or licensors of the Services, Content, or Marks and ensure that any copyright or proprietary notice appears or is visible on posting, reproducing, or displaying our Content.'
+              'If you wish to make any use of the Services, Content, or Marks other than as set out in this section or elsewhere in our Legal Terms, please address your request to: help@zaapondemand.ca. If we ever grant you the permission to post, reproduce, or publicly display any part of our Services or Content, you must identify us as the owners or licensors of the Services, Content, or Marks and ensure that any copyright or proprietary notice appears or is visible on posting, reproducing, or displaying our Content.'
             }
             style={styles.paragraph}
           />
@@ -364,7 +363,7 @@ const TermsAndConditions = () => {
           </View>
           <CustomText
             text={
-              'You agree to provide current, complete, and accurate purchase and account information for all purchases made via the Services. You further agree to promptly update account and payment information, including email address, payment method, and payment card expiration date, so that we can complete your transactions and contact you as needed. Sales tax will be added to the price of purchases as deemed required by us. We may change prices at any time. All payments shall be in Indian Rupee.'
+              'You agree to provide current, complete, and accurate purchase and account information for all purchases made via the Services. You further agree to promptly update account and payment information, including email address, payment method, and payment card expiration date, so that we can complete your transactions and contact you as needed. Sales tax will be added to the price of purchases as deemed required by us. We may change prices at any time.'
             }
             style={styles.paragraph}
           />
@@ -674,7 +673,7 @@ const TermsAndConditions = () => {
             <CustomText text={'14. PRIVACY POLICY'} style={styles.heading} />
             <CustomText
               text={
-                'We care about data privacy and security. Please review our Privacy Policy: http://www.zaapondemand.in/privacy. By using the Services, you agree to be bound by our Privacy Policy, which is incorporated into these Legal Terms. Please be advised the Services are hosted in India. If you access the Services from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in India, then through your continued use of the Services, you are transferring your data to India, and you expressly consent to have your data transferred to and processed in India.'
+                'We care about data privacy and security. Please review our Privacy Policy: http://www.zaapondemand.ca/privacy. By using the Services, you agree to be bound by our Privacy Policy, which is incorporated into these Legal Terms. Please be advised the Services are hosted in Canada. If you access the Services from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in Canada, then through your continued use of the Services, you are transferring your data to Canada, and you expressly consent to have your data transferred to and processed in Canada.'
               }
               style={styles.paragraph}
             />
@@ -713,9 +712,10 @@ const TermsAndConditions = () => {
             />
             <CustomText text={'18. GOVERNING LAW'} style={styles.heading} />
             <CustomText
-              text={
-                'These Legal Terms shall be governed by and defined following the laws of India. Zaapr Online Services Private Limited and yourself irrevocably consent that the courts of India shall have exclusive jurisdiction to resolve any dispute which may arise in connection with these Legal Terms.'
-              }
+              text={`These Legal Terms shall be governed by and defined following the laws of Canada.
+ZAAP ONDEMAND INC and yourself irrevocably consent that the courts of Canada shall
+have exclusive jurisdiction to resolve any dispute which may arise in connection with
+these Legal Terms.`}
               style={styles.paragraph}
             />
             <CustomText text={'19. DISPUTE RESOLUTION'} style={styles.heading} />
@@ -728,9 +728,14 @@ const TermsAndConditions = () => {
             />
             <CustomText text={'Binding Arbitration'} style={styles.heading} />
             <CustomText
-              text={
-                'Any dispute arising out of or in connection with these Legal Terms, including any question regarding its existence, validity, or termination, shall be referred to and finally resolved by courts of India who will have exclusive jurisdiction. The number of arbitrators shall be three (3). The seat, or legal place, or arbitration shall be Hyderabad, India. The language of the proceedings shall be English. The governing law of these Legal Terms shall be substantive law of India.'
-              }
+              text={`Any dispute arising out of or in connection with these Legal Terms, including any
+question regarding its existence, validity, or termination, shall be referred to and finally
+resolved by the International Commercial Arbitration Court under the European
+Arbitration Chamber (Belgium, Brussels, Avenue Louise, 146) according to the Rules of
+this ICAC, which, as a result of referring to it, is considered as the part of this clause.
+The number of arbitrators shall be three (3). The seat, or legal place, or arbitration shall
+be Toronto, Canada. The language of the proceedings shall be English. The governing
+law of these Legal Terms shall be substantive law of Canada`}
               style={styles.paragraph}
             />
             <CustomText text={'Restrictions'} style={styles.heading} />
@@ -831,7 +836,7 @@ const TermsAndConditions = () => {
             <CustomText text={'28. CONTACT US'} style={styles.heading} />
             <CustomText
               text={
-                'In order to resolve a complaint regarding the Services or to receive further information regarding use of the Services, please contact our support team by email at help@zaapondemand.in'
+                'In order to resolve a complaint regarding the Services or to receive further information regarding use of the Services, please contact our support team by email at help@zaapondemand.ca'
               }
               style={styles.paragraph}
             />

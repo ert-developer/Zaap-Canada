@@ -362,7 +362,7 @@ const CustomerSidePaymentModel = () => {
     setServiceCompleted(true);
     handleFeedback();
 
-    const to = `${user.email},${providerStatus[0].email_id},tarunmartha75@gmail.com`;
+    const to = `${user.email},${providerStatus[0].email_id}`;
     const subject = 'Service Completed';
     const textMsg = 'Request for amount transfer to the service provider';
     const bodyText = `
@@ -564,8 +564,14 @@ const CustomerSidePaymentModel = () => {
 
   // Handle click event for percentage
   const handleTextClick = percentage => {
-    setSelectedText(percentage);
-    setShowAmount(true);
+    // Toggle the selection: If the clicked percentage is already selected, clear it
+    if (selectedText === percentage) {
+      setSelectedText(null); // Deselect the option
+      setShowAmount(false); // Hide the amount
+    } else {
+      setSelectedText(percentage); // Select the new option
+      setShowAmount(true); // Show the amount
+    }
   };
 
   const percentageOptions = [
@@ -970,7 +976,9 @@ const CustomerSidePaymentModel = () => {
               <TouchableOpacity onPress={handlePhoneIconPress}>
                 <Call />
               </TouchableOpacity>
-              <MessageIcon onPress={handleChatIconPress} opacity={chatIconOpacity} />
+              <TouchableOpacity onPress={handleChatIconPress}>
+                <MessageIcon opacity={chatIconOpacity} />
+              </TouchableOpacity>
             </View>
           </View>
           <View>
@@ -1043,7 +1051,8 @@ const CustomerSidePaymentModel = () => {
                           borderWidth: 1,
                           borderColor: 'gray',
                           borderRadius: 5,
-                          paddingBottom: 60,
+                          padding: 10, // Optional: adds padding to make it look cleaner
+                          textAlignVertical: 'top',
                         }}
                         placeholder="Enter text here"
                         onChangeText={onChangeText}
@@ -1083,7 +1092,7 @@ const CustomerSidePaymentModel = () => {
                                 fontSize: heightToDp(2),
                               }}>
                               {showAmount && selectedText === percentage && percentage !== 'Others'
-                                ? `₹${(jobDetails.salary * percentage) / 100}`
+                                ? `$${(jobDetails.salary * percentage) / 100}`
                                 : label}
                             </Text>
                           </View>

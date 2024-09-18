@@ -7,7 +7,7 @@ import {getJobDetails} from '../../common/collection';
 import {getUserDetails} from '../../common/collection';
 import {useRoute} from '@react-navigation/native';
 import {getPlatformFee} from '../../common/platformFee';
-import { envConfig } from '../../assets/helpers/envApi';
+import {envConfig} from '../../assets/helpers/envApi';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -84,7 +84,7 @@ const InvoiceDetailScreen = ({navigation}) => {
                   <View style={styles.infoRow}>
                     <Text style={styles.labelTextBold}>From:</Text>
                     {/* <Text style={styles.addressText}>{invoiceDetails.customerName}</Text> */}
-                    <Text style={styles.addressText}>ZAAPR Online services Pvt. Ltd, Hyderabad, Telangana, INDIA</Text>
+                    <Text style={styles.addressText}>ZAAPR Online services Pvt. Ltd, Ontario, Canada</Text>
                   </View>
                   <View style={styles.infoRow}>
                     <Text style={styles.labelTextBold}>Bill to:</Text>
@@ -113,15 +113,15 @@ const InvoiceDetailScreen = ({navigation}) => {
                 </View>
                 <View style={styles.itemRow}>
                   <Text style={styles.itemText}>{invoiceDetails.jobTitle || 'Job Title'}</Text>
-                  <Text style={styles.amountText}>₹{invoiceDetails.salary || '1000'}</Text>
+                  <Text style={styles.amountText}>${invoiceDetails.salary || '1000'}</Text>
                 </View>
                 <View style={styles.itemRow}>
                   <Text style={styles.itemText}>Platform Fee</Text>
-                  <Text style={styles.amountText}>₹{platformFee || '99'}</Text>
+                  <Text style={styles.amountText}>${platformFee || '99'}</Text>
                 </View>
                 <View style={styles.itemRow}>
                   <Text style={styles.itemText}>Total Amount</Text>
-                  <Text style={styles.amountText}>₹{totalAmount || '1099'}</Text>
+                  <Text style={styles.amountText}>${totalAmount || '1099'}</Text>
                 </View>
               </View>
             </View>

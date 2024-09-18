@@ -333,8 +333,7 @@ const ProviderProfile = ({
                   formErrors.languages_known ? styles.errorStyle : null, // Apply error style if there are formErrors
                 ]} // Custom dropdown border style
                 dropDownContainerStyle={styles.dropDownContainer} // Style for the dropdown container
-                listMode="SCROLLVIEW"
-                scrollViewProps={{nestedScrollEnabled: true}} // Allow nested scrolling in case it's inside another scrollable view
+                listMode="MODAL"
                 maxHeight={250}
               />
 

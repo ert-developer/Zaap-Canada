@@ -166,6 +166,7 @@ const JobDetail = ({
           />
           <View style={styles.popupHeadingCon}>
             <CustomText text={'You have successfully applied.'} style={styles.popupHeadText} />
+            <CustomText text={'Check the status of your application in My Jobs'} style={{textAlign: 'center'}} />
           </View>
         </View>
       </Modal>
@@ -283,7 +284,7 @@ const JobDetail = ({
                     <CustomText text={'Budget'} style={styles.textSTyle} />
                   </View>
                   <View style={styles.desc}>
-                    <CustomText text={`₹ ${price}`} style={styles.dynamicTextStyle} />
+                    <CustomText text={`$ ${price}`} style={styles.dynamicTextStyle} />
                   </View>
                 </View>
               </View>

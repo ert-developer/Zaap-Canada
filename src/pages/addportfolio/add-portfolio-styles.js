@@ -15,6 +15,12 @@ const addPortfolioStyles = () => {
       marginBottom: widthToDp(20),
       backgroundColor: 'white',
     },
+    charLeftText: {
+      color: Color.colorRed,
+      fontSize: 10,
+      fontWeight: '400',
+      textAlign: 'right',
+    },
     portfolioLabel: {
       flexDirection: 'row',
       alignItems: 'center',

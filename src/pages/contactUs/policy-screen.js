@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {FlatList, SafeAreaView, Text, TouchableOpacity, View, StyleSheet, Platform} from 'react-native';
+import {FlatList, SafeAreaView, Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import {widthToDp} from '../../responsive/responsive';
-import {ScrollView} from 'react-native-gesture-handler';
 import Trustandsafety from '../../pages/termsandconditions/trust';
 import Antidiscrimination from '../../pages/termsandconditions/discrimination';
 import Cancellationpolicy from '../../pages/termsandconditions/cancellationfee';
 import Platformfee from '../../pages/termsandconditions/platformfee';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const termsList = ['Trust & Safety', 'Anti Discrimination', 'Cancellation Policy', 'Platform Fee'];
 

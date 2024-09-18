@@ -6,6 +6,8 @@ function profileScreenStyle() {
   const styles = StyleSheet.create({
     profileCoverPhoto: {
       height: heightToDp(13),
+      width: widthToDp(100),
+      resizeMode: 'cover',
     },
     profilePhoto: {
       borderRadius: 50,

@@ -108,6 +108,12 @@ const Cancellationpolicy = () => {
           legal requirements, or platform functionality. Users are advised to stay up-to-date with the latest version of
           the policy.
         </Text>
+
+        <Text style={styles.paragraph}>8. Contacting Support:</Text>
+        <Text style={styles.listItem}>
+          - If you need assistance with cancellations or wish to discuss a specific situation, please reach out to our
+          support team for guidance at <Text style={styles.link}> help@zaapondemand.ca</Text>.
+        </Text>
       </View>
     </ScrollView>
   );

@@ -27,7 +27,7 @@ const PrivacyPolicies = () => {
       />
       <CustomText
         text={
-          'Questions or concerns? Reading this privacy notice will help you understand your privacy rights and choices. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at help@zaapondemand.in.'
+          'Questions or concerns? Reading this privacy notice will help you understand your privacy rights and choices. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at help@zaapondemand.ca.'
         }
         style={styles.paragraph}
       />
@@ -430,11 +430,34 @@ const PrivacyPolicies = () => {
       />
       <CustomText
         text={
-          'We do not knowingly collect, solicit data from, or market to children under 18 years of age, nor do we knowingly sell such personal information. By using the Services, you represent that you are at least 18 or that you are the parent or guardian of such a minor and consent to such minor dependentʼs use of the Services. If we learn that personal information from users less than 18 years of age has been collected, we will deactivate the account and take reasonable measures to promptly delete such data from our records. If you become aware of any data we may have collected from children under age 18, please contact us at help@zaapondemand.in'
+          'We do not knowingly collect, solicit data from, or market to children under 18 years of age, nor do we knowingly sell such personal information. By using the Services, you represent that you are at least 18 or that you are the parent or guardian of such a minor and consent to such minor dependentʼs use of the Services. If we learn that personal information from users less than 18 years of age has been collected, we will deactivate the account and take reasonable measures to promptly delete such data from our records. If you become aware of any data we may have collected from children under age 18, please contact us at help@zaapondemand.ca'
         }
         style={styles.paragraph}
       />
       <CustomText text={''} />
+      <CustomText text={'10. WHAT ARE YOUR PRIVACY RIGHTS?'} style={styles.heading} />
+      <CustomText
+        text={'In Short: You may review, change, or terminate your account at any time.'}
+        style={styles.paragraph}
+      />
+      <CustomText
+        text={
+          'If you are a resident in the European Economic Area and you believe we are unlawfully processing your personal information, you also have the right to complain to your local data protection supervisory authority. You can find their contact details here: http://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm.'
+        }
+        style={styles.paragraph}
+      />
+      <CustomText
+        text={
+          'If you are a resident in Switzerland, the contact details for the data protection authorities are available here: https://www.edoeb.admin.ch/edoeb/en/home.html.'
+        }
+        style={styles.paragraph}
+      />
+      <CustomText
+        text={
+          'If you have questions or comments about your privacy rights, you may email us at https://zaapondemand.ca/contact-us/.'
+        }
+        style={styles.paragraph}
+      />
     </View>
   );
 };

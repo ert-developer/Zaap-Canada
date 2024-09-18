@@ -71,7 +71,7 @@ const UpdateBankDetailsScreen = ({
             {/* <CustomText text={'Bank Details'} style={styles.popupHeadText} /> */}
             <CustomText
               text={
-                error ? 'There are some error in the form please rectify them' : ' Bank Details Updated Successfully!'
+                error ? 'There are some error in the form please rectify them' : ' Bank Details \nUpdated Successfully!'
               }
               style={styles.popupHeadText}
             />

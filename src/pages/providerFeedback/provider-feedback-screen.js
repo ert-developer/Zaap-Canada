@@ -59,8 +59,12 @@ const ProviderFeedbackScreen = ({
   // Determine how to format the languages for display
   let firstLineLanguages = '';
   let secondLineLanguages = '';
-
-  if (languages.length > 3) {
+  let thirdLineLanguages = '';
+  if (languages.length > 6) {
+    firstLineLanguages = languages.slice(0, 3).join(', ');
+    secondLineLanguages = languages.slice(3, 6).join(', ');
+    thirdLineLanguages = languages.slice(6).join(', ');
+  } else if (languages.length > 3) {
     firstLineLanguages = languages.slice(0, 3).join(', ');
     secondLineLanguages = languages.slice(3).join(', ');
   } else if (languages.length > 0) {
@@ -350,7 +354,10 @@ const ProviderFeedbackScreen = ({
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
       <ScrollView>
-        <Image source={require('../../assets/staticImages/profile-cover-photo.jpg')} style={styles.profileCoverPhoto} />
+        <Image
+          source={require('../../assets/staticImages/profile-cover-photo-new.jpg')}
+          style={styles.profileCoverPhoto}
+        />
 
         {loader ? (
           <CustomLoader visible={loader} />
@@ -401,6 +408,7 @@ const ProviderFeedbackScreen = ({
                 <Text style={styles.memberShipText}>
                   Languages Known: {firstLineLanguages}
                   {secondLineLanguages ? `\n                                   ${secondLineLanguages}` : ''}
+                  {thirdLineLanguages ? `\n                                   ${thirdLineLanguages}` : ''}
                 </Text>
               </View>
 

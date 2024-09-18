@@ -245,7 +245,7 @@ const UpdateGovtIdDetailsScreen = ({
         <View style={styles.modalContent}>
           <RightPopupSVG />
           <View style={styles.popupHeadingCon}>
-            <CustomText text={'Goverment ID'} style={styles.popupHeadText} />
+            <CustomText text={'Government ID'} style={styles.popupHeadText} />
             <CustomText text={'Uploaded Successfully!'} style={styles.popupHeadText} />
           </View>
           <CustomText

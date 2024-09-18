@@ -11,8 +11,8 @@ const AcceptableUsePolicy = () => {
       <Text style={styles.paragraph}>
         This Acceptable Use Policy ("Policy") is part of our Terms and Conditions ("Legal Terms") and should therefore
         be read alongside our main Legal Terms:
-        <Text style={styles.link} onPress={() => Linking.openURL('https://www.zaapondemand.in/terms')}>
-          https://www.zaapondemand.in/terms
+        <Text style={styles.link} onPress={() => Linking.openURL('https://www.zaapondemand.ca/terms')}>
+          https://www.zaapondemand.ca/terms
         </Text>
         . If you do not agree with these Legal Terms, please refrain from using our Services. Your continued use of our
         Services implies acceptance of these Legal Terms.
@@ -28,9 +28,9 @@ const AcceptableUsePolicy = () => {
       <Text style={styles.subheader}>WHO WE ARE</Text>
       <Text style={styles.paragraph}>
         We are Zaapr Online Services Private Limited, doing business as ZAAP - Hire or Work locally ("Company", "we",
-        "us", or "our"), a company registered in India at, Hyderabad, Telangana. We operate the mobile application ZAAP
-        - Hire or Work Locally (the "App"), as well as any other related products and services that refer or link to
-        this Policy (collectively, the "Services").
+        "us", or "our"), a company registered in Canada at Toronto, Ontario. We operate the mobile application ZAAP -
+        Hire or Work Locally (the "App"), as well as any other related products and services that refer or link to this
+        Policy (collectively, the "Services").
       </Text>
 
       <Text style={styles.subheader}>USE OF THE SERVICES</Text>
@@ -287,12 +287,12 @@ const AcceptableUsePolicy = () => {
       <Text style={styles.paragraph}>If you consider that any Content or Contribution:</Text>
 
       <Text style={styles.listItem}>
-        • Breach this Policy, please or refer to the contact details at the bottom of this document to let us know which
-        Content or Contribution is in breach of this Policy and why; or
+        • Breach this Policy, please email us at help@zaapondemand.ca or refer to the contact details at the bottom of
+        this document to let us know which Content or Contribution is in breach of this Policy and why; or
       </Text>
       <Text style={styles.listItem}>
         • Infringe any third-party intellectual property rights, please check out our Legal Terms for information about
-        our copyright infringement reporting process here: http://www.zaapondemand.in/terms
+        our copyright infringement reporting process here: http://www.zaapondemand.ca/terms
       </Text>
 
       <Text style={styles.subheader}>CONSEQUENCES OF BREACHING THIS POLICY</Text>
@@ -340,9 +340,9 @@ const AcceptableUsePolicy = () => {
       <Text style={styles.subheader}>HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</Text>
       <Text style={styles.paragraph}>
         If you have questions or comments about this notice, you may contact our support team by email at
-        <Text style={styles.link} onPress={() => Linking.openURL('mailto:help@zaapondemand.in')}>
+        <Text style={styles.link} onPress={() => Linking.openURL('mailto:help@zaapondemand.ca')}>
           {' '}
-          help@zaapondemand.in
+          help@zaapondemand.ca
         </Text>
         .
       </Text>

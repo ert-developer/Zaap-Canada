@@ -34,6 +34,15 @@ const Disclaimer = () => {
           PRODUCTS OR SERVICES.
         </Text>
 
+        <Text style={styles.sectionTitle}>PROFESSIONAL DISCLAIMER</Text>
+        <Text style={styles.paragraph}>
+          The Site cannot and does not contain medical advice. The medical information is provided for general
+          informational and educational purposes only and is not a substitute for professional advice. Accordingly,
+          before taking any actions based upon such information, we encourage you to consult with the appropriate
+          professionals. We do not provide any kind of medical advice. THE USE OR RELIANCE OF ANY INFORMATION CONTAINED
+          ON OUR MOBILE APPLICATION IS SOLELY AT YOUR OWN RISK
+        </Text>
+
         <Text style={styles.sectionTitle}>AFFILIATES DISCLAIMER</Text>
         <Text style={styles.paragraph}>
           Our mobile application may contain links to affiliate websites, and we receive an affiliate commission for any

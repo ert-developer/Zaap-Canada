@@ -2,12 +2,12 @@ import React, {useCallback, useMemo, useState} from 'react';
 import {
   FlatList,
   SafeAreaView,
-  ScrollView,
   StatusBar,
   View,
   Image,
   StyleSheet,
   Pressable,
+  ScrollView,
   ActivityIndicator,
   Alert,
   CustomTouchableOpacity,
@@ -205,10 +205,7 @@ const SeriveProviderProfileScreen = ({
     <SafeAreaView style={[styles.safeArea, modalVisible && styles.containerFade]}>
       <StatusBar barStyle="light-content" />
       <HeaderComponent text={'My Profile'} />
-      <ScrollView
-        style={styles.scrollView}
-        // scrollEnabled={!open} // Disable parent scroll when dropdown is open
-      >
+      <ScrollView style={styles.scrollView}>
         <View style={styles.container}>
           <>
             <View styles={styles.row}>
@@ -462,8 +459,7 @@ const SeriveProviderProfileScreen = ({
                   formErrors.languagesKnown ? styles.errorStyle : null, // Apply error style if there are formErrors
                 ]} // Custom dropdown border style
                 dropDownContainerStyle={styles.dropDownContainer} // Style for the dropdown container
-                listMode="SCROLLVIEW"
-                scrollViewProps={{nestedScrollEnabled: true}} // Allow nested scrolling in case it's inside another scrollable view
+                listMode="MODAL"
                 maxHeight={250}
               />
 

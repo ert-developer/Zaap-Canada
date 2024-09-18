@@ -9,7 +9,7 @@ import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {getJobDetails} from '../../common/collection';
 import {set} from 'date-fns';
-import { envConfig } from '../../assets/helpers/envApi';
+import {envConfig} from '../../assets/helpers/envApi';
 
 const InvoiceScreen = () => {
   const styles = InvoicesStyles();
@@ -69,7 +69,7 @@ const InvoiceScreen = () => {
             </View>
             <View style={styles.cardRight}>
               <CustomText text={formatDateString(item.timeAgo)} style={styles.dateText} />
-              <CustomText text={`₹${parseFloat(item.salary).toFixed(2)}`} style={styles.salaryTextInvoice} />
+              <CustomText text={`$${parseFloat(item.salary).toFixed(2)}`} style={styles.salaryTextInvoice} />
             </View>
           </View>
         </TouchableOpacity>

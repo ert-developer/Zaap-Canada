@@ -36,12 +36,16 @@ const ServiceProviderPublicProfileScreen = ({
   // Determine how to format the languages for display
   let firstLineLanguages = '';
   let secondLineLanguages = '';
-
-  if (languages[0].length > 2) {
-    firstLineLanguages = languages[0].slice(0, 2).join(', ');
-    secondLineLanguages = languages[0].slice(2).join(', ');
-  } else if (languages[0].length > 0) {
-    firstLineLanguages = languages[0].join(', ');
+  let thirdLineLanguages = '';
+  if (languages.length > 6) {
+    firstLineLanguages = languages.slice(0, 3).join(', ');
+    secondLineLanguages = languages.slice(3, 6).join(', ');
+    thirdLineLanguages = languages.slice(6).join(', ');
+  } else if (languages.length > 3) {
+    firstLineLanguages = languages.slice(0, 3).join(', ');
+    secondLineLanguages = languages.slice(3).join(', ');
+  } else if (languages.length > 0) {
+    firstLineLanguages = languages.join(', ');
   } else {
     firstLineLanguages = 'No languages specified'; // Default message when no languages are provided
   }
@@ -53,9 +57,13 @@ const ServiceProviderPublicProfileScreen = ({
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
-      <HeaderComponent text={'My Public Profile'} />
+      <HeaderComponent text={'My Public Profie'} />
       <ScrollView>
-        <Image source={require('../../assets/staticImages/profile-cover-photo.jpg')} style={styles.profileCoverPhoto} />
+        <Image
+          source={require('../../assets/staticImages/profile-cover-photo-new.jpg')}
+          style={styles.profileCoverPhoto}
+        />
+
         <View
           style={{
             borderColor: Color.colorSilver,
@@ -102,6 +110,7 @@ const ServiceProviderPublicProfileScreen = ({
               <Text style={styles.memberShipText}>
                 Languages Known: {firstLineLanguages}
                 {secondLineLanguages ? `\n                                   ${secondLineLanguages}` : ''}
+                {thirdLineLanguages ? `\n                                   ${thirdLineLanguages}` : ''}
               </Text>
             </View>
             <View>

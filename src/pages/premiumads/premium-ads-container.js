@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import PremiumAdsScreen from './premium-ads-screen';
 import {useSelector} from 'react-redux';
 import firestore from '@react-native-firebase/firestore';
-import { envConfig } from '../../assets/helpers/envApi';
+import {envConfig} from '../../assets/helpers/envApi';
 
 const PremiumAdsContainer = () => {
   const [isSpotlightOrFeatured, setIsSpotlightOrFeatured] = useState(true);

@@ -51,7 +51,6 @@ import MyEarningsContainer from '../../../pages/myEarnings/my-earnings-container
 import MyEarningScreen from '../../../pages/myEarnings/my-earnings-screen';
 import MyearningsDetails from '../../../pages/myEarnings/my-earnings-details.js';
 import FeedbackContainer from '../../../pages/feedback/feedback-container';
-import ServiceStandardsContainer from '../../../pages/serviceStandards/service-standards-container';
 import NotificationContainer from '../../../pages/notification/notification-container';
 import ServiceProviderReviewsContainer from '../../../pages/serviceproviderReviews/serviceProviderReviews-container.js';
 import PortfolioDetailsScreen from '../../../molecules/portfoliolinkmodal/PortfolioDetailsScreen';
@@ -108,7 +107,6 @@ const PostAuthStack = () => {
       <Stack.Screen name="myEarningsScreen" component={MyEarningScreen} />
       <Stack.Screen name="myEarningsDetails" component={MyearningsDetails} />
       <Stack.Screen name="feedback" component={FeedbackContainer} />
-      <Stack.Screen name="serviceStandards" component={ServiceStandardsContainer} />
       <Stack.Screen name="Notification" component={NotificationContainer} />
       <Stack.Screen name="ServiceProviderReviews" component={ServiceProviderReviewsContainer} />
       <Stack.Screen name="PortfolioDetails" component={PortfolioDetailsScreen} />

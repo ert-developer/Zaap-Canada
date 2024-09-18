@@ -17,22 +17,27 @@ const PremiumAdsCartScreen = ({
   paymentSuccessModal,
   onCloseSuccessModal,
   loader,
+  countFeaturedChange,
+  countSpotlightChange,
 }) => {
   const styles = premiumAdsCartStyles();
 
-  const originalPrice =
-    featuredAdsCount *
-      (featuredAdsCount === 10 ? 2000 : featuredAdsCount === 5 ? 1000 : featuredAdsCount === 3 ? 600 : 200) +
-    spotlightAdsCount *
-      (spotlightAdsCount === 10 ? 3000 : spotlightAdsCount === 5 ? 1500 : spotlightAdsCount === 3 ? 900 : 300);
+  let originalPrice =
+    countFeaturedChange *
+      (featuredAdsCount === 10 ? 249.9 : featuredAdsCount === 5 ? 124.95 : featuredAdsCount === 3 ? 74.97 : 24.99) +
+    countSpotlightChange *
+      (spotlightAdsCount === 10 ? 399.9 : spotlightAdsCount === 5 ? 199.95 : spotlightAdsCount === 3 ? 119.97 : 39.99);
 
-  const price =
-    featuredAdsCount *
-      (featuredAdsCount === 10 ? 1499 : featuredAdsCount === 5 ? 799 : featuredAdsCount === 3 ? 499 : 149) +
-    spotlightAdsCount *
-      (spotlightAdsCount === 10 ? 2099 : spotlightAdsCount === 5 ? 1099 : spotlightAdsCount === 3 ? 699 : 249);
+  let price =
+    countFeaturedChange *
+      (featuredAdsCount === 10 ? 169.99 : featuredAdsCount === 5 ? 89.99 : featuredAdsCount === 3 ? 54.99 : 19.99) +
+    countSpotlightChange *
+      (spotlightAdsCount === 10 ? 229.99 : spotlightAdsCount === 5 ? 129.99 : spotlightAdsCount === 3 ? 79.99 : 29.99);
+  let discount = originalPrice - price;
 
-  const discount = originalPrice - price;
+  originalPrice = originalPrice.toFixed(2);
+  price = price.toFixed(2);
+  discount = discount.toFixed(2);
 
   return (
     <SafeAreaView>
@@ -49,7 +54,7 @@ const PremiumAdsCartScreen = ({
               <CustomText text={'Success! Premium Ads Purchased'} style={styles.modalSuccessText} />
               <CustomText
                 text={
-                  'You ads now benefit from priority placement and enhanced visibility Find premium ad details in My Account'
+                  'You ads now benefit from priority placement and enhanced visibility.\n Find premium ad details in My Account'
                 }
                 style={styles.modalSuccessDescriptionText}
               />
@@ -66,31 +71,27 @@ const PremiumAdsCartScreen = ({
             <View style={styles.cartAdsDataContainer}>
               <View style={styles.adsCountContainer}>
                 <View style={styles.adsCountTextBox}>
-                  <CustomText text={`${featuredAdsCount} ADS`} style={styles.adsCountText} />
+                  {featuredAdsCount !== 0 ? (
+                    <CustomText text={`${featuredAdsCount} ADS`} style={styles.adsCountText} />
+                  ) : (
+                    <CustomText text={`${countFeaturedChange} ADS`} style={styles.adsCountText} />
+                  )}
                 </View>
                 <CustomText text={'='} style={styles.equalTo} />
                 <View style={styles.priceContainer}>
-                  <CustomText
-                    text={`₹${
-                      featuredAdsCount *
-                      (featuredAdsCount === 10
-                        ? 1499 / 10
-                        : featuredAdsCount === 5
-                        ? 799 / 5
-                        : featuredAdsCount === 3
-                        ? 499 / 3
-                        : 149)
-                    }`}
-                    style={styles.adsAmount}
-                  />
+                  {featuredAdsCount !== 0 ? (
+                    <CustomText text={`$${(featuredAdsCount * 24.99).toFixed(2)}`} style={styles.adsAmount} />
+                  ) : (
+                    <CustomText text={`$${(countFeaturedChange * 24.99).toFixed(2)}`} style={styles.adsAmount} />
+                  )}
                 </View>
               </View>
               <View style={styles.increaseBtnContainer}>
-                <TouchableOpacity onPress={() => onDecreaseAdsCount('featured', featuredAdsCount)}>
+                <TouchableOpacity onPress={() => onDecreaseAdsCount('featured', countFeaturedChange)}>
                   <CustomText text={'-'} style={styles.minusIcon} />
                 </TouchableOpacity>
-                <CustomText text={featuredAdsCount} />
-                <TouchableOpacity onPress={() => onIncreaseAdsCount('featured', featuredAdsCount)}>
+                <CustomText text={countFeaturedChange} />
+                <TouchableOpacity onPress={() => onIncreaseAdsCount('featured', countFeaturedChange)}>
                   <CustomText text={'+'} style={styles.plusIcon} />
                 </TouchableOpacity>
               </View>
@@ -101,31 +102,27 @@ const PremiumAdsCartScreen = ({
             <View style={styles.cartAdsDataContainer}>
               <View style={styles.adsCountContainer}>
                 <View style={styles.adsCountTextBox}>
-                  <CustomText text={`${spotlightAdsCount} ADS`} style={styles.adsCountText} />
+                  {spotlightAdsCount !== 0 ? (
+                    <CustomText text={`${spotlightAdsCount} ADS`} style={styles.adsCountText} />
+                  ) : (
+                    <CustomText text={`${countSpotlightChange} ADS`} style={styles.adsCountText} />
+                  )}
                 </View>
                 <CustomText text={'='} style={styles.equalTo} />
                 <View style={styles.priceContainer}>
-                  <CustomText
-                    text={`₹${
-                      spotlightAdsCount *
-                      (spotlightAdsCount === 10
-                        ? 2099 / 10
-                        : spotlightAdsCount === 5
-                        ? 1099 / 5
-                        : spotlightAdsCount === 3
-                        ? 699 / 3
-                        : 249)
-                    }`}
-                    style={styles.adsAmount}
-                  />
+                  {spotlightAdsCount !== 0 ? (
+                    <CustomText text={`$${(spotlightAdsCount * 39.99).toFixed(2)}`} style={styles.adsAmount} />
+                  ) : (
+                    <CustomText text={`$${(countSpotlightChange * 39.99).toFixed(2)}`} style={styles.adsAmount} />
+                  )}
                 </View>
               </View>
               <View style={styles.increaseBtnContainer}>
-                <TouchableOpacity onPress={() => onDecreaseAdsCount('spotlight', spotlightAdsCount)}>
+                <TouchableOpacity onPress={() => onDecreaseAdsCount('spotlight', countSpotlightChange)}>
                   <CustomText text={'-'} style={styles.minusIcon} />
                 </TouchableOpacity>
-                <CustomText text={spotlightAdsCount} />
-                <TouchableOpacity onPress={() => onIncreaseAdsCount('spotlight', spotlightAdsCount)}>
+                <CustomText text={countSpotlightChange} />
+                <TouchableOpacity onPress={() => onIncreaseAdsCount('spotlight', countSpotlightChange)}>
                   <CustomText text={'+'} style={styles.plusIcon} />
                 </TouchableOpacity>
               </View>
@@ -136,16 +133,16 @@ const PremiumAdsCartScreen = ({
             <View style={styles.amountContainer}>
               <View style={styles.amountAndDiscountContainer}>
                 <CustomText text={'Original Price'} style={styles.priceText} />
-                <CustomText text={`₹${originalPrice}`} style={styles.cashText} />
+                <CustomText text={`$${originalPrice}`} style={styles.cashText} />
               </View>
               <View style={styles.amountAndDiscountContainer}>
                 <CustomText text={'Discount'} style={styles.priceText} />
-                <CustomText text={`₹${discount}`} style={styles.cashText} />
+                <CustomText text={`$${discount}`} style={styles.cashText} />
               </View>
             </View>
             <View style={styles.totalAmountContainer}>
               <CustomText text={'Total'} style={styles.totalText} />
-              <CustomText text={`₹${originalPrice - discount}`} style={styles.totalAmount} />
+              <CustomText text={`$${(originalPrice - discount).toFixed(2)}`} style={styles.totalAmount} />
             </View>
           </View>
           <CustomButton

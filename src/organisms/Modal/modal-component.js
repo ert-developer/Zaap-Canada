@@ -315,7 +315,7 @@ const ModalComponent = ({isVisible, onClose, userWorking}) => {
                     marginTop: heightToDp(1),
                   }}>
                   <CustomText text={'Your Budget'} style={styles.yourBudgetHead} />
-                  <CustomText text={`₹${amount}`} style={styles.yourBudgetHead} />
+                  <CustomText text={`$${amount}`} style={styles.yourBudgetHead} />
                 </View>
               </View>
 
@@ -334,7 +334,7 @@ const ModalComponent = ({isVisible, onClose, userWorking}) => {
               <View style={{padding: heightToDp(2)}}>
                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                   <CustomText text={'Total Pay'} style={styles.totalFeeHead} />
-                  <CustomText text={`₹${amount + platformFee}`} style={styles.totalFeeHead} />
+                  <CustomText text={`$${amount + platformFee}`} style={styles.totalFeeHead} />
                 </View>
               </View>
 

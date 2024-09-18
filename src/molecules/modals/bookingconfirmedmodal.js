@@ -31,12 +31,12 @@ const BookingConfirmedModal = ({toggleModal}) => {
                 resizeMode={FastImage.resizeMode.contain}
               /> */}
               <FastImage
-            style={{ width: 100, height: 100 }}
-            source={require('../../assets/Success.gif')}
-            resizeMode={FastImage.resizeMode.contain}
-          />
+                style={{width: 150, height: 150}}
+                source={require('../../assets/payment-success.gif')}
+                resizeMode={FastImage.resizeMode.contain}
+              />
             </View>
-            <CustomText text={'Thank you for your payment !'} style={styles.firstText} />
+            <CustomText text={'Thank you for your payment!'} style={styles.firstText} />
 
             {/* <CustomText text={'Service provider confirmed.'} style={styles.firstText} /> */}
             <CustomText text={'Your Booking is confirmed.'} style={styles.firstText} />
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
 
     // height: 100,
     width: widthToDp(90),
-    height: heightToDp(25),
+    height: heightToDp(30),
   },
   firstText: {
     fontSize: heightToDp(2),

@@ -8,7 +8,7 @@ import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {getPlatformFee} from '../../common/platformFee';
 import {ExclamationSVG} from '../../assets/svgImage/providerProfile';
-import { envConfig } from '../../assets/helpers/envApi';
+import {envConfig} from '../../assets/helpers/envApi';
 
 const MyEarningScreen = () => {
   const styles = InvoicesStyles();
@@ -54,7 +54,7 @@ const MyEarningScreen = () => {
         <View style={styles.cardContent}>
           <View style={styles.cardLeft}>
             <CustomText text={item.jobTitle} style={styles.jobTitle} />
-            <CustomText text={`Work Value ₹${item.salary}`} style={styles.bookingText} />
+            <CustomText text={`Work Value $${item.salary}`} style={styles.bookingText} />
             {/* platform fee */}
             <CustomText text={`Platform Fee $${getPlatformFee(item.salary)}`} style={styles.bookingText} />
             <CustomText text={`Booking ID  #${item.bookingId}`} style={styles.bookingText} />
