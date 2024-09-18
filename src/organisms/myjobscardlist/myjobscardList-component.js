@@ -3,7 +3,6 @@ import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import CustomText from '../../atoms/text/textComponent';
 import CustomImage from '../../atoms/image/imageComponent';
 import {Border, Color, FontFamily, FontSize, Margin} from '../../assets/static/globalStyles';
-import RupeeSvgComponent from '../../assets/svgIcons/RupeeIcon/rupeeiconsvg';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 import StaticImage from '../../assets/svgImage/static';
 import {
@@ -185,8 +184,7 @@ const MyjobsCardList = ({
             <View style={styles.DateandRadius}>
               <CustomText text={JobsList.timeAgo} style={styles.AgoText} />
               <View style={styles.amountContainer}>
-                <RupeeSvgComponent style={styles.rupeeIcon} />
-                <CustomText text={JobsList.salary} style={styles.text1} />
+                <CustomText text={`$${JobsList.salary}`} style={styles.text1} />
               </View>
             </View>
           </View>

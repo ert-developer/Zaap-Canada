@@ -3,7 +3,6 @@ import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {RadioButton} from 'react-native-paper';
 import CircleCheckbox from '../../atoms/circleCheckbox/circleCheckbox-component';
 import CustomText from '../../atoms/text/textComponent';
-import RupeeSvgComponent from '../../assets/svgIcons/RupeeIcon/rupeeiconsvg';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 import {Color} from '../../assets/static/globalStyles';
 

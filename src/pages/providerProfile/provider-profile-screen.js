@@ -402,7 +402,7 @@ const ProviderProfile = ({
                 value={formData[field.name.toLowerCase().split(' ').join('_')]}
                 onHandleChange={text => handleInputChange(field.name.toLowerCase().split(' ').join('_'), text)}
                 field={field.name.toLowerCase().split(' ').join('_')}
-                placeholder={'+91'}
+                placeholder={'+1'}
                 formErrors={formErrors}
               />
             </View>

@@ -306,7 +306,7 @@ const PostJobScreen = ({
                       value={formData.phone}
                       onHandleChange={text => handleChange('phone', text)}
                       field={'phone'}
-                      placeholder={'+91'}
+                      placeholder={'+1'}
                       formErrors={formErrors}
                     />
                   </View>

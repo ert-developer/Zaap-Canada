@@ -1,20 +1,12 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image} from 'react-native';
 import CustomText from '../../atoms/text/textComponent';
-import SpotliteStaticImage from '../../assets/svgImage/spotlitestaticimage';
-import {heightArea, heightToDp, widthToDp} from '../../responsive/responsive';
-import RupeeSvgComponent from '../../assets/svgIcons/RupeeIcon/rupeeiconsvg';
+import {heightToDp, widthToDp} from '../../responsive/responsive';
 import {FontFamily, Color} from '../../assets/static/globalStyles';
-import {SpotlightBanner} from '../../assets/svgIcons/spotlightbanner';
 import {NewSpotlightBanner} from '../../assets/svgIcons/spotlightbanner';
-import BlackRupeeSvgComponent from '../../assets/svgIcons/RupeeIcon/rupeeiconblack';
 const CardSpotlite = ({image, title, description, price}) => {
   return (
     <View style={styles.cardContainer}>
-      {/* <View style={styles.spotliteStaticImage}>
-      <SpotliteStaticImage />
-
-      </View> */}
       <Image style={styles.spotLightJobImage} source={{uri: image}} />
       <View style={styles.textContainer}>
         <View style={styles.salaryAndTitleContainer}>
@@ -28,8 +20,7 @@ const CardSpotlite = ({image, title, description, price}) => {
             </View>
           </View>
           <View style={styles.salaryContainer}>
-            <BlackRupeeSvgComponent style={styles.rupee} />
-            <CustomText text={price} style={styles.priceText} />
+            <CustomText text={`$${price}`} style={styles.priceText} />
           </View>
         </View>
         <Text numberOfLines={2} ellipsizeMode="tail" style={styles.within15Kms}>

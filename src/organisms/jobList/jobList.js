@@ -41,7 +41,7 @@ const JobList = ({item, handleJobPress, fav}) => {
     });
   };
 
-  const formattedSalary = parseInt(item?.data?.salary).toLocaleString('en-IN');
+  const formattedSalary = parseInt(item?.data?.salary).toLocaleString('en-CA');
 
   return (
     <CustomTouchableOpacity

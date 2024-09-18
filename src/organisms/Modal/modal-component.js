@@ -6,7 +6,6 @@ import SvgComponent from '../../assets/svgIcons/hennaSvg/svghenna';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 import CustomText from '../../atoms/text/textComponent';
 import ZaapLogoSvgComponent from '../../assets/svgIcons/zaaplogosvg/zaaplogosvg';
-import RupeeSvgComponent from '../../assets/svgIcons/RupeeIcon/rupeeiconsvg';
 import ArrowSvgComponent from '../../assets/svgIcons/arrrowiconsvg/arrowiconsvg';
 import {useNavigation} from '@react-navigation/native';
 import usePayment from '../../custom-hooks/payment/usePayment';
