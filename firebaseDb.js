@@ -15,7 +15,8 @@ const firebaseConfig = {
   // appId: '1:600651705755:web:703afc43f9173df2',
   // measurementId: 'G-DE0C4VCCY6',
 
-  apiKey: 'AIzaSyBHbHmGIhY7piNuSYcvwMEom06LJZyLCoU', //
+  apiKey: 'AIzaSyBHbHmGIhY7piNuSYcvwMEom06LJZyLCoU',
+  databaseURL: 'https://zaap-canada-default-rtdb.firebaseio.com',
   authDomain: 'zaap-canada.firebaseapp.com', //
   projectId: 'zaap-canada',
   storageBucket: 'zaap-canada.appspot.com',
