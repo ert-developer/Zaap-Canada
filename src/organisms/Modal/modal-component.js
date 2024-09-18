@@ -43,7 +43,6 @@ const ModalComponent = ({isVisible, onClose, userWorking}) => {
   ///////////// 20 percentage of job salary /////////////
   // asdf Customer One time Pay and One Time OTP
   const amount = jobDetails.salary;
-  const twentyPercentageOfSalary = (amount * 20) / 100;
 
   const getPlatformFee = transactionAmount => {
     let fee = 0;
@@ -143,7 +142,6 @@ const ModalComponent = ({isVisible, onClose, userWorking}) => {
   const iinchatScreenNavigation = async data => {
     // Generate a unique room ID
     // const roomId = generateRoomId();
-    console.log('datadatadata', data);
 
     const snapshot = await database().ref(`/chatlist/${data.userId}/${user.userId}`).once('value');
     const roomDetails = snapshot.val();
@@ -208,7 +206,7 @@ const ModalComponent = ({isVisible, onClose, userWorking}) => {
 
     try {
       const paymentAmount = parseInt(amount + platformFee);
-      const paymentResponse = await handleCheckout(paymentAmount);
+      const response = await handleCheckout(paymentAmount);
 
       if (response && response['_documentPath']) {
         await Promise.all([
@@ -253,20 +251,6 @@ const ModalComponent = ({isVisible, onClose, userWorking}) => {
     fetchPostedCustomerDetails(serviceproviderData.userId);
   });
 
-  let result;
-
-  if (profiledetail.name) {
-    const names = profiledetail.name.split(' ');
-    if (names.length === 1) {
-      // Only first name provided
-      result = names[0].charAt(0);
-    } else if (names.length >= 2) {
-      // Both first and last names provided
-      result = `${names[0].charAt(0)}${names[names.length - 1].charAt(0)}`;
-    }
-  } else {
-    result = 'X';
-  }
   return (
     <View>
       <Modal isVisible={isVisible} style={styles.modal}>

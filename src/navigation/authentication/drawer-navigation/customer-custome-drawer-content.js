@@ -186,7 +186,7 @@ export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
     try {
       const providerDevData = await fetchCollectionDetails(envConfig.Provider);
       const response = providerDevData.filter(item => item.provider_id === uid);
-      setUserDetails(response);
+      setCurrentUser(response);
       if (response.length && response[0]?.isverified === 'in progress') {
         setModalVisible(true);
       } else {

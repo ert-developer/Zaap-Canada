@@ -84,11 +84,13 @@ const PremiumAdsCartContainer = () => {
         const collectionRef = firestore().collection(envConfig.Premium_ads);
         const docRef = collectionRef.doc(userId); // Use the user's ID as the document ID
         // Prepare the data to update or create the document
+        const featuredFinalCount = purchaseAdsData.featuredAdsCount === 0 ? countFeaturedChange : featuredAdsCount;
+        const spotlightFinalCount = purchaseAdsData.spotlightAdsCount === 0 ? countSpotlightChange : spotlightAdsCount;
         const premiumAdsData = {
           creationTime: Date.now(),
           userId: userId,
-          featuredAds: firestore.FieldValue.increment(featuredAdsCount), // Increment the value
-          spotlightAds: firestore.FieldValue.increment(spotlightAdsCount), // Increment the value
+          featuredAds: firestore.FieldValue.increment(featuredFinalCount), // Increment the value
+          spotlightAds: firestore.FieldValue.increment(spotlightFinalCount), // Increment the value
         };
         // Update or create the document
         await docRef.set(premiumAdsData, {merge: true});
