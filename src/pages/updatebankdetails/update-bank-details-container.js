@@ -6,6 +6,7 @@ import firestore from '@react-native-firebase/firestore';
 import {postCollectionDetails} from '../../common/collection';
 import {tr} from 'date-fns/locale';
 import {envConfig} from '../../assets/helpers/envApi';
+import {useNavigation} from '@react-navigation/native';
 
 const UpdateBankDetailsContainer = () => {
   const AuthUser = useSelector(state => state.Auth);
@@ -13,6 +14,7 @@ const UpdateBankDetailsContainer = () => {
 
   const [showPopup, setShowPopup] = useState(false);
   const [error, setError] = useState('');
+  const navigation = useNavigation();
 
   const bankDetailsFields = [
     {
@@ -183,6 +185,7 @@ const UpdateBankDetailsContainer = () => {
   const onClosePopup = () => {
     setShowPopup(false);
     setError(false);
+    navigation.navigate('HomeScreen');
   };
 
   return (
