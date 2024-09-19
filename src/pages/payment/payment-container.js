@@ -48,7 +48,6 @@ const PaymentContainer = () => {
 
   const handleCheckout = async () => {
     try {
-      console.log('handleCheckout');
       const data = await fetchPaymentSheetParams();
 
       setSecretKey(data.paymentIntent);

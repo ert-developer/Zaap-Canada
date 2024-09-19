@@ -347,7 +347,7 @@ const Enduseraggrement = () => {
       <CustomText text={'12. CONTACT INFORMATION'} style={styles.heading} />
       <CustomText
         text={
-          'For general inquiries, complaints, questions or claims concerning the Licensed Application, please contact our support team by email at help@zaapondemand.in'
+          'For general inquiries, complaints, questions or claims concerning the Licensed Application, please contact our support team by email at help@zaapondemand.ca'
         }
         style={styles.paragraph}
       />

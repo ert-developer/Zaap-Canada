@@ -100,7 +100,7 @@ const ProviderFeedbackScreen = ({
     const appliedUser = await getUserDetails(envConfig.User, profiledetail.userId);
     const token = appliedUser.fcmToken;
     try {
-      const response = await fetch('https://push-notifications-server-lvzr.onrender.com/sendNotification', {
+      const response = await fetch('https://canada-push-notifications-server.onrender.com/sendNotification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

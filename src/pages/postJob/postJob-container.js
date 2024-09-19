@@ -578,7 +578,7 @@ const PostJobContainer = () => {
         } else {
           try {
             setPaymentLoader(true);
-            let response = await handleCheckout(paymentAmount);
+            let response = await handleCheckout(parseFloat(paymentAmount));
             if (response && response['_documentPath']) {
               await purchasePremiumAds();
               handlePostJob();

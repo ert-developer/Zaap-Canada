@@ -205,7 +205,7 @@ const JobDetailContainer = ({route, navigation}) => {
   const sendnotification = async () => {
     try {
       const token = await getfcmtoken();
-      const response = fetch('https://push-notifications-server-lvzr.onrender.com/sendNotification', {
+      const response = fetch('https://canada-push-notifications-server.onrender.com/sendNotification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

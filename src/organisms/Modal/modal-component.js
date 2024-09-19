@@ -78,7 +78,7 @@ const ModalComponent = ({isVisible, onClose, userWorking}) => {
     const appliedUser = await getUserDetails(envConfig.User, profiledetail.userId);
     const token = appliedUser.fcmToken;
     try {
-      const response = await fetch('https://push-notifications-server-lvzr.onrender.com/sendNotification', {
+      const response = await fetch('https://canada-push-notifications-server.onrender.com/sendNotification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -204,7 +204,7 @@ const ModalComponent = ({isVisible, onClose, userWorking}) => {
     };
 
     try {
-      const paymentAmount = parseInt(amount + platformFee);
+      const paymentAmount = parseFloat(amount + platformFee);
       const response = await handleCheckout(paymentAmount);
 
       if (response && response['_documentPath']) {

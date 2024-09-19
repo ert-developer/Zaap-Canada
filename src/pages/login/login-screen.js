@@ -21,7 +21,7 @@ const LoginScreen = ({googleLogin, facebookLogin, toggleModal, modalVisible, set
   // };
   const [isModalVisible, setIsModalVisible] = useState(false);
   const handleEmailPress = () => {
-    const email = 'mailto:help@zaapondemand.in';
+    const email = 'mailto:help@zaapondemand.ca';
     Linking.canOpenURL(email)
       .then(supported => {
         return Linking.openURL(email);
@@ -48,7 +48,7 @@ const LoginScreen = ({googleLogin, facebookLogin, toggleModal, modalVisible, set
               />
             </View>
             <TouchableOpacity style={styles.contactUsBtn} onPress={handleEmailPress}>
-              <CustomText text={'help@zaapondemand.in'} style={styles.btnText} />
+              <CustomText text={'help@zaapondemand.ca'} style={styles.btnText} />
             </TouchableOpacity>
           </View>
         </View>

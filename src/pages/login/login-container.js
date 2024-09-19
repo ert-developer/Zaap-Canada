@@ -121,7 +121,7 @@ const LoginContainer = ({navigation}) => {
               
               <h3>Need Assistance? We’re Here to Help!</h3>
               <p>If you have any questions or need support, our team is ready to assist you. Check out the Help Center in the app for answers to common questions, or reach out to us at 
-                <a href="mailto:help@zaapondemand.in" style="color: #4CAF50;">help@zaapondemand.in</a>
+                <a href="mailto:help@zaapondemand.ca" style="color: #4CAF50;">help@zaapondemand.ca</a>
               </p>
               
               <h3>Stay Connected:</h3>
@@ -139,7 +139,7 @@ const LoginContainer = ({navigation}) => {
           `;
 
           const textMsg =
-            'Welcome to ZAAP! Thank you for registering with us. Explore our platform to find local talent or work. Need help? Email us at help@zaapondemand.in and stay connected on Facebook, Twitter, and Instagram.';
+            'Welcome to ZAAP! Thank you for registering with us. Explore our platform to find local talent or work. Need help? Email us at help@zaapondemand.ca and stay connected on Facebook, Twitter, and Instagram.';
 
           mailSenter(to, subject, textMsg, bodyText);
 
@@ -255,7 +255,7 @@ const LoginContainer = ({navigation}) => {
           
           <h3>Need Assistance? We’re Here to Help!</h3>
           <p>If you have any questions or need support, our team is ready to assist you. Check out the Help Center in the app for answers to common questions, or reach out to us at 
-            <a href="mailto:help@zaapondemand.in" style="color: #4CAF50;">help@zaapondemand.in</a>
+            <a href="mailto:help@zaapondemand.ca" style="color: #4CAF50;">help@zaapondemand.ca</a>
           </p>
           
           <h3>Stay Connected:</h3>
@@ -273,7 +273,7 @@ const LoginContainer = ({navigation}) => {
       `;
 
         const textMsg =
-          'Welcome to ZAAP! Thank you for registering with us. Explore our platform to find local talent or work. Need help? Email us at help@zaapondemand.in and stay connected on Facebook, Twitter, and Instagram.';
+          'Welcome to ZAAP! Thank you for registering with us. Explore our platform to find local talent or work. Need help? Email us at help@zaapondemand.ca and stay connected on Facebook, Twitter, and Instagram.';
 
         mailSenter(to, subject, textMsg, bodyText);
       } else {

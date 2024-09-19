@@ -604,7 +604,7 @@ const CustomerSidePaymentModel = () => {
         return;
       }
       // let response = await handlePayment(parseInt(tipAmount));
-      let response = await handleCheckout(parseInt(tipAmount));
+      let response = await handleCheckout(parseFloat(tipAmount));
 
       if (response && response['_documentPath']) {
         handleServiceCompleted();
@@ -891,7 +891,7 @@ const CustomerSidePaymentModel = () => {
           <h3>What You Need to Do:</h3>
           <p>There’s no action required from your side regarding this cancellation. Please feel free to check out other jobs available on the platform that you can apply for.</p>
           <p>We understand that cancellations can be frustrating. However, please remember that this is a normal part of working in the on-demand marketplace. Each cancellation is an opportunity for you to be ready for the next job, and new opportunities will come your way.</p>
-          <p>Keep up the great work and stay positive! If you have any questions or need further assistance, please reach out to our support team via email at <a href="mailto:help@zaapondemand.in" style="color: #4CAF50;">help@zaapondemand.in</a>.</p>
+          <p>Keep up the great work and stay positive! If you have any questions or need further assistance, please reach out to our support team via email at <a href="mailto:help@zaapondemand.ca" style="color: #4CAF50;">help@zaapondemand.ca</a>.</p>
           <p>Thank you for your understanding and for being a valued part of the ZAAP community.</p>
           <p>Best regards,<br>Team ZAAP</p>
         </div>
