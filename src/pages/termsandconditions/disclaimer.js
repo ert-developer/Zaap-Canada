@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, ScrollView, Text, View} from 'react-native';
 import {Color} from '../../assets/static/globalStyles';
 import {widthToDp} from '../../responsive/responsive';
+import CustomText from '../../atoms/text/textComponent';
 
 const Disclaimer = () => {
   return (
@@ -12,14 +13,14 @@ const Disclaimer = () => {
 
         <Text style={styles.sectionTitle}>WEBSITE DISCLAIMER</Text>
         <Text style={styles.paragraph}>
-          The information provided by Zaapr Online Services Private Limited ('we', 'us', or 'our') on our mobile
-          application is for general informational purposes only. All information on our mobile application is provided
-          in good faith, however we make no representation or warranty of any kind, express or implied, regarding the
-          accuracy, adequacy, validity, reliability, availability, or completeness of any information on our mobile
-          application. UNDER NO CIRCUMSTANCE SHALL WE HAVE ANY LIABILITY TO YOU FOR ANY LOSS OR DAMAGE OF ANY KIND
-          INCURRED AS A RESULT OF THE USE OF OUR MOBILE APPLICATION OR RELIANCE ON ANY INFORMATION PROVIDED ON OUR
-          MOBILE APPLICATION. YOUR USE OF OUR MOBILE APPLICATION AND YOUR RELIANCE ON ANY INFORMATION ON OUR MOBILE
-          APPLICATION IS SOLELY AT YOUR OWN RISK.
+          The information provided by ZAAP ONDEMAND INC ('we', 'us', or 'our') on our mobile application is for general
+          informational purposes only. All information on our mobile application is provided in good faith, however we
+          make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy,
+          validity, reliability, availability, or completeness of any information on our mobile application. UNDER NO
+          CIRCUMSTANCE SHALL WE HAVE ANY LIABILITY TO YOU FOR ANY LOSS OR DAMAGE OF ANY KIND INCURRED AS A RESULT OF THE
+          USE OF OUR MOBILE APPLICATION OR RELIANCE ON ANY INFORMATION PROVIDED ON OUR MOBILE APPLICATION. YOUR USE OF
+          OUR MOBILE APPLICATION AND YOUR RELIANCE ON ANY INFORMATION ON OUR MOBILE APPLICATION IS SOLELY AT YOUR OWN
+          RISK.
         </Text>
 
         <Text style={styles.sectionTitle}>EXTERNAL LINKS DISCLAIMER</Text>
@@ -46,7 +47,7 @@ const Disclaimer = () => {
         <Text style={styles.sectionTitle}>AFFILIATES DISCLAIMER</Text>
         <Text style={styles.paragraph}>
           Our mobile application may contain links to affiliate websites, and we receive an affiliate commission for any
-          purchases made by you on the affiliate website using such links.
+          purchases made by you on the affiliate website using such links. Our affiliates include the following:
         </Text>
 
         <Text style={styles.sectionTitle}>TESTIMONIALS DISCLAIMER</Text>
@@ -70,6 +71,7 @@ const Disclaimer = () => {
           our views and opinions. We are not affiliated with users who provide testimonials, and users are not paid or
           otherwise compensated for their testimonials.
         </Text>
+        <CustomText text={''} style={styles.paragraph} />
       </View>
     </ScrollView>
   );

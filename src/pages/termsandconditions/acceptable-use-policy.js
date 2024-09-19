@@ -27,10 +27,10 @@ const AcceptableUsePolicy = () => {
 
       <Text style={styles.subheader}>WHO WE ARE</Text>
       <Text style={styles.paragraph}>
-        We are Zaapr Online Services Private Limited, doing business as ZAAP - Hire or Work locally ("Company", "we",
-        "us", or "our"), a company registered in Canada at Toronto, Ontario. We operate the mobile application ZAAP -
-        Hire or Work Locally (the "App"), as well as any other related products and services that refer or link to this
-        Policy (collectively, the "Services").
+        We are ZAAP ONDEMAND INC, doing business as ZAAP - Hire or Work locally ("Company", "we", "us", or "our"), a
+        company registered in Canada at Toronto, Ontario. We operate the mobile application ZAAP - Hire or Work Locally
+        (the "App"), as well as any other related products and services that refer or link to this Policy (collectively,
+        the "Services").
       </Text>
 
       <Text style={styles.subheader}>USE OF THE SERVICES</Text>
@@ -172,8 +172,7 @@ const AcceptableUsePolicy = () => {
         manner on or through to the Services; or
       </Text>
       <Text style={styles.listItem}>
-        • Any other content, materials, or data you provide to Zaapr Online Services Private Limited or use with the
-        Services.
+        • Any other content, materials, or data you provide to ZAAP ONDEMAND INC or use with the Services.
       </Text>
       <Text style={styles.paragraph}>
         Some areas of the Services may allow users to upload, transmit, or post Contributions. We may but are under no
@@ -325,16 +324,14 @@ const AcceptableUsePolicy = () => {
 
       <Text style={styles.subheader}>DISCLAIMER</Text>
       <Text style={styles.paragraph}>
-        Zaapr Online Services Private Limited is under no obligation to monitor usersʼ activities, and we disclaim any
-        responsibility for any userʼs misuse of the Services. Zaapr Online Services Private Limited has no
-        responsibility for any user or other Content or Contribution created, maintained, stored, transmitted, or
-        accessible on or through the Services, and is not obligated to monitor or exercise any editorial control over
-        such material. If Zaapr Online Services Private Limited becomes aware that any such Content or Contribution
-        violates this Policy, Zaapr Online Services Private Limited may, in addition to removing such Content or
-        Contribution and blocking your account, report such breach to the police or appropriate regulatory authority.
-        Unless otherwise stated in this Policy, Zaapr Online Services Private Limited disclaims any obligation to any
-        person who has not entered into an agreement with Zaapr Online Services Private Limited for the use of the
-        Services.
+        ZAAP ONDEMAND INC is under no obligation to monitor usersʼ activities, and we disclaim any responsibility for
+        any userʼs misuse of the Services. ZAAP ONDEMAND INC has no responsibility for any user or other Content or
+        Contribution created, maintained, stored, transmitted, or accessible on or through the Services, and is not
+        obligated to monitor or exercise any editorial control over such material. If ZAAP ONDEMAND INC becomes aware
+        that any such Content or Contribution violates this Policy, ZAAP ONDEMAND INC may, in addition to removing such
+        Content or Contribution and blocking your account, report such breach to the police or appropriate regulatory
+        authority. Unless otherwise stated in this Policy, ZAAP ONDEMAND INC disclaims any obligation to any person who
+        has not entered into an agreement with ZAAP ONDEMAND INC for the use of the Services.
       </Text>
 
       <Text style={styles.subheader}>HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</Text>
