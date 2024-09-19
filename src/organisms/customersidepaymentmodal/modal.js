@@ -363,23 +363,24 @@ const CustomerSidePaymentModel = () => {
     setServiceCompleted(true);
     handleFeedback();
 
-    const to = `${user.email},${providerStatus[0].email_id}`;
+    const to = providerStatus[0].email_id;
+    const to2 = user.email;
     const subject = 'Service Completed';
     const textMsg = 'Request for amount transfer to the service provider';
     const bodyText = `
     <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
       <h2>Service Completed</h2>
-      <p>Service Completed by <strong>${providerStatus[0].legal_name_on_id}</strong> for <strong>${user.displayName}</strong> on Job: <strong>${jobDetails.jobTitle}</strong> with an amount of <strong>${jobDetails.salary}</strong>.</p>
+      <p>Service Completed by <strong>${providerStatus[0].legal_name_on_id}</strong> for <strong>${user.displayName}</strong> on Job: <strong>$${jobDetails.jobTitle}</strong> with an amount of <strong>$${jobDetails.salary}</strong>.</p>
       <p><strong>Job ID:</strong> ${jobDetails.jobId}</p>
       <p><strong>Job Description:</strong> ${jobDetails.jobDescription}</p>
     </div>
   `;
 
     mailSenter(to, subject, textMsg, bodyText);
-
+    mailSenter(to2, subject, textMsg, bodyText);
     const data = {
       title: 'Service Completed',
-      message: `Service Completed by ${providerStatus[0].legal_name_on_id} for ${user.displayName} on ${jobDetails.jobTitle} with an amount of ${jobDetails.salary}`,
+      message: `Service Completed by ${providerStatus[0].legal_name_on_id} for ${user.displayName} on ${jobDetails.jobTitle} with an amount of $${jobDetails.salary}`,
       userId: profiledetail.userId,
       markasread: false,
       time: new Date(),
@@ -768,11 +769,11 @@ const CustomerSidePaymentModel = () => {
       const to = `${providerStatus[0].email_id}`;
       const subject = 'Service Cancelled By Customer';
       const textMsg = 'Request for amount refund to the customer';
-      const bodyText = `Service Cancelled by ${user.displayName} for ${providerStatus[0].legal_name_on_id}   on ${jobinfo.data.jobTitle} with an amount of ${jobinfo.data.salary} and you will be refunded with ${cancellationCharge}`;
+      const bodyText = `Service Cancelled by ${user.displayName} for ${providerStatus[0].legal_name_on_id}   on ${jobinfo.data.jobTitle} with an amount of $${jobinfo.data.salary} and you will be refunded with ${cancellationCharge}`;
       mailSenter(to, subject, textMsg, bodyText);
       const data = {
         title: 'Service Cancelled',
-        message: `Service Cancelled by ${user.displayName} for ${providerStatus[0].legal_name_on_id} on ${jobinfo.data.jobTitle} with an amount of ${jobinfo.data.salary}`,
+        message: `Service Cancelled by ${user.displayName} for ${providerStatus[0].legal_name_on_id} on ${jobinfo.data.jobTitle} with an amount of $${jobinfo.data.salary}`,
         userId: profiledetail.userId,
         markasread: false,
         time: new Date(),

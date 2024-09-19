@@ -133,11 +133,11 @@ const accountType = [
 
 const indiaGovDocs = [
   {name: 'Canadian passport', value: 'Canadian passport'},
-  {name: 'Permanent resident card', value: 'Permanent resident card'},
   {name: "Driver's License", value: 'driverslicense'},
-  {name: 'Work Permit', value: 'Work Permit'},
+  {name: 'Permanent resident card', value: 'Permanent resident card'},
+  {name: 'Provincial Identity Cards', value: 'Provincial Identity Cards'},
   {name: 'Study Permit', value: 'Study Permit'},
-  {name: 'Identity Cards', value: 'Identity Cards'},
+  {name: 'Work Permit', value: 'Work Permit'},
 ];
 
 const indiaStateOptions = [
@@ -218,7 +218,7 @@ const ProviderProfileContainer = ({navigation}) => {
       setFormData(prevState => ({...prevState, [field]: value, state: '', city: ''}));
       setStates(State.getStatesOfCountry(value));
     }
-    if (field === 'postal_code' && value.length > 7) {
+    if (field === 'postal_code' && (value.length > 7 || value.length < 3)) {
       setFormErrors(prevState => ({...prevState, [field]: true}));
     } else if (field === 'city') {
       if (!isCharacter(value)) {
@@ -515,7 +515,7 @@ const ProviderProfileContainer = ({navigation}) => {
           }
           break;
         case 'Postal Code':
-          if (formData.postal_code.length !== 7) {
+          if (formData.postal_code.length > 7 || formData.postal_code.length < 3) {
             formErrors.postal_code = true;
             return false;
           }

@@ -155,7 +155,7 @@ const TermsAndConditions = () => {
             );
           })}
         </View>
-        <ScrollView ref={scrollViewRef} style={{backgroundColor: 'lightgrey'}}>
+        <ScrollView>
           <View onLayout={event => handleLayout('ourservices', event)}>
             <CustomText text={'1.OUR SERVICES'} style={styles.heading} />
             <CustomText

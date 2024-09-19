@@ -14,6 +14,7 @@ const termsList = ['Terms and conditions', 'Privacy Policy', 'Disclaimer', 'Acce
 const termsData = {
   'Terms and conditions': <TermsAndConditions />,
   'Privacy Policy': <PrivacyPolicies />,
+  'End user agreement': <Enduseraggrement />,
   Disclaimer: <Disclaimer />,
   'Acceptable Use Policy': <AcceptableUsePolicy />,
 };

@@ -461,17 +461,17 @@ const PostJobContainer = () => {
 
       // Define pricing for ads
       const featuredPricing = {
-        149: 1,
-        499: 3,
-        799: 5,
-        1499: 10,
+        19.99: 1,
+        54.99: 3,
+        89.99: 5,
+        169.99: 10,
       };
 
       const spotlightPricing = {
-        249: 1,
-        699: 3,
-        1099: 5,
-        2099: 10,
+        29.99: 1,
+        79.99: 3,
+        129.99: 5,
+        299.99: 10,
       };
 
       if (docSnapshot.exists) {
