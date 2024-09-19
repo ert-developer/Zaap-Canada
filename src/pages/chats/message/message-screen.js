@@ -135,9 +135,9 @@ const ChatScreenExample = ({data, allChat}) => {
 
   const keyExtractor = (item, index) => index.toString();
 
-  const sendNotification = messageData => {
+  const sendNotification = async messageData => {
     const userId = messageData.to;
-    const recicerUser = getUserDetails(envConfig.User, userId);
+    const recicerUser = await getUserDetails(envConfig.User, userId);
     const fcmToken = recicerUser.fcmToken;
     try {
       const response = fetch('https://canada-push-notifications-server.onrender.com/sendNotification', {
