@@ -60,7 +60,6 @@ import {
   Transaction,
 } from 'firebase/firestore';
 import {ca} from 'date-fns/locale';
-import handlePayment from '../../custom-hooks/payment/useRazorPayPayment';
 import {TransparentLoader} from '../loader/loader';
 import TextAreaInputComponent from '../../atoms/textAreaInput/textAreaInput-component';
 import {envConfig} from '../../assets/helpers/envApi';
@@ -550,19 +549,6 @@ const CustomerSidePaymentModel = () => {
   const [customText, setCustomText] = useState('');
   const [showAmount, setShowAmount] = useState(false);
 
-  // const handlePayment = async () => {
-  //   try {
-  //     let response = await handleCheckout(parseInt(20 * 100));
-
-  //     if (response && response['_documentPath']) {
-  //       setServiceCompleted(true);
-  //     } else {
-  //       Alert.alert('Cancel', 'Canceled Payment.', [{text: 'OK'}]);
-  //     }
-  //   } catch (error) {
-  //     console.log('errrorrrrrrrrrrrrrrrrrrr', error);
-  //   }
-  // };
 
   // Handle click event for percentage
   const handleTextClick = percentage => {
@@ -604,7 +590,6 @@ const CustomerSidePaymentModel = () => {
         setPaymentLoader(false);
         return;
       }
-      // let response = await handlePayment(parseInt(tipAmount));
       let response = await handleCheckout(parseFloat(tipAmount));
 
       if (response && response['_documentPath']) {

@@ -16,7 +16,6 @@ import {useIsFocused} from '@react-navigation/native';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import {InvoiceNumber} from 'invoice-number';
-import handlePayment from '../../custom-hooks/payment/useRazorPayPayment';
 import {setEditJobStatus} from '../../redux/editjob/action';
 import {getDoc, doc, updateDoc} from 'firebase/firestore';
 import {db} from '../../../firebaseDb';
@@ -25,7 +24,7 @@ const initialFormData = Object.freeze({
   jobTitle: '',
   categories: '',
   subCategory: '',
-  salary: 0,
+  salary: '',
   phone: '',
   location: '',
   landmark: '',

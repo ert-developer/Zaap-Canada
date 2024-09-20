@@ -31,7 +31,6 @@ import {Color} from '../../assets/static/globalStyles';
 import {getUserDetails} from '../../common/collection';
 import {mailSenter} from '../../common/mailSender';
 import {collection, query, where, getDocs} from 'firebase/firestore';
-import handlePayment from '../../custom-hooks/payment/useRazorPayPayment';
 import getPlatformFee from '../../common/platformFee';
 import {envConfig} from '../../assets/helpers/envApi';
 

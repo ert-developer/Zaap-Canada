@@ -1,13 +1,6 @@
 const envType = 'dev'; // dev | uat | prod
 let envConfig;
-import {
-  GOOGLE_API_KEY_DEV,
-  RAZORPAY_API_KEY_DEV,
-  GOOGLE_API_KEY_UAT,
-  RAZORPAY_API_KEY_UAT,
-  GOOGLE_API_KEY_PROD,
-  RAZORPAY_API_KEY_PROD,
-} from '@env';
+import {GOOGLE_API_KEY_DEV, GOOGLE_API_KEY_UAT, GOOGLE_API_KEY_PROD} from '@env';
 
 switch (envType) {
   case 'dev':
@@ -38,7 +31,6 @@ switch (envType) {
       updateGovtIdDetails: 'updateGovtIdDetails_dev',
       selectedProfiles: 'selectedProfiles_dev',
       GOOGLE_API_KEY: GOOGLE_API_KEY_DEV,
-      RAZORPAY_API_KEY: RAZORPAY_API_KEY_DEV,
     };
     break;
   case 'uat':
@@ -70,7 +62,6 @@ switch (envType) {
       selectedProfiles: 'selectedProfiles_uat',
       // base url will put here
       GOOGLE_API_KEY: GOOGLE_API_KEY_UAT,
-      RAZORPAY_API_KEY: RAZORPAY_API_KEY_UAT,
     };
     break;
   case 'prod':
@@ -102,7 +93,6 @@ switch (envType) {
       selectedProfiles: 'selectedProfiles',
       // base url will put here
       GOOGLE_API_KEY: GOOGLE_API_KEY_PROD,
-      RAZORPAY_API_KEY: RAZORPAY_API_KEY_PROD,
     };
     break;
   default:

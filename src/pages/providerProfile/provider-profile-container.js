@@ -151,7 +151,7 @@ const indiaStateOptions = [
   {label: 'Nova Scotia', value: 'Nova Scotia'},
   {label: 'Prince Edward Island', value: 'Prince Edward Island'},
   {label: 'Newfoundland and Labrador', value: 'Newfoundland and Labrador'},
-];
+].sort((a, b) => a.label.localeCompare(b.label));
 const ProviderProfileContainer = ({navigation}) => {
   const dispatch = useDispatch();
 

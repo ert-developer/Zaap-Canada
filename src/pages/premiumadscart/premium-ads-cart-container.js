@@ -6,7 +6,6 @@ import {useRoute} from '@react-navigation/native';
 import {Alert} from 'react-native';
 import usePayment from '../../custom-hooks/payment/usePayment';
 import {useNavigation} from '@react-navigation/native';
-import handlePayment from '../../custom-hooks/payment/useRazorPayPayment';
 import {envConfig} from '../../assets/helpers/envApi';
 
 const PremiumAdsCartContainer = () => {
@@ -78,7 +77,6 @@ const PremiumAdsCartContainer = () => {
         return;
       }
       // Start payment process
-      // let response = await handlePayment(parseInt(finalAmount));
       let response = await handleCheckout(parseFloat(finalAmount));
       if (response && response['_documentPath']) {
         const collectionRef = firestore().collection(envConfig.Premium_ads);
