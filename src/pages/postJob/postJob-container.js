@@ -72,7 +72,7 @@ const PostJobContainer = () => {
           return null;
         }
       } catch (error) {
-        console.error('Error fetching Payment Status data:', error);
+        console.error('Error fetching job data:', error);
         return null;
       } finally {
         setLoader(false);
@@ -707,9 +707,9 @@ const PostJobContainer = () => {
       // Update the job document in Firestore
       await updateDoc(jobRef, updatedJobDetails);
       Alert.alert('Job Details updated successfully');
+      navigation.navigate('HomeScreen');
       setFormData(initialFormData);
       dispatch(setEditJobStatus({jobId: null, editJobStatus: false}));
-      console.log('Job details updated successfully');
     } catch (error) {
       console.error('Error updating job details:', error);
     }

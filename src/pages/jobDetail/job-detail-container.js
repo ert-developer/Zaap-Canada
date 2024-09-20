@@ -150,9 +150,7 @@ const JobDetailContainer = ({route, navigation}) => {
   const shareJobDetails = async () => {
     const shareOptions = {
       title: 'Check out this job',
-      message: `Job Title: ${title}\nDescription: ${description}\nCategory: ${category}\nSubCategory: ${subCategory}\nPrice: ${price}\nLocation: ${areaDesc}, ${
-        location.split(',')[0]
-      }\nPosted By: ${userName}\nTime: ${starttime}\nDate: ${startdate} \n\nDownload the app to apply for this job.\n\n playstorelink: https://play.google.com/store/apps \n appstorelink: https://apps.apple.com/`,
+      message: `Job Title: ${title}\nPrice: ${price}\nDate: ${startdate} \nI've found this Job on ZAAP - Hire or Work Locally.\nDownload the app to apply for this job.\n\n playstorelink: https://play.google.com/store/apps \n appstorelink: https://apps.apple.com/`,
       social: RNShare.Social.WHATSAPP,
     };
     try {
@@ -359,6 +357,7 @@ const JobDetailContainer = ({route, navigation}) => {
               await deleteDoc(doc(db, envConfig.Jobs, id));
               // Optionally, you can show a success message or refresh the list of jobs
               Alert.alert('Success', 'Job has been deleted successfully.');
+              navigation.navigate('HomeScreen');
             } catch (error) {
               // Handle any errors that occur during the delete operation
               console.error('Error deleting job:', error);

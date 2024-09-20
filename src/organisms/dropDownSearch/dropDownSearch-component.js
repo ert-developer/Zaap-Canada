@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 import {FontSize, Border, Padding, Color} from '../../assets/static/globalStyles';
@@ -17,6 +17,10 @@ const DropdownSearchComponent = ({
 }) => {
   const [value, setValue] = useState(selectedValue);
   const [isFocus, setIsFocus] = useState(false);
+
+  useEffect(() => {
+    setValue(selectedValue);
+  }, [selectedValue]);
 
   const handleChange = text => {
     onHandleChange(fieldName, text[valueField]);

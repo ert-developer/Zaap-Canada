@@ -152,6 +152,7 @@ const indiaStateOptions = [
   {label: 'Prince Edward Island', value: 'Prince Edward Island'},
   {label: 'Newfoundland and Labrador', value: 'Newfoundland and Labrador'},
 ].sort((a, b) => a.label.localeCompare(b.label));
+
 const ProviderProfileContainer = ({navigation}) => {
   const dispatch = useDispatch();
 
@@ -218,7 +219,7 @@ const ProviderProfileContainer = ({navigation}) => {
       setFormData(prevState => ({...prevState, [field]: value, state: '', city: ''}));
       setStates(State.getStatesOfCountry(value));
     }
-    if (field === 'postal_code' && (value.length > 7 || value.length < 3)) {
+    if (field === 'postal_code' && value.length > 7) {
       setFormErrors(prevState => ({...prevState, [field]: true}));
     } else if (field === 'city') {
       if (!isCharacter(value)) {

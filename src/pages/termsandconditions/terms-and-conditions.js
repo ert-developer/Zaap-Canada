@@ -106,7 +106,7 @@ const TermsAndConditions = () => {
         {/* Add more terms and conditions */}
         <CustomText
           text={
-            "We are ZAAP ONDEMAND INC Private, doing business as ZAAP - Hire or Work Locally ('Company', 'we', 'us', or 'our'), a company registered in Canada at Toronto, Ontario"
+            "We are ZAAP ONDEMAND INC, doing business as ZAAP - Hire or Work Locally ('Company', 'we', 'us', or 'our'), a company registered in Canada at Toronto, Ontario"
           }
           style={styles.paragraph}
         />
