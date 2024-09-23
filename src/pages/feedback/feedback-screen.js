@@ -8,6 +8,7 @@ import feedbackStyles from './feedback-styles';
 import CustomButton from '../../atoms/button/buttonComponent';
 import Modal from 'react-native-modal';
 import FastImage from 'react-native-fast-image';
+import {Image} from 'react-native';
 
 const FeedbackScreen = ({
   formData,
@@ -26,7 +27,7 @@ const FeedbackScreen = ({
           <Modal isVisible={showFeedbackModal} onBackdropPress={onCloseSuccessModal}>
             <View style={styles.modalContainer}>
               <View style={styles.modalContent}>
-                <FastImage
+                <Image
                   style={{width: 100, height: 100}}
                   source={require('../../assets/Success.gif')}
                   resizeMode={FastImage.resizeMode.contain}

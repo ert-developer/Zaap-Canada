@@ -45,7 +45,7 @@ const DeletePortfolioDetailsModal = ({
                 justifyContent: 'center',
                 padding: heightToDp(1),
               }}>
-              <FastImage
+              <Image
                 style={{width: 100, height: 100}}
                 source={require('../../assets/Success.gif')}
                 resizeMode={FastImage.resizeMode.contain}

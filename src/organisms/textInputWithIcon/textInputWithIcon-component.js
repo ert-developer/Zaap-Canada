@@ -17,6 +17,7 @@ const TextInputWithIconComponent = ({
   editable,
   onSubmitEditing,
   icon,
+  placeholderTextColor,
 }) => {
   const hasError = formErrors && formErrors[field];
   const inputStyle = hasError ? [styles.input, styles.inputErrorStyles] : [styles.input, firstPicker];
@@ -30,6 +31,7 @@ const TextInputWithIconComponent = ({
           placeholder={placeholder}
           editable={editable}
           onSubmitEditing={onSubmitEditing}
+          placeholderTextColor={placeholderTextColor}
         />
         <View style={{marginLeft: 'auto', marginRight: 10}}>{icon}</View>
         {/* <CalenderSVG /> */}

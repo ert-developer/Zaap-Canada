@@ -1,5 +1,5 @@
 import Modal from 'react-native-modal';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import CustomText from '../../atoms/text/textComponent';
 import {useState} from 'react';
 import CustomButton from '../../atoms/button/buttonComponent';
@@ -32,7 +32,7 @@ const NoJobPostModal = () => {
         <View style={styles.modalContent}>
           <View style={{width: heightToDp(43)}}>
             <View style={{justifyContent: 'center', alignItems: 'center', padding: heightToDp(1.5)}}>
-              <FastImage
+              <Image
                 style={{width: 100, height: 100}}
                 source={require('../../assets/Cross.gif')}
                 resizeMode={FastImage.resizeMode.contain}
@@ -48,12 +48,12 @@ const NoJobPostModal = () => {
                 }}
               />
               <CustomText
-               text={`Service Providers can't post ads.`}
+                text={`Service Providers can't post ads.`}
                 style={{
                   fontFamily: 'Roboto',
                   marginLeft: heightToDp(2.1),
                   fontSize: heightToDp(1.5),
-                  }}
+                }}
               />
               <CustomText
                 text={`Log in with other account to post ads.`}
@@ -61,7 +61,7 @@ const NoJobPostModal = () => {
                   fontFamily: 'Roboto',
                   marginLeft: heightToDp(2.1),
                   fontSize: heightToDp(1.5),
-                  }}
+                }}
               />
             </View>
           </View>

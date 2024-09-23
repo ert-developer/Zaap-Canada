@@ -8,6 +8,7 @@ import {reportStyles} from './report-styles';
 import Modal from 'react-native-modal';
 import FastImage from 'react-native-fast-image';
 import TextAreaInputComponent from '../../atoms/textAreaInput/textAreaInput-component';
+import {Image} from 'react-native';
 
 const ReportScreen = ({submitJobReport, reportSubmitModal, onCloseSuccessModal}) => {
   const [reportValue, setReportValue] = useState();
@@ -34,7 +35,7 @@ const ReportScreen = ({submitJobReport, reportSubmitModal, onCloseSuccessModal})
         <Modal isVisible={reportSubmitModal} onBackdropPress={onCloseSuccessModal}>
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
-              <FastImage
+              <Image
                 style={{width: 100, height: 100}}
                 source={require('../../assets/ReportAdTransparent.gif')}
                 resizeMode={FastImage.resizeMode.contain}

@@ -136,7 +136,7 @@ const JobDetail = ({
       <Modal isVisible={showPopup} style={styles.modalContainer} onBackdropPress={onClosePopup}>
         <View style={styles.modalContent}>
           {/* Replace RightPopupSVG with FastImage */}
-          <FastImage
+          <Image
             style={{width: 100, height: 100}}
             source={require('../../assets/Success.gif')}
             resizeMode={FastImage.resizeMode.contain}

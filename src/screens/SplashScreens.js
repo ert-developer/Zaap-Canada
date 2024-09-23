@@ -7,7 +7,7 @@ const SplashScreens = ({navigation}) => {
   return (
     <View style={styles.container}>
       {isLoading && (
-        <FastImage
+        <Image
           style={styles.logo}
           source={{
             uri: 'src/assets/SplashScreen.gif',

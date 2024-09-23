@@ -7,6 +7,7 @@ import CustomText from '../../atoms/text/textComponent';
 import CustomButton from '../../atoms/button/buttonComponent';
 import {CancelPopupSvg, CancelPopupTick} from '../../assets/svgImage/bottomDrawer';
 import FastImage from 'react-native-fast-image';
+import {Image} from 'react-native';
 const ServiceCanceldModal = ({isVisible, isClose, onPressCancelService, onCustCancelltionCharge}) => {
   const [isModalVisible, setModalVisible] = useState(isVisible);
 
@@ -43,7 +44,7 @@ const ServiceCanceldModal = ({isVisible, isClose, onPressCancelService, onCustCa
                 width: heightToDp(37),
               }}>
               {/* <CancelPopupTick style={{marginBottom: heightToDp(2)}} /> */}
-              <FastImage
+              <Image
                 style={{width: 100, height: 100}}
                 source={require('../../assets/CancelSuccess.gif')}
                 resizeMode={FastImage.resizeMode.contain}
@@ -61,7 +62,7 @@ const ServiceCanceldModal = ({isVisible, isClose, onPressCancelService, onCustCa
             </View>
           ) : (
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-              <FastImage
+              <Image
                 style={{width: 100, height: 100}}
                 source={require('../../assets/CancelService.gif')}
                 resizeMode={FastImage.resizeMode.contain}

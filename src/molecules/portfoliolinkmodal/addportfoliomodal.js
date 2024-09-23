@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import Modal from 'react-native-modal';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 import CustomText from '../../atoms/text/textComponent';
@@ -21,7 +21,7 @@ const PortfolioAddPopup = ({portfolioAdded, setPortFolioAdded}) => {
         <View style={styles.modalContent}>
           <View style={{width: heightToDp(43)}}>
             <View style={{justifyContent: 'center', alignItems: 'center', padding: heightToDp(1.5)}}>
-              <FastImage
+              <Image
                 style={{width: 100, height: 100}}
                 source={require('../../assets/Success.gif')}
                 resizeMode={FastImage.resizeMode.contain}

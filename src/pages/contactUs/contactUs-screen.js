@@ -1,6 +1,6 @@
 import React, {useMemo, useState} from 'react';
 import CustomText from '../../atoms/text/textComponent';
-import {View, ScrollView, SafeAreaView, StatusBar, TouchableOpacity} from 'react-native';
+import {View, ScrollView, SafeAreaView, StatusBar, TouchableOpacity, Image} from 'react-native';
 import ContactStyles from './styles';
 import {ZaapLogo} from '../../assets/svgImage/zaaplogo';
 import {BackIcon} from '../../assets/svgImage/sideDrawer';
@@ -39,7 +39,7 @@ const ContactUs = () => {
       <Modal isVisible={isModalVisible} onBackdropPress={() => setIsModalVisible(false)}>
         <View style={styles.modalContentContainer}>
           {/* <ContactUsSVG /> */}
-          <FastImage
+          <Image
             style={{width: 250, height: 250}}
             source={require('../../assets/ContactSupport.gif')}
             resizeMode={FastImage.resizeMode.contain}

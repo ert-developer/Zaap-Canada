@@ -7,6 +7,7 @@ import {FreeGreenTickSVG} from '../../assets/svgImage/profile';
 import Modal from 'react-native-modal';
 import CustomButton from '../../atoms/button/buttonComponent';
 import FastImage from 'react-native-fast-image';
+import {Image} from 'react-native';
 
 const PremiumAdsCartScreen = ({
   featuredAdsCount,
@@ -46,7 +47,7 @@ const PremiumAdsCartScreen = ({
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               {/* <FreeGreenTickSVG /> */}
-              <FastImage
+              <Image
                 style={{width: 100, height: 100}}
                 source={require('../../assets/Success.gif')}
                 resizeMode={FastImage.resizeMode.contain}

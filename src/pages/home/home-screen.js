@@ -337,7 +337,7 @@ const HomeScreen = ({
               {/* <NotificationContainer onNotificationCheck={setHasNotifications} /> */}
               <CustomTouchableOpacity onPress={() => navigation.navigate('Notification')} style={{padding: 0}}>
                 {hasNotifications ? (
-                  <FastImage
+                  <Image
                     style={styles.activenotification}
                     source={require('../../assets/notification-bell.gif')}
                     resizeMode={FastImage.resizeMode.contain}

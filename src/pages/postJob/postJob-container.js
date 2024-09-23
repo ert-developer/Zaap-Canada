@@ -2,7 +2,7 @@ import React, {useState, useEffect, useCallback} from 'react';
 import PostJobScreen from './postJob-screen';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {useSelector, useDispatch} from 'react-redux';
-import {Alert, BackHandler} from 'react-native';
+import {Alert, BackHandler, Platform} from 'react-native';
 import {fetchCollectionDetails, getJobDetails, postCollectionDetails} from '../../common/collection';
 import {postJobRequest, postJobSuccess, postJobFailure} from '../../redux/myJobs/action';
 import {useNavigation, useRoute} from '@react-navigation/native';

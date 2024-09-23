@@ -12,6 +12,7 @@ import {SmallExclamationSVG} from '../../assets/svgImage/providerProfile';
 import FastImage from 'react-native-fast-image';
 import Modal from 'react-native-modal';
 import LegalScreen from '../contactUs/legal-scree';
+import {Image} from 'react-native';
 
 const LoginScreen = ({googleLogin, facebookLogin, toggleModal, modalVisible, setModalVisible, tc, logoutPress}) => {
   const styles = useMemo(() => LoginStyles(), []);
@@ -34,7 +35,7 @@ const LoginScreen = ({googleLogin, facebookLogin, toggleModal, modalVisible, set
       <Modal isVisible={isModalVisible} onBackdropPress={() => setIsModalVisible(false)}>
         <View style={styles.modalContentContainer}>
           {/* <ContactUsSVG /> */}
-          <FastImage
+          <Image
             style={{width: 250, height: 250}}
             source={require('../../assets/ContactSupport.gif')}
             resizeMode={FastImage.resizeMode.contain}

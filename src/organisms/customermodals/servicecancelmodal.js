@@ -10,6 +10,7 @@ import {CancelPopupSvg} from '../../assets/svgImage/bottomDrawer';
 import {CancelPopupTick} from '../../assets/svgImage/bottomDrawer';
 import FastImage from 'react-native-fast-image';
 import {Color} from '../../assets/static/globalStyles';
+import {Image} from 'react-native';
 
 const Service_CancelPopupAfter_otp = ({
   cancelPopupAfterOtp,
@@ -48,7 +49,7 @@ const Service_CancelPopupAfter_otp = ({
         <View style={styles.modalContent}>
           {cancelAfterConfirm ? (
             <View style={{justifyContent: 'center', alignItems: 'center', marginBottom: heightToDp(2)}}>
-              <FastImage
+              <Image
                 style={{width: 100, height: 100}}
                 source={require('../../assets/CancelSuccess.gif')}
                 resizeMode={FastImage.resizeMode.contain}
@@ -66,7 +67,7 @@ const Service_CancelPopupAfter_otp = ({
             </View>
           ) : cancel ? (
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-              <FastImage
+              <Image
                 style={{width: 100, height: 100}}
                 source={require('../../assets/CancelService.gif')}
                 resizeMode={FastImage.resizeMode.contain}
@@ -115,7 +116,7 @@ const Service_CancelPopupAfter_otp = ({
             </View>
           ) : (
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-              <FastImage
+              <Image
                 style={{width: 100, height: 100}}
                 source={require('../../assets/CancelService.gif')}
                 resizeMode={FastImage.resizeMode.contain}
@@ -227,7 +228,7 @@ const Service_CancelPopupAfter_otp = ({
         style={styles.modalContainer}
         onBackdropPress={() => setShowRemoveJobConfirm(false)}>
         <View style={styles.modalContent}>
-          <FastImage
+          <Image
             style={{width: 100, height: 100}}
             source={require('../../assets/CancelService.gif')}
             resizeMode={FastImage.resizeMode.contain}

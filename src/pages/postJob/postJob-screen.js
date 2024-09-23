@@ -10,6 +10,7 @@ import {
   StyleSheet,
   Pressable,
   ActivityIndicator,
+  Image,
   // Modal,
 } from 'react-native';
 import Modal from 'react-native-modal';
@@ -139,21 +140,6 @@ const PostJobScreen = ({
     setShowStartTimePicker(!showStartTimePicker);
   };
 
-  const onChangeStartTime = (event, selectedTime) => {
-    onChangeStartTimePicker();
-
-    const formattedTime = selectedTime.toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true,
-    });
-
-    // Only pass the value to handleChange if the checkbox is unchecked
-    if (!checked) {
-      handleChange('starttime', formattedTime);
-    }
-  };
-
   const onChangeDatePicker = () => {
     setshowDatePicker(!showDatePicker);
   };
@@ -185,60 +171,44 @@ const PostJobScreen = ({
     );
   }, []);
 
-  const LocationJobs = text => {
-    fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${text.location.lat},${text.location.lng}&key=${envConfig.GOOGLE_API_KEY}`,
-    )
-      .then(response => response.json())
-      .then(data => {
-        const addressComponents = data.results[0].address_components;
-        const areaName = addressComponents.find(component => component.types.includes('sublocality_level_1'));
-        handleChange('area', areaName.long_name);
-        // Filter jobs based on location if needed
-        // jobs.filter((item, index) => {
-        //   console.log("item:", item);
-        // });
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  };
-
   return loader ? (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <ActivityIndicator size={32} />
     </View>
   ) : (
     <>
-      <Modal visible={popUps} style={styless.modalContainer} onBackdropPress={closepopup}>
-        <View style={styless.modalContent}>
-          <View style={styless.premiumAdsIcons}>
+      {popUps && (
+        <Modal isVisible={true} style={styless.modalContainer} onBackdropPress={closepopup}>
+          <View style={styless.modalContent}>
+            <View style={styless.premiumAdsIcons}>
+              {formData.advertisement.type === 'FEATURED' || formData.advertisement.type === 'SPOTLIGHT' ? (
+                <Image
+                  style={{width: 100, height: 100}}
+                  source={require('../../assets/Featured.gif')}
+                  resizeMode={FastImage.resizeMode.contain}
+                />
+              ) : (
+                <Image
+                  style={{width: 100, height: 100}}
+                  source={require('../../assets/Success.gif')}
+                  resizeMode={FastImage.resizeMode.contain}
+                />
+              )}
+            </View>
+            <CustomText text={'Congratulations!'} style={styles.congratulationsText} />
             {formData.advertisement.type === 'FEATURED' || formData.advertisement.type === 'SPOTLIGHT' ? (
-              <FastImage
-                style={{width: 100, height: 100}}
-                source={require('../../assets/Featured.gif')}
-                resizeMode={FastImage.resizeMode.contain}
+              <CustomText
+                text={`Your ${formData.advertisement.type.toLowerCase()} Ad is now live.`}
+                style={styles.adText}
               />
             ) : (
-              <FastImage
-                style={{width: 100, height: 100}}
-                source={require('../../assets/Success.gif')}
-                resizeMode={FastImage.resizeMode.contain}
-              />
+              <CustomText text={'Your Ad is now live.'} style={styles.adText} />
             )}
+            <Text style={styless.reviewText}>Review the applicants in your profile</Text>
           </View>
-          <CustomText text={'Congratulations!'} style={styles.congratulationsText} />
-          {formData.advertisement.type === 'FEATURED' || formData.advertisement.type === 'SPOTLIGHT' ? (
-            <CustomText
-              text={`Your ${formData.advertisement.type.toLowerCase()} Ad is now live.`}
-              style={styles.adText}
-            />
-          ) : (
-            <CustomText text={'Your Ad is now live.'} style={styles.adText} />
-          )}
-          <Text style={styless.reviewText}>Review the applicants in your profile</Text>
-        </View>
-      </Modal>
+        </Modal>
+      )}
+
       <SafeAreaView style={[styles.safeArea]}>
         <StatusBar barStyle="light-content" />
         <HeaderComponent text={'Post Your Ad'} setScreenType={setScreenType} screenType={screenType} />
@@ -341,6 +311,7 @@ const PostJobScreen = ({
                         editable={false}
                         placeholder={'Select Date'}
                         value={formData.startdate}
+                        placeholderTextColor={Color.colorSilver}
                         firstPicker={styles.firstPicker}
                         field={'startdate'}
                         formErrors={formErrors}
@@ -367,6 +338,7 @@ const PostJobScreen = ({
                         firstPicker={styles.firstPicker}
                         formErrors={formErrors}
                         field={'starttime'}
+                        placeholderTextColor={Color.colorSilver}
                         icon={<PlaceholderClockSVG />}
                       />
 

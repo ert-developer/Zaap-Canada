@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text, Pressable} from 'react-native';
+import {View, StyleSheet, Text, Pressable, Image} from 'react-native';
 import Modal from 'react-native-modal';
 import {CloseIcon} from '../../assets/svgIcons/providerPaymentSvg';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
@@ -16,7 +16,7 @@ const CustomerServiceCompletedModal = ({isVisiblecompleted, serviceCompleteClose
         <View style={styles.modalContent}>
           <View style={{alignItems: 'center', justifyContent: 'center', padding: heightToDp(2)}}>
             {/* <CancelPopupTick /> */}
-            <FastImage
+            <Image
               style={{width: 100, height: 100}}
               source={require('../../assets/Success.gif')}
               resizeMode={FastImage.resizeMode.contain}

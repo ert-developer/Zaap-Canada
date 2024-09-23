@@ -583,7 +583,7 @@ const SeriveProviderProfileScreen = ({
           <Modal isVisible={updateSuccessPopup} onBackdropPress={onPressOnBackdrop}>
             <View style={styles.popupContainer}>
               {/* <ProfilePopupSVG /> */}
-              <FastImage
+              <Image
                 style={{width: 100, height: 100}}
                 source={require('../../assets/Profileupdatesuccess.gif')}
                 resizeMode={FastImage.resizeMode.contain}

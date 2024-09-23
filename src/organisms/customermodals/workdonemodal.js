@@ -15,6 +15,7 @@ import {mailSenter} from '../../common/mailSender';
 import {doc, updateDoc, getDoc, FieldValue} from 'firebase/firestore';
 import firestore from '@react-native-firebase/firestore';
 import {db} from '../../../firebaseDb';
+import {Image} from 'react-native';
 
 const WorkDoneModal = ({showWorkDonePopup, onWorkdone, setWorkDonePopup, selectedJobDetails, providerStatus}) => {
   //asdf
@@ -90,7 +91,7 @@ const WorkDoneModal = ({showWorkDonePopup, onWorkdone, setWorkDonePopup, selecte
         <View style={styles.modalContent}>
           <View style={{justifyContent: 'center', alignItems: 'center'}}>
             {/* <CancelPopupSvg style={{marginBottom: heightToDp(2)}} /> */}
-            <FastImage
+            <Image
               style={{width: 100, height: 100}}
               source={require('../../assets/CancelService.gif')}
               resizeMode={FastImage.resizeMode.contain}

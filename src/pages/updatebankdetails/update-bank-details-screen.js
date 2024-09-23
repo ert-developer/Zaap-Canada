@@ -7,6 +7,7 @@ import DropdownSearchComponent from '../../organisms/dropDownSearch/dropDownSear
 import Modal from 'react-native-modal';
 // import {RightPopupSVG} from '../../assets/svgIcons/premiumads/premium-ads-screen-svgs';
 import FastImage from 'react-native-fast-image';
+import {Image} from 'react-native';
 
 const UpdateBankDetailsScreen = ({
   accountType,
@@ -62,7 +63,7 @@ const UpdateBankDetailsScreen = ({
     <SafeAreaView>
       <Modal isVisible={showPopup || error} style={styles.modalContainer} onBackdropPress={onClosePopup}>
         <View style={styles.modalContent}>
-          <FastImage
+          <Image
             style={{width: 100, height: 100}}
             source={error ? require('../../assets/CancelService.gif') : require('../../assets/Success.gif')}
             resizeMode={FastImage.resizeMode.contain}

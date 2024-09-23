@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, Image} from 'react-native';
 import Modal from 'react-native-modal';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 import CustomText from '../../atoms/text/textComponent';
@@ -11,8 +11,8 @@ const WrongOtpMdal = ({toggleModal}) => {
       <Modal isVisible={true} onBackdropPress={toggleModal} style={styles.modalContainer}>
         <View style={styles.modalContent}>
           <View style={{justifyContent: 'center', alignItems: 'center', width: heightToDp(40)}}>
-            <FastImage
-              style={{ width: 100, height: 100 }}
+            <Image
+              style={{width: 100, height: 100}}
               source={require('../../assets/CancelService.gif')}
               resizeMode={FastImage.resizeMode.contain}
             />

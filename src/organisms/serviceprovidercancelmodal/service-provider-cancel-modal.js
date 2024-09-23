@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text, Pressable} from 'react-native';
+import {View, StyleSheet, Text, Pressable, Image} from 'react-native';
 import Modal from 'react-native-modal';
 import {useNavigation} from '@react-navigation/native';
 import {widthToDp, heightToDp} from '../../responsive/responsive';
@@ -45,7 +45,7 @@ const ServiceProviderCanceldModal = ({
           {cancelService ? (
             <View style={styles.cancelContainer}>
               {/* <CancelPopupTick style={{marginBottom: heightToDp(2)}} /> */}
-              <FastImage
+              <Image
                 style={{width: 100, height: 100}}
                 source={require('../../assets/CancelSuccess.gif')}
                 resizeMode={FastImage.resizeMode.contain}
@@ -58,7 +58,7 @@ const ServiceProviderCanceldModal = ({
           ) : (
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
               {/* <CancelPopupSvg style={{marginVertical: heightToDp(1), marginBottom: heightToDp(2)}} /> */}
-              <FastImage
+              <Image
                 style={{width: 100, height: 100}}
                 source={require('../../assets/CancelService.gif')}
                 resizeMode={FastImage.resizeMode.contain}

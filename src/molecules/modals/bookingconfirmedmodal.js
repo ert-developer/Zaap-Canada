@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text, Pressable} from 'react-native';
+import {View, StyleSheet, Text, Pressable, Image} from 'react-native';
 import Modal from 'react-native-modal';
 import {CloseIcon} from '../../assets/svgIcons/providerPaymentSvg';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
@@ -21,16 +21,7 @@ const BookingConfirmedModal = ({toggleModal}) => {
         <View style={styles.modalContent}>
           <View style={styles.firstTextContainer}>
             <View style={styles.container}>
-              {/* Using FastImage for a GIF from a URL */}
-              {/* <FastImage
-                source={{
-                  uri: 'https://res.cloudinary.com/dzxemuctv/image/upload/v1707980738/Animation_-_1707980330777_f8zlij.gif',
-                  priority: FastImage.priority.normal,
-                }}
-                style={styles.gif}
-                resizeMode={FastImage.resizeMode.contain}
-              /> */}
-              <FastImage
+              <Image
                 style={{width: 150, height: 150}}
                 source={require('../../assets/payment-success.gif')}
                 resizeMode={FastImage.resizeMode.contain}
