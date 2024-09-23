@@ -56,7 +56,6 @@ const JobDetail = ({
   location,
   backNavigation,
   addToFavourite,
-  isAddToFav,
   isAlreadyFavourite,
   removeFav,
   onApply,
@@ -67,7 +66,6 @@ const JobDetail = ({
   timeAgo,
   subCategory,
   isVerified,
-  IdentityVerificationScreenNavigation,
   lat,
   lng,
   isExpired,
@@ -104,28 +102,7 @@ const JobDetail = ({
   const circleCenter = {latitude: lat, longitude: lng};
   const radius = 3000; // 3 kilometers in meters
 
-  // can be used for profile image with a name
-
-  // let result
-  // if (userName) {
-  //   const names = userName.split(' ');
-  //   if (names.length === 1) {
-  //     // Only first name provided
-  //     result = names[0].charAt(0);
-  //   } else if (names.length >= 2) {
-  //     // Both first and last names provided
-  //     result = `${names[0].charAt(0)}${names[names.length - 1].charAt(0)}`;
-  //   }
-  // } else {
-  //   result = 'No name provided';
-  // }
-  const postedCustomerUrl = postedCustomer[0]?.imageUrl
-    ? postedCustomer[0].imageUrl
-    : 'https://lh3.googleusercontent.com/a-/AOh14GjkcNgdIcCDlLTtU7zYP0OCKHr9welDwEDj9zC9=s96-c';
   const postedCustomerName = postedCustomer[0]?.displayName ? postedCustomer[0]?.displayName : userName;
-  const city = postedCustomer[0]?.city;
-  const province = postedCustomer[0]?.provinces;
-  // console.log("latt",lat,'long',lng)
 
   const onPressViewProfile = () => {
     navigation.navigate('viewProfile', {postedBy});
@@ -166,7 +143,10 @@ const JobDetail = ({
           />
           <View style={styles.popupHeadingCon}>
             <CustomText text={'You have successfully applied.'} style={styles.popupHeadText} />
-            <CustomText text={'Check the status of your application in My Jobs'} style={{textAlign: 'center'}} />
+            <CustomText
+              text={'Check the status of your application in My Jobs'}
+              style={{textAlign: 'center', fontWeight: '500'}}
+            />
           </View>
         </View>
       </Modal>
@@ -174,7 +154,6 @@ const JobDetail = ({
       <HeaderComponent text={'Job Posts'} />
       <SafeAreaView style={{backgroundColor: '#ffffff', ...styles.containerWithShadow, flex: 1}}>
         <Modal isVisible={isExpired}>
-          {/* {isExpired ? ( */}
           <View style={styles.expiryContainer}>
             <View style={styles.expiryContent}>
               <ExpiredSVG />
@@ -184,17 +163,11 @@ const JobDetail = ({
               </TouchableOpacity>
             </View>
           </View>
-          {/* ) : null} */}
         </Modal>
 
         <Modal isVisible={showAddImage} onBackdropPress={() => setShowAddImage(false)}>
           <View style={styles.addImageContainer}>
-            <Image
-              // eslint-disable-next-line react-native/no-inline-styles
-              style={styles.addimageStyles}
-              source={{uri: addImage}}
-              resizeMode="cover"
-            />
+            <Image style={styles.addimageStyles} source={{uri: addImage}} resizeMode="cover" />
           </View>
         </Modal>
 
@@ -208,7 +181,6 @@ const JobDetail = ({
                   renderItem={({item}) => (
                     <TouchableOpacity onPress={() => onPressShowAddImage(item)}>
                       <Image
-                        // eslint-disable-next-line react-native/no-inline-styles
                         style={{
                           width: '90%',
                           height: 200,
@@ -222,7 +194,7 @@ const JobDetail = ({
                     </TouchableOpacity>
                   )}
                   sliderWidth={screenWidth}
-                  itemWidth={screenWidth - 10} // Adjust the itemWidth based on your padding
+                  itemWidth={screenWidth - 10}
                 />
               ) : (
                 <Detail style={{backgroundColor: 'red'}} />
@@ -368,15 +340,6 @@ const JobDetail = ({
               <View style={styles.shadowLine} />
               <View style={styles.containerpadding}>
                 <View style={{marginTop: heightToDp(1), flexDirection: 'row', alignItems: 'center'}}>
-                  {/* <Image
-                    style={{
-                      width: 50,
-                      height: 50,
-                      borderRadius: 40,
-                    }}
-                    source={{uri: postedCustomerUrl}}
-                    resizeMode="cover"
-                  /> */}
                   {!postedCustomer[0]?.imageUrl ? (
                     <CustomImage
                       style={{
@@ -464,31 +427,6 @@ const JobDetail = ({
                   <CustomText text={'Map'} style={styles.textSTyle} />
                 </View>
               </View>
-
-              {/* <View
-                style={{padding: 24, flexDirection: 'row', justifyContent: 'space-between', marginTop: heightToDp(2)}}>
-                {!isAlreadyFavourite && (
-                  <TouchableOpacity style={{flexDirection: 'row'}} onPress={addToFavourite}>
-                    <Like />
-                    <CustomText text={'Favourite'} style={{marginLeft: 7}} />
-                  </TouchableOpacity>
-                )}
-                {isAlreadyFavourite && (
-                  <TouchableOpacity style={{flexDirection: 'row'}} onPress={removeFav}>
-                    <RedHeartIcon />
-                    <CustomText text={'Favourite'} style={{marginLeft: 8}} />
-                  </TouchableOpacity>
-                )}
-
-                <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => navigation.navigate('Report')}>
-                  <ReportSVG />
-                  <CustomText text={'Report'} style={{marginLeft: 8}} />
-                </TouchableOpacity>
-                <TouchableOpacity style={{flexDirection: 'row'}}>
-                  <Share />
-                  <CustomText text={'Share'} style={{marginLeft: 8}} />
-                </TouchableOpacity>
-              </View> */}
 
               <View style={{marginBottom: heightToDp(1)}}>
                 <MapView

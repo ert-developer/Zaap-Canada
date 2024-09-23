@@ -98,7 +98,7 @@ const MyJobService = ({filteredJobs, selectedJobs}) => {
       address,
       area,
       serviceProviderId: item?.selectedCandidateDetails?.userId,
-      IsPaid
+      IsPaid,
     };
     return isVerified === 'verified' ? null : (
       <MyjobsCardList

@@ -4,8 +4,7 @@ import Modal from 'react-native-modal';
 import CustomText from '../../atoms/text/textComponent';
 import CustomButton from '../../atoms/button/buttonComponent';
 import ModalComponent from '../../organisms/Modal/modal-component';
-import ProviderFeedbackStyles from './provider-feedback-styles';
-import {useState, useMemo, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import moment from 'moment';
 import {collection, getDocs, query, where} from 'firebase/firestore';
@@ -18,19 +17,15 @@ import {MembershipSVGComponent} from '../../assets/svgIcons/membershipsvg/member
 import ProfileLocationSVGComponent from '../../assets/svgIcons/profilelocationsymbol/profile-location-symbol';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ArrowIcon from 'react-native-vector-icons/FontAwesome';
-import Collapsible from 'react-native-collapsible';
-import {JobCategory} from '../../assets/svgImage/jobDetail';
 import {LanguagesSVG} from '../../assets/svgIcons/membershipsvg/membershipsvg';
 import {doc, getDoc, updateDoc} from 'firebase/firestore';
 import {Rating} from 'react-native-ratings';
 import CustomLoader from '../../molecules/customLoader/customLoader';
 import ReadMoreText from '../../organisms/readmore/read-more';
-import JobDetail from '../jobDetail/job-detail-screen';
 import {fetchSelectedJobs} from '../../redux/selectedjobs/action';
 import {fetchSelectedProfileDetails} from '../../redux/selectedprofiledetails/action';
 import {postCollectionDetails, getUserDetails} from '../../common/collection';
 import {generateRoomId} from '../../../src/utils/index';
-import {is} from 'date-fns/locale';
 import {Color} from '../../assets/static/globalStyles';
 import {EmptyPortfolioSVG} from '../../assets/svgImage/portfolio/portfolio';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
@@ -40,16 +35,13 @@ const ProviderFeedbackScreen = ({
   firstLetter,
   feedbackData,
   goBack,
-  isproviderverified,
   formattedDate,
-  isverifiedbio,
   userWorkingWithYou,
   loading,
   providerStatus,
   starRatingCount,
 }) => {
   const [isReviewOpen, setIsReviewOpen] = useState(false);
-  const [isPortFolioOpen, setPortFolioOpen] = useState(true);
   const [loader, setLoader] = useState(false);
   const navigation = useNavigation();
   const styles = profileScreenStyle();
@@ -57,6 +49,7 @@ const ProviderFeedbackScreen = ({
   const languages = providerStatus[0]?.languages_known || [];
 
   // Determine how to format the languages for display
+  languages = languages[0];
   let firstLineLanguages = '';
   let secondLineLanguages = '';
   let thirdLineLanguages = '';
@@ -100,7 +93,7 @@ const ProviderFeedbackScreen = ({
     const appliedUser = await getUserDetails(envConfig.User, profiledetail.userId);
     const token = appliedUser.fcmToken;
     try {
-      const response = await fetch('https://canada-push-notifications-server.onrender.com/sendNotification', {
+      const response = await fetch('https://push-notifications-server-lvzr.onrender.com/sendNotification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -126,9 +119,6 @@ const ProviderFeedbackScreen = ({
     await postCollectionDetails(envConfig.Notifications, data);
   };
   const iinchatScreenNavigation = async data => {
-    // Generate a unique room ID
-    // const roomId = generateRoomId();
-
     const snapshot = await database().ref(`/chatlist/${data.userId}/${user.userId}`).once('value');
     const roomDetails = snapshot.val();
     const roomId = roomDetails?.roomId || generateRoomId();
@@ -146,9 +136,7 @@ const ProviderFeedbackScreen = ({
 
   const handleSelectedText = async () => {
     setLoader(true);
-    // console.log('user.userIduser.userId', profiledetail.userId, jobDetails.jobId);
     const selectedJobsCollection = collection(db, envConfig.SelectedJobs);
-    // console.log('try0');
 
     const q = query(
       selectedJobsCollection,
@@ -314,43 +302,6 @@ const ProviderFeedbackScreen = ({
     );
   };
 
-  const onDeleteAllExceptSelected = async userId => {
-    try {
-      // Construct the document reference with the correct collection and document IDs
-      const docRef = doc(db, envConfig.Jobs, 'Wl4JiXhabRzlvPFT1lMQ');
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        // Get the current jobApplications array
-        const jobData = docSnap.data();
-        const jobApplications = jobData.jobApplications || [];
-
-        // Find the selected application
-        const selectedApplicationIndex = jobApplications.findIndex(
-          application => application?.userId === 'IciI9ukD8iQnCuxpUt6yhdaXlHp2',
-        );
-
-        if (selectedApplicationIndex !== -1) {
-          // Construct a new array containing only the selected application
-          const filteredApplications = [jobApplications[selectedApplicationIndex]];
-
-          // Update the document with the filtered array
-          await updateDoc(docRef, {
-            jobApplications: filteredApplications,
-          });
-
-          console.log('Array values deleted except selected one for user:', userId);
-        } else {
-          console.error('Selected application not found');
-        }
-      } else {
-        console.error('Document not found');
-      }
-    } catch (error) {
-      console.error('Error deleting array values:', error);
-    }
-  };
-
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
       <ScrollView>
@@ -428,19 +379,6 @@ const ProviderFeedbackScreen = ({
                 <CustomText text="Reviews" style={styles.reviewsHeadingTextStyle} />
                 <ArrowIcon name="angle-double-down" size={20} color="black" style={styles.downArrowStyles} />
               </TouchableOpacity>
-              {/* <Collapsible collapsed={isReviewOpen} style={styles.reviewsContainer}>
-                <ScrollView>
-                  {feedbackData.length > 0 ? (
-                    <FlatList
-                      data={feedbackData}
-                      renderItem={renderFeedbackItem}
-                      keyExtractor={(item, index) => index.toString()}
-                    />
-                  ) : (
-                    <Text> No Reviews Yet</Text>
-                  )}
-                </ScrollView>
-              </Collapsible> */}
               <Modal isVisible={isReviewOpen} onBackdropPress={() => setIsReviewOpen(!isReviewOpen)}>
                 <ScrollView contentContainerStyle={styles.modalcontainer}>
                   <View style={styles.modalContentContainer}>
@@ -482,40 +420,24 @@ const ProviderFeedbackScreen = ({
                 <CustomText text="Portfolio" style={styles.portfolioHeadingTextStyle} />
                 <ArrowIcon name="angle-double-down" size={20} color="black" style={styles.downArrowStyles} />
               </TouchableOpacity>
-              {/* <Collapsible collapsed={isPortFolioOpen}>
-              <Text style={{textAlign: 'center'}}>This is Open Portfolio Box</Text>
-            </Collapsible> */}
             </View>
           </View>
         )}
-
-        {/* userWorking={userWorking} */}
-        <ModalComponent isVisible={isModalVisible} onClose={() => setModalVisible(false)} userWorking={userWorking} />
+        <ModalComponent
+          isVisible={isModalVisible}
+          onBackdropPress={() => setModalVisible(false)}
+          userWorking={userWorking}
+          setModalVisible1={setModalVisible}
+          onClose={() => setModalVisible(false)}
+        />
       </ScrollView>
-      {/* <View style={{position: 'absolute', bottom: 2}}>
-        <View style={styles.bottomButtonContainer}>
-          <CustomButton
-            title={loader ? <ActivityIndicat or color={'white'} /> : selectedjob[0] ? 'Check Status' : 'Hire'}
-            style={styles.hireButton}
-            onPress={loader ? null : selectedjob[0] ? () => navigation.navigate('ProviderPaymentScreen') : toggleModal}
-          />
-          <CustomButton title={'Back'} style={styles.backButton} onPress={goBack} />
-        </View>
-      </View> */}
       <View style={{position: 'absolute', bottom: 2, padding: 5}}>
         <View style={styles.bottomButtonContainer}>
           {loading ? (
             <View style={{width: 200}}>
               <ActivityIndicator color={'black'} size="large" />
             </View>
-          ) : // ) : userWorkingWithYou === 'workingwithme' ? (
-          //   <CustomButton
-          //     title={selectedjob[0] ? 'HIRED' : 'HIRE'}
-          //     style={[selectedjob[0] ? styles.hiredButton : styles.hireButton]}
-          //     textStyle={styles.hireButtonText}
-          //     onPress={selectedjob[0] ? null : toggleModal}
-          //   />
-          userWorkingWithYou === 'workinginanotherjob' ? (
+          ) : userWorkingWithYou === 'workinginanotherjob' ? (
             <CustomButton
               title={'HIRE'}
               style={styles.hireButton}

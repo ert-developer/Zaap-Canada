@@ -207,6 +207,7 @@ const AccordionItem = ({
                 text={'VIEW APPLICANTS'}
                 style={[
                   styles.btnsText,
+                  {marginLeft: -7},
                   activeBtn.button3 ? styles.activeBtnTextStyle : styles.deactiveBtnTextStyle,
                   IsBookingCancel ? styles.isBookingCancelDisableBtnText : null,
                 ]}
@@ -322,7 +323,7 @@ const styles = StyleSheet.create({
   },
   profileStatusBtnContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    width: '100%',
   },
   profileBtn: {
     flexDirection: 'row',

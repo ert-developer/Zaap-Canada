@@ -74,13 +74,12 @@ export const getChatList = (id, callback) => {
           // console.log('User data: ', data);
         } else {
           // Handle the case where data is null or undefined
-          console.error('Data is null or undefined');
           // You might want to call the callback with an empty array or handle it differently
           callback([]);
         }
       });
   } catch (err) {
-    console.error(err);
+    console.log(err);
     callback([]);
   }
 };

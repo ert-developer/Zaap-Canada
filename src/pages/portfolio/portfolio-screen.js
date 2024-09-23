@@ -75,7 +75,7 @@ const PortfolioScreen = ({portfolioDetails, onDeletePortfolio, onRefresh, loader
                   <CustomText style={styles.emptyProfilePortfolioHeading} text={'your portfolio yet'} />
                   <CustomText
                     style={styles.emptyProfilePortfolioDesc}
-                    text={'Capture clients attention with Showcase of your work'}
+                    text={'Capture clients attention with\n Showcase of your work'}
                   />
                 </View>
               ) : (

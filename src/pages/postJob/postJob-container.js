@@ -440,7 +440,13 @@ const PostJobContainer = () => {
         address: false,
       });
       setAdType('');
-      setPopUps(true);
+      if (Platform.OS === 'ios') {
+        setTimeout(() => {
+          setPopUps(true);
+        }, 200); // 200ms delay for iOS
+      } else {
+        setPopUps(true); // Directly set popUps to true for other platforms
+      }
       // navigation.navigate('HomeScreen');
     } catch (error) {
       dispatch(postJobFailure(error));

@@ -17,7 +17,6 @@ const DropdownSearchComponent = ({
 }) => {
   const [value, setValue] = useState(selectedValue);
   const [isFocus, setIsFocus] = useState(false);
-
   useEffect(() => {
     setValue(selectedValue);
   }, [selectedValue]);
@@ -60,12 +59,13 @@ export default DropdownSearchComponent;
 
 const styles = StyleSheet.create({
   dropdown: {
-    height: 46,
+    height: 40,
     paddingHorizontal: Padding.p_10,
     color: Color.colorBlack,
   },
   placeholderStyle: {
     fontSize: FontSize.size_14,
+    color: Color.colorSilver,
   },
   selectedTextStyle: {
     fontSize: FontSize.size_14,

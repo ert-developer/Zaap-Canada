@@ -307,12 +307,7 @@ function ProfileStyles() {
       borderRadius: widthToDp(5),
     },
     profileIconAndTextStyle: {
-      // borderWidth: 1,
-      // borderColor: 'red',
-      // borderStyle: 'solid',
-
       flexDirection: 'row',
-      // justifyContent: 'space-between',
       alignItems: 'center',
       width: widthToDp(40),
     },
@@ -390,7 +385,7 @@ function ProfileStyles() {
       width: widthToDp(30),
       height: widthToDp(30),
       borderRadius: widthToDp(50),
-      resizeMode: 'contain',
+      resizeMode: 'cover',
     },
     cameraIconStyles: {
       position: 'absolute',

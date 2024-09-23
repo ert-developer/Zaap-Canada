@@ -3,7 +3,7 @@ import {differenceInDays, differenceInHours} from 'date-fns';
 import {useEffect, useState, useMemo} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchMyJobs} from '../../../redux/myJobs/action';
-import {View, SafeAreaView, FlatList, TouchableOpacity, Text, ActivityIndicator} from 'react-native';
+import {View, SafeAreaView, FlatList, TouchableOpacity, Text, ActivityIndicator, ScrollView} from 'react-native';
 import MyJobStyles from './myJob-styles';
 import MyjobsCardList from '../../../organisms/myjobscardlist/myjobscardList-component';
 import {useNavigation} from '@react-navigation/native';
@@ -13,9 +13,8 @@ import CompletedJobsCard from '../../../atoms/completedjobscard/completed-jobs-c
 import moment from 'moment';
 import {fetchServiceProviderDetails} from '../../../redux/providerstatus/action';
 import {useIsFocused} from '@react-navigation/native';
-import {ScrollView} from 'react-native-gesture-handler';
 import {backgroundUpload} from 'react-native-compressor';
-import { envConfig } from '../../../assets/helpers/envApi';
+import {envConfig} from '../../../assets/helpers/envApi';
 
 const MyJobsPreviousJobs = () => {
   // 3rd Tab
@@ -51,6 +50,7 @@ const MyJobsPreviousJobs = () => {
   useEffect(() => {
     if (isFocused) {
       fetchCompletedJobs();
+      setLoader(false);
     }
   }, [isFocused]);
 
@@ -72,6 +72,7 @@ const MyJobsPreviousJobs = () => {
   useEffect(() => {
     if (isFocused) {
       fetchExpiredJobsData();
+      setLoader(false);
     }
   }, [isFocused]);
 

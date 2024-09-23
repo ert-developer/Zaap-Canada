@@ -33,6 +33,7 @@ import DeleteAccountModal from '../../../organisms/deletemodal/deletemodal';
 import VerificationInProgressModal from '../../../organisms/verificationprogressmodal/verificationmodal';
 import DeviceInfo from 'react-native-device-info';
 import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
+import {Platform} from 'react-native';
 
 export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
   const styles = drawerStyles();
@@ -43,16 +44,20 @@ export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
   const [curruserDetails, setCurrentUser] = useState([]);
   const user = useSelector(state => state.Auth.user);
   const uid = user?.userId;
-
   useEffect(() => {
     const getBGCStatus = async () => {
-      const providerDevData = await fetchCollectionDetails(envConfig.Provider);
-      const response = providerDevData.filter(item => item.provider_id === uid);
-      setCurrentUser(response);
+      try {
+        const providerDevData = await fetchCollectionDetails(envConfig.Provider);
+        const response = providerDevData.filter(item => item.provider_id === uid);
+        // Only update if the data is different
+        setCurrentUser(response);
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
     };
 
     getBGCStatus();
-  }, [setCurrentUser, curruserDetails]);
+  }, [uid]);
 
   const handleLogout = async () => {
     try {
@@ -269,7 +274,11 @@ export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
           /> */}
         </View>
         <View style={styles.versionContainer}>
-          <CustomText text={`Android Version: ${appVersion}`} style={styles.versionText} />
+          {Platform.OS === 'ios' ? (
+            <CustomText text={`iOS Version: ${appVersion}`} style={styles.versionText} />
+          ) : (
+            <CustomText text={`Android Version: ${appVersion}`} style={styles.versionText} />
+          )}
         </View>
       </View>
     </View>

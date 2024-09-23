@@ -27,7 +27,7 @@ const portfolioStyles = () => {
       alignItems: 'center',
     },
     portfolioBtnsText: {
-      fontWeight: '900',
+      fontWeight: '800',
       marginRight: widthToDp(1),
     },
     activeBtn: {

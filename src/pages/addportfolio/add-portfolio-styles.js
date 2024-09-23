@@ -99,7 +99,7 @@ const addPortfolioStyles = () => {
       paddingHorizontal: widthToDp(5),
     },
     uploadFileInstruction: {
-      fontWeight: 'bold',
+      fontWeight: '700',
       marginVertical: widthToDp(3),
     },
     fileSizeTextContainer: {
@@ -108,6 +108,7 @@ const addPortfolioStyles = () => {
     fileSizeText: {
       fontSize: FontSize.size_12,
       lineHeight: widthToDp(6),
+      fontWeight: '600',
     },
     descrptionLabelText: {
       color: Color.colorBlack,
@@ -178,9 +179,10 @@ const addPortfolioStyles = () => {
       fontSize: FontSize.size_10,
     },
     linkText: {
-      fontSize: widthToDp(4),
-      marginLeft: widthToDp(2),
+      fontSize: widthToDp(3.5),
       color: Color.colorIndigo,
+      fontWeight: '700',
+      marginVertical: 5,
     },
   });
   return styles;

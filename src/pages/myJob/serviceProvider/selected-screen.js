@@ -2,14 +2,22 @@ const {default: CustomText} = require('../../../atoms/text/textComponent');
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchAppliedJobs} from '../../../redux/appliedjobs/action';
 import {useEffect, useState} from 'react';
-import {SafeAreaView, View, FlatList, StyleSheet, Touchable, Text, ActivityIndicator} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  FlatList,
+  StyleSheet,
+  Touchable,
+  Text,
+  ActivityIndicator,
+  TouchableOpacity,
+} from 'react-native';
 import CardJobs from '../../../molecules/job-card/jobCard';
 import CustomTouchableOpacity from '../../../molecules/touchable-opacity/touchable-opacity-component';
 import {fetchSelectedProfileDetails} from '../../../redux/selectedprofiledetails/action';
 import {heightToDp, widthToDp} from '../../../responsive/responsive';
 import SelectedProfilesCard from '../../../atoms/selectedprofilescard/selected-profilecard';
 import moment from 'moment';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 import {it} from 'date-fns/locale';
 import {Color, FontFamily, FontSize} from '../../../assets/static/globalStyles';
@@ -38,28 +46,41 @@ const MyJobsSelectd = () => {
 
   // console.log("filteredAppliedJobs",filteredAppliedJobs)
 
-  const handleJobPress = item => {
+  const handleJobPress = job => {
     navigation.navigate('JobDeatil', {
-      imageSource: item.imageUrls[0],
-      category: item.data.category,
-      title: item.data.jobTitle,
-      description: item.data.jobDescription,
-      price: item.data.salary,
-      location: item?.locationDesc?.description,
-      postedBy: item.postedBy,
-      id: item.id,
-      jobAdType: item.jobAds.type,
-      createdOn: item.createdOn,
-      starttime: item.data.starttime,
-      startdate: item.data.startdate,
-      subCategory: item.data.subCategory,
-      images: item.imageUrls,
-      area: item.area,
-      lat: item.location.lat,
-      lng: item.location.lng,
-      address: item.address,
-      userName: item.userName,
-      IsPaid: item.IsPaid ? item.IsPaid : false,
+      // imageSource: job.imageSource[0],
+      // category: job.category,
+      // title: job.jobTitle,
+      // description: job.jobDescription,
+      // price: job.price,
+      // location: job.description,
+      // postedBy: job.postedBy,
+      // id: job.id,
+      // area: job.area,
+
+      // jobAdType: job.jobAds.type,
+      // createdOn: job.createdOn,
+
+      imageSource: [job.imageUrls],
+      category: job.category, //
+      title: job.title,
+      description: job.description, //
+      price: job.price,
+      location: job?.location,
+      postedBy: job.postedBy,
+      id: job.id,
+      jobAdType: job.jobAdType,
+      createdOn: job.createdOn, //
+      starttime: job.starttime,
+      startdate: job.startdate,
+      subCategory: job.subCategory,
+      images: job.images,
+      area: job.area, //
+      lat: job.location.lat,
+      lng: job.location.lng,
+      address: job.address, //
+      userName: job.userName,
+      // IsPaid: job?.IsPaid,
     });
   };
   const renderJobList = ({item}) => {
@@ -251,7 +272,7 @@ const styles = StyleSheet.create({
   },
   noData: {
     fontSize: FontSize.size_16,
-    fontWeight: '500',
+    fontWeight: '400',
     fontFamily: FontFamily.helvetica,
     color: Color.colorSilver,
     textAlign: 'center',

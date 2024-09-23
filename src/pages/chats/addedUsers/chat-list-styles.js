@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     fontSize: widthToDp(5),
     padding: heightToDp(2),
     textAlign: 'center',
-    fontWeight: '500',
+    fontWeight: '400',
     fontFamily: FontFamily.helvetica,
     color: Color.colorSilver,
   },

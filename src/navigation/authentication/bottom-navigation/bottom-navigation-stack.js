@@ -14,46 +14,39 @@ import {
   NearMeFillNewSVG,
   MyJobsFillNewSVG,
 } from '../../../assets/svgImage/bottomDrawer';
-import {MyJobsSvg, ChatSvg, PostAd, NearMe, PostJob} from '../../../assets/svgIcons/bottomdrawersvg';
+import {MyJobsSvg, ChatSvg} from '../../../assets/svgIcons/bottomdrawersvg';
 import {JobPost} from '../../../assets/svgIcons/bottomdrawersvg';
 import {ChatStack} from '../post-auth/post-auth-stack';
 import styles from './styles';
-import DevContainer from '../../../atoms/developmentScreen/dev-container';
-// import { Color } from '../../../assets/static/globalStyles';
-import {Color} from '../../../assets/static/globalStyles';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
-import CustomText from '../../../atoms/text/textComponent';
+import {View, Text, TouchableOpacity, Image, ActivityIndicator} from 'react-native';
 import {widthToDp} from '../../../responsive/responsive';
-import {black} from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 import MyJobServiceContainer from '../../../pages/myJob/serviceProvider/myJob-container';
 import NearMeContainer from '../../../pages/nearMe/nearMe-container';
 
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import PreviousJobsScreen from '../../../pages/previousJobs/previous-jobs.-screen';
 import MyJobsSelectd from '../../../pages/myJob/serviceProvider/selected-screen';
 import MyJobsPreviousJobs from '../../../pages/myJob/serviceProvider/previousjobs-screen';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchServiceProviderDetails} from '../../../redux/providerstatus/action';
 import {useEffect} from 'react';
-import PremiumAdsContainer from '../../../pages/premiumads/premium-ads-container';
 import HeaderComponent from '../../../atoms/header/headerComponent';
 import NoJobPostModal from '../../../molecules/modals/job-post-service-provider-pop-up';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {setEditJobStatus} from '../../../redux/editjob/action';
-import FastImage from 'react-native-fast-image';
 
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
 
 function MyTabs() {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
   const user = useSelector(state => state.Auth.user);
   const userId = user.userId;
   useEffect(() => {
-    dispatch(fetchServiceProviderDetails(userId));
-  }, []);
+    if (userId) {
+      dispatch(fetchServiceProviderDetails(userId));
+    }
+  }, [userId]);
   const providerStatus = useSelector(state => state.providerverification.providerDetails);
   const isVerified = providerStatus[0]?.isverified;
 
@@ -67,8 +60,7 @@ function MyTabs() {
   // );
 
   return (
-    <TopTab.Navigator style={styles.mainContainer} initialRouteName={isVerified === 'verified' ? 'HIRED' : 'Live Ads'}>
-      {/* <TopTab.Screen name={isVerified === 'verified' ? 'APPLIED' : 'HIRED'} component={MyJobsSelectd} /> */}
+    <TopTab.Navigator style={styles.mainContainer}>
       <Tab.Screen
         name={isVerified === 'verified' ? 'APPLIED' : 'HIRED'}
         component={MyJobsSelectd}

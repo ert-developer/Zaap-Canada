@@ -30,7 +30,7 @@ const AddPortfolioScreen = ({
   const styles = addPortfolioStyles();
 
   const [openExternalLinkPopup, setExternalLinkPopup] = useState(false);
-  const [externalLinks, setExternalLinks] = useState(portfolioDetails?.Links || []);
+  const [externalLinks, setExternalLinks] = useState(portfolioDetails?.Link || []);
   const [title, setTitle] = useState(portfolioDetails ? portfolioDetails.title : '');
   const [portfolioDescription, setPortfolioDescription] = useState(
     portfolioDetails ? portfolioDetails.description : '',
@@ -42,6 +42,23 @@ const AddPortfolioScreen = ({
   const [titleError, setTitleError] = useState('');
   const [descriptionError, setDescriptionError] = useState('');
   const [imageError, setImageError] = useState('');
+
+  const onPressPortfolioLink = async link => {
+    const correctedLink =
+      link.startsWith('http://') || link.startsWith('https://') ? link : `https://${link.toLowerCase()}`;
+
+    try {
+      const supported = await Linking.canOpenURL(correctedLink);
+      if (supported) {
+        await Linking.openURL(correctedLink);
+      } else {
+        Alert.alert('This is not a valid link');
+      }
+    } catch (error) {
+      Alert.alert('An error occurred', 'Could not open the link');
+      console.warn(error);
+    }
+  };
 
   const openLinkPopup = () => {
     setExternalLinkPopup(!openExternalLinkPopup);
@@ -203,9 +220,11 @@ const AddPortfolioScreen = ({
                 <CustomText text={'. Images (.jpg, .png upto 3 MB Limit)'} style={styles.fileSizeText} />
                 <CustomText text={'. Document (.pdf upto 7 MB)'} style={styles.fileSizeText} />
                 <CustomText
-                  text={
-                    '. Copy and paste the links of videos, projects, and other materials ex. (Youtube, Google Drive, Dropbox etc)'
-                  }
+                  text={'. Copy and paste the links of videos, projects, and other'}
+                  style={styles.fileSizeText}
+                />
+                <CustomText
+                  text={'   materials ex. (Youtube, Google Drive, Dropbox etc)'}
                   style={styles.fileSizeText}
                 />
               </View>
@@ -214,8 +233,8 @@ const AddPortfolioScreen = ({
                 {Array.isArray(externalLinks) && externalLinks.length > 0 ? (
                   externalLinks.map((link, index) => (
                     <View key={link} style={styles.externalLinkContainer}>
-                      <TouchableOpacity onPress={() => Linking.openURL(link)}>
-                        <CustomText text={link} style={styles.linkText} />
+                      <TouchableOpacity onPress={() => onPressPortfolioLink(link)}>
+                        <CustomText text={link.toLowerCase()} style={styles.linkText} />
                       </TouchableOpacity>
                       <TouchableOpacity onPress={() => handleRemoveExternalLink(index)}>
                         <CustomText text={'Remove'} style={styles.removeLinkText} />
@@ -225,9 +244,6 @@ const AddPortfolioScreen = ({
                 ) : (
                   <CustomText text={'No external links available'} style={styles.linkText} />
                 )}
-                {/* <TouchableOpacity onPress={openLinkPopup} style={styles.addLinkButton}>
-                  <CustomText text={externalLinks} style={styles.addLinkText} />
-                </TouchableOpacity> */}
               </View>
             </View>
             <View>
@@ -238,7 +254,7 @@ const AddPortfolioScreen = ({
                 onChangeText={text => setPortfolioDescription(text)}
                 value={portfolioDescription}
                 placeholder={'Enter detailed description'}
-                numberOfLines={4}
+                numberOfLines={5}
                 multiline
                 maxLength={500}
               />

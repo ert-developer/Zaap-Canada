@@ -24,7 +24,6 @@ import {CameraIcon} from '../../../assets/svgIcons/postJob';
 import {Camera} from '../../../assets/svgImage/chat';
 import {heightArea, heightToDp, widthToDp} from '../../../responsive/responsive';
 import BackIcon from '../../../assets/svgIcons/common';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import HeaderComponent from '../../../atoms/header/headerComponent';
 import {getUserDetails, postCollectionDetails} from '../../../common/collection';
 import {envConfig} from '../../../assets/helpers/envApi';
@@ -98,6 +97,7 @@ const ChatScreenExample = ({data, allChat}) => {
                 padding: Padding.p_14,
                 color: item.from !== user.userId ? Color.colorBlack : Color.colorWhite,
                 borderRadius: Border.br_16,
+                overflow: 'hidden',
               }}>
               {item.message}
             </Text>
@@ -123,6 +123,7 @@ const ChatScreenExample = ({data, allChat}) => {
                 padding: Padding.p_14,
                 color: item.from !== user.userId ? Color.colorBlack : Color.colorWhite,
                 borderRadius: Border.br_16,
+                overflow: 'hidden',
               }}>
               {item.message}
             </Text>
@@ -140,7 +141,7 @@ const ChatScreenExample = ({data, allChat}) => {
     const recicerUser = await getUserDetails(envConfig.User, userId);
     const fcmToken = recicerUser.fcmToken;
     try {
-      const response = fetch('https://canada-push-notifications-server.onrender.com/sendNotification', {
+      const response = fetch('https://push-notifications-server-lvzr.onrender.com/sendNotification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -221,12 +222,6 @@ const ChatScreenExample = ({data, allChat}) => {
           <View>
             {renderAvatar()}
             <CustomText text={data.displayName} style={styles.displayName} />
-            {/* <CustomButton
-              title="View Profile"
-              style={styles.button}
-              textStyle={styles.buttonText}
-              onPress={navigateProfile}
-            /> */}
           </View>
           <CustomText
             text={isServiceProvider === false || isServiceProvider === 'no' ? 'Customer' : 'Service Provider'}
@@ -237,10 +232,6 @@ const ChatScreenExample = ({data, allChat}) => {
             data={allChat}
             renderItem={renderMessage}
             keyExtractor={keyExtractor}
-            // style={{flex: 1}}
-            // ref={ref => {
-            //   scrollViewRef.current = ref;
-            // }}
             onContentSizeChange={() => flatListRef.current.scrollToEnd({animated: true})}
           />
 

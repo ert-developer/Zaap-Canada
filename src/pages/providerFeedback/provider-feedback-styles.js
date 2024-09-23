@@ -10,9 +10,9 @@ function profileScreenStyle() {
       resizeMode: 'cover',
     },
     profilePhoto: {
-      borderRadius: 50,
+      borderRadius: widthToDp(10), // Half of the width to make it round
       width: widthToDp(20),
-      height: heightToDp(10),
+      height: widthToDp(20), // Ensure height is equal to width
       marginTop: -50,
       margin: Margin.m_6,
     },
@@ -111,11 +111,10 @@ function profileScreenStyle() {
     bottomButtonContainer: {
       width: '98%',
       flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
+      justifyContent: 'center',
     },
     hireButton: {
-      width: widthToDp(46),
+      width: widthToDp(45),
       height: heightToDp(6),
       borderRadius: widthToDp(2),
       textAlign: 'center',
@@ -123,10 +122,11 @@ function profileScreenStyle() {
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#00BF63',
-      // marginRight: 2,
+      marginLeft: 14,
+      marginRight: 3,
     },
     hiredButton: {
-      width: widthToDp(46),
+      width: widthToDp(45),
       height: heightToDp(6),
       borderRadius: widthToDp(2),
       textAlign: 'center',
@@ -141,7 +141,7 @@ function profileScreenStyle() {
       fontWeight: 'bold',
     },
     backButton: {
-      width: widthToDp(46),
+      width: widthToDp(45),
       height: heightToDp(6),
       borderRadius: widthToDp(2),
       textAlign: 'center',
@@ -149,9 +149,11 @@ function profileScreenStyle() {
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#FF5757',
+      marginLeft: 3,
+      marginRight: 2,
     },
     goBackButton: {
-      width: widthToDp(46),
+      width: widthToDp(45),
       height: heightToDp(6),
       borderRadius: widthToDp(2),
       textAlign: 'center',

@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {Border, Color, Margin} from '../../../assets/static/globalStyles';
 import {heightArea, heightToDp, widthToDp} from '../../../responsive/responsive';
 
@@ -17,9 +17,9 @@ const styles = StyleSheet.create({
     width: 35,
   },
   tabBar: {
-    height: heightToDp(8),
-    borderTopLeftRadius: heightToDp(5),
-    borderTopRightRadius: heightToDp(5),
+    height: heightToDp(6),
+    borderTopLeftRadius: heightToDp(3),
+    borderTopRightRadius: heightToDp(3),
     // borderBottomLeftRadius: Border.br_45,
     // borderBottomRightRadius: Border.br_45,
     // marginBottom: Margin.m_10,
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     elevation: 18,
   },
   tabBarLabel: {
-    marginBottom: heightArea(15),
+    marginBottom: Platform.OS === 'android' ? heightArea(15) : heightArea(-25),
     color: Color.colorIndigo,
   },
   tabBarIcon: {

@@ -51,6 +51,8 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_sm,
     color: Color.colorBlack,
     marginBottom: Margin.m_10,
+    height: 42,
+    paddingVertical: 10,
   },
   placeholderTextColor: {
     color: Color.colorSilver,

@@ -882,25 +882,25 @@ const ProviderProfile = ({
                   {categories.category === 'PERSONAL' && (
                     <CustomText
                       text={'Personal Details'}
-                      style={{textAlign: 'center', fontFamily: 'Helvetica', color: '#000000'}}
+                      style={{textAlign: 'center', fontFamily: 'Helvetica', color: '#000000', fontSize: 13}}
                     />
                   )}
                   {categories.category === 'BANK DETAILS' && (
                     <CustomText
-                      text={'Bank  Details'}
-                      style={{textAlign: 'center', fontFamily: 'Helvetica', color: '#000000'}}
+                      text={'Bank\n Details'}
+                      style={{textAlign: 'center', fontFamily: 'Helvetica', color: '#000000', fontSize: 13}}
                     />
                   )}
                   {categories.category === 'BACKGROUND CHECK' && (
                     <CustomText
                       text={'Government Issued ID'}
-                      style={{textAlign: 'center', fontFamily: 'Helvetica', color: '#000000'}}
+                      style={{textAlign: 'center', fontFamily: 'Helvetica', color: '#000000', fontSize: 13}}
                     />
                   )}
                   {categories.category === 'TERMS AND CONDITIONS' && (
                     <CustomText
                       text={'Terms And Conditions'}
-                      style={{textAlign: 'center', fontFamily: 'Helvetica', color: '#000000'}}
+                      style={{textAlign: 'center', fontFamily: 'Helvetica', color: '#000000', fontSize: 13}}
                     />
                   )}
                 </View>

@@ -6,6 +6,7 @@ import {widthToDp, heightToDp} from '../../responsive/responsive';
 import {EditIconSvg, DeleteIconSvg} from '../../assets/svgImage/providerProfile';
 import HeaderComponent from '../../atoms/header/headerComponent';
 import DeletePortfolioDeleteModal from './deleteportfoliomodal';
+import {FontFamily} from '../../assets/static/globalStyles';
 
 const PortfolioDetailsScreen = () => {
   const navigation = useNavigation();
@@ -46,20 +47,17 @@ const PortfolioDetailsScreen = () => {
     }
   };
 
+  console.log('dd', portfolioDetails);
   const renderLinks = () => {
     return portfolioDetails.Link && portfolioDetails.Link.length > 0 ? (
       <View style={styles.linkContainer}>
         <CustomText text={'External Links'} style={styles.sectionTitle} />
 
-        {typeof portfolioDetails.Link === 'object' ? (
-          portfolioDetails.Link.map((link, index) => (
-            <TouchableOpacity key={index} onPress={() => onPressPortfolioLink(link)}>
-              <CustomText text={link} style={styles.linkText} />
-            </TouchableOpacity>
-          ))
-        ) : (
-          <CustomText text={portfolioDetails.Link} style={styles.linkText} />
-        )}
+        {portfolioDetails.Link.map((link, index) => (
+          <TouchableOpacity key={index} onPress={() => onPressPortfolioLink(link)}>
+            <CustomText text={link.toLowerCase()} style={styles.linkText} />
+          </TouchableOpacity>
+        ))}
       </View>
     ) : null;
   };
@@ -147,7 +145,7 @@ const styles = StyleSheet.create({
     fontSize: heightToDp(2.2),
     fontWeight: '600',
     color: '#464183',
-    marginBottom: heightToDp(1),
+    marginBottom: 1,
   },
   portfolioImage: {
     height: heightToDp(30),
@@ -165,9 +163,12 @@ const styles = StyleSheet.create({
     borderColor: '#EAEAEA',
   },
   descriptionText: {
-    fontSize: heightToDp(1.9),
+    fontSize: heightToDp(1.8),
     lineHeight: heightToDp(2.5),
+    fontFamily: FontFamily.helvetica,
     color: '#666666',
+    fontWeight: '400',
+    marginBottom: 20,
   },
   // linkContainer: {
   //   marginVertical: heightToDp(2),

@@ -4,17 +4,12 @@ import {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import CustomText from '../../atoms/text/textComponent';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
-import {Live} from '../../assets/svgImage/home';
 import {
   Call,
-  IIcon,
-  Lines,
   MessageIcon,
-  ProfileVerify,
   WorkInProgressStart,
   TickMark,
   WorkInProgressCompleted,
-  WorkCompleteStarted,
   WorkCompleted,
   WorkInProgress,
   WorkCompleteInProgress,
@@ -22,31 +17,28 @@ import {
 } from '../../assets/svgIcons/providerPaymentSvg';
 import CustomButton from '../../atoms/button/buttonComponent';
 import ServiceCompletedNodal from '../backdroppressmodal/Service-completed-Modal';
-import ServiceCanceldModal from '../backdroppressmodal/service-cancelled-modal';
 import CommonOtpInput from '../../molecules/customotpinput/customotp';
 import database from '@react-native-firebase/database';
 import {useNavigation} from '@react-navigation/native';
 import {MapIconSvg} from '../../assets/svgIcons/providerPaymentSvg';
 import {DottedLines} from '../../assets/svgImage/bottomDrawer';
 import {BookingConfirm} from '../../assets/svgImage/bottomDrawer';
-import {SmallDottedLines} from '../../assets/svgImage/bottomDrawer';
 import {NewInfoIcon} from '../../assets/svgImage/bottomDrawer';
 import {InProgresBannersSvg} from '../../assets/svgImage/bottomDrawer';
 import Tooltip from 'react-native-walkthrough-tooltip';
 import {FeedbackBannerSvg} from '../../assets/svgImage/bottomDrawer';
 import {AirbnbRating} from 'react-native-ratings';
 import {NewReviewSvg} from '../../assets/svgImage/bottomDrawer';
-import {postCollectionDetails, getUserDetails, deleteDocument} from '../../common/collection';
+import {postCollectionDetails} from '../../common/collection';
 import VerificationSuccessModal from '../../molecules/custommodal';
 import {db} from '../../../firebaseDb';
 import ServiceProviderCanceldModal from '../serviceprovidercancelmodal/service-provider-cancel-modal';
 import WrongOtpMdal from '../../molecules/custommodal/wrong-otp-popup';
-import FastImage from 'react-native-fast-image';
 import firestore from '@react-native-firebase/firestore';
 import {collection, query, where, getDocs} from 'firebase/firestore';
-import {Padding, Margin, FontFamily, FontSize, Color} from '../../assets/static/globalStyles';
+import {Color} from '../../assets/static/globalStyles';
 import {mailSenter} from '../../common/mailSender';
-import {doc, updateDoc, getDoc, FieldValue} from 'firebase/firestore';
+import {doc, updateDoc, getDoc} from 'firebase/firestore';
 import {envConfig} from '../../assets/helpers/envApi';
 
 const PreviousJobsPaymentModal = () => {
@@ -119,37 +111,18 @@ const PreviousJobsPaymentModal = () => {
     getRoomDetails(selectedJobDetails.candidateUserId, selectedJobDetails.customerId);
   }, [selectedJobDetails.customerId, selectedJobDetails.candidateUserId]);
 
-  const user = useSelector(state => state.Auth.user);
   const [isModalVisible, setModalVisible] = useState(false);
-  const toggleModal = () => {
-    // console.log("----------------------------------------------------------")
-    setModalVisible(!isModalVisible);
-  };
+
   const [isWorkStartedButton, setWorkStartedButton] = useState(false);
   const [otpEntered, setOtpEntered] = useState('');
-  const [isWorkStarted, setWorkStarted] = useState(false);
 
-  const [isComplete, setComplete] = useState(false);
   // const [isFinish,setFinish]=useState(false)
 
   const [isOtpValid, setOtpValid] = useState();
   const handleOtpChange = code => {
     setOtpEntered(code);
-    // Check if the OTP is entered, then enable work start
     setWorkStartedButton(code.length > 0);
   };
-
-  const handleStartWork = () => {
-    setWorkStarted(true);
-  };
-
-  const handleComplete = () => {
-    setComplete(true);
-  };
-
-  // const handleFinish = ()=>{
-  //   setFinish(true)
-  // }
 
   const validateOtp = async () => {
     try {
@@ -240,23 +213,6 @@ const PreviousJobsPaymentModal = () => {
   };
 
   const [isWorkFinished, setIsWorkFinished] = useState(false);
-
-  // useEffect(() => {
-  //   const isWorkFinishedRef = database().ref('/common/isWorkFinished/isworkdone');
-
-  //   const handleSnapshot = snapshot => {
-  //     const value = snapshot.val();
-  //     setIsWorkFinished(value);
-  //     console.log('Updated isWorkFinished:', value);
-  //     // Perform actions with the updated isWorkFinished value
-  //   };
-
-  //   isWorkFinishedRef.on('value', handleSnapshot);
-
-  //   return () => {
-  //     isWorkFinishedRef.off('value', handleSnapshot);
-  //   };
-  // }, []); // Empty dependency array means this effect runs once when the component mounts
   const [jobDetails, setJobDetails] = useState('');
 
   let phoneNumber;
@@ -298,6 +254,7 @@ const PreviousJobsPaymentModal = () => {
     }
   }, [isJobCancelled, showFeedback, roomDetails]);
 
+  const [open, setClose] = useState(true);
   const handleMessageIconPress = async () => {
     if (selectedJobDetails) {
       await getRoomDetails(selectedJobDetails.candidateUserId, selectedJobDetails.customerId);
@@ -315,6 +272,7 @@ const PreviousJobsPaymentModal = () => {
           .update({isDisabled: false});
         roomDetails.isDisabled = false;
       }
+      setClose(false);
       navigation.navigate('OneChat', {chatDetail: roomDetails});
     }
   };
@@ -357,7 +315,6 @@ const PreviousJobsPaymentModal = () => {
     try {
       let response = await postCollectionDetails(envConfig.serviceProvider_Feedback, feedBack);
       setIsWorkFinished(true);
-      // console.log("Completed job added successfully with ID: ", response.id);
     } catch (error) {
       console.error('Error adding completed job data to Firestore:', error);
     }
@@ -382,18 +339,11 @@ const PreviousJobsPaymentModal = () => {
         jobSalary: selectedJobDetails.salary,
       });
 
-      // Remove object from jobApplications array where userId matches
-      // const updatedJobApplications = docData.jobApplications.filter(
-      //   application => application.userId !== selectedJobDetails.candidateUserId,
-      // );
-
       // Update the document with the modified cancelCandidateDetails array
       await updateDoc(docRef, {
         IsBookingCancel: true,
         IsBookingConfirmed: false,
         cancelCandidateDetails: cancelCandidateDetails,
-        // jobApplications: updatedJobApplications,
-        // selectedCandidateDetails: FieldValue.delete(),
       });
 
       const selectedProfileRef = firestore().collection(envConfig.selectedProfiles);
@@ -444,7 +394,7 @@ const PreviousJobsPaymentModal = () => {
           <li>Select the service provider who best matches your requirements and preferences.</li>
         </ol>
       
-        <p>If you need any assistance or have questions, reach out to our support team via email at <a href="mailto:help@zaapondemand.ca">help@zaapondemand.ca</a>.</p>
+        <p>If you need any assistance or have questions, reach out to our support team via email at <a href="mailto:help@zaapondemand.in">help@zaapondemand.in</a>.</p>
       
         <p>Thank you for your patience and understanding.</p>
       
@@ -484,7 +434,7 @@ const PreviousJobsPaymentModal = () => {
 
   <p>We urge you to adhere to confirmed bookings and avoid unnecessary cancellations. Maintaining a reliable and professional standard is crucial for the integrity of our platform and the satisfaction of our customers.</p>
 
-  <p>If you have any questions or wish to discuss this matter further, please contact us directly at <a href="mailto:help@zaapondemand.ca">help@zaapondemand.ca</a>.</p>
+  <p>If you have any questions or wish to discuss this matter further, please contact us directly at <a href="mailto:help@zaapondemand.in">help@zaapondemand.in</a>.</p>
 
   <p>Thank you for your prompt attention to this matter.</p>
 
@@ -513,7 +463,7 @@ const PreviousJobsPaymentModal = () => {
 
   return (
     <View>
-      <Modal isVisible={true} style={styles.modalContainer}>
+      <Modal isVisible={open} style={styles.modalContainer}>
         <Text
           onPress={() => {
             navigation.goBack();
@@ -527,7 +477,7 @@ const PreviousJobsPaymentModal = () => {
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-between',
-              margin: heightToDp(2.5),
+              margin: heightToDp(1.8),
             }}>
             <View style={{flexDirection: 'row', alignItems: 'center', gap: heightToDp(1)}}>
               {employerData?.imageUrl ? (
@@ -538,18 +488,20 @@ const PreviousJobsPaymentModal = () => {
               <View>
                 <CustomText
                   text={employerData?.displayName}
-                  style={{fontFamily: 'Roboto', color: '#000000', fontSize: heightToDp(2.2)}}
+                  style={{fontFamily: 'Roboto', color: '#000000', fontSize: heightToDp(1.9)}}
                 />
                 <Text style={{fontFamily: 'Roboto', color: '#000000', fontSize: heightToDp(1.6)}}>Employer</Text>
               </View>
             </View>
-            <View style={{flexDirection: 'row', alignItems: 'center', gap: heightToDp(3.5)}}>
+            <View style={{flexDirection: 'row', alignItems: 'center', gap: heightToDp(2.5)}}>
               {/* <Call />
               <MessageIcon /> */}
               <TouchableOpacity onPress={handlePhoneIconPress}>
                 <Call />
               </TouchableOpacity>
-              <MessageIcon onPress={handleMessageIconPress} opacity={chatIconOpacity} />
+              <TouchableOpacity onPress={handleMessageIconPress}>
+                <MessageIcon opacity={chatIconOpacity} />
+              </TouchableOpacity>
               {isOtpValid ? null : (
                 <Tooltip
                   isVisible={tooltipVisible}
@@ -664,7 +616,7 @@ const PreviousJobsPaymentModal = () => {
                   onPress={() => setFeedback(true)}
                 />
               ) : (
-                <View style={{alignItems: 'center'}}>
+                <View style={{alignItems: 'center', marginBottom: 30}}>
                   <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
                     <NewInfoIcon />
                     <Text style={{fontFamily: 'Roboto', fontSize: heightToDp(1.7)}}>Kindly request the Customer </Text>
@@ -740,7 +692,13 @@ const PreviousJobsPaymentModal = () => {
                     />
                   </View>
                 </View>
-                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    alignSelf: 'center',
+                  }}>
                   <CustomButton
                     title={'START WORK'}
                     style={styles.startWorkButton}
@@ -760,109 +718,6 @@ const PreviousJobsPaymentModal = () => {
               </View>
             </View>
           )}
-
-          {/* <View style={styles.customerDetailsContainer}>
-            <View style={styles.logoNAmeAndStartsContainer}>
-              <View style={styles.customerNameLogo}>
-                <CustomText text={'SK'} style={styles.customerShortName} />
-              </View>
-              <View>
-                <CustomText text={user.displayName} style={styles.name} />
-                <CustomText text={'⭐⭐⭐'} />
-              </View>
-            </View>
-
-            <View style={styles.callAndMessageContainer}>
-            <TouchableOpacity onPress={handlePhoneIconPress}>
-              <Call />
-
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <MessageIcon onPress={() => navigation.navigate('OneChat', {chatDetail: roomDetails})} />
-              </TouchableOpacity>
-
-              <TouchableOpacity onPress={() => openGoogleMaps()}>
-                <Live />
-              </TouchableOpacity>
-            </View>
-          </View> */}
-
-          {/* <View>
-            <Lines />
-
-            <CustomText text={'SERVICE PROGRESS'} style={styles.ServiceProgressText} />
-
-            <View style={styles.iconsContainer}>
-              <View style={styles.iconWithTick}>
-                {isOtpValid ? <ProfileVerified /> : <ProfileVerify />}
-                <CustomText text={'Verify'} style={styles.statusText} />
-                <TickMark style={isOtpValid ? styles.hide : styles.show} />
-              </View>
-              <View style={styles.iconWithTick}>
-                {isWorkDone ? <WorkInProgressCompleted /> : isOtpValid ? <WorkInProgressStart /> : <WorkInProgress />}
-
-                <CustomText text={'in Progress'} style={styles.statusText} />
-                <TickMark style={isWorkDone ? styles.hide : styles.show} />
-              </View>
-              <View style={styles.iconWithTick}>
-                {isWorkFinished ? <WorkCompleted /> : isWorkDone ? <WorkCompleteStarted /> : <WorkCompleteInProgress />}
-
-                <CustomText text={'Completed'} style={styles.statusText} />
-                <TickMark style={isWorkFinished ? styles.hide : styles.show} />
-              </View>
-            </View>
-
-            {isOtpValid ? (
-              isWorkDone ? null : (
-                <TouchableOpacity onPress={handleComplete}>
-                  <View style={styles.askTheCXTextContainer}>
-                    <IIcon style={styles.Iicon} />
-                    <CustomText text={'Ask the Customer to click on work done to finish'} style={styles.askCxText} />
-                  </View>
-                </TouchableOpacity>
-              )
-            ) : (
-              <View>
-                <View style={styles.centeredButtonContainer}>
-                  <CommonOtpInput
-                    handleChange={handleOtpChange}
-                    numberOfInputs={4}
-                    inputStyles={{
-                      backgroundColor: '#DEE2E6',
-                      borderRadius: 10,
-                      margin: 5,
-                      width: 50,
-                      height: 50,
-                      fontSize: 16,
-                      color: '#000',
-                      textAlign: 'center',
-                    }}
-                    containerStyles={{flexDirection: 'row'}}
-                  />
-                </View>
-
-                {isWorkStartedButton && (
-                  <View style={styles.buttonContainer}>
-                    <CustomButton title={'START WORK'} style={styles.startWorkButton} onPress={validateOtp} />
-                  </View>
-                )}
-
-                <View style={styles.informationContainer}>
-                  <IIcon />
-                  <CustomText
-                    text={'Ask the customer to check for OTP in My Jobs > This Job  '}
-                    style={styles.askTheCustomer}
-                  />
-                </View>
-              </View>
-            )}
-          </View> */}
-
-          {/* {isWorkDone ? (
-            <View style={styles.finishButton}>
-              <CustomButton title={'Finish'} style={styles.startWorkButton} onPress={workFinished} />
-            </View>
-          ) : null}  */}
         </View>
 
         <ServiceCompletedNodal isVisiblecompleted={isWorkFinished} serviceCompleteClose={serviceCompleteClose} />
@@ -998,11 +853,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica',
     color: '#fff',
     backgroundColor: '#00BF63',
-    width: heightToDp(20),
+    width: heightToDp(19),
     padding: heightToDp(1.5),
     fontSize: 16,
     letterSpacing: 0.4,
     borderRadius: heightToDp(1),
+    marginRight: 2,
   },
   cancelService: {
     fontSize: 16,
@@ -1010,11 +866,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica',
     color: '#fff',
     backgroundColor: '#FF5757',
-    width: heightToDp(20),
+    width: heightToDp(19),
     padding: heightToDp(1.5),
     fontSize: 16,
     letterSpacing: 0.4,
     borderRadius: heightToDp(1),
+    marginLeft: 2,
   },
   startWorkBtnText: {
     textTransform: 'uppercase',
@@ -1085,7 +942,6 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: 'white',
-
     borderRadius: heightToDp(1),
   },
   bookingConfirmed: {
@@ -1097,12 +953,12 @@ const styles = StyleSheet.create({
     color: 'white',
     marginLeft: heightToDp(1),
     marginTop: heightToDp(0.6),
-    fontSize: heightToDp(2.2),
+    fontSize: heightToDp(2),
   },
   profilePhoto: {
-    borderRadius: 50,
-    width: widthToDp(14),
-    height: heightToDp(7),
-    marginRight: heightToDp(1),
+    borderRadius: widthToDp(6.5), // Half of the width to make it round
+    width: widthToDp(13),
+    height: widthToDp(13), // Ensure height is equal to width
+    marginRight: heightToDp(0.6),
   },
 });

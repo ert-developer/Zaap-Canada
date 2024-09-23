@@ -36,6 +36,7 @@ import RNShare from 'react-native-share';
 import DeleteAccountModal from '../../../organisms/deletemodal/deletemodal';
 import DeviceInfo from 'react-native-device-info';
 import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
+import {Platform} from 'react-native';
 
 export const ProviderCustomDrawerContent = ({props, state, navigation}) => {
   const serviceProviderDetails = useSelector(state => state.providerverification.providerDetails);
@@ -229,7 +230,11 @@ export const ProviderCustomDrawerContent = ({props, state, navigation}) => {
             isSelected={state.routes[state.index].name === 'Favourite'}
           />
           <View style={styles.versionContainerSP}>
-            <CustomText text={`Android Version: ${appVersion}`} style={styles.versionTextSP} />
+            {Platform.OS === 'ios' ? (
+              <CustomText text={`iOS Version: ${appVersion}`} style={styles.versionText} />
+            ) : (
+              <CustomText text={`Android Version: ${appVersion}`} style={styles.versionText} />
+            )}
           </View>
 
           {/* <DrawerItemWithArrow

@@ -34,7 +34,7 @@ import {collection, query, where, getDocs} from 'firebase/firestore';
 import getPlatformFee from '../../common/platformFee';
 import {envConfig} from '../../assets/helpers/envApi';
 
-const ModalComponent = ({isVisible, onClose, userWorking}) => {
+const ModalComponent = ({isVisible, setModalVisible1, onClose, userWorking}) => {
   const user = useSelector(state => state.Auth.user);
   const jobDetails = useSelector(state => state.checkProfileJob.jobDetails);
   const profiledetail = useSelector(state => state.applicantProfileDetails.profileDetails);
@@ -131,9 +131,18 @@ const ModalComponent = ({isVisible, onClose, userWorking}) => {
   };
 
   const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-    navigation.navigate('ProviderPaymentScreen');
+    setModalVisible(false);
+    setModalVisible1(false);
+    onClose();
+    setTimeout(
+      () => {
+        console.log('Navigating to ProviderPaymentScreen');
+        navigation.navigate('ProviderPaymentScreen');
+      },
+      Platform.OS === 'ios' ? 200 : 0,
+    );
   };
+
   const {handleCheckout} = usePayment();
   const dispatch = useDispatch();
 
@@ -254,7 +263,7 @@ const ModalComponent = ({isVisible, onClose, userWorking}) => {
       <Modal isVisible={isVisible} style={styles.modal}>
         <View style={styles.modalContent}>
           <View style={styles.others}>
-            <View style={{padding: heightToDp(1)}}>
+            <View style={{paddingTop: heightToDp(1)}}>
               <MyjobsCardList
                 JobsList={jobDetails}
                 cardModal={true}
@@ -269,13 +278,6 @@ const ModalComponent = ({isVisible, onClose, userWorking}) => {
               </View>
               <View style={styles.nameAndimageContainer}>
                 <View style={styles.textContainer}>
-                  {/* {providerStatus[0]?.imageURL ? (
-                    <View style={styles.imageContainer}>
-                      <Image source={{uri: providerStatus[0]?.imageURL}} style={styles.image} />
-                    </View>
-                  ) : (
-                    <CustomText text={result} style={styles.namelogo} />
-                  )} */}
                   {!providerStatus[0]?.personal_photo ? (
                     <Image src={providerStatus[0]?.imageURL} style={styles.image} />
                   ) : (
@@ -297,7 +299,7 @@ const ModalComponent = ({isVisible, onClose, userWorking}) => {
                     marginTop: heightToDp(1),
                   }}>
                   <CustomText text={'Your Budget'} style={styles.yourBudgetHead} />
-                  <CustomText text={`$${amount}`} style={styles.yourBudgetHead} />
+                  <CustomText text={`₹${amount}`} style={styles.yourBudgetHead} />
                 </View>
               </View>
 
@@ -316,25 +318,23 @@ const ModalComponent = ({isVisible, onClose, userWorking}) => {
               <View style={{padding: heightToDp(2)}}>
                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                   <CustomText text={'Total Pay'} style={styles.totalFeeHead} />
-                  <CustomText text={`$${amount + platformFee}`} style={styles.totalFeeHead} />
+                  <CustomText text={`₹${amount + platformFee}`} style={styles.totalFeeHead} />
                 </View>
               </View>
 
-              <View style={styles.payAndBackButtonContainer1}>
-                <View style={styles.payAndBackButtonContainer}>
-                  <CustomButton
-                    title={loader ? <ActivityIndicator color={'white'} size={20} /> : 'Pay'}
-                    style={styles.payButton}
-                    textStyle={styles.payBtnText}
-                    onPress={clickOnHandlePayment}
-                  />
-                  <CustomButton
-                    title={'Cancel'}
-                    textStyle={styles.payBtnText}
-                    style={[styles.payButton, styles.back]}
-                    onPress={onClose}
-                  />
-                </View>
+              <View style={styles.payAndBackButtonContainer}>
+                <CustomButton
+                  title={loader ? <ActivityIndicator color={'white'} size={20} /> : 'Pay'}
+                  style={styles.payButton}
+                  textStyle={styles.payBtnText}
+                  onPress={clickOnHandlePayment}
+                />
+                <CustomButton
+                  title={'Cancel'}
+                  textStyle={styles.payBtnText}
+                  style={[styles.payButton, styles.back]}
+                  onPress={onClose}
+                />
               </View>
             </View>
           </View>
@@ -380,14 +380,14 @@ const styles = StyleSheet.create({
     // borderColor: 'red',
     // borderWidth: 1,
   },
-  yourBudgetHead: {fontSize: widthToDp(4), fontWeight: 'bold'},
+  yourBudgetHead: {fontSize: widthToDp(4), fontWeight: '500'},
   platFormFeeHead: {
     fontSize: widthToDp(4),
-    fontWeight: 'bold',
+    fontWeight: '500',
   },
   totalFeeHead: {
     fontSize: heightToDp(2),
-    fontWeight: 'bold',
+    fontWeight: '700',
     color: Color.colorBlack,
   },
   stylesyourHiringContainer: {
@@ -399,9 +399,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     color: 'white',
     // paddingTop: heightToDp(3),
-    top: 1,
+    top: 3,
     left: 15,
     fontWeight: 'bold',
+    fontSize: 14,
   },
 
   nameAndimageContainer: {
@@ -443,20 +444,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica',
     color: Color.colorBlack,
   },
-  // payAndBackButtonContainer1: {
-  //   borderTopWidth: 1,
-  //   borderColor: '#B893FF',
-  //   padding:heightToDp(5)
-  // },
   payAndBackButtonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // borderTopWidth:1,
-    // marginTop: 10,
     padding: heightToDp(1),
-    // marginTop: heightToDp(4),
-    // marginBottom: heightToDp(6),
   },
   payButton: {
     fontSize: 16,
@@ -471,11 +463,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     letterSpacing: 0.4,
     borderRadius: heightToDp(1),
+    width: '50%',
+    marginHorizontal: 1,
+    alignSelf: 'center',
   },
   payBtnText: {
     fontWeight: 'bold',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
+    alignSelf: 'center',
   },
 
   back: {
@@ -488,8 +484,9 @@ const styles = StyleSheet.create({
   },
   fareBreakdown: {
     color: Color.colorBlack,
-    fontWeight: 'bold',
-    fontSize: widthToDp(4),
+    fontWeight: '600',
+    fontSize: widthToDp(4.5),
+    marginBottom: 20,
   },
   imageContainer: {
     margin: 20,

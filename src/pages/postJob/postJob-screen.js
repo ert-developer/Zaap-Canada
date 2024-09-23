@@ -39,6 +39,9 @@ import {CalenderSVG, FreeGreenTickSVG, PremiumAdsSVG} from '../../assets/svgImag
 import {PlaceholderClockSVG} from '../../assets/svgImage/clock/clock-svg';
 import {Color, FontFamily} from '../../assets/static/globalStyles';
 import {envConfig} from '../../assets/helpers/envApi';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+
 const PostJobScreen = ({
   GetFeaturePaymentAmount,
   GetSpotlightPaymentAmount,
@@ -89,35 +92,51 @@ const PostJobScreen = ({
 }) => {
   // const styles = useMemo(() => PostJobStyles(), []);
   const styles = PostJobStyles();
-  const [location, setLocation] = useState('');
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
   const [showDatePicker, setshowDatePicker] = useState(false);
-  const [selectedDate, setselectedDate] = useState('');
-  const [selectedStartTime, setSelectedStartTime] = useState('');
   const [showStartTimePicker, setShowStartTimePicker] = useState(false);
   const [checked, setChecked] = useState(formData.starttime === 'AnyTime');
+
+  const toggleCheckbox = () => {
+    setChecked(!checked);
+    // Set starttime to "Anytime" when checked
+
+    formData.starttime = !checked ? 'Anytime' : '';
+  };
+
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
+
+  const showDatePicker1 = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirmDate = date => {
+    onChangeDate(date);
+    hideDatePicker();
+  };
+
+  const showTimePicker = () => {
+    setTimePickerVisibility(true);
+  };
+
+  const hideTimePicker = () => {
+    setTimePickerVisibility(false);
+  };
+
+  const handleConfirmTime = time => {
+    const formattedTime = time.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+
+    (formData.starttime = formattedTime), hideTimePicker();
+  };
 
   const sortedCategories = categories.slice().sort((a, b) => a.name.localeCompare(b.name));
 
   const onChangeStartTimePicker = () => {
     setShowStartTimePicker(!showStartTimePicker);
-  };
-
-  const onCheckAnyTime = value => {
-    setChecked(value);
-
-    if (value) {
-      handleChange('starttime', 'AnyTime');
-    } else {
-      // Pass the formatted time to handleChange when unchecked
-      const formattedTime = new Date().toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true,
-      });
-      handleChange('starttime', formattedTime);
-    }
   };
 
   const onChangeStartTime = (event, selectedTime) => {
@@ -248,7 +267,7 @@ const PostJobScreen = ({
                     <CustomText text={'Category'} style={styles.label} />
                     <View style={[styles.input, styles.inputWrapper, styles.firstPicker]}>
                       <DropdownSearchComponent
-                        selectedValue={formData.categories}
+                        selectedValue={`${formData.categories}`}
                         onHandleChange={handleChange}
                         fieldName={'categories'}
                         defaultOption={'Category'}
@@ -315,12 +334,12 @@ const PostJobScreen = ({
                 {/* Date */}
 
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <View style={{width: '50%'}}>
-                    <Pressable onPress={onChangeDatePicker}>
+                  <View style={{width: '51%'}}>
+                    <Pressable onPress={showDatePicker1}>
                       <TextInputWithIconComponent
                         label={'Date'}
-                        editable={true}
-                        placeholder={'Date'}
+                        editable={false}
+                        placeholder={'Select Date'}
                         value={formData.startdate}
                         firstPicker={styles.firstPicker}
                         field={'startdate'}
@@ -328,57 +347,49 @@ const PostJobScreen = ({
                         icon={<CalenderSVG />}
                       />
                     </Pressable>
-                    {showDatePicker && (
-                      <DateTimePicker
-                        mode="date"
-                        display="spinner"
-                        value={formData.startdate ? new Date(formData.startdate) : new Date()}
-                        minimumDate={new Date()}
-                        onChange={(event, date) => {
-                          onChangeDate(date);
-                          setshowDatePicker(false);
-                        }}
-                      />
-                    )}
+
+                    <DateTimePickerModal
+                      isVisible={isDatePickerVisible}
+                      mode="date"
+                      onConfirm={handleConfirmDate}
+                      onCancel={hideDatePicker}
+                      minimumDate={new Date()}
+                    />
                   </View>
 
-                  {/* StartDatePicker */}
-
-                  <View style={styles.column}>
-                    <Pressable onPress={checked ? null : onChangeStartTimePicker}>
+                  <View style={{width: '51%'}}>
+                    <Pressable onPress={checked ? null : showTimePicker} style={{flex: 1}}>
                       <TextInputWithIconComponent
                         label={'Time'}
-                        editable={true}
-                        placeholder={'Start Time'}
+                        editable={false}
+                        placeholder={'Select Time'}
                         value={formData.starttime}
                         firstPicker={styles.firstPicker}
                         formErrors={formErrors}
                         field={'starttime'}
                         icon={<PlaceholderClockSVG />}
                       />
-                    </Pressable>
-                    {showStartTimePicker && (
-                      <DateTimePicker
+
+                      <DateTimePickerModal
+                        isVisible={isTimePickerVisible}
                         mode="time"
-                        display="spinner"
-                        value={new Date()}
-                        onChange={(event, selectedTime) => onChangeStartTime(event, selectedTime)}
-                        is24Hour={false} // Set to false to show AM and PM
+                        onConfirm={handleConfirmTime}
+                        onCancel={hideTimePicker}
+                        is24Hour={false}
                       />
-                    )}
+                    </Pressable>
                   </View>
                 </View>
                 <View style={styles.checkboxContainer}>
                   <CustomText text="Anytime" style={styles.checkboxLabel} />
-                  <CheckBox value={checked} onValueChange={onCheckAnyTime} />
+                  <TouchableOpacity onPress={toggleCheckbox} style={styles.checkbox}>
+                    <Icon
+                      name={checked ? 'check-box' : 'check-box-outline-blank'}
+                      size={24} // Adjust size as needed
+                      color={checked ? '#007AFF' : '#B0B0B0'} // Adjust colors as needed
+                    />
+                  </TouchableOpacity>
                 </View>
-
-                {/* <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <CheckBox disabled={false} value={checked} onValueChange={newValue => onCheckAnyTime(newValue)} />
-                  <CustomText text={'Anytime'} />
-                </View> */}
-
-                {/* Location */}
                 <View style={styles.inputContainer}>
                   <CustomText text={'Location'} style={styles.label} />
                   <GooglePlacesInput
@@ -401,28 +412,8 @@ const PostJobScreen = ({
                     formErrors={formErrors}
                   />
                 </View>
-                {/* ADDRESS */}
-                {/* <View style={[styles.row, styles.inputContainer]}> */}
                 <View style={styles.column}>
-                  {/* <TextInputWithLabelComponent
-                      label={'ADDRESS'}
-                      value={formData.address}
-                      onHandleChange={text => handleChange('address', text)}
-                      field={'address'}
-                      placeholder={'Enter Address'}
-                      formErrors={formErrors}
-                      firstPicker={styles.firstPicker}
-                    /> */}
-
                   <CustomText text={'Address'} style={styles.label} />
-                  {/* <GooglePlacesInput
-                    value={formData.address}
-                    onHandleChange={text => handleChange('address', text.location)}
-                    field={'address'}
-                    placeholder={'Enter Address'}
-                    formErrors={formErrors}
-                    firstPicker={styles.firstPicker}
-                  /> */}
                   <TextAreaInputComponent
                     style={{...styles.input, textAlignVertical: 'top'}}
                     onChangeText={value => handleChange('address', value)}
@@ -431,18 +422,12 @@ const PostJobScreen = ({
                     placeholderTextColor={'silver'}
                     editable
                     multiline
-                    numberOfLines={2}
+                    numberOfLines={4}
                     fieldName={'address'}
                     formErrors={formErrors}
                     maxLength={200}
                   />
                 </View>
-                {/* <View style={[styles.column, {marginTop: heightToDp(-1.5)}]}>
-                  
-                </View> */}
-                {/* </View> */}
-
-                {/* description */}
                 <View style={styles.inputContainer}>
                   <CustomText text={'Description'} style={styles.label} />
                   <TextAreaInputComponent

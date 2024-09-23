@@ -16,7 +16,7 @@ export const drawerStyles = () => {
       borderColor: Color.colorBlack,
       borderWidth: 1.5,
       justifyContent: 'center',
-      resizeMode: 'contain',
+      resizeMode: 'cover',
       marginRight: Margin.m_10,
     },
     userProfileCard: {

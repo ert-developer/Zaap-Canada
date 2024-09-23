@@ -138,6 +138,8 @@ const MyjobsCardList = ({
         borderRightWidth: 1,
         borderLeftWidth: 1,
         marginBottom: 5,
+        width: '92%',
+        alignSelf: 'center',
         // Android fallback for shadow
       }}>
       {IsBookingCancel && isBookingCancelText && (

@@ -57,7 +57,7 @@ const ServiceProviderPublicProfileScreen = ({
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
-      <HeaderComponent text={'My Public Profie'} />
+      <HeaderComponent text={'My Public Profile'} />
       <ScrollView>
         <Image
           source={require('../../assets/staticImages/profile-cover-photo-new.jpg')}

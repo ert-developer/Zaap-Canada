@@ -10,9 +10,9 @@ function serviceProviderPublicprofileScreenStyle() {
       resizeMode: 'cover',
     },
     profilePhoto: {
-      borderRadius: 50,
+      borderRadius: widthToDp(10), // Half of the width to make it round
       width: widthToDp(20),
-      height: heightToDp(10),
+      height: widthToDp(20), // Ensure height is equal to width
       marginTop: -50,
       margin: Margin.m_6,
     },
@@ -84,6 +84,13 @@ function serviceProviderPublicprofileScreenStyle() {
       fontWeight: '500',
       fontSize: FontSize.size_16,
       color: Color.colorBlack,
+    },
+    languageContainer: {
+      flexDirection: 'column',
+    },
+    languageText: {
+      fontSize: 16, // Adjust according to your app's font size
+      marginLeft: 20, // Indent for better visual alignment
     },
     profileBio: {
       marginTop: Margin.m_16,

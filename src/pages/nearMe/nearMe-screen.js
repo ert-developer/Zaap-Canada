@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Image, ActivityIndicator} from 'react-native';
 import MapView, {Marker, Callout} from 'react-native-maps';
-import {check, PERMISSIONS} from 'react-native-permissions';
+import {check, PERMISSIONS, openSettings} from 'react-native-permissions';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {widthToDp} from '../../responsive/responsive';
@@ -31,12 +31,27 @@ const NearMeScreen = () => {
 
   const checkLocationPermission = async () => {
     try {
-      const permissionResult = await check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION);
+      const permissionResult = await check(
+        Platform.OS === 'ios' ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+      );
 
       if (permissionResult === 'granted') {
         setHasPermission(true);
-      } else {
+      } else if (permissionResult === 'denied') {
+        // If the permission is denied, you might want to request it
+        const requestResult = await request(
+          Platform.OS === 'ios' ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+        );
+
+        if (requestResult === 'granted') {
+          setHasPermission(true);
+        } else {
+          setHasPermission(false);
+        }
+      } else if (permissionResult === 'blocked') {
+        // Handle the case where permission is blocked
         setHasPermission(false);
+        // Optionally guide the user to the settings
       }
     } catch (err) {
       console.warn(err);

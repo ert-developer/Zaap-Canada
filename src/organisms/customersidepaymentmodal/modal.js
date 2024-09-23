@@ -5,35 +5,25 @@ import CustomText from '../../atoms/text/textComponent';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 import {
   Call,
-  IIcon,
-  Lines,
   MessageIcon,
   ProfileVerified,
   ReviewIcon,
-  ReviewSuccess,
   TickMark,
-  ReviewInProgress,
   WorkCompleteInProgress,
   WorkInProgressStart,
-  WorkInProgressCompleted,
-  WorkcompletedSvg,
   WorkCompleteStarted,
 } from '../../assets/svgIcons/providerPaymentSvg';
 import {WorkCompleted} from '../../assets/svgIcons/providerPaymentSvg';
 import CustomButton from '../../atoms/button/buttonComponent';
-import ServiceCompletedNodal from '../backdroppressmodal/Service-completed-Modal';
 import ServiceCanceldModal from '../backdroppressmodal/service-cancelled-modal';
-import CustomTextInput from '../../atoms/textInput/textInputComponent';
 import database from '@react-native-firebase/database';
 import {useSelector, useDispatch} from 'react-redux';
-import {deleteDocument, postCollectionDetails} from '../../common/collection';
+import {postCollectionDetails} from '../../common/collection';
 import {fetchCompletedJobs} from '../../redux/completedjobs/action';
-import CustomModal from '../../molecules/custommodal';
 import {useNavigation} from '@react-navigation/native'; // Add this import
 import {ActivityIndicator} from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
-import {Profileimageeee} from '../../assets/svgImage/bottomDrawer';
-import {YouAreHiringSvg, DottedLines, InProgressSvg, ServiceFeedback} from '../../assets/svgImage/bottomDrawer';
+import {DottedLines} from '../../assets/svgImage/bottomDrawer';
 import {BookingConfirm, InProgresBannersSvg} from '../../assets/svgImage/bottomDrawer';
 import {FeedbackBannerSvg} from '../../assets/svgImage/bottomDrawer';
 import {AirbnbRating} from 'react-native-ratings';
@@ -44,22 +34,8 @@ import {Color} from '../../assets/static/globalStyles';
 import CustomerServiceCompletedModal from '../backdroppressmodal/customer-service-complete-modal';
 import {db} from '../../../firebaseDb';
 import {getJobDetails} from '../../common/collection';
-import {set} from 'date-fns';
-import FastImage from 'react-native-fast-image';
 import {mailSenter} from '../../common/mailSender';
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  updateDoc,
-  doc,
-  getDoc,
-  deleteDoc,
-  FieldValue,
-  Transaction,
-} from 'firebase/firestore';
-import {ca} from 'date-fns/locale';
+import {collection, query, where, getDocs, updateDoc, doc, getDoc} from 'firebase/firestore';
 import {TransparentLoader} from '../loader/loader';
 import TextAreaInputComponent from '../../atoms/textAreaInput/textAreaInput-component';
 import {envConfig} from '../../assets/helpers/envApi';
@@ -140,7 +116,9 @@ const CustomerSidePaymentModel = () => {
     }
   }, [isServiceCompleted, isServiceCancelled, roomDetails]);
 
+  const [open, setClose] = useState(true);
   const handleChatIconPress = async () => {
+    setClose(false);
     await getRoomDetails(userID, profileUserID);
     if (isServiceCompleted || isServiceCancelled || roomDetails === null || roomDetails === undefined) {
       Alert.alert("Chat can't be initiated", 'Please complete the service to start the chat', [{text: 'OK'}]);
@@ -158,26 +136,6 @@ const CustomerSidePaymentModel = () => {
   useEffect(() => {
     getRoomDetails(userID, profileUserID);
   }, []);
-
-  const [isModalVisible, setModalVisible] = useState(false);
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
-
-  const dispatch = useDispatch();
-
-  const handleDeleteCollection = async () => {
-    try {
-      const commonRef = database().ref('/common');
-
-      await commonRef.remove();
-
-      Alert.alert('Success', 'Successfully deleted /common collection');
-    } catch (error) {
-      console.error('Error deleting /common collection:', error.message);
-      Alert.alert('Error', 'Failed to delete /common collection');
-    }
-  };
 
   const [isOtpValid, setOtpValid] = useState(false);
   const [otp, setOtp] = useState('****');
@@ -548,7 +506,6 @@ const CustomerSidePaymentModel = () => {
   const [selectedText, setSelectedText] = useState(null);
   const [customText, setCustomText] = useState('');
   const [showAmount, setShowAmount] = useState(false);
-
 
   // Handle click event for percentage
   const handleTextClick = percentage => {
@@ -932,7 +889,7 @@ const CustomerSidePaymentModel = () => {
 
   return (
     <View>
-      <Modal isVisible={true} style={styles.modalContainer}>
+      <Modal isVisible={open} style={styles.modalContainer}>
         <Text
           onPress={() => {
             navigation.goBack();
@@ -1212,8 +1169,23 @@ const CustomerSidePaymentModel = () => {
                     {otp.split('').map((digit, index) => (
                       <View
                         key={index}
-                        style={{backgroundColor: '#D9D9D9', marginHorizontal: 18, padding: 4, borderRadius: 5}}>
-                        <Text style={{fontSize: 20, letterSpacing: 20, fontWeight: 'bold', color: 'black'}}>
+                        style={{
+                          backgroundColor: '#D9D9D9',
+                          marginHorizontal: 18,
+                          padding: 4,
+                          borderRadius: 5,
+                          alignItems: 'center', // Center horizontally
+                          justifyContent: 'center', // Center vertically
+                          height: 40, // Set a fixed height to ensure vertical centering
+                          width: 40, // Set a fixed width for consistent spacing
+                        }}>
+                        <Text
+                          style={{
+                            fontSize: 20,
+                            letterSpacing: 0, // Reset letterSpacing to avoid extra spacing
+                            fontWeight: 'bold',
+                            color: 'black',
+                          }}>
                           {digit}
                         </Text>
                       </View>

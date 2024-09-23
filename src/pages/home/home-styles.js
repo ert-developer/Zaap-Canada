@@ -148,6 +148,7 @@ function HomeStyles() {
       color: '#ffffff',
       fontSize: 16,
       fontFamily: FontFamily.helvetica,
+      fontWeight: '400',
     },
     cat: {
       color: Color.colorIndigo,
@@ -167,7 +168,7 @@ function HomeStyles() {
     categoryList: {flexDirection: 'row', flexWrap: 'wrap'},
     tc: {
       alignItems: 'center',
-      justifyContent: 'centers',
+      justifyContent: 'center',
       // margin: 5,
       width: '33.33%',
       margin: 0,

@@ -72,7 +72,7 @@ function MyJobStyles() {
     },
     noData: {
       fontSize: FontSize.size_16,
-      fontWeight: '500',
+      fontWeight: '400',
       fontFamily: FontFamily.helvetica,
       color: Color.colorSilver,
       flex: 1,
