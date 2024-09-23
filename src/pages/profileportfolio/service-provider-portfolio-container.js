@@ -3,7 +3,7 @@ import ServiceProviderPortfolioScreen from './service-provider-portfolio-screen'
 import firestore from '@react-native-firebase/firestore';
 import {ActivityIndicator, View} from 'react-native';
 import profilePortfolioStyles from './service-provider-portfolio-styles';
-import { envConfig } from '../../assets/helpers/envApi';
+import {envConfig} from '../../assets/helpers/envApi';
 
 const ServiceProviderPortfolioContainer = ({route}) => {
   const styles = profilePortfolioStyles();
@@ -16,7 +16,10 @@ const ServiceProviderPortfolioContainer = ({route}) => {
   /////////////This is for fetching Portfolio Details from Firebase Collection///////////////
   const fetchPortfolio = async () => {
     try {
-      const querySnapshot = await firestore().collection(envConfig.portfolio).where('userId', '==', profileUserID).get();
+      const querySnapshot = await firestore()
+        .collection(envConfig.portfolio)
+        .where('userId', '==', profileUserID)
+        .get();
 
       const fetchedPortfolio = [];
       querySnapshot.forEach(documentSnapshot => {

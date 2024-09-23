@@ -43,24 +43,15 @@ function MyTabs() {
   const user = useSelector(state => state.Auth.user);
   const userId = user.userId;
   useEffect(() => {
-    if (userId) {
+    if (userId && isVerified === 'verified') {
       dispatch(fetchServiceProviderDetails(userId));
     }
   }, [userId]);
   const providerStatus = useSelector(state => state.providerverification.providerDetails);
   const isVerified = providerStatus[0]?.isverified;
 
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     navigation.reset({
-  //       index: 0,
-  //       routes: [{name: isVerified === 'verified' ? 'HIRED' : 'Live Ads'}],
-  //     });
-  //   }, [isVerified]),
-  // );
-
   return (
-    <TopTab.Navigator style={styles.mainContainer}>
+    <TopTab.Navigator style={styles.mainContainer} initialRouteName={'Live Ads'}>
       <Tab.Screen
         name={isVerified === 'verified' ? 'APPLIED' : 'HIRED'}
         component={MyJobsSelectd}

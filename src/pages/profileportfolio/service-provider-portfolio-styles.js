@@ -106,6 +106,7 @@ const profilePortfolioStyles = () => {
       backgroundColor: 'white',
       borderRadius: heightToDp(1),
       width: widthToDp(90),
+      padding: 5,
       // padding: heightToDp(2),
       // maxHeight: '80%',
     },
@@ -114,7 +115,7 @@ const profilePortfolioStyles = () => {
       color: '#47417D',
       fontWeight: 'bold',
       fontSize: heightToDp(2.1),
-      padding: heightToDp(2),
+      padding: heightToDp(1),
     },
     dashedLine: {
       height: 1,
@@ -150,12 +151,11 @@ const profilePortfolioStyles = () => {
     imageListContent: {
       paddingHorizontal: heightToDp(1),
     },
-    extranalLinkCon: {borderBottomWidth: 1, borderTopWidth: 1, borderColor: '#DCE4E8'},
+    extranalLinkCon: {borderBottomWidth: 1, borderTopWidth: 1, borderColor: '#DCE4E8', paddingBottom: 10},
     linkInfoContainer: {
       flexDirection: 'row',
-      marginTop: heightToDp(1.5),
       gap: heightToDp(0.5),
-      marginLeft: heightToDp(2),
+      marginLeft: heightToDp(1),
     },
     linkInfoText: {
       color: '#697164',
@@ -167,15 +167,23 @@ const profilePortfolioStyles = () => {
     linkText: {
       color: '#5A2DAF',
       fontFamily: 'Roboto',
-      marginLeft: heightToDp(4.75),
-      marginTop: heightToDp(0.5),
+      marginLeft: heightToDp(1.5),
+      marginTop: heightToDp(0.7),
+      marginBottom: heightToDp(0.2),
+      textDecorationLine: 'underline',
     },
     descriptionContainer: {
-      marginTop: heightToDp(2),
-      marginBottom: heightToDp(2),
+      marginTop: heightToDp(0.4),
+      marginBottom: heightToDp(1.5),
     },
-    descriptionHead: {color: Color.colorBlack, fontSize: widthToDp(4.5), fontFamily: 'Roboto'},
-    descriptionText: {marginLeft: heightToDp(2), fontFamily: 'Roboto', fontSize: heightToDp(1.8), color: '#697164'},
+    descriptionHead: {color: Color.colorBlack, fontSize: widthToDp(4), fontFamily: 'Roboto'},
+    descriptionText: {
+      marginLeft: heightToDp(1.2),
+      fontFamily: 'Roboto',
+      fontSize: heightToDp(1.8),
+      color: '#697164',
+      fontWeight: '600',
+    },
   });
   return styles;
 };

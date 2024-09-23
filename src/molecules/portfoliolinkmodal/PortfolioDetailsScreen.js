@@ -47,10 +47,9 @@ const PortfolioDetailsScreen = () => {
     }
   };
 
-  console.log('dd', portfolioDetails);
   const renderLinks = () => {
     return portfolioDetails.Link && portfolioDetails.Link.length > 0 ? (
-      <View style={styles.linkContainer}>
+      <View>
         <CustomText text={'External Links'} style={styles.sectionTitle} />
 
         {portfolioDetails.Link.map((link, index) => (

@@ -13,73 +13,61 @@ import {fetchSelectedProfileDetails} from '../../../redux/selectedprofiledetails
 import ChattModal from '../../../organisms/chatmodal';
 import ServiceProviderVerificationModal from '../../../organisms/serviceproviderpopupmodal/serviceprovider-popup-modal';
 import LoadingIndicator from '../../../atoms/loadingIndicator/LoadingIndicator';
+import moment from 'moment';
+import {ScrollView} from 'react-native-gesture-handler';
+
 const MyJobServiceContainer = () => {
-  const selectedJobs = useSelector(state => state.selectedJobs.selectedJobs);
-  const [loading, setIsLoading] = useState(true);
-
-  const providerStatus = useSelector(state => state.providerverification.providerDetails);
-  const user = useSelector(state => state.Auth.user);
-  // const providerVerify = user?.isServiceProvider;
-
-  const isVerified = user?.isServiceProvider;
-  // const isVerified = user?.isServiceProvider;
-  // console.log("providerVerify",providerVerify,providerStatus)
   const dispatch = useDispatch();
-  const {jobs, categories} = useSelector(state => state.home);
-  // const jobss= jobs.slice(0,3)
+  const [loading, setIsLoading] = useState(true);
+  const [recentJobs, setRecentJobs] = useState([]);
 
-  const appliedjobs = useSelector(state => state.appliedjobs.appliedJobsDetails);
+  const user = useSelector(state => state.Auth.user);
   const userId = user.userId;
+  const isVerified = user?.isServiceProvider;
+
+  const jobs = useSelector(state => state.home.jobs);
+  const selectedJobs = useSelector(state => state.selectedJobs.selectedJobs);
   const filteredSelectedJobs = selectedJobs.filter(job => job.candidateUserId === userId);
 
   useEffect(() => {
-    setIsLoading(true);
-    dispatch(fetchSelectedJobs());
-    dispatch(fetchSelectedProfileDetails());
-    setIsLoading(false);
+    const fetchData = async () => {
+      setIsLoading(true);
+
+      // Fetch necessary data
+      dispatch(fetchSelectedJobs());
+      dispatch(fetchSelectedProfileDetails());
+
+      if (isVerified === true) {
+        dispatch(fetchServiceProviderDetails(userId));
+        dispatch(updateProviderStatus(isVerified));
+      }
+
+      const filteredJobs = jobs.filter(job => job.postedBy === userId);
+      const sortedJobs = filteredJobs.sort((a, b) => new Date(b.createdOn) - new Date(a.createdOn));
+      const currentDate = new Date();
+      const recentJobs = sortedJobs.filter(job => {
+        const daysDifference = moment(currentDate).diff(moment(job.createdOn), 'days');
+        return daysDifference < 5;
+      });
+
+      setRecentJobs(recentJobs);
+      setIsLoading(false);
+    };
+
+    fetchData();
   }, []);
-  useEffect(() => {
-    dispatch(fetchServiceProviderDetails(user.userId));
-    dispatch(updateProviderStatus(isVerified));
-  }, [user]);
-
-  const [recentJobs, setRecentJobs] = useState([]);
-
-  useEffect(() => {
-    setIsLoading(true);
-    const filteredJobs = jobs.filter(job => job.postedBy === userId);
-    // console.log('filteredJobsfilteredJobsfilteredJobs', filteredJobs);
-    const sortedJobs = filteredJobs.sort((a, b) => new Date(b.createdOn) - new Date(a.createdOn));
-    const currentDate = new Date();
-    const recentJobs = sortedJobs.filter(job => {
-      const daysDifference = differenceInDays(currentDate, new Date(job.createdOn));
-      // setIsLoading(false);
-      return daysDifference < 5;
-    });
-
-    setRecentJobs(recentJobs);
-    setIsLoading(false);
-  }, [jobs, userId]);
-
-  // if (recentJobs[0] && recentJobs[0].area) {
-  //   console.log('Area:', recentJobs[0].area);
-  // } else {
-  //   console.log('Area is undefined or not present in the object.');
-  // }
 
   const filteredSelectedJobss = filteredSelectedJobs.sort((a, b) => new Date(b.timeAgo) - new Date(a.timeAgo));
 
-  // console.log('filteredJobs-jobs-------------------------', jobs);
-  // console.log("filteredSelectedJobss",recentJobs)
   return (
-    <View>
-      {/* {loading ? (
-        <ActivityIndicator color={'black'} size="large" />
-      ) : (
-        <MyJobService filteredJobs={recentJobs} selectedJobs={filteredSelectedJobss} isVerified={isVerified} />
-      )} */}
-      <MyJobService filteredJobs={recentJobs} selectedJobs={filteredSelectedJobss} isVerified={isVerified} />
-    </View>
+    <ScrollView>
+      <MyJobService
+        filteredJobs={recentJobs}
+        selectedJobs={filteredSelectedJobss}
+        isVerified={isVerified}
+        loading={loading}
+      />
+    </ScrollView>
   );
 };
 

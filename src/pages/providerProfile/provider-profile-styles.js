@@ -21,7 +21,7 @@ function ProviderProfileStyles() {
       marginVertical: Margin.m_10,
     },
     verification: {
-      FontFamily: FontFamily.helvetica,
+      fontFamily: FontFamily.helvetica,
       color: Color.colorBlack,
       fontSize: FontSize.size_22,
       fontStyle: 'normal',
@@ -58,7 +58,7 @@ function ProviderProfileStyles() {
       color: Color.colorBlack,
       fontFamily: FontFamily.helvetica,
       // fontSize: FontSize.size_8,
-      fontSize:12,
+      fontSize: 12,
       fontStyle: 'normal',
       fontWeight: '300',
       letterSpacing: 0.8,
@@ -290,7 +290,7 @@ function ProviderProfileStyles() {
       opacity: 0,
     },
     hide: {
-      opacity: 1
+      opacity: 1,
     },
     inputErrorStyles: {
       borderColor: Color.colorRed,

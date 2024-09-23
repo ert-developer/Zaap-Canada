@@ -1047,7 +1047,7 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   verification: {
-    FontFamily: FontFamily.helvetica,
+    fontFamily: FontFamily.helvetica,
     color: Color.colorBlack,
     fontSize: FontSize.size_22,
     fontStyle: 'normal',
@@ -1342,7 +1342,7 @@ const styles = StyleSheet.create({
     marginVertical: Margin.m_10,
   },
   verification: {
-    FontFamily: FontFamily.helvetica,
+    fontFamily: FontFamily.helvetica,
     color: Color.colorBlack,
     fontSize: FontSize.size_22,
     fontStyle: 'normal',

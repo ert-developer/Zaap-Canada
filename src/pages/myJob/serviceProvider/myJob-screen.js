@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useMemo, useCallback} from 'react';
-import {View, SafeAreaView, FlatList, ScrollView, Text, ActivityIndicator, RefreshControl} from 'react-native';
+import {View, SafeAreaView, FlatList, Text, ActivityIndicator, RefreshControl} from 'react-native';
 import MyjobsCardList from '../../../organisms/myjobscardlist/myjobscardList-component';
 import MyJobStyles from './myJob-styles';
 import {useSelector, useDispatch} from 'react-redux';
@@ -13,9 +13,11 @@ import {fetchServiceProviderDetails} from '../../../redux/providerstatus/action'
 import {fetchAllJobs, fetchCategories, fetchSpotlightJobs} from '../../../redux/home/action';
 import {Color} from '../../../assets/static/globalStyles';
 import {envConfig} from '../../../assets/helpers/envApi';
+import {ScrollView} from 'react-native-gesture-handler';
 
-const MyJobService = ({filteredJobs, selectedJobs}) => {
+const MyJobService = ({filteredJobs, selectedJobs, loading}) => {
   const navigation = useNavigation();
+
   const styles = useMemo(() => MyJobStyles(), []);
   const providerStatus = useSelector(state => state.providerverification.providerDetails);
   const isVerified = providerStatus[0]?.isverified;
@@ -24,7 +26,6 @@ const MyJobService = ({filteredJobs, selectedJobs}) => {
 
   const [loader, setLoader] = useState(true);
   useEffect(() => {
-    setLoader(true);
     const fetchAllJobDetails = async () => {
       const jobDetailsPromises = selectedJobs.map(async job => {
         try {
@@ -43,19 +44,11 @@ const MyJobService = ({filteredJobs, selectedJobs}) => {
       }, {});
 
       setJobDetailsMap(jobDetailsObject);
-      dispatch(fetchServiceProviderDetails(user.userId));
-
-      dispatch(fetchAllJobs());
-      dispatch(fetchCategories());
-      fetchSpotlightJobs();
-      // fetchFreeFeatured();
-      dispatch(fetchSelectedJobs());
-      dispatch(fetchSelectedProfileDetails());
+      setLoader(false);
     };
 
     fetchAllJobDetails();
-    setLoader(false);
-  }, [selectedJobs, dispatch]);
+  }, []);
 
   const renderItem = ({item}) => {
     const {
@@ -150,15 +143,15 @@ const MyJobService = ({filteredJobs, selectedJobs}) => {
   const [load, setLoad] = useState(false);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    // Set interval to trigger the OnRefreshHandler every 5 seconds
-    const interval = setInterval(() => {
-      OnRefreshHandler(); // Trigger the refresh handler
-    }, 10000); // Trigger every 5 seconds
+  // useEffect(() => {
+  //   // Set interval to trigger the OnRefreshHandler every 5 seconds
+  //   const interval = setInterval(() => {
+  //     OnRefreshHandler(); // Trigger the refresh handler
+  //   }, 10000); // Trigger every 5 seconds
 
-    // Clear interval on component unmount
-    return () => clearInterval(interval);
-  }, []);
+  //   // Clear interval on component unmount
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const OnRefreshHandler = () => {
     // Create an array of dispatches as promises
@@ -177,7 +170,7 @@ const MyJobService = ({filteredJobs, selectedJobs}) => {
       <ScrollView
         refreshControl={<RefreshControl refreshing={load} onRefresh={OnRefreshHandler} />}
         style={{backgroundColor: Color.colorWhite, height: '100%', paddingTop: 20}}>
-        {loader ? (
+        {loading ? (
           <ActivityIndicator color={'black'} size="large" />
         ) : (
           <>

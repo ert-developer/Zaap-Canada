@@ -27,7 +27,7 @@ function ContactUsQuestionsStyles() {
     title: {
       fontSize: widthToDp(5),
       color: Color.colorIndigo2,
-      FontFamily: FontFamily.helvetica,
+      fontFamily: FontFamily.helvetica,
       fontWeight: 'bold',
       textAlign: 'center',
     },
@@ -86,13 +86,13 @@ function ContactUsQuestionsStyles() {
       marginRight: heightToDp(0.8),
       // textAlign: 'justify',
       paddingLeft: Padding.p_5,
-      FontFamily: FontFamily.helvetica,
+      fontFamily: FontFamily.helvetica,
     },
     answerTextStyle: {
       padding: Padding.p_5,
       textAlign: 'justify',
       fontSize: 13,
-      FontFamily: FontFamily.poppins,
+      fontFamily: FontFamily.poppins,
       fontWeight: 'normal',
     },
     minusIconStyle: {

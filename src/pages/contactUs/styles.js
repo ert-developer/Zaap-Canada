@@ -64,7 +64,7 @@ function ContactStyles() {
     helpTitleDescription: {
       fontSize: widthToDp(4),
       color: 'gray',
-      FontFamily: 'Inter',
+      fontFamily: 'Inter',
       textAlign: 'center',
       fontWeight: 'bold',
       marginTop: widthToDp(4),
@@ -78,7 +78,7 @@ function ContactStyles() {
       marginTop: widthToDp(2),
     },
     faqCategoryButton: {
-      FontFamily: FontFamily.helvetica,
+      fontFamily: FontFamily.helvetica,
       fontWeight: '600',
     },
     faqCategoryButtonContainer: {
