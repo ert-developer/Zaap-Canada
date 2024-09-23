@@ -677,7 +677,13 @@ const ProviderProfile = ({
           return (
             // <View>
             <View style={styles.row}>
-              <CheckBox value={toggleCheckBox} onValueChange={handleCheckBoxClick} />
+              <TouchableOpacity onPress={handleCheckBoxClick} style={styles.iconContainer}>
+                <Icon
+                  name={toggleCheckBox ? 'check-box' : 'check-box-outline-blank'} // Use appropriate icon names
+                  size={24} // Adjust size as needed
+                  color={toggleCheckBox ? Color.colorIndigo2 : 'grey'} // Adjust colors as needed
+                />
+              </TouchableOpacity>
               <CustomText
                 text="By submitting, you accept the terms of the Independent Contractor Agreement"
                 style={styles.check}
@@ -1574,6 +1580,8 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_14,
     fontWeight: '700',
     paddingVertical: Padding.p_5,
+    marginLeft: 10,
+    marginTop: 5,
   },
   // categoryButtonContainer: {
   //   flex: 1,

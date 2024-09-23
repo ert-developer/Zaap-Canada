@@ -74,8 +74,21 @@ const IdentityVerificationScreen = ({OpenServiceProvideForm, isLoading}) => {
               </View>
             </View>
             <CustomButton
-              title={isLoading ? <ActivityIndicator size={20} color={'white'} /> : 'CONTINUE'}
-              style={styles.startVerificationButton}
+              title={
+                isLoading ? (
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <ActivityIndicator size={20} color={'white'} />
+                  </View>
+                ) : (
+                  'CONTINUE'
+                )
+              }
+              style={[styles.startVerificationButton, isLoading && {justifyContent: 'center'}]}
               textStyle={styles.verificationttext}
               onPress={OpenServiceProvideForm}
             />
@@ -157,7 +170,7 @@ const styles = StyleSheet.create({
   },
   verticalLine: {
     width: 2,
-    height: 50,
+    height: heightToDp(7.3),
     backgroundColor: 'grey',
     borderStyle: 'dashed',
   },
