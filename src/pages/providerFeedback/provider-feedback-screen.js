@@ -49,7 +49,6 @@ const ProviderFeedbackScreen = ({
   const languages = providerStatus[0]?.languages_known || [];
 
   // Determine how to format the languages for display
-  languages = languages[0];
   let firstLineLanguages = '';
   let secondLineLanguages = '';
   let thirdLineLanguages = '';

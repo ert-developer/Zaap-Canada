@@ -52,7 +52,7 @@ const CardJobs = ({image, title, price, jobAdType, timeAgo, category, location})
         source={{uri: image}}
       />
       <View style={styles.textContainer}>
-        <View style={styles.SvgtextContainer}>
+        <View>
           <View style={styles.spotlightBannerContainer}>
             <Text numberOfLines={1} ellipsizeMode="tail" style={styles.name}>
               {truncatedTitle}
@@ -83,8 +83,8 @@ export default CardJobs;
 const styles = StyleSheet.create({
   spotLightbannerText: {
     position: 'absolute',
-    fontSize: heightToDp(1.32),
-    right: 4,
+    fontSize: heightToDp(1.19),
+    right: 0,
     top: 4,
     color: 'black',
     fontWeight: 'bold',
@@ -104,10 +104,10 @@ const styles = StyleSheet.create({
   },
   spotlightText: {
     position: 'absolute',
-    fontSize: heightToDp(1.32),
+    fontSize: heightToDp(1.19),
     color: 'white',
     top: 4,
-    left: 15,
+    left: 12,
     fontWeight: 'bold',
     // letterSpacing:1
   },
@@ -147,6 +147,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.helvetica,
     color: Color.colorIndigo2,
     width: widthToDp(50),
+    marginTop: 4,
   },
   within15Kms: {
     fontSize: heightToDp(1.5),

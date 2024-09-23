@@ -166,7 +166,7 @@ const MyjobsCardList = ({
             }}
           />
           <View style={styles.textContainer}>
-            <View style={styles.SvgtextContainer}>
+            <View>
               <View style={styles.spotlightBannerContainer}>
                 <Text numberOfLines={1} ellipsizeMode="tail" style={styles.name}>
                   {truncatedTitle}
@@ -220,12 +220,13 @@ const styles = StyleSheet.create({
   bannerContainer: {
     position: 'relative',
     right: 40,
+    top: -1,
   },
   spotlightText: {
     position: 'absolute',
-    fontSize: heightToDp(1.32),
-    right: 4,
-    top: 4,
+    fontSize: heightToDp(1.2),
+    right: 0,
+    top: 2,
     color: 'black',
     fontWeight: 'bold',
   },
