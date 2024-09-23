@@ -5,12 +5,14 @@ import {heightToDp, widthToDp} from '../../responsive/responsive';
 import CustomText from '../../atoms/text/textComponent';
 import {FontSize, Margin, Color} from '../../assets/static/globalStyles';
 import CircleCheckbox from '../../atoms/circleCheckbox/circleCheckbox-component';
+import RupeeSvgComponent from '../../assets/svgIcons/RupeeIcon/rupeeiconsvg';
 import FeatureCheckBox from '../featurecheckboxlist';
 import CheckBox from '@react-native-community/checkbox';
 import {useSelector} from 'react-redux';
 import firestore from '@react-native-firebase/firestore';
 import SpotlightCheckBox from '../spotlightcheckboxlist';
 import {envConfig} from '../../assets/helpers/envApi';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const DropdownComponent = ({
   data,
@@ -156,7 +158,13 @@ const DropdownComponent = ({
             <CustomText text={remainingAds} style={styles.reaminingAdsText} />
           </View>
           <TouchableOpacity style={styles.useAdTextContainer} onPress={onPressCheckBox} disabled={remainingAds === 0}>
-            <CheckBox value={usedCheckBox} onValueChange={onPressCheckBox} disabled={remainingAds === 0} />
+            <View style={styles.iconContainer}>
+              <Icon
+                name={usedCheckBox ? 'check-box' : 'check-box-outline-blank'} // Change icon name based on state
+                size={24} // Size of the icon
+                color={remainingAds === 0 ? 'gray' : Color.colorIndigo2} // Adjust color based on availability
+              />
+            </View>
             <CustomText text={remainingAds > 0 ? 'Use 1 For This Ad' : 'No Ads Left to Use'} style={styles.useAdText} />
           </TouchableOpacity>
         </View>
@@ -173,7 +181,7 @@ const DropdownComponent = ({
       ) : null}
 
       {available === 'BUY' && value === 'SPOTLIGHT' ? (
-        <View style={styles.spotlightContainer}>
+        <View style={styles.featuredContainer}>
           <SpotlightCheckBox
             GetSpotlightPaymentAmount={GetSpotlightPaymentAmount}
             paymentAmount={paymentAmount}
@@ -196,6 +204,9 @@ const styles = StyleSheet.create({
     color: '#5a2daf',
     marginBottom: Margin.m_10,
   },
+  iconContainer: {
+    marginRight: 8, // Add some spacing between the icon and text
+  },
   tagContainer: {
     flexDirection: 'row',
   },
@@ -214,16 +225,7 @@ const styles = StyleSheet.create({
     fontsize: heightToDp(2),
   },
   featuredContainer: {
-    marginTop: heightToDp(3),
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-
-    elevation: 3,
+    marginTop: heightToDp(2),
   },
   purchase: {
     backgroundColor: '#5A2DAF',

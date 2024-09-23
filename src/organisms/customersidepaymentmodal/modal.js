@@ -1054,6 +1054,7 @@ const CustomerSidePaymentModel = () => {
                             setCustomText(numericText);
                           }}
                           placeholder="Enter custom text"
+                          placeholderTextColor={Color.colorSilver}
                           style={{
                             borderWidth: 1,
                             borderColor: '#D9D9D9',

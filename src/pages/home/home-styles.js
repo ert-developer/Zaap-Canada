@@ -197,7 +197,7 @@ function HomeStyles() {
       color: 'black',
       fontFamily: FontFamily.helvetica,
       textAlign: 'center',
-      fontSize: FontSize.size_10,
+      fontSize: widthToDp(2.7), // Adjust the value based on the desired size
       marginTop: 2,
     },
     textSpotlight: {

@@ -140,6 +140,9 @@ const styles = StyleSheet.create({
   amountText: {
     color: 'green',
   },
+  text: {
+    fontWeight: '600',
+  },
 });
 
 export default FeatureCheckBox;

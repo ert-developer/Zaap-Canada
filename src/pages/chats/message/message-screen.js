@@ -246,6 +246,7 @@ const ChatScreenExample = ({data, allChat}) => {
                 value={newMessage}
                 onChangeText={text => setNewMessage(text)}
                 editable={data.isDisabled ? false : true}
+                placeholderTextColor={Color.colorSilver}
               />
               <View style={[styles.row, styles.camsend]}>
                 <Camera />

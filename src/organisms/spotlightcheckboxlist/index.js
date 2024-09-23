@@ -140,6 +140,9 @@ const styles = StyleSheet.create({
     marginLeft: 90,
     marginTop: 2,
   },
+  text: {
+    fontWeight: '600',
+  },
 });
 
 export default SpotlightCheckBox;

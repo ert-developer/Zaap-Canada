@@ -141,7 +141,7 @@ const premiumAdsCartStyles = () => {
       borderRadius: 5,
       alignItems: 'center',
       width: widthToDp(90),
-      height: heightToDp(32),
+      height: heightToDp(25),
       // height: heightToDp(30),
     },
     modalSuccessText: {

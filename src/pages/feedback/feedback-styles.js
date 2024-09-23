@@ -1,4 +1,4 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet, Dimensions, Platform} from 'react-native';
 import {Border, Color, FontFamily, FontSize, Margin, Padding} from '../../assets/static/globalStyles';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 
@@ -20,7 +20,7 @@ const feedbackStyles = () => {
       shadowRadius: 4,
       padding: widthToDp(3),
       //   height: widthToDp(15),
-      height: heightToDp(88),
+      height: Platform.OS === 'ios' ? heightToDp(80) : heightToDp(88),
     },
     label: {
       color: Color.colorBlack,
@@ -83,6 +83,7 @@ const feedbackStyles = () => {
       textAlign: 'center',
       padding: widthToDp(2),
       color: Color.colorBlack,
+      fontWeight: '500',
     },
   });
 };
