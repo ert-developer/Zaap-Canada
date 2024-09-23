@@ -215,9 +215,6 @@ const styles = StyleSheet.create({
   svgStyles: {
     marginTop: widthToDp(3),
     marginLeft: widthToDp(3),
-    borderWidth: 1,
-    borderColor: 'red',
-    borderStyle: 'solid',
   },
   svgTextContainer: {
     paddingLeft: widthToDp(14),

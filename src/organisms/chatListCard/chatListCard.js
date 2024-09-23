@@ -34,8 +34,6 @@ export const ChatCard = ({data}) => {
           const latestMessage = otherUserMessages.sort((a, b) => new Date(b.sendTime) - new Date(a.sendTime))[0];
 
           setLastMessageTime(latestMessage.sendTime); // Store the latest message's timestamp
-        } else {
-          console.log('No messages from the other user found');
         }
       } else {
         console.warn('No messages found');

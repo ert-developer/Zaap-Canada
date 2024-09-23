@@ -20,8 +20,6 @@ const DeletePortfolioDetailsModal = ({
     try {
       setdeletePortfolio(true);
       await onDeletePortfolio(deletePotfolioId);
-
-      navigation.navigate('Portfolio');
     } catch (error) {
       console.error('Error deleting portfolio:', error);
     } finally {
@@ -29,12 +27,14 @@ const DeletePortfolioDetailsModal = ({
     }
   };
 
+  const closeModal = () => {
+    setShowDeletePortfolioModal(false);
+    navigation.navigate('Portfolio');
+  };
+
   return (
     <View>
-      <Modal
-        isVisible={showDeletePortfolioModal}
-        style={styles.modalContainer}
-        onBackdropPress={() => setShowDeletePortfolioModal(false)}>
+      <Modal isVisible={showDeletePortfolioModal} style={styles.modalContainer} onBackdropPress={() => closeModal()}>
         <View style={styles.modalContent}>
           {deletePortfolio ? (
             <View

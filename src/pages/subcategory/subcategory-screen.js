@@ -1,16 +1,14 @@
 import React from 'react';
 import {View, FlatList, SafeAreaView, StyleSheet, Text, ScrollView} from 'react-native';
-import CustomText from '../../atoms/text/textComponent';
-import BackIcon from '../../assets/svgIcons/common';
 import JobList from '../../organisms/jobList/jobList';
 import {heightArea, heightToDp} from '../../responsive/responsive';
 import HeaderComponent from '../../atoms/header/headerComponent';
-import {Color, FontFamily, FontSize, Margin} from '../../assets/static/globalStyles';
+import {Color, FontFamily, FontSize} from '../../assets/static/globalStyles';
 
-const SubCategoryScreen = ({subCategory, handleJobPress, navigationBack}) => {
+const SubCategoryScreen = ({subCategory, handleJobPress}) => {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <HeaderComponent text={'Sub Categories'} />
+      <HeaderComponent text={`${subCategory}`} />
       <ScrollView style={{backgroundColor: Color.colorWhite}}>
         {subCategory.length > 0 ? (
           <FlatList
@@ -20,7 +18,7 @@ const SubCategoryScreen = ({subCategory, handleJobPress, navigationBack}) => {
           />
         ) : (
           <View style={styles.noDataContainer}>
-            <Text style={styles.noData}> No jobs to display for this sub-category</Text>
+            <Text style={styles.noData}> No {subCategory} jobs to display</Text>
           </View>
         )}
       </ScrollView>

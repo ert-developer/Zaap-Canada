@@ -198,6 +198,7 @@ function HomeStyles() {
       fontFamily: FontFamily.helvetica,
       textAlign: 'center',
       fontSize: FontSize.size_10,
+      marginTop: 2,
     },
     textSpotlight: {
       fontFamily: 'Poppins-Bold',

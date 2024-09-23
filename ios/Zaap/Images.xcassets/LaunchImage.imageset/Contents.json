@@ -1,20 +1,16 @@
 {
   "images": [
     {
-      "filename": "LaunchImage.gif",
+      "filename": "AppIcon-29@3x.png",
       "idiom": "universal",
       "scale": "1x"
     },
     {
-      "filename": "LaunchImage.gif",
+      "filename": "AppIcon-40@3x.png",
       "idiom": "universal",
       "scale": "2x"
     },
-    {
-      "filename": "LaunchImage.gif",
-      "idiom": "universal",
-      "scale": "3x"
-    }
+    {"filename": "AppIcon-60@3x~car.png", "idiom": "universal", "scale": "3x"}
   ],
   "info": {
     "author": "xcode",

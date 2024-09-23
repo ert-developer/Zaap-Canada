@@ -532,6 +532,7 @@
 				DEVELOPMENT_TEAM = B4XX5QV5FV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Zaap/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Zaap Canada";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -542,7 +543,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.zaap-canada-ios";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = "org.reactjs.native.example.zaap-canada-ios";
 				PRODUCT_NAME = Zaap;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -559,6 +561,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B4XX5QV5FV;
 				INFOPLIST_FILE = Zaap/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Zaap Canada";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -570,7 +573,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.zaap-canada-ios";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = "org.reactjs.native.example.zaap-canada-ios";
 				PRODUCT_NAME = Zaap;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
