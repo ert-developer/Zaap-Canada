@@ -1000,6 +1000,7 @@ const CustomerSidePaymentModel = () => {
                         }}
                         placeholder="Enter text here"
                         onChangeText={onChangeText}
+                        numberOfLines={4}
                       />
                     </View>
                   </View>

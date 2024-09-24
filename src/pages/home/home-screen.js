@@ -78,6 +78,7 @@ import {useSelector} from 'react-redux';
 import {tr} from 'date-fns/locale';
 import FastImage from 'react-native-fast-image';
 import {envConfig} from '../../assets/helpers/envApi';
+import {Image} from 'react-native';
 
 const HomeScreen = ({
   navigation,

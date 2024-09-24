@@ -76,7 +76,7 @@ const MyJobsPreviousJobs = () => {
       fetchExpiredJobsData();
       setLoader(false);
     }
-  }, []);
+  }, [isFocused]);
 
   const [olderJobs, setOlderJobs] = useState([]);
 
@@ -110,7 +110,7 @@ const MyJobsPreviousJobs = () => {
 
   return (
     <SafeAreaView style={styles.frameParent}>
-      <ScrollView style={{backgroundColor: 'white', height: '100%'}}>
+      <ScrollView style={{backgroundColor: 'white', height: '100%', paddingTop: 15}}>
         {isLoading ? (
           <ActivityIndicator color={'black'} size="large" />
         ) : (

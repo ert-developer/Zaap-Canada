@@ -162,9 +162,12 @@ const MyJobService = ({filteredJobs, selectedJobs}) => {
 
   const OnRefreshHandler = () => {
     // Create an array of dispatches as promises
+    setLoad(true);
     Promise.all([dispatch(fetchSelectedJobs(), dispatch(fetchAllJobs())), dispatch(fetchSelectedProfileDetails())])
       .then(() => {
         // All promises resolved, stop loading
+
+        setLoad(false);
       })
       .catch(error => {
         console.error('Error refreshing data:', error);

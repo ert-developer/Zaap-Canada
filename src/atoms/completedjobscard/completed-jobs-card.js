@@ -39,6 +39,8 @@ const CompletedJobsCard = ({completedJobs, timeAgoo}) => {
         borderWidth: 1,
         height: 92,
         marginBottom: 10,
+        width: '92%',
+        alignSelf: 'center',
       }}>
       <View style={styles.mainContainer}>
         <View style={styles.frameParent}>
@@ -50,7 +52,7 @@ const CompletedJobsCard = ({completedJobs, timeAgoo}) => {
             />
           </View>
           <View style={styles.textContainer}>
-            <View style={styles.SvgtextContainer}>
+            <View>
               <View style={styles.spotlightBannerContainer}>
                 <Text numberOfLines={2} ellipsizeMode="tail" style={styles.name}>
                   {completedJobs.jobTitle}
@@ -117,16 +119,16 @@ const styles = StyleSheet.create({
   frameParent: {
     flexDirection: 'row',
     backgroundColor: '#fff',
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
     borderRadius: widthToDp(3),
-    marginBottom: heightToDp(0),
-    shadowColor: 'black',
     shadowOffset: {
       width: 0,
       height: heightToDp(0.4),
     },
-    shadowOpacity: 0.8,
-    shadowRadius: 5,
-    elevation: 5,
+    // marginBottom: -10,
   },
   textContainer: {
     flex: 1,

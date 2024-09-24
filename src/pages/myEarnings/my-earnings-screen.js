@@ -49,7 +49,7 @@ const MyEarningScreen = () => {
     <View key={index}>
       <TouchableOpacity onPress={() => navigation.navigate('myEarningsDetails')}>
         <ExclamationSVG style={styles.infoicon} />
-        <CustomText text="" />
+        <CustomText text=" " />
       </TouchableOpacity>
       <View style={styles.card}>
         <View style={styles.cardContent}>

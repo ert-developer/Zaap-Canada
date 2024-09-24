@@ -5,10 +5,10 @@ import {heightArea, heightToDp} from '../../responsive/responsive';
 import HeaderComponent from '../../atoms/header/headerComponent';
 import {Color, FontFamily, FontSize} from '../../assets/static/globalStyles';
 
-const SubCategoryScreen = ({subCategory, handleJobPress}) => {
+const SubCategoryScreen = ({subCategory, subcatname, handleJobPress}) => {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <HeaderComponent text={`${subCategory}`} />
+      <HeaderComponent text={`${subcatname}`} />
       <ScrollView style={{backgroundColor: Color.colorWhite}}>
         {subCategory.length > 0 ? (
           <FlatList
@@ -18,7 +18,7 @@ const SubCategoryScreen = ({subCategory, handleJobPress}) => {
           />
         ) : (
           <View style={styles.noDataContainer}>
-            <Text style={styles.noData}> No {subCategory} jobs to display</Text>
+            <Text style={styles.noData}> No {subcatname} jobs to display</Text>
           </View>
         )}
       </ScrollView>
