@@ -1,5 +1,5 @@
-import { StyleSheet, Dimensions } from 'react-native';
-import { heightToDp } from '../../responsive/responsive';
+import {StyleSheet, Dimensions} from 'react-native';
+import {heightToDp} from '../../responsive/responsive';
 
 const InvoicesStyles = () => {
   const screenWidth = Dimensions.get('window').width;
@@ -25,7 +25,7 @@ const InvoicesStyles = () => {
       borderRadius: 12,
       elevation: 3,
       shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
+      shadowOffset: {width: 0, height: 2},
       shadowOpacity: 0.25,
       shadowRadius: 4,
       margin: 16,
@@ -76,6 +76,7 @@ const InvoicesStyles = () => {
       color: '#000000',
       opacity: 0.7,
       textTransform: 'uppercase',
+      marginBottom: 3,
     },
     dateText: {
       fontSize: 10,
@@ -117,7 +118,7 @@ const InvoicesStyles = () => {
       borderRadius: 12,
       elevation: 3,
       shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
+      shadowOffset: {width: 0, height: 2},
       shadowOpacity: 0.25,
       shadowRadius: 4,
       padding: 16,

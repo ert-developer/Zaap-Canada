@@ -5,6 +5,7 @@ import Geocoding from 'react-native-geocoding';
 import {useDispatch, useSelector} from 'react-redux';
 import {currentLocation, latLang, permission} from '../../redux/location/action';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {check, request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 
 const LocationListener = ({onPermissionGranted}) => {
   const [locationName, setLocationName] = useState(null);
@@ -39,6 +40,29 @@ const LocationListener = ({onPermissionGranted}) => {
         } else if (Platform.OS === 'ios') {
           // Implement iOS permission request here
           // You can use a library like react-native-permissions for a unified API
+          const checkLocationPermission = async () => {
+            try {
+              const locationPermission = await check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+              if (locationPermission === RESULTS.GRANTED) {
+                setupLocationListener();
+              } else if (locationPermission === RESULTS.DENIED) {
+                const granted = await request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+                dispatch(permission(granted));
+                if (granted === RESULTS.GRANTED) {
+                  setupLocationListener();
+                } else {
+                  console.log('Location permission denied');
+                }
+              } else if (locationPermission === RESULTS.BLOCKED) {
+                console.log('Location permission is blocked');
+              }
+            } catch (error) {
+              console.error('Error checking or requesting iOS location permission:', error);
+            }
+          };
+
+          // Call the function to check or request location permission
+          checkLocationPermission();
         }
       } catch (error) {
         console.error('Error requesting location permission:', error);

@@ -208,30 +208,6 @@ const SeriveProviderProfileScreen = ({
     setCities([]); // Clear the suggestions after selecting
   };
 
-  // const onChangeSelectedDate = selectedDate => {
-  //   console.log('selectedDateselectedDate', selectedDate);
-  //   toggleDatePicker();
-  //   // Assuming selectedDate is a string in the format '2024-01-22T06:41:00.000Z'
-  //   var selectedDatePickers = selectedDate;
-
-  //   // Convert the date string to a Date object
-  //   var dateObject = new Date(selectedDatePickers);
-
-  //   // Get the individual components of the date
-  //   var month = (dateObject.getMonth() + 1).toString().padStart(2, '0'); // Adding 1 because months are zero-based
-  //   var day = dateObject.getDate().toString().padStart(2, '0');
-  //   var year = dateObject.getFullYear();
-
-  //   // Format the date as 'MM-DD-YYYY'
-  //   var formattedDate = month + '-' + day + '-' + year;
-  //   updateField('dob', formattedDate);
-  //   setSelectDatePicker(formattedDate);
-  // };
-
-  // const toggleDatePicker = () => {
-  //   setShowPicker(!showPicker);
-  // };
-
   return (
     <SafeAreaView style={[styles.safeArea, modalVisible && styles.containerFade]}>
       <StatusBar barStyle="light-content" />
@@ -287,20 +263,11 @@ const SeriveProviderProfileScreen = ({
                   </View>
                 )}
               </View>
-
-              {/* <ImageCompo /> */}
-              {/* <CustomTouchableOpacity style={styles.editButton} onPress={() => setModalVisible(true)}> */}
-
-              {/* </CustomTouchableOpacity> */}
             </View>
             <View style={styles.inputContainer} onTouchEnd={() => setTooltipVisible(!tooltipVisible)}>
               <TextInputWithLabelComponent
                 label="Full Name"
                 value={formData.name}
-                // value={legal_name_on_id}
-                // onHandleChange={text => {
-                //   updateField('name', text);
-                // }}
                 field={'name'}
                 placeholder={'Full Name'}
                 formErrors={formErrors}
@@ -310,49 +277,13 @@ const SeriveProviderProfileScreen = ({
                 style={styles.disabledStyle}
               />
             </View>
-            {/* {loader && <ActivityIndicator size={30} color={'red'} style={{ justifyContent: 'center', alignItems: 'center' }} />} */}
             <View style={[styles.dobAndGenderCon]}>
-              {/* <View style={styles.selectDOB}>
-                  <Pressable
-                  // onPress={toggleDatePicker}
-                  >
-                    <TextInputWithIconComponent
-                      label={'Date of Birth'}
-                      // value={selectDatePicker}
-                      value={date_of_birth}
-                      // onHandleChange={text => updateField('dob', text)}
-                      // field={'dob'}
-                      placeholder={'Select Date'}
-                      formErrors={formErrors}
-                      editable={false}
-                      // onPress={toggleDatePicker}
-                    />
-                  </Pressable>
-                  {showPicker && (
-                    <DateTimePicker
-                      mode="date"
-                      display="spinner"
-                      value={new Date()} // Set the initial value for the date
-                      // onChange={setDate}
-                      maximumDate={new Date(2030, 10, 20)}
-                      minimumDate={new Date(1950, 0, 1)}
-                      timeZoneOffsetInMinutes={60}
-                      timeZoneOffsetInSeconds={3600}
-                      onChange={(event, selectedDate) => onChangeSelectedDate(selectedDate)}
-                    />
-                  )}
-                </View> */}
               <View
                 style={[styles.donAndInputContainer, {marginRight: 14}]}
                 onTouchEnd={() => setTooltipVisible(!tooltipVisible)}>
                 <TextInputWithLabelComponent
                   label="Date of Birth"
-                  // value={formData.name}
                   value={formData.dob}
-                  // onHandleChange={text => {
-                  //   updateField('name', text);
-                  // }}
-                  // field={'name'}
                   input={styles.disableTextColor}
                   placeholder={'Date of Birth'}
                   formErrors={formErrors}
@@ -389,17 +320,12 @@ const SeriveProviderProfileScreen = ({
                 formErrors={formErrors}
                 labeStyle={styles.label}
                 editable
-                // editable={editMode}
-                // selectTextOnFocus={editMode}
               />
             </View>
             <View style={styles.inputContainer} onTouchEnd={() => setTooltipVisible(!tooltipVisible)}>
               <TextInputWithLabelComponent
                 label="Email ID"
                 value={formData.email}
-                // value={email_id}
-                // onHandleChange={text => updateField('email', text)}
-                // field={'email'}
                 placeholder={'abc@gmail.com'}
                 formErrors={formErrors}
                 labeStyle={styles.label}
@@ -407,8 +333,6 @@ const SeriveProviderProfileScreen = ({
                 style={styles.disabledStyle}
                 selectTextOnFocus={false}
               />
-              {/* <CustomText text="EMAIL " style={styles.label} /> */}
-              {/* <CustomText text={user?.email} style={styles.value} /> */}
             </View>
             <View style={styles.inputContainer}>
               <CustomText text="State" style={styles.label} />
@@ -493,40 +417,7 @@ const SeriveProviderProfileScreen = ({
                 listMode="MODAL"
                 maxHeight={250}
               />
-
-              {/* <ScrollView horizontal={true}>
-                {selectedLanguages.map((language, index) => (
-                  <View key={index} style={{flexDirection: 'row', alignItems: 'center', marginRight: 10}}>
-                    <Text>{language}</Text>
-                    <TouchableOpacity onPress={() => handleDeleteText(index)}>
-                      <Text style={{color: 'red', marginLeft: 3}}>X</Text>
-                    </TouchableOpacity>
-                  </View>
-                ))}
-              </ScrollView> */}
             </View>
-            {/* <View style={styles.inputContainer}>
-              <Text style={styles.label}>Languages Known</Text>
-              <View style={styles.textInputWithTagsContainer}>
-                <ScrollView horizontal contentContainerStyle={styles.tagsContainer}>
-                  <TextInput
-                    style={styles.textInput}
-                    value={formData.languagesKnown}
-                    onChangeText={text => handleTextChange(text)}
-                    placeholder="Type language name and press Enter"
-                    onSubmitEditing={handleTextInputSubmit}
-                  />
-                  {enteredTexts.map((enteredText, index) => (
-                    <View key={index} style={styles.tag}>
-                      <Text style={styles.tagText}>{enteredText}</Text>
-                      <TouchableOpacity onPress={() => handleDeleteText(index)}>
-                        <Text style={styles.deleteText}>X</Text>
-                      </TouchableOpacity>
-                    </View>
-                  ))}
-                </ScrollView>
-              </View>
-            </View> */}
 
             <View style={styles.inputContainer}>
               <CustomText text={'Professional Bio'} style={styles.label} />
@@ -543,23 +434,11 @@ const SeriveProviderProfileScreen = ({
                 maxLength={500}
                 placeholderTextColor={'silver'}
               />
+              <CustomText
+                text={`${500 - formData.professionBio.toString().length} Characters left`}
+                style={styles.charLeftText}
+              />
             </View>
-            {/* {providerStatus ? (
-                <View style={styles.inputContainer}>
-                  <CustomText text="BIO" style={styles.label} />
-                  <TextAreaInputComponent
-                    style={styles.input}
-                    onChangeText={text => updateField('bio', text)}
-                    value={bio}
-                    // placeholder="I have an experience of 8 years in mobile phone repairing."
-                    multiline
-                    numberOfLines={4}
-                    formErrors={formErrors}
-                    editable={editMode}
-                    selectTextOnFocus={editMode}
-                  />
-                </View>
-              ) : null} */}
 
             <View style={[styles.row1]}>
               <CustomButton

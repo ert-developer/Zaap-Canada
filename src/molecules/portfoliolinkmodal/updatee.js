@@ -7,33 +7,33 @@ import {AddPortfolioPop} from '../../assets/svgIcons/bottomdrawersvg';
 import FastImage from 'react-native-fast-image';
 import {useNavigation} from '@react-navigation/native';
 
-const PortfolioUpdatePopup = ({portfolioUpdated, setPortfolioUpdated}) => {
+const PortfolioAddPopup = ({portfolioAdded, setPortFolioAdded}) => {
   const navigation = useNavigation();
 
-  const handleBackdropPress = () => {
-    setPortfolioUpdated(false);
+  const handleClose = () => {
+    setPortFolioAdded(false);
     navigation.navigate('Portfolio');
   };
 
   return (
     <View>
-      <Modal isVisible={portfolioUpdated} style={styles.modalContainer} onBackdropPress={handleBackdropPress}>
+      <Modal isVisible={portfolioAdded} style={styles.modalContainer} onBackdropPress={handleClose}>
         <View style={styles.modalContent}>
-          <View style={{width: heightToDp(43)}}>
-            <View style={{justifyContent: 'center', alignItems: 'center', padding: heightToDp(1.5)}}>
+          <View style={{width: heightToDp(37), height: heightToDp(18)}}>
+            <View style={{justifyContent: 'center', alignItems: 'center', alignSelf: 'center', marginTop: 5}}>
               <Image
                 style={{width: 100, height: 100}}
                 source={require('../../assets/Success.gif')}
                 resizeMode={FastImage.resizeMode.contain}
               />
               <CustomText
-                text={'Portfolio Updated Successfully!'}
+                text={'Portfolio Added Successfully !'}
                 style={{
                   color: '#464183',
                   fontFamily: 'Roboto',
-                  fontSize: heightToDp(2.5),
-                  marginVertical: heightToDp(2),
-                  marginBottom: heightToDp(5),
+                  fontSize: heightToDp(2.3),
+                  marginVertical: heightToDp(0.2),
+                  marginBottom: 0,
                 }}
               />
             </View>
@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PortfolioUpdatePopup;
+export default PortfolioAddPopup;

@@ -33,7 +33,10 @@ const ChatScreenExample = ({data, allChat}) => {
   const user = useSelector(state => state.Auth.user);
   const serviceProviderDetails = useSelector(state => state.providerverification.providerDetails);
 
-  const {photoURL, imageUrl, isServiceProvider} = data;
+  let {photoURL, imageUrl, isServiceProvider} = data;
+  if (photoURL) {
+    isServiceProvider = true;
+  }
   const styles = useMemo(() => ChatStyles(), []);
   const [messages, setMessages] = useState(allChat);
   const [newMessage, setNewMessage] = useState('');
@@ -101,7 +104,7 @@ const ChatScreenExample = ({data, allChat}) => {
               }}>
               {item.message}
             </Text>
-            <Text style={{...styles.timeStamp, textAlign: 'right', marginRight: 5}}>{formattedTime}</Text>
+            <Text style={{...styles.timeStamp, textAlign: 'right', marginRight: 5}}> {formattedTime}</Text>
           </View>
         )}
         {/* {item.from !== user.userId ? renderAvatar(imageUrl) : renderAvatar(photoURL)} */}
@@ -115,6 +118,8 @@ const ChatScreenExample = ({data, allChat}) => {
             ? renderAvatar(photoURL)
             : renderAvatar(user.imageUrl)
           : null}
+        {isServiceProvider === undefined ? renderAvatar(undefined) : null}
+
         {item.from !== user.userId && (
           <View style={{flexDirection: 'column'}}>
             <Text
@@ -133,6 +138,8 @@ const ChatScreenExample = ({data, allChat}) => {
       </Animated.View>
     );
   };
+
+  console.log(isServiceProvider);
 
   const keyExtractor = (item, index) => index.toString();
 
@@ -222,6 +229,12 @@ const ChatScreenExample = ({data, allChat}) => {
           <View>
             {renderAvatar()}
             <CustomText text={data.displayName} style={styles.displayName} />
+            {/* <CustomButton
+              title="View Profile"
+              style={styles.button}
+              textStyle={styles.buttonText}
+              onPress={navigateProfile}
+            /> */}
           </View>
           <CustomText
             text={isServiceProvider === false || isServiceProvider === 'no' ? 'Customer' : 'Service Provider'}
@@ -232,6 +245,10 @@ const ChatScreenExample = ({data, allChat}) => {
             data={allChat}
             renderItem={renderMessage}
             keyExtractor={keyExtractor}
+            // style={{flex: 1}}
+            // ref={ref => {
+            //   scrollViewRef.current = ref;
+            // }}
             onContentSizeChange={() => flatListRef.current.scrollToEnd({animated: true})}
           />
 

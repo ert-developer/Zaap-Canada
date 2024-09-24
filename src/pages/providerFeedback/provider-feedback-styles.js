@@ -45,6 +45,8 @@ function profileScreenStyle() {
       fontSize: FontSize.size_22,
       fontWeight: 'bold',
       color: Color.colorBlack,
+      marginBottom: 5,
+      marginLeft: 5,
     },
     verificationAndReviews: {
       flexDirection: 'row',
@@ -88,8 +90,10 @@ function profileScreenStyle() {
     profileBio: {
       marginTop: Margin.m_16,
       lineHeight: widthToDp(6),
-      fontSize: FontSize.size_14,
+      fontSize: FontSize.size_12,
       textAlign: 'justify',
+      color: '#617088',
+      marginLeft: -20,
     },
     reviewsHeadingContainer: {
       flexDirection: 'row',

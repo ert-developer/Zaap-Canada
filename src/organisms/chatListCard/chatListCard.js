@@ -187,6 +187,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center', // Centers text vertically (Android)
     alignSelf: 'center', // Ensures it doesn't take full width of parent
     marginRight: 20,
+    overflow: 'hidden',
   },
 
   redDot: {

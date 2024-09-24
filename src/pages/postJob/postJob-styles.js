@@ -10,9 +10,9 @@ function PostJobStyles() {
       paddingBottom: heightToDp(2),
     },
     charLeftText: {
-      color: Color.colorRed,
-      fontSize: 10,
-      fontWeight: '400',
+      color: '#464183',
+      fontSize: 12,
+      fontWeight: '500',
       textAlign: 'right',
     },
     container: {
@@ -72,7 +72,7 @@ function PostJobStyles() {
       color: Color.colorBlack,
       fontWeight: '700',
       fontSize: FontSize.size_14,
-      marginBottom: Margin.m_4,
+      marginTop: 2,
     },
     premiumAdInput: {
       marginLeft: widthToDp(5),

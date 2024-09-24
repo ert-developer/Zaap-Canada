@@ -41,14 +41,15 @@ const MyJobsPreviousJobs = () => {
       const data = querySnapshot.docs.map(doc => doc.data());
       // console.log("datadatadata",data)
       setCompletedJobs(data);
-      setLoader(false);
     } catch (error) {
       console.error('Error fetching Completed Jobs data:', error);
+    } finally {
+      setLoader(false);
     }
   };
 
   useEffect(() => {
-    if (isFocused) {
+    if (isFocused && isVerified === 'verified') {
       fetchCompletedJobs();
       setLoader(false);
     }
@@ -62,19 +63,20 @@ const MyJobsPreviousJobs = () => {
       const querySnapshot = await getDocs(q);
       const data = querySnapshot.docs.map(doc => doc.data());
       setExpiredJobs(data);
-      setLoader(false);
     } catch (error) {
       console.error('Error fetching Customer Feedback data:', error);
       // Handle error if needed
+    } finally {
+      setLoader(false);
     }
   };
 
   useEffect(() => {
-    if (isFocused) {
+    if (isFocused && isVerified !== 'verified') {
       fetchExpiredJobsData();
       setLoader(false);
     }
-  }, [isFocused]);
+  }, []);
 
   const [olderJobs, setOlderJobs] = useState([]);
 
@@ -88,45 +90,15 @@ const MyJobsPreviousJobs = () => {
       return daysDifference >= 5;
     });
     setOlderJobs(olderJobs);
+    setLoader(false);
   }, [jobs, userId]);
 
   const renderItem = ({item}) => {
-    const {
-      jobTitle,
-      jobDescription,
-      salary,
-      imageUrls = [],
-      category,
-      createdOn,
-      address,
-      subCategory,
-      startdate,
-      starttime,
-      isExpired,
-    } = item;
+    const {createdOn} = item;
 
     const timeAgo = moment(createdOn).fromNow();
 
-    const JobsList = {
-      jobTitle,
-      category,
-      subCategory,
-      salary,
-      jobDescription,
-      imageUrls,
-      timeAgo,
-      address,
-      starttime,
-      startdate,
-      isExpired,
-      createdOn,
-    };
-
     return isVerified === 'verified' ? null : <CompletedJobsCard completedJobs={item} timeAgoo={timeAgo} />;
-
-    // <View>
-    //   <MyjobsCardList JobsList={JobsList} accordianStatus={false} cardModal={true} />
-    // </View>
   };
 
   const renderItemcompletedJobs = ({item}) => {

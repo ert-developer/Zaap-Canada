@@ -671,7 +671,7 @@ const PreviousJobsPaymentModal = () => {
                     }}>
                     <NewInfoIcon />
 
-                    <Text style={{fontSize: heightToDp(1.5)}}>
+                    <Text style={{fontSize: heightToDp(1.3), color: Color.colorBlack}}>
                       Ask customer to provide Validation key to begin the work
                     </Text>
                   </View>
@@ -808,6 +808,8 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     fontFamily: 'Helvetica',
     color: '#000',
+    marginTop: 3,
+    marginBottom: 3,
   },
   iconWithTick: {
     alignItems: 'center',

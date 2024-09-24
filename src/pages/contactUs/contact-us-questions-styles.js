@@ -1,7 +1,6 @@
 import {StyleSheet, Platform} from 'react-native';
-import {Border, Color, FontFamily, FontSize, Margin, Padding} from '../../assets/static/globalStyles';
+import {Color, FontFamily, Padding} from '../../assets/static/globalStyles.js';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
-import {he} from 'date-fns/locale';
 
 function ContactUsQuestionsStyles() {
   const styles = StyleSheet.create({
@@ -79,7 +78,7 @@ function ContactUsQuestionsStyles() {
     },
     questionTextStyle: {
       fontSize: 16,
-      fontWeight: '600',
+      fontWeight: '400',
       color: Color.colorBlack,
       flex: 1,
       flexWrap: 'wrap',

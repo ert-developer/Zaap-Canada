@@ -3,6 +3,7 @@ import React from 'react';
 import {Modal, View, Text, TouchableWithoutFeedback} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import CustomText from '../../atoms/text/textComponent';
+import {Image} from 'react-native';
 
 const VerificationInProgressModal = ({visible, onClose}) => {
   return (

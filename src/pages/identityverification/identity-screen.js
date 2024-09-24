@@ -18,10 +18,10 @@ const IdentityVerificationScreen = ({OpenServiceProvideForm, isLoading}) => {
             <CustomText text={'Verify your identity to'} style={styles.svgText} />
             <View style={styles.identityTextCOntainer}>
               <CustomText text={'begin working with'} style={styles.svgText} />
-              <CustomText text={' Zaap!'} style={styles.zaapText} />
+              <CustomText text={' ZAAP!'} style={styles.zaapText} />
             </View>
             <View style={styles.encryptedcontainer}>
-              <Text style={styles.subSvgText}>A few Minutes is all it takes...</Text>
+              <Text style={styles.subSvgText}>A Few Minutes is all it takes...</Text>
               <Text style={styles.subSvgText}>Your Data is encrypted and fully secured.</Text>
             </View>
           </View>
@@ -116,8 +116,9 @@ const styles = StyleSheet.create({
 
   infotext: {
     width: widthToDp(60),
-    fontSize: widthToDp(3),
+    fontSize: widthToDp(2.5),
     // padding: widthToDp(5),
+    marginLeft: -10,
   },
   info: {
     flexDirection: 'row',
@@ -170,9 +171,10 @@ const styles = StyleSheet.create({
   },
   verticalLine: {
     width: 2,
-    height: heightToDp(7.3),
+    height: heightToDp(5.9),
     backgroundColor: 'grey',
-    borderStyle: 'dashed',
+    borderStyle: 'solid',
+    borderWidth: 1,
   },
   circleContainer: {
     flexDirection: 'row',
@@ -234,7 +236,7 @@ const styles = StyleSheet.create({
     paddingTop: heightToDp(2),
   },
   svgText: {
-    fontSize: heightToDp(2.5),
+    fontSize: heightToDp(2.3),
     color: 'black',
     letterSpacing: widthToDp(0.2),
     fontFamily: 'Helvetica',
@@ -261,7 +263,7 @@ const styles = StyleSheet.create({
     // borderWidth:3
   },
   statusLine: {
-    backgroundColor: 'lightgray',
+    backgroundColor: Color.colorGray,
     width: '100%',
     padding: heightToDp(4),
     borderRadius: widthToDp(3),
@@ -277,6 +279,6 @@ const styles = StyleSheet.create({
     marginTop: heightToDp(2),
   },
   subSvgText: {
-    fontSize: heightToDp(1.8),
+    fontSize: heightToDp(1.5),
   },
 });

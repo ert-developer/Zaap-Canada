@@ -171,7 +171,10 @@ const AddPortfolioScreen = ({
             placeholder={'Write a captivating title'}
             onHandleChange={text => setTitle(text)}
             value={title}
+            maxLength={70}
           />
+          <CustomText text={`${70 - title.length} Characters left`} style={styles.charLeftText} />
+
           {titleError ? <CustomText text={titleError} style={styles.errorText} /> : null}
 
           <View>
@@ -218,15 +221,17 @@ const AddPortfolioScreen = ({
               </View>
               <View style={styles.fileSizeTextContainer}>
                 <CustomText text={'. Images (.jpg, .png upto 3 MB Limit)'} style={styles.fileSizeText} />
-                <CustomText text={'. Document (.pdf upto 7 MB)'} style={styles.fileSizeText} />
+
                 <CustomText
-                  text={'. Copy and paste the links of videos, projects, and other'}
+                  text={'. Copy and paste the links of videos, projects, documents'}
                   style={styles.fileSizeText}
                 />
+
                 <CustomText
-                  text={'   materials ex. (Youtube, Google Drive, Dropbox etc)'}
+                  text={'  and other materials ex: (Youtube, Google Drive, Dropbox'}
                   style={styles.fileSizeText}
                 />
+                <CustomText text={'  etc) '} style={styles.fileSizeText} />
               </View>
               <View>
                 <CustomText text={'External Links'} style={styles.externaleLinkText} />

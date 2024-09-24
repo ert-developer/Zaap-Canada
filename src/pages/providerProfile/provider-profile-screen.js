@@ -836,8 +836,6 @@ const ProviderProfile = ({
   };
 
   const renderSvgIcon = (iconName, width, height, style) => {
-    // console.log('categoryData.categories',categoryData.category)
-
     switch (iconName) {
       case 'PERSONAL':
         return <PersonIconComplete />;
@@ -845,7 +843,7 @@ const ProviderProfile = ({
         return <BankDetailIconCompleted />;
 
       case 'BACKGROUND CHECK':
-        return <BackGroundCheckCompleted />;
+        return <BackGroundCheckCompleted width={36} height={36} />;
 
       case 'TERMS AND CONDITIONS':
         return <TCIConInProgress />;
@@ -853,12 +851,6 @@ const ProviderProfile = ({
         return null;
     }
   };
-
-  // const renderText = () => {
-  //   if (categories.category === 'BANK DETAILS') {
-  //     <CustomText text={'BANK'} />;
-  //   }
-  // };
 
   const renderCategoryButtons = () => {
     return (
@@ -877,6 +869,7 @@ const ProviderProfile = ({
                     width: index === 3 ? 90 : 80,
                     textAlign: 'center',
                     marginRight: widthToDp(2),
+                    marginTop: 5,
                   }}>
                   {/* Green Tick Icon */}
                   <GreenTickIcon style={{marginBottom: 5, opacity: categories.flag ? 1 : 0}} />
@@ -888,25 +881,49 @@ const ProviderProfile = ({
                   {categories.category === 'PERSONAL' && (
                     <CustomText
                       text={'Personal Details'}
-                      style={{textAlign: 'center', fontFamily: 'Helvetica', color: '#000000', fontSize: 13}}
+                      style={{
+                        textAlign: 'center',
+                        fontFamily: 'Helvetica',
+                        color: '#000000',
+                        fontSize: 13,
+                        fontWeight: '400',
+                      }}
                     />
                   )}
                   {categories.category === 'BANK DETAILS' && (
                     <CustomText
                       text={'Bank\n Details'}
-                      style={{textAlign: 'center', fontFamily: 'Helvetica', color: '#000000', fontSize: 13}}
+                      style={{
+                        textAlign: 'center',
+                        fontFamily: 'Helvetica',
+                        color: '#000000',
+                        fontSize: 13,
+                        fontWeight: '400',
+                      }}
                     />
                   )}
                   {categories.category === 'BACKGROUND CHECK' && (
                     <CustomText
                       text={'Government Issued ID'}
-                      style={{textAlign: 'center', fontFamily: 'Helvetica', color: '#000000', fontSize: 13}}
+                      style={{
+                        textAlign: 'center',
+                        fontFamily: 'Helvetica',
+                        color: '#000000',
+                        fontSize: 13,
+                        fontWeight: '400',
+                      }}
                     />
                   )}
                   {categories.category === 'TERMS AND CONDITIONS' && (
                     <CustomText
                       text={'Terms And Conditions'}
-                      style={{textAlign: 'center', fontFamily: 'Helvetica', color: '#000000', fontSize: 13}}
+                      style={{
+                        textAlign: 'center',
+                        fontFamily: 'Helvetica',
+                        color: '#000000',
+                        fontSize: 13,
+                        fontWeight: '400',
+                      }}
                     />
                   )}
                 </View>
@@ -961,48 +978,10 @@ const ProviderProfile = ({
   };
 
   return (
-    // <SafeAreaView style={[styles.safeArea]}>
-    //   {/* <BackgroundCheckIcon /> */}
-    //   <StatusBar barStyle="light-content" />
-    //   <ScrollView style={styles.scrollView} contentContainerStyle={{flexGrow: 1}}>
-    //     <View style={styles.container}>
-    //       <View style={styles.header}>
-    //         <View style={styles.titleContainer}>
-    //           <View style={styles.row}>
-    //             <BackIcon onPress={() => navigation.navigate('HomeScreen')} style={styles.backIcon} />
-    //             <CustomText text="Background Verification" style={styles.verification} />
-    //           </View>
-
-    //           <View style={styles.row}>
-    //             <CustomText text="for " style={styles.for} />
-    //             <CustomText text="Service Provider" style={styles.sp} />
-    //           </View>
-    //         </View>
-
-    //         {renderCategoryButtons()}
-    //       </View>
-
-    //       <View style={styles.form}>{renderInputsForCategory()}</View>
-    //       {showVerificationModal && <ServiceProviderVerificationModal />}
-    //     </View>
-    //   </ScrollView>
-    // </SafeAreaView>
     <SafeAreaView style={[styles.safeArea]}>
       {/* <BackgroundCheckIcon /> */}
       <HeaderComponent text={'Identity Verification'} />
-      <View style={styles.header}>
-        {/* <View style={styles.titleContainer}>
-              <View style={styles.row}>
-                <BackIcon onPress={() => navigation.navigate('HomeScreen')} style={styles.backIcon} />
-                <CustomText text="Background Verification" style={styles.verification} />
-              </View>
-              <View style={styles.row}>
-                <CustomText text="for " style={styles.for} />
-                <CustomText text="Service Provider" style={styles.sp} />
-              </View>
-            </View> */}
-        {renderCategoryButtons()}
-      </View>
+      <View style={styles.header}>{renderCategoryButtons()}</View>
       <StatusBar barStyle="light-content" />
       <ScrollView style={styles.scrollView} contentContainerStyle={{flexGrow: 1}}>
         <View style={styles.container}>

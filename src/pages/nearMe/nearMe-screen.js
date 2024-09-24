@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Image, ActivityIndicator} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Image, ActivityIndicator, Alert} from 'react-native';
 import MapView, {Marker, Callout} from 'react-native-maps';
-import {check, PERMISSIONS, openSettings} from 'react-native-permissions';
+import {PermissionsAndroid, Platform} from 'react-native';
+import {PERMISSIONS, RESULTS, check, openSettings, request} from 'react-native-permissions';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {widthToDp} from '../../responsive/responsive';
@@ -69,9 +70,48 @@ const NearMeScreen = () => {
 
   const handleEnableLocation = async () => {
     try {
-      await openSettings();
+      if (Platform.OS === 'android') {
+        // Request the necessary location permission for Android
+        const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
+
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          setHasPermission(true);
+        } else {
+          console.log('Location permission denied');
+          setHasPermission(false);
+        }
+      } else if (Platform.OS === 'ios') {
+        // Check the current location permission status
+        const checkPermission = await check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+        if (checkPermission === RESULTS.GRANTED) {
+          setHasPermission(true);
+        } else if (checkPermission === RESULTS.DENIED) {
+          // Request permission if it's currently denied
+          const requestPermission = await request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+          if (requestPermission === RESULTS.GRANTED) {
+            setHasPermission(true);
+          } else {
+            console.log('Location permission denied');
+            setHasPermission(false);
+          }
+        } else if (checkPermission === RESULTS.BLOCKED) {
+          console.log('Location permission is blocked');
+          setHasPermission(false);
+          // Prompt the user to open the app settings
+          Alert.alert(
+            'Location Permission Blocked',
+            'Please enable location access in settings to use this feature.',
+            [
+              {text: 'Cancel', style: 'cancel'},
+              {text: 'Open Settings', onPress: () => openSettings()},
+            ],
+            {cancelable: true},
+          );
+        }
+      }
     } catch (error) {
-      console.log('Error opening settings', error);
+      console.error('Error requesting location permission:', error);
+      setHasPermission(false);
     }
   };
 

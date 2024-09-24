@@ -19,8 +19,8 @@ const PortfolioAddPopup = ({portfolioAdded, setPortFolioAdded}) => {
     <View>
       <Modal isVisible={portfolioAdded} style={styles.modalContainer} onBackdropPress={handleClose}>
         <View style={styles.modalContent}>
-          <View style={{width: heightToDp(43)}}>
-            <View style={{justifyContent: 'center', alignItems: 'center', padding: heightToDp(1.5)}}>
+          <View style={{width: heightToDp(37), height: heightToDp(18)}}>
+            <View style={{justifyContent: 'center', alignItems: 'center', alignSelf: 'center', marginTop: 5}}>
               <Image
                 style={{width: 100, height: 100}}
                 source={require('../../assets/Success.gif')}
@@ -31,9 +31,9 @@ const PortfolioAddPopup = ({portfolioAdded, setPortFolioAdded}) => {
                 style={{
                   color: '#464183',
                   fontFamily: 'Roboto',
-                  fontSize: heightToDp(2.5),
-                  marginVertical: heightToDp(2),
-                  marginBottom: heightToDp(5),
+                  fontSize: heightToDp(2.3),
+                  marginVertical: heightToDp(0.2),
+                  marginBottom: 0,
                 }}
               />
             </View>

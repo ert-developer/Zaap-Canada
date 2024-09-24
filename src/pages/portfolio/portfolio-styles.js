@@ -91,13 +91,14 @@ const portfolioStyles = () => {
     },
     emptyProfilePortfolioHeading: {
       color: Color.colorIndigo2,
-      fontSize: widthToDp(5),
-      fontWeight: 'bold',
+      fontSize: widthToDp(4.5),
+      fontWeight: '700',
     },
     emptyProfilePortfolioDesc: {
       color: Color.colorSilver,
-      marginTop: widthToDp(3),
+      marginTop: widthToDp(2.5),
       textAlign: 'center',
+      fontWeight: '500',
     },
 
     imageContainer: {
@@ -134,9 +135,10 @@ const portfolioStyles = () => {
     },
     text: {
       color: 'white',
-      fontSize: FontSize.size_16,
+      fontSize: FontSize.size_18,
       fontWeight: 'bold',
       marginLeft: widthToDp(2),
+      marginTop: 7,
     },
     linkSvgStyles: {
       marginRight: widthToDp(5),

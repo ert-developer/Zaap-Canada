@@ -1301,6 +1301,8 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     fontFamily: 'Helvetica',
     color: '#000',
+    marginTop: 3,
+    marginBottom: 3,
   },
 
   iconWithTick: {
@@ -1430,19 +1432,19 @@ const styles = StyleSheet.create({
   profilePicContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 20,
+    gap: 15,
   },
 
   heading: {
     fontFamily: 'Roboto',
     color: '#000000',
-    fontSize: heightToDp(2.2),
+    fontSize: heightToDp(2.1),
   },
 
   subHeading: {
     fontFamily: 'Roboto',
     color: '#000000',
-    fontSize: heightToDp(1.6),
+    fontSize: heightToDp(1.5),
   },
 
   bookingConfirmedSvgContainer: {
@@ -1469,11 +1471,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica',
     color: '#fff',
     backgroundColor: '#00BF63',
-    width: heightToDp(21),
+    width: heightToDp(20),
     padding: heightToDp(1.5),
     fontSize: 16,
     letterSpacing: 0.4,
     borderRadius: heightToDp(1),
+    marginRight: 2,
   },
   CancelButton: {
     fontSize: 16,
@@ -1481,11 +1484,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica',
     color: '#fff',
     backgroundColor: '#FF5757',
-    width: heightToDp(21),
+    width: heightToDp(20),
     padding: heightToDp(1.5),
     fontSize: 16,
     letterSpacing: 0.4,
     borderRadius: heightToDp(1),
+    marginLeft: 2,
   },
   image: {
     height: heightToDp(7),
