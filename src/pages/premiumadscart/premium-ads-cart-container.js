@@ -79,7 +79,7 @@ const PremiumAdsCartContainer = () => {
       }
       // Start payment process
       // let response = await handlePayment(parseInt(finalAmount));
-      let response = await handleCheckout(parseInt(finalAmount));
+      let response = await handleCheckout(parseFloat(finalAmount));
       if (response && response['_documentPath']) {
         const collectionRef = firestore().collection(envConfig.Premium_ads);
         const docRef = collectionRef.doc(userId); // Use the user's ID as the document ID

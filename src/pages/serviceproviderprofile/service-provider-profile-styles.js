@@ -15,6 +15,12 @@ function ServiceProviderProfileStyles() {
       borderRadius: widthToDp(2),
       margin: widthToDp(3),
     },
+    charLeftText: {
+      color: '#464183',
+      fontSize: 12,
+      fontWeight: '500',
+      textAlign: 'right',
+    },
     containerFade: {
       backgroundColor: Color.pageBgFade,
     },

@@ -20,21 +20,19 @@ const DeletePortfolioDetailsModal = ({
     try {
       setdeletePortfolio(true);
       await onDeletePortfolio(deletePotfolioId);
-
-      navigation.navigate('Portfolio');
     } catch (error) {
       console.error('Error deleting portfolio:', error);
-    } finally {
-      setdeletePortfolio(false);
     }
+  };
+
+  const closeModal = () => {
+    setShowDeletePortfolioModal(false);
+    navigation.navigate('Portfolio');
   };
 
   return (
     <View>
-      <Modal
-        isVisible={showDeletePortfolioModal}
-        style={styles.modalContainer}
-        onBackdropPress={() => setShowDeletePortfolioModal(false)}>
+      <Modal isVisible={showDeletePortfolioModal} style={styles.modalContainer} onBackdropPress={closeModal}>
         <View style={styles.modalContent}>
           {deletePortfolio ? (
             <View
@@ -45,7 +43,7 @@ const DeletePortfolioDetailsModal = ({
                 justifyContent: 'center',
                 padding: heightToDp(1),
               }}>
-              <FastImage
+              <Image
                 style={{width: 100, height: 100}}
                 source={require('../../assets/Success.gif')}
                 resizeMode={FastImage.resizeMode.contain}

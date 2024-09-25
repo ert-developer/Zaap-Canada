@@ -16,7 +16,7 @@ const TextAreaInputComponent = (
       maxLength={maxLength}
       placeholder={placeholder}
       numberOfLines={numberOfLines}
-      placeholderTextColor={placeholderTextColor}
+      placeholderTextColor={Color.colorSilver}
       multiline={true}
       {...props}
     />

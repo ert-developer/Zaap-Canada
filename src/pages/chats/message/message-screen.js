@@ -24,7 +24,6 @@ import {CameraIcon} from '../../../assets/svgIcons/postJob';
 import {Camera} from '../../../assets/svgImage/chat';
 import {heightArea, heightToDp, widthToDp} from '../../../responsive/responsive';
 import BackIcon from '../../../assets/svgIcons/common';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import HeaderComponent from '../../../atoms/header/headerComponent';
 import {getUserDetails, postCollectionDetails} from '../../../common/collection';
 import {envConfig} from '../../../assets/helpers/envApi';
@@ -34,7 +33,10 @@ const ChatScreenExample = ({data, allChat}) => {
   const user = useSelector(state => state.Auth.user);
   const serviceProviderDetails = useSelector(state => state.providerverification.providerDetails);
 
-  const {photoURL, imageUrl, isServiceProvider} = data;
+  let {photoURL, imageUrl, isServiceProvider} = data;
+  if (photoURL) {
+    isServiceProvider = true;
+  }
   const styles = useMemo(() => ChatStyles(), []);
   const [messages, setMessages] = useState(allChat);
   const [newMessage, setNewMessage] = useState('');
@@ -98,10 +100,11 @@ const ChatScreenExample = ({data, allChat}) => {
                 padding: Padding.p_14,
                 color: item.from !== user.userId ? Color.colorBlack : Color.colorWhite,
                 borderRadius: Border.br_16,
+                overflow: 'hidden',
               }}>
               {item.message}
             </Text>
-            <Text style={{...styles.timeStamp, textAlign: 'right', marginRight: 5}}>{formattedTime}</Text>
+            <Text style={{...styles.timeStamp, textAlign: 'right', marginRight: 5}}> {formattedTime}</Text>
           </View>
         )}
         {/* {item.from !== user.userId ? renderAvatar(imageUrl) : renderAvatar(photoURL)} */}
@@ -115,6 +118,8 @@ const ChatScreenExample = ({data, allChat}) => {
             ? renderAvatar(photoURL)
             : renderAvatar(user.imageUrl)
           : null}
+        {isServiceProvider === undefined ? renderAvatar(undefined) : null}
+
         {item.from !== user.userId && (
           <View style={{flexDirection: 'column'}}>
             <Text
@@ -123,6 +128,7 @@ const ChatScreenExample = ({data, allChat}) => {
                 padding: Padding.p_14,
                 color: item.from !== user.userId ? Color.colorBlack : Color.colorWhite,
                 borderRadius: Border.br_16,
+                overflow: 'hidden',
               }}>
               {item.message}
             </Text>
@@ -133,11 +139,13 @@ const ChatScreenExample = ({data, allChat}) => {
     );
   };
 
+  console.log(isServiceProvider);
+
   const keyExtractor = (item, index) => index.toString();
 
-  const sendNotification = messageData => {
+  const sendNotification = async messageData => {
     const userId = messageData.to;
-    const recicerUser = getUserDetails(envConfig.User, userId);
+    const recicerUser = await getUserDetails(envConfig.User, userId);
     const fcmToken = recicerUser.fcmToken;
     try {
       const response = fetch('https://push-notifications-server-lvzr.onrender.com/sendNotification', {
@@ -255,6 +263,7 @@ const ChatScreenExample = ({data, allChat}) => {
                 value={newMessage}
                 onChangeText={text => setNewMessage(text)}
                 editable={data.isDisabled ? false : true}
+                placeholderTextColor={Color.colorSilver}
               />
               <View style={[styles.row, styles.camsend]}>
                 <Camera />

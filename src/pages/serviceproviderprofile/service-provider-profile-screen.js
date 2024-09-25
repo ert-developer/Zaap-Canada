@@ -281,36 +281,6 @@ const SeriveProviderProfileScreen = ({
             </View>
             {/* {loader && <ActivityIndicator size={30} color={'red'} style={{ justifyContent: 'center', alignItems: 'center' }} />} */}
             <View style={[styles.dobAndGenderCon]}>
-              {/* <View style={styles.selectDOB}>
-                  <Pressable
-                  // onPress={toggleDatePicker}
-                  >
-                    <TextInputWithIconComponent
-                      label={'Date of Birth'}
-                      // value={selectDatePicker}
-                      value={date_of_birth}
-                      // onHandleChange={text => updateField('dob', text)}
-                      // field={'dob'}
-                      placeholder={'Select Date'}
-                      formErrors={formErrors}
-                      editable={false}
-                      // onPress={toggleDatePicker}
-                    />
-                  </Pressable>
-                  {showPicker && (
-                    <DateTimePicker
-                      mode="date"
-                      display="spinner"
-                      value={new Date()} // Set the initial value for the date
-                      // onChange={setDate}
-                      maximumDate={new Date(2030, 10, 20)}
-                      minimumDate={new Date(1950, 0, 1)}
-                      timeZoneOffsetInMinutes={60}
-                      timeZoneOffsetInSeconds={3600}
-                      onChange={(event, selectedDate) => onChangeSelectedDate(selectedDate)}
-                    />
-                  )}
-                </View> */}
               <View
                 style={[styles.donAndInputContainer, {marginRight: 14}]}
                 onTouchEnd={() => setTooltipVisible(!tooltipVisible)}>
@@ -318,10 +288,6 @@ const SeriveProviderProfileScreen = ({
                   label="Date of Birth"
                   // value={formData.name}
                   value={formData.dob}
-                  // onHandleChange={text => {
-                  //   updateField('name', text);
-                  // }}
-                  // field={'name'}
                   input={styles.disableTextColor}
                   placeholder={'Date of Birth'}
                   formErrors={formErrors}
@@ -462,40 +428,7 @@ const SeriveProviderProfileScreen = ({
                 listMode="MODAL"
                 maxHeight={250}
               />
-
-              {/* <ScrollView horizontal={true}>
-                {selectedLanguages.map((language, index) => (
-                  <View key={index} style={{flexDirection: 'row', alignItems: 'center', marginRight: 10}}>
-                    <Text>{language}</Text>
-                    <TouchableOpacity onPress={() => handleDeleteText(index)}>
-                      <Text style={{color: 'red', marginLeft: 3}}>X</Text>
-                    </TouchableOpacity>
-                  </View>
-                ))}
-              </ScrollView> */}
             </View>
-            {/* <View style={styles.inputContainer}>
-              <Text style={styles.label}>Languages Known</Text>
-              <View style={styles.textInputWithTagsContainer}>
-                <ScrollView horizontal contentContainerStyle={styles.tagsContainer}>
-                  <TextInput
-                    style={styles.textInput}
-                    value={formData.languagesKnown}
-                    onChangeText={text => handleTextChange(text)}
-                    placeholder="Type language name and press Enter"
-                    onSubmitEditing={handleTextInputSubmit}
-                  />
-                  {enteredTexts.map((enteredText, index) => (
-                    <View key={index} style={styles.tag}>
-                      <Text style={styles.tagText}>{enteredText}</Text>
-                      <TouchableOpacity onPress={() => handleDeleteText(index)}>
-                        <Text style={styles.deleteText}>X</Text>
-                      </TouchableOpacity>
-                    </View>
-                  ))}
-                </ScrollView>
-              </View>
-            </View> */}
 
             <View style={styles.inputContainer}>
               <CustomText text={'Professional Bio'} style={styles.label} />
@@ -511,6 +444,10 @@ const SeriveProviderProfileScreen = ({
                 formErrors={formErrors}
                 maxLength={500}
                 placeholderTextColor={'silver'}
+              />
+              <CustomText
+                text={`${500 - formData.professionBio.toString().length} Characters left`}
+                style={styles.charLeftText}
               />
             </View>
             {/* {providerStatus ? (

@@ -49,7 +49,6 @@ const ProviderFeedbackScreen = ({
   starRatingCount,
 }) => {
   const [isReviewOpen, setIsReviewOpen] = useState(false);
-  const [isPortFolioOpen, setPortFolioOpen] = useState(true);
   const [loader, setLoader] = useState(false);
   const navigation = useNavigation();
   const styles = profileScreenStyle();
@@ -57,21 +56,7 @@ const ProviderFeedbackScreen = ({
   const languages = providerStatus[0]?.languages_known || [];
 
   // Determine how to format the languages for display
-  let firstLineLanguages = '';
-  let secondLineLanguages = '';
-  let thirdLineLanguages = '';
-  if (languages.length > 6) {
-    firstLineLanguages = languages.slice(0, 3).join(', ');
-    secondLineLanguages = languages.slice(3, 6).join(', ');
-    thirdLineLanguages = languages.slice(6).join(', ');
-  } else if (languages.length > 3) {
-    firstLineLanguages = languages.slice(0, 3).join(', ');
-    secondLineLanguages = languages.slice(3).join(', ');
-  } else if (languages.length > 0) {
-    firstLineLanguages = languages.join(', ');
-  } else {
-    firstLineLanguages = 'No languages specified'; // Default message when no languages are provided
-  }
+  let firstLineLanguages = languages.join(', ');
   const location =
     providerStatus[0]?.city == undefined || providerStatus[0]?.state == undefined
       ? 'No Info provided'
@@ -314,43 +299,6 @@ const ProviderFeedbackScreen = ({
     );
   };
 
-  const onDeleteAllExceptSelected = async userId => {
-    try {
-      // Construct the document reference with the correct collection and document IDs
-      const docRef = doc(db, envConfig.Jobs, 'Wl4JiXhabRzlvPFT1lMQ');
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        // Get the current jobApplications array
-        const jobData = docSnap.data();
-        const jobApplications = jobData.jobApplications || [];
-
-        // Find the selected application
-        const selectedApplicationIndex = jobApplications.findIndex(
-          application => application?.userId === 'IciI9ukD8iQnCuxpUt6yhdaXlHp2',
-        );
-
-        if (selectedApplicationIndex !== -1) {
-          // Construct a new array containing only the selected application
-          const filteredApplications = [jobApplications[selectedApplicationIndex]];
-
-          // Update the document with the filtered array
-          await updateDoc(docRef, {
-            jobApplications: filteredApplications,
-          });
-
-          console.log('Array values deleted except selected one for user:', userId);
-        } else {
-          console.error('Selected application not found');
-        }
-      } else {
-        console.error('Document not found');
-      }
-    } catch (error) {
-      console.error('Error deleting array values:', error);
-    }
-  };
-
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
       <ScrollView>
@@ -405,12 +353,9 @@ const ProviderFeedbackScreen = ({
                 <View style={styles.locationIconStyle}>
                   <LanguagesSVG />
                 </View>
-                <Text style={styles.memberShipText}>
-                  Languages Known: {firstLineLanguages}
-                  {secondLineLanguages ? `\n                                   ${secondLineLanguages}` : ''}
-                  {thirdLineLanguages ? `\n                                   ${thirdLineLanguages}` : ''}
-                </Text>
+                <Text style={styles.memberShipText}>Languages Known:</Text>
               </View>
+              <Text style={{...styles.memberShipText, fontWeight: '400', paddingLeft: 30}}>{firstLineLanguages}</Text>
 
               {bio ? <ReadMoreText text={bio} style={styles.profileBio} /> : <CustomLoader visible={bio} />}
             </View>

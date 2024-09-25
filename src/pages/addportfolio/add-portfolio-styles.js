@@ -16,9 +16,9 @@ const addPortfolioStyles = () => {
       backgroundColor: 'white',
     },
     charLeftText: {
-      color: Color.colorRed,
-      fontSize: 10,
-      fontWeight: '400',
+      color: '#464183',
+      fontSize: 12,
+      fontWeight: '500',
       textAlign: 'right',
     },
     portfolioLabel: {

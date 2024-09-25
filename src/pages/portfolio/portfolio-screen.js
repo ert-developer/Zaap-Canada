@@ -27,8 +27,16 @@ const PortfolioScreen = ({portfolioDetails, onDeletePortfolio, onRefresh, loader
 
   const sortedPortfolioDetails = [...portfolioDetails].sort((a, b) => b.portfolioDate - a.portfolioDate);
 
+  function truncateText(text, maxLength) {
+    if (text.length > maxLength) {
+      return text.slice(0, maxLength) + '...';
+    }
+    return text;
+  }
+
   const renderItemForImageCard = ({item}) => {
     const firstImage = item.images && item.images.length > 0 ? item.images[0] : null;
+    const truncatedTitle = truncateText(item.title, 25);
     return (
       <TouchableOpacity onPress={() => portfolioItemDetails(item)} style={styles.imageContainer}>
         {firstImage ? (
@@ -38,7 +46,7 @@ const PortfolioScreen = ({portfolioDetails, onDeletePortfolio, onRefresh, loader
         )}
         <BlurView style={styles.blurView} blurType="light" blurAmount={10}>
           <View style={styles.blurButtons}>
-            <Text style={styles.text}>{item.title}</Text>
+            <Text style={styles.text}>{truncatedTitle}</Text>
             <View>
               <LinkArrowSVG style={styles.linkSvgStyles} />
             </View>
@@ -70,12 +78,16 @@ const PortfolioScreen = ({portfolioDetails, onDeletePortfolio, onRefresh, loader
             <View style={styles.allImagesContainer}>
               {portfolioDetails.length === 0 ? (
                 <View style={styles.emptyProfilePortfolioCon}>
-                  <EmptyPortfolioSVG style={styles.emptyProfilePortfolioSvg} />
+                  <EmptyPortfolioSVG
+                    style={styles.emptyProfilePortfolioSvg}
+                    width={110} // Set your desired width
+                    height={110}
+                  />
                   <CustomText style={styles.emptyProfilePortfolioHeading} text={'You have not added'} />
                   <CustomText style={styles.emptyProfilePortfolioHeading} text={'your portfolio yet'} />
                   <CustomText
                     style={styles.emptyProfilePortfolioDesc}
-                    text={'Capture clients attention with Showcase of your work'}
+                    text={'Capture clients attention with\nShowcase of your work'}
                   />
                 </View>
               ) : (

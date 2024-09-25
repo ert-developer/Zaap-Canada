@@ -104,6 +104,7 @@ export const drawerStyles = () => {
     },
     verifiedTextCon: {
       flexDirection: 'row',
+      marginLeft: -3,
     },
     rightTick: {margin: widthToDp(0.5)},
     verificationText: {fontWeight: '700', color: 'green'},

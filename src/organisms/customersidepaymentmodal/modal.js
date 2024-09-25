@@ -585,7 +585,7 @@ const CustomerSidePaymentModel = () => {
   let tipAmount;
   if (selectedText !== 'Others') {
     // Convert the percentage to the actual tip amount based on salary
-    tipAmount = Math.round((jobDetails.salary * selectedText) / 100); // Convert to integer
+    tipAmount = ((jobDetails.salary * selectedText) / 100).toFixed(2); // Convert to integer
   } else {
     // Parse and validate the custom text value as a number
     tipAmount = parseInt(customText);
