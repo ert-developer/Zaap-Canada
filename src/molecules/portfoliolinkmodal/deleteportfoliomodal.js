@@ -22,8 +22,6 @@ const DeletePortfolioDetailsModal = ({
       await onDeletePortfolio(deletePotfolioId);
     } catch (error) {
       console.error('Error deleting portfolio:', error);
-    } finally {
-      setdeletePortfolio(false);
     }
   };
 
@@ -34,7 +32,7 @@ const DeletePortfolioDetailsModal = ({
 
   return (
     <View>
-      <Modal isVisible={showDeletePortfolioModal} style={styles.modalContainer} onBackdropPress={() => closeModal()}>
+      <Modal isVisible={showDeletePortfolioModal} style={styles.modalContainer} onBackdropPress={closeModal}>
         <View style={styles.modalContent}>
           {deletePortfolio ? (
             <View
