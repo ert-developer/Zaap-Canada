@@ -94,7 +94,6 @@ const PostJobScreen = ({
   // const styles = useMemo(() => PostJobStyles(), []);
   const styles = PostJobStyles();
   const [showDatePicker, setshowDatePicker] = useState(false);
-  const [showStartTimePicker, setShowStartTimePicker] = useState(false);
   const [checked, setChecked] = useState(formData.starttime === 'AnyTime');
 
   const toggleCheckbox = () => {
@@ -120,6 +119,22 @@ const PostJobScreen = ({
     hideDatePicker();
   };
 
+  const onChangeDate = selectedDate => {
+    onChangeDatePicker();
+    if (selectedDate) {
+      const currentDate = new Date(selectedDate);
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth() + 1;
+      const day = currentDate.getDate();
+      const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+      handleChange('startdate', formattedDate);
+    }
+  };
+
+  const onChangeDatePicker = () => {
+    setshowDatePicker(!showDatePicker);
+  };
+
   const showTimePicker = () => {
     setTimePickerVisibility(true);
   };
@@ -136,25 +151,6 @@ const PostJobScreen = ({
 
   const sortedCategories = categories.slice().sort((a, b) => a.name.localeCompare(b.name));
 
-  const onChangeStartTimePicker = () => {
-    setShowStartTimePicker(!showStartTimePicker);
-  };
-
-  const onChangeDatePicker = () => {
-    setshowDatePicker(!showDatePicker);
-  };
-
-  const onChangeDate = selectedDate => {
-    onChangeDatePicker();
-    if (selectedDate) {
-      const currentDate = new Date(selectedDate);
-      const year = currentDate.getFullYear();
-      const month = currentDate.getMonth() + 1;
-      const day = currentDate.getDate();
-      const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
-      handleChange('startdate', formattedDate);
-    }
-  };
   const onLocationHandleChange = value => {
     handleChange('location', value);
   };

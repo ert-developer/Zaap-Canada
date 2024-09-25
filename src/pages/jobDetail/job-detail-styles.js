@@ -246,7 +246,7 @@ function JobDetailStyles() {
       backgroundColor: Color.colorWhite,
       borderRadius: widthToDp(2),
       // padding: widthToDp(3),
-      height: heightToDp(90),
+      height: heightToDp(40),
       justifyContent: 'center',
       alignItems: 'center',
       shadowColor: '#000',

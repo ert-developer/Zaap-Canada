@@ -167,7 +167,7 @@ const JobDetail = ({
 
         <Modal isVisible={showAddImage} onBackdropPress={() => setShowAddImage(false)}>
           <View style={styles.addImageContainer}>
-            <Image style={styles.addimageStyles} source={{uri: addImage}} resizeMode="cover" />
+            <Image style={styles.addimageStyles} source={{uri: addImage}} resizeMode="contain" />
           </View>
         </Modal>
 

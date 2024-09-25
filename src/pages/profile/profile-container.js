@@ -228,21 +228,6 @@ const ProfileContainer = ({navigation}) => {
       try {
         const {name, images, address, phone, dob, city, provinces, email} = formData;
 
-        // Create a reference to the storage service
-        // const storageRef = storage.ref();
-
-        // // Generate a unique filename for the image (you can customize this logic)
-        // const imageName = `${uid}_${Date.now()}.jpg`;
-
-        // // Create a reference to the file in the storage
-        // const imageRef = storageRef.child(`images/${imageName}`);
-
-        // // Upload the file to the storage
-        // const snapshot = await imageRef.putString(images, 'data_url'); // Assuming images is a base64 encoded data URL
-
-        // // Get the HTTPS link to the uploaded image
-        // const uploadedImageUrl = await snapshot.ref.getDownloadURL();
-
         let profileData = {
           creationTime: Date.now(),
           displayName: name,
@@ -254,18 +239,11 @@ const ProfileContainer = ({navigation}) => {
           dob: dob,
           city: city,
           provinces: provinces,
-          // bio: bio,
         };
-        // const uploadedImageUrl = uploadImageToServer('file:///data/user/0/com.zaap_canada/cache/rn_image_picker_lib_temp_1d9e8e38-bc6f-4b85-b994-b97dff5ac07a.jpg');
-        // console.log('uploadedImageUrl', uploadedImageUrl)
-        // // Now, `uploadedImageUrl` contains the HTTPS link to the uploaded image.
-        // console.log("HTTPS URL:", uploadedImageUrl);
         let response = await updateCollectionDetails(envConfig.User, profileData, uid);
         setloader(false);
         dispatch(loginSuccess(profileData));
         setUpdateSuccessPopup(true);
-        // Alert.alert('Success', 'Profile posted successfully!', [{text: 'OK'}]);
-        // navigation.navigate('HomeScreenStack');
         setEditMode(false);
       } catch (error) {
         logError(error);

@@ -45,6 +45,7 @@ import {BlueCameraIcon} from '../../assets/svgImage/profile';
 import Modal from 'react-native-modal';
 import FastImage from 'react-native-fast-image';
 import {envConfig} from '../../assets/helpers/envApi';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const ProfileScreen = ({
   formData,
@@ -76,43 +77,39 @@ const ProfileScreen = ({
   onPressOnBackdrop,
   imageLoader,
 }) => {
-  // const styles = useMemo(() => ProfileStyles(), []);
   const styles = ProfileStyles();
-  // console.log('usetDetailsusetDetails', userDetails);
-  // console.log('user', user);
-  const [selectDatePicker, setSelectDatePicker] = useState(null);
-  const [showPicker, setShowPicker] = useState(false);
+  const [showDatePicker, setshowDatePicker] = useState(false);
 
-  const onChangeSelectedDate = selectedDate => {
-    // console.log('selectedDateselectedDate', selectedDate);
-    toggleDatePicker();
-    // Assuming selectedDate is a string in the format '2024-01-22T06:41:00.000Z'
-    var selectedDatePickers = selectedDate;
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-    // Convert the date string to a Date object
-    var dateObject = new Date(selectedDatePickers);
-
-    // Get the individual components of the date
-    var month = (dateObject.getMonth() + 1).toString().padStart(2, '0'); // Adding 1 because months are zero-based
-    var day = dateObject.getDate().toString().padStart(2, '0');
-    var year = dateObject.getFullYear();
-
-    // Format the date as 'MM-DD-YYYY'
-    var formattedDate = month + '-' + day + '-' + year;
-    updateField('dob', formattedDate);
-    setSelectDatePicker(formattedDate);
+  const showDatePicker1 = () => {
+    setDatePickerVisibility(true);
   };
 
-  const toggleDatePicker = () => {
-    setShowPicker(!showPicker);
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
   };
 
-  const today = new Date();
-  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+  const handleConfirmDate = date => {
+    onChangeDate(date);
+    hideDatePicker();
+  };
 
-  const defaultUrl = 'https://lh3.googleusercontent.com/a/ACg8ocIDVDP-KbOdvf5Y1yeFyP-W9X8lvSXwBsM-AqFYsqFq=s96-c';
-  const timestamp = formData.dob && formData.dob.seconds ? formData.dob : null;
-  const dateFromTimestamp = timestamp ? new Date(timestamp.seconds * 1000) : new Date();
+  const onChangeDate = selectedDate => {
+    onChangeDatePicker();
+    if (selectedDate) {
+      const currentDate = new Date(selectedDate);
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth() + 1;
+      const day = currentDate.getDate();
+      const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+      updateField('dob', formattedDate);
+    }
+  };
+
+  const onChangeDatePicker = () => {
+    setshowDatePicker(!showDatePicker);
+  };
 
   const [cities, setCities] = useState([]);
   const fetchCities = async text => {
@@ -222,32 +219,26 @@ const ProfileScreen = ({
           {/* {loader && <ActivityIndicator size={30} color={'red'} style={{ justifyContent: 'center', alignItems: 'center' }} />} */}
           <View style={[styles.dobAndGenderCon]}>
             <View style={styles.selectDOB}>
-              <Pressable onPress={toggleDatePicker}>
+              <Pressable onPress={showDatePicker1}>
                 <TextInputWithIconComponent
-                  label={'Date of Birth'}
-                  value={formData.dob}
-                  onHandleChange={text => updateField('dob', text)}
-                  field={'dob'}
-                  placeholder={'Select Date'}
-                  formErrors={formErrors}
+                  label={'Date'}
                   editable={false}
-                  onPress={toggleDatePicker}
+                  placeholder={'Select DOB'}
+                  value={formData.dob}
+                  field={'dob'}
+                  onHandleChange={text => updateField('dob', text)}
+                  formErrors={formErrors}
                   icon={<CalenderSVG />}
                 />
               </Pressable>
-              {showPicker && (
-                <DateTimePicker
-                  mode="date"
-                  display="spinner"
-                  value={dateFromTimestamp}
-                  // onChange={setDate}
-                  maximumDate={maxDate}
-                  minimumDate={new Date(1920, 0, 1)}
-                  timeZoneOffsetInMinutes={60}
-                  timeZoneOffsetInSeconds={3600}
-                  onChange={(event, selectedDate) => onChangeSelectedDate(selectedDate)}
-                />
-              )}
+
+              <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="date"
+                onConfirm={handleConfirmDate}
+                onCancel={hideDatePicker}
+                maximumDate={new Date(new Date().setFullYear(new Date().getFullYear() - 18))}
+              />
             </View>
             {/* <View style={styles.column}>
               <CustomText text="Gender" style={styles.label} />
