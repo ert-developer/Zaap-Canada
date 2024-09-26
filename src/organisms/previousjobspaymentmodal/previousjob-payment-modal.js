@@ -549,7 +549,9 @@ const PreviousJobsPaymentModal = () => {
               <TouchableOpacity onPress={handlePhoneIconPress}>
                 <Call />
               </TouchableOpacity>
-              <MessageIcon onPress={handleMessageIconPress} opacity={chatIconOpacity} />
+              <TouchableOpacity onPress={handleMessageIconPress}>
+                <MessageIcon opacity={chatIconOpacity} />
+              </TouchableOpacity>
               {isOtpValid ? null : (
                 <Tooltip
                   isVisible={tooltipVisible}
@@ -953,6 +955,8 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     fontFamily: 'Helvetica',
     color: '#000',
+    marginTop: 2,
+    marginBottom: 2,
   },
   iconWithTick: {
     alignItems: 'center',
