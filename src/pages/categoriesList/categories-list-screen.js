@@ -38,18 +38,18 @@ import HeaderComponent from '../../atoms/header/headerComponent';
 import {Color} from '../../assets/static/globalStyles';
 const CategoryList = ({categoriesData, selectedCategory, navigation, loader}) => {
   const styles = useMemo(() => CategoriesListStyles(), []);
+  const scrollViewRef = useRef();
 
   useEffect(() => {
     if (scrollViewRef.current && selectedCategory) {
       const index = categoriesData.findIndex(item => item.apiName === selectedCategory);
       if (index !== -1) {
-        const yOffset = index * 100; // Adjust this value according to your UI needs
+        const categoryHeight = 100;
+        const yOffset = index * categoryHeight;
         scrollViewRef.current.scrollTo({y: yOffset, animated: true});
       }
     }
   }, [selectedCategory, categoriesData]);
-
-  const scrollViewRef = useRef();
 
   const renderCategoryIcon = category => {
     switch (category) {
@@ -69,8 +69,6 @@ const CategoryList = ({categoriesData, selectedCategory, navigation, loader}) =>
         return <Beauty width={30} height={30} />;
       case 'VIDEO MAKERS':
         return <VideoMakers width={30} height={30} />;
-      // case 'BEAUTY & WELLNESS MEN':
-      //   return <Beauty width={30} height={30} />;
       case 'ENTERTAINERS':
         return <Entertainers width={30} height={30} />;
       case 'MECHANIC':
@@ -105,8 +103,6 @@ const CategoryList = ({categoriesData, selectedCategory, navigation, loader}) =>
         return <Photographers width={30} height={30} />;
       case 'DELIVERY':
         return <Delivery width={30} height={30} />;
-      // case 'BEAUTY & WELLNESS WOMEN':
-      //   return <Beauty width={30} height={30} />;
       case 'OTHER':
         return <Others width={30} height={30} />;
       default:
@@ -119,7 +115,6 @@ const CategoryList = ({categoriesData, selectedCategory, navigation, loader}) =>
       const sortedSubCategories = item.SubCategories.slice().sort();
       return (
         <CategoryAccordian
-          // key={item}
           categoryName={item.apiName}
           SubCategories={sortedSubCategories}
           renderCategoryIcon={renderCategoryIcon}

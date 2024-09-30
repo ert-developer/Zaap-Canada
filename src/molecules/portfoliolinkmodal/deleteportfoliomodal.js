@@ -54,6 +54,11 @@ const DeletePortfolioDetailsModal = ({
             <View
               style={{width: heightToDp(43), alignItems: 'center', justifyContent: 'center', padding: heightToDp(1)}}>
               <View style={{marginBottom: heightToDp(4)}}>
+                <Image
+                  style={{width: 100, height: 100 , marginLeft: 35}}
+                  source={require('../../assets/CancelService.gif')}
+                  resizeMode={FastImage.resizeMode.contain}
+                />
                 <CustomText
                   text={'Are you sure you want'}
                   style={{Color: '#464183', fontFamily: 'Roboto', fontSize: heightToDp(2)}}

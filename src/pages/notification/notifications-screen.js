@@ -5,11 +5,20 @@ import HeaderComponent from '../../atoms/header/headerComponent';
 import notificationstyles from './notification-styles';
 import {formatDistanceToNow} from 'date-fns';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
+import {useNavigation} from '@react-navigation/native';
 
 const NotificationScreen = ({notifications, markAsRead, markAllAsRead, loading}) => {
   const styles = notificationstyles();
+  const navigation = useNavigation();
 
   const [expandedNotification, setExpandedNotification] = useState(null);
+
+  const handleNotificationPress = notification => {
+    console.log('Notification pressed:', notification);
+    if (notification.screen) {
+      navigation.navigate(notification.screen, notification.params || {});
+    }
+  };
 
   const toggleMessage = id => {
     setExpandedNotification(expandedNotification === id ? null : id);
@@ -56,13 +65,15 @@ const NotificationScreen = ({notifications, markAsRead, markAllAsRead, loading})
 
                 return (
                   <View key={notification.id} style={styles.notificationContainer}>
-                    <CustomText text={notification.title} style={styles.title} />
-                    <View style={styles.messageRow}>
-                      <TouchableOpacity onPress={() => toggleMessage(notification.id)}>
-                        <Text style={styles.message}>{isExpanded ? notification.message : truncatedMessage}</Text>
-                      </TouchableOpacity>
-                      <Text style={styles.time}>{timeAgo}</Text>
-                    </View>
+                    <TouchableOpacity key={notification.id} onPress={() => handleNotificationPress(notification)}>
+                      <CustomText text={notification.title} style={styles.title} />
+                      <View style={styles.messageRow}>
+                        <TouchableOpacity onPress={() => toggleMessage(notification.id)}>
+                          <Text style={styles.message}>{isExpanded ? notification.message : truncatedMessage}</Text>
+                        </TouchableOpacity>
+                        <Text style={styles.time}>{timeAgo}</Text>
+                      </View>
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={() => markAsRead(notification.id)} style={styles.button}>
                       <Text style={styles.buttonText}>Mark as Read</Text>
                     </TouchableOpacity>

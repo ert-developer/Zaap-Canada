@@ -8,7 +8,7 @@ import {ScrollView} from 'react-native';
 
 const ChatListScreen = ({userList, loading}) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{backgroundColor: '#FFFFFF'}}>
       <HeaderComponent text={'Inbox'} />
       {loading ? (
         <View style={styles.loaderContainer}>

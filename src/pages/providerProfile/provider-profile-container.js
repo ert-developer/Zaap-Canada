@@ -10,6 +10,7 @@ import {updateProviderStatus} from '../../redux/providerstatus/action';
 import {fetchServiceProviderDetails} from '../../redux/providerstatus/action';
 import storage from '@react-native-firebase/storage';
 import {mailSenter} from '../../common/mailSender';
+import firestore from '@react-native-firebase/firestore';
 
 const categoriesOptions = [
   {
@@ -320,14 +321,49 @@ const ProviderProfileContainer = ({navigation}) => {
     const initialForm = {};
     categories.forEach(category => {
       category.inputFields.forEach(field => {
-        initialForm[field.name.toLowerCase().split(' ').join('_')] = value === 'initialState' ? '' : false;
+        initialForm[field.name.toLowerCase().split(' ').join('_')] = value === 'initialState' ? '' : value[0][field.name.toLowerCase().split(' ').join('_')];
       });
     });
     return initialForm;
   };
 
-  const [formData, setFormData] = useState(generateInitialForm(categoriesData, 'initialState'));
+  const formdata = useSelector(state => state.providerverification.providerDetails);
+  // console.log('formdata', formdata);
+  // // console.log('formdata', formdata !== []);
+  const [formData, setFormData] = useState(() => {
+    return formdata.length > 0
+      ? generateInitialForm(categoriesData, formdata)
+      : generateInitialForm(categoriesData, 'initialState');
+  });
   const [formErrors, setFormErrors] = useState(generateInitialForm(categoriesData, 'errorValidation'));
+
+  const deleteAndPostProviderDetails = async (collectionName, userID) => {
+    try {
+      const querySnapshot = await firestore().collection(collectionName).where('provider_id', '==', userID).get();
+      if (!querySnapshot.empty) {
+        querySnapshot.forEach(async doc => {
+          await firestore().collection(collectionName).doc(doc.id).delete();
+          console.log('Document deleted');
+        });
+      } else {
+        console.log('user filling for the first time');
+      }
+    } catch (error) {
+      console.error('Error deleting and posting provider details:', error);
+      throw error;
+    }
+  };
+  const saveAndNext = async () => {
+    console.log('came heree');
+    let providerDetails = {
+      provider_id: userID,
+      ...formData,
+    };
+    await deleteAndPostProviderDetails(envConfig.Provider, userID);
+    let response = await postCollectionDetails(envConfig.Provider, providerDetails);
+    console.log('response', response);
+    dispatch(fetchServiceProviderDetails(userID));
+  };
 
   const handleCategoriesChange = value => {
     if (selectedCategory === 'PERSONAL') {
@@ -636,6 +672,8 @@ const ProviderProfileContainer = ({navigation}) => {
           ...formData,
         };
 
+        await deleteAndPostProviderDetails(envConfig.Provider, userID);
+
         let response = await postCollectionDetails(envConfig.Provider, providerDetails);
         const to = 'help@zaapondemand.in';
         const subject = 'New Application For Background Verification';
@@ -702,6 +740,7 @@ const ProviderProfileContainer = ({navigation}) => {
       frontLoader={frontLoader}
       backLoader={backLoader}
       indiaStateOptions={indiaStateOptions}
+      saveAndNext={saveAndNext}
     />
   );
 };

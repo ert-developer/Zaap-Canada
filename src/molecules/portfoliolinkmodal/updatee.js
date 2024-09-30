@@ -19,7 +19,7 @@ const PortfolioUpdatePopup = ({portfolioUpdated, setPortfolioUpdated}) => {
     <View>
       <Modal isVisible={portfolioUpdated} style={styles.modalContainer} onBackdropPress={handleBackdropPress}>
         <View style={styles.modalContent}>
-          <View style={{width: heightToDp(43)}}>
+          <View style={{width: heightToDp(40)}}>
             <View style={{justifyContent: 'center', alignItems: 'center', padding: heightToDp(1.5)}}>
               <FastImage
                 style={{width: 100, height: 100}}

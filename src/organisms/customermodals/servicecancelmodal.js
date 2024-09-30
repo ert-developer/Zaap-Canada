@@ -138,7 +138,7 @@ const Service_CancelPopupAfter_otp = ({
                 </Text>
               </View>
 
-              <View style={{flexDirection: 'row', gap: 20, marginTop: heightToDp(1), marginBottom: heightToDp(2)}}>
+              <View style={{flexDirection: 'row', gap: 20, marginTop: heightToDp(1), marginBottom: heightToDp(0.5)}}>
                 <CustomButton
                   title={'Rehire'}
                   style={{
@@ -180,8 +180,13 @@ const Service_CancelPopupAfter_otp = ({
         isVisible={showRehireConfirm}
         style={styles.modalContainer}
         onBackdropPress={() => setShowRehireConfirm(false)}>
-        <View style={{...styles.modalContent, width: '90%'}}>
-          <View style={{justifyContent: 'center'}}></View>
+        <View style={{...styles.modalContent, width: '85%'}}>
+          {/* <View style={{justifyContent: 'center'}}></View> */}
+          <FastImage
+            style={{width: 100, height: 100}}
+            source={require('../../assets/CancelService.gif')}
+            resizeMode={FastImage.resizeMode.contain}
+          />
           <CustomText
             text={'Are you sure you want \nto rehire a new person?'}
             style={{fontFamily: 'Roboto', color: '#464183', fontSize: heightToDp(1.9), marginBottom: 10}}
@@ -198,7 +203,8 @@ const Service_CancelPopupAfter_otp = ({
                 backgroundColor: '#00BF63',
                 fontFamily: 'Roboto',
                 borderRadius: heightToDp(1),
-                width: heightToDp(18),
+                width: heightToDp(16),
+                marginBottom: heightToDp(0.5),
               }}
               textStyle={{fontSize: heightToDp(2)}}
               onPress={handleRehireConfirm}
@@ -296,13 +302,12 @@ const styles = StyleSheet.create({
   modalContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 0,
   },
   modalContent: {
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 20,
-    width: '80%',
+    padding: 5,
+    width: '100%',
     alignItems: 'center',
   },
 });

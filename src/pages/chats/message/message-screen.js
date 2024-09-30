@@ -168,6 +168,7 @@ const ChatScreenExample = ({data, allChat}) => {
       userId: userId,
       markasread: false,
       time: new Date(),
+      screen: 'Chat',
     };
     postCollectionDetails(envConfig.Notifications, data);
   };
@@ -185,7 +186,7 @@ const ChatScreenExample = ({data, allChat}) => {
       markasread: false,
     };
 
-    const newReference = database().ref(`/messages/${data.roomId}`).push();
+    const newReference = database().ref(`/${envConfig.message}/${data.roomId}`).push();
 
     newReference.set(messageData).then(() => sendNotification(messageData));
 

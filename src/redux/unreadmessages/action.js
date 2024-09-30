@@ -3,11 +3,12 @@ export const CLEAR_UNREAD_MESSAGES = 'CLEAR_UNREAD_MESSAGES';
 export const FETCH_UNREAD_MESSAGES = 'FETCH_UNREAD_MESSAGES';
 
 import database from '@react-native-firebase/database';
+import envConfig from '../../assets/helpers/envApi';
 
 export const fetchUnreadMessages = userId => {
   return async dispatch => {
     try {
-      const snapshot = await database().ref(`/chatlist/${userId}`).once('value');
+      const snapshot = await database().ref(`/${envConfig.chatlist}/${userId}`).once('value');
       const chatList = snapshot.val() || {};
 
       let unreadMessages = [];
@@ -21,7 +22,7 @@ export const fetchUnreadMessages = userId => {
           continue; // Skip if there's no roomId
         }
 
-        const roomSnapshot = await database().ref(`/messages/${roomId}`).once('value');
+        const roomSnapshot = await database().ref(`/${envConfig.message}/${roomId}`).once('value');
         const messages = roomSnapshot.val();
 
         // Filter out unread messages

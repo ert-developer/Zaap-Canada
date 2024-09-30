@@ -16,6 +16,7 @@ import {fetchServiceProviderDetails} from '../../redux/providerstatus/action';
 import {PermissionsAndroid, Platform} from 'react-native';
 import {mailSenter} from '../../common/mailSender';
 import {CloseSVG} from '../../assets/svgImage/providerProfile';
+import {ActivityIndicator, View, Text} from 'react-native';
 
 const generateInvoiceId = () => {
   return Math.random().toString(36).substring(2, 10);
@@ -24,6 +25,7 @@ const generateInvoiceId = () => {
 const LoginContainer = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const {error, clearError, handleError} = useErrorHandler();
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const AuthUser = useSelector(state => state.Auth);
   const {isLogIn, user, authError} = AuthUser;
@@ -149,13 +151,16 @@ const LoginContainer = ({navigation}) => {
         }
       } else {
         console.log('Google Sign-In was canceled by the user.');
+        setLoading(false);
         return; // Exit early if the user canceled the sign-in
       }
     } catch (err) {
       if (err.code === statusCodes.SIGN_IN_CANCELLED) {
         // Handle sign-in cancellation
+        setLoading(false);
         console.log('Sign-In was cancelled by the user.');
       } else {
+        setLoading(false);
         handleError(err);
       }
     }
@@ -163,6 +168,8 @@ const LoginContainer = ({navigation}) => {
 
   const googleLogin = async () => {
     dispatch(loginRequest());
+    setLoading(true);
+    console.log('loaderrrr');
     try {
       const authInfo = await onGoogleButtonPress();
       // const {displayName, email, phoneNumber, photoURL, uid, invoiceId} = authInfo?.user;
@@ -176,8 +183,10 @@ const LoginContainer = ({navigation}) => {
 
       dispatch(addUserToChat(authInfo));
       dispatch(loginSuccess(authInfo));
+      setLoading(false);
     } catch (err) {
       __DEV__ & console.error('Google sign-in failed:', err);
+      setLoading(false);
       dispatch(loginFailure(err));
     }
   };
@@ -326,6 +335,13 @@ const LoginContainer = ({navigation}) => {
   };
 
   return (
+    <>
+    {loading && (
+        <View style={{height:"100%", justifyContent: 'center', alignItems: 'center', backgroundColor: 'fffff'}}>
+          <ActivityIndicator size="large" color="#0000ff" />
+          <Text>Logging in, please wait...</Text>
+        </View>
+      )}
     <LoginScreen
       googleLogin={googleLogin}
       facebookLogin={onFacebookButtonPress}
@@ -337,6 +353,7 @@ const LoginContainer = ({navigation}) => {
       tc={tc}
       logoutPress={logoutPress}
     />
+    </>
   );
 };
 

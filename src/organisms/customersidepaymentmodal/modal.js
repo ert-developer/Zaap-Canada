@@ -148,8 +148,8 @@ const CustomerSidePaymentModel = () => {
       return;
     } else {
       if (roomDetails.isDisabled) {
-        await database().ref(`/chatlist/${userID}/${profileUserID}`).update({isDisabled: false});
-        await database().ref(`/chatlist/${profileUserID}/${userID}`).update({isDisabled: false});
+        await database().ref(`/${envConfig.chatlist}/${userID}/${profileUserID}`).update({isDisabled: false});
+        await database().ref(`/${envConfig.chatlist}/${profileUserID}/${userID}`).update({isDisabled: false});
         roomDetails.isDisabled = false;
       }
       navigation.navigate('OneChat', {chatDetail: roomDetails});
@@ -169,7 +169,7 @@ const CustomerSidePaymentModel = () => {
 
   const handleDeleteCollection = async () => {
     try {
-      const commonRef = database().ref('/common');
+      const commonRef = database().ref(`/${envConfig.common}`);
 
       await commonRef.remove();
 
@@ -383,6 +383,7 @@ const CustomerSidePaymentModel = () => {
       userId: profiledetail.userId,
       markasread: false,
       time: new Date(),
+      screen: 'MyJobScreen',
     };
     await postCollectionDetails(envConfig.Notifications, data);
   };
@@ -415,7 +416,7 @@ const CustomerSidePaymentModel = () => {
   };
 
   useEffect(() => {
-    const otpValidationStatusRef = database().ref(`myjobs/${userID}_${jobDetails.jobId}`).child('otpData');
+    const otpValidationStatusRef = database().ref(`${envConfig.myjobs}/${userID}_${jobDetails.jobId}`).child('otpData');
 
     const handleOtpValidationStatus = snapshot => {
       const validationStatus = snapshot.val();
@@ -440,7 +441,7 @@ const CustomerSidePaymentModel = () => {
     const otpData = {
       isworkdone: true,
     };
-    database().ref(`myjobs/${userID}_${jobDetails.jobId}`).child('isworkdone').set(otpData);
+    database().ref(`${envConfig.myjobs}/${userID}_${jobDetails.jobId}`).child('isworkdone').set(otpData);
 
     const selectedProfileRef = firestore().collection(envConfig.selectedProfiles);
     const snapshot = await selectedProfileRef.where('jobId', '==', jobDetails.jobId).get();
@@ -460,7 +461,7 @@ const CustomerSidePaymentModel = () => {
   const [isWorkDone, setIsWorkDone] = useState(null);
 
   useEffect(() => {
-    const isWorkDoneRef = database().ref(`myjobs/${userID}_${jobDetails.jobId}/isworkdone/isworkdone`);
+    const isWorkDoneRef = database().ref(`${envConfig.myjobs}/${userID}_${jobDetails.jobId}/isworkdone/isworkdone`);
 
     const handleSnapshot = snapshot => {
       const value = snapshot.val();
@@ -529,6 +530,7 @@ const CustomerSidePaymentModel = () => {
       userId: profiledetail.userId,
       markasread: false,
       time: new Date(),
+      screen: 'MyJobScreen',
     };
     await postCollectionDetails(envConfig.Notifications, data);
   };
@@ -588,7 +590,7 @@ const CustomerSidePaymentModel = () => {
     tipAmount = ((jobDetails.salary * selectedText) / 100).toFixed(2); // Convert to integer
   } else {
     // Parse and validate the custom text value as a number
-    tipAmount = parseInt(customText);
+    tipAmount = parseFloat(customText);
   }
 
   const cliclHandlePayment = async () => {
@@ -603,10 +605,8 @@ const CustomerSidePaymentModel = () => {
         setPaymentLoader(false);
         return;
       }
-      // let response = await handlePayment(parseInt(tipAmount));
-      let response = await handleCheckout(parseInt(tipAmount));
-
-      if (response && response['_documentPath']) {
+      let response = await handlePayment(parseFloat(tipAmount));
+      if (response && response.result.status === 'success') {
         handleServiceCompleted();
         setServiceCompleted(true);
       }
@@ -776,6 +776,7 @@ const CustomerSidePaymentModel = () => {
         userId: profiledetail.userId,
         markasread: false,
         time: new Date(),
+        screen: 'MyJobScreen',
       };
       await postCollectionDetails(envConfig.Notifications, data);
     } catch (error) {
@@ -802,9 +803,12 @@ const CustomerSidePaymentModel = () => {
         IsBookingConfirmed: false,
         cancelCandidateDetails: cancelCandidateDetails,
       });
-      database().ref(`myjobs/${selectedJobDetails.postedBy}_${selectedJobDetails.jobId}`).child('otpData').update({
-        otpValidationStatus: false,
-      });
+      database()
+        .ref(`${envConfig.myjobs}/${selectedJobDetails.postedBy}_${selectedJobDetails.jobId}`)
+        .child('otpData')
+        .update({
+          otpValidationStatus: false,
+        });
       setOtpValid(false);
       const selectedProfileRef = firestore().collection(envConfig.selectedProfiles);
       const snapshot = await selectedProfileRef.where('jobId', '==', selectedJobDetails.jobId).get();
@@ -856,8 +860,11 @@ const CustomerSidePaymentModel = () => {
         // selectedCandidateDetails: FieldValue.delete(),
       });
       // console.log(selectedJobDetails, 'ghjkbhnjmkhjikm');
-      database().ref(`myjobs/${selectedJobDetails.postedBy}_${selectedJobDetails.jobId}`).child('otpData').update({
-        otpValidationStatus: false, // Clear the existing validation status
+      database()
+        .ref(`${envConfig.myjobs}/${selectedJobDetails.postedBy}_${selectedJobDetails.jobId}`)
+        .child('otpData')
+        .update({
+          otpValidationStatus: false, // Clear the existing validation status
       });
       setOtpValid(false);
 
@@ -906,6 +913,7 @@ const CustomerSidePaymentModel = () => {
         userId: profiledetail.userId,
         markasread: false,
         time: new Date(),
+        screen: 'MyJobScreen',
       };
       await postCollectionDetails(envConfig.Notifications, data);
 

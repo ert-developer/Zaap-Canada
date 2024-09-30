@@ -10,7 +10,7 @@ const WrongOtpMdal = ({toggleModal}) => {
     <View>
       <Modal isVisible={true} onBackdropPress={toggleModal} style={styles.modalContainer}>
         <View style={styles.modalContent}>
-          <View style={{justifyContent: 'center', alignItems: 'center', width: heightToDp(40)}}>
+          <View style={{justifyContent: 'center', alignItems: 'center', width: heightToDp(25)}}>
             <FastImage
               style={{ width: 100, height: 100 }}
               source={require('../../assets/CancelService.gif')}
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   modalContent: {
     backgroundColor: '#fff',
     borderRadius: heightToDp(1),
-    padding: widthToDp(3),
+    // padding: widthToDp(3),
   },
 });
 

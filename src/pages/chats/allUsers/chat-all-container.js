@@ -9,6 +9,7 @@ import CustomButton from '../../../atoms/button/buttonComponent';
 import {generateRoomId} from '../../../utils';
 import {logDebug} from '../../../utils/logger/logger';
 import ChatListScreen1 from './chat-all-screen';
+import envConfig from '../../../assets/helpers/envApi';
 
 const ChatListContainerList = ({navigation}) => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const ChatListContainerList = ({navigation}) => {
     // const roomId = generateRoomId();
     console.log('datadatadata', data);
 
-    const snapshot = await database().ref(`/chatlist/${data.userId}/${user.userId}`).once('value');
+    const snapshot = await database().ref(`/${envConfig.chatlist}/${data.userId}/${user.userId}`).once('value');
     const roomDetails = snapshot.val();
     const roomId = roomDetails?.roomId || generateRoomId();
 
