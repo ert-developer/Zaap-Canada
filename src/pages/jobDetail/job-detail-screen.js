@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   View,
   ScrollView,
@@ -123,8 +123,20 @@ const JobDetail = ({
     setVerificationModal(false);
   };
 
+  const [activeIndex, setActiveIndex] = useState(0);
   const [showAddImage, setShowAddImage] = useState(false);
   const [addImage, setAddImage] = useState(null);
+
+  const carouselRef = useRef(null);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (carouselRef.current && images.length > 0) {
+        setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
+        carouselRef.current.snapToNext();
+      }
+    }, 3000); // 3 seconds for each scroll
+    return () => clearInterval(intervalId); // Cleanup on unmount
+  }, [images]);
 
   const onPressShowAddImage = addImage => {
     setAddImage(addImage);
@@ -167,7 +179,19 @@ const JobDetail = ({
 
         <Modal isVisible={showAddImage} onBackdropPress={() => setShowAddImage(false)}>
           <View style={styles.addImageContainer}>
-            <Image style={styles.addimageStyles} source={{uri: addImage}} resizeMode="contain" />
+          <FlatList
+              horizontal
+              pagingEnabled
+              data={images}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({item}) => (
+                <FastImage
+                  style={{width: screenWidth - 45, height: '100%'}}
+                  source={{uri: item}}
+                  resizeMode="contain"
+                />
+              )}
+            />
           </View>
         </Modal>
 
@@ -176,6 +200,7 @@ const JobDetail = ({
             <View style={{marginTop: heightToDp(0.5), padding: heightToDp(1)}}>
               {images && images.length > 0 ? (
                 <Carousel
+                  ref={carouselRef}
                   data={images}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({item}) => (

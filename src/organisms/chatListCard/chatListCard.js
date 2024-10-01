@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     // marginTop: heightToDp(1),
     borderColor: Color.colorSilver,
-    borderWidth: 1,
+    borderBottomWidth: 1,
     padding: 10,
     marginVertical: 5,
   },

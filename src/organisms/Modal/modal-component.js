@@ -100,6 +100,7 @@ const ModalComponent = ({isVisible, setModalVisible1, onClose, userWorking}) => 
       userId: profiledetail.userId,
       markasread: false,
       time: new Date(),
+      screen: 'MyJobScreen',
     };
     await postCollectionDetails(envConfig.Notifications, data);
   };
@@ -150,7 +151,7 @@ const ModalComponent = ({isVisible, setModalVisible1, onClose, userWorking}) => 
     // Generate a unique room ID
     // const roomId = generateRoomId();
 
-    const snapshot = await database().ref(`/chatlist/${data.userId}/${user.userId}`).once('value');
+    const snapshot = await database().ref(`/${envConfig.chatlist}/${data.userId}/${user.userId}`).once('value');
     const roomDetails = snapshot.val();
     const roomId = roomDetails?.roomId || generateRoomId();
 

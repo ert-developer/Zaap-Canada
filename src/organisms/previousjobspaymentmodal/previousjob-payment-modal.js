@@ -450,6 +450,7 @@ const PreviousJobsPaymentModal = () => {
         userId: selectedJobDetails.customerId,
         markasread: false,
         time: new Date(),
+        screen: 'MyJobScreen',
       };
       await postCollectionDetails(envConfig.Notifications, data);
 

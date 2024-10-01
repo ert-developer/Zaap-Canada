@@ -341,6 +341,7 @@ const CustomerSidePaymentModel = () => {
       userId: profiledetail.userId,
       markasread: false,
       time: new Date(),
+      screen: 'MyJobScreen',
     };
     await postCollectionDetails(envConfig.Notifications, data);
   };
@@ -487,6 +488,7 @@ const CustomerSidePaymentModel = () => {
       userId: profiledetail.userId,
       markasread: false,
       time: new Date(),
+      screen: 'MyJobScreen',
     };
     await postCollectionDetails(envConfig.Notifications, data);
   };
@@ -719,6 +721,7 @@ const CustomerSidePaymentModel = () => {
         userId: profiledetail.userId,
         markasread: false,
         time: new Date(),
+        screen: 'MyJobScreen',
       };
       await postCollectionDetails(envConfig.Notifications, data);
     } catch (error) {
@@ -849,6 +852,7 @@ const CustomerSidePaymentModel = () => {
         userId: profiledetail.userId,
         markasread: false,
         time: new Date(),
+        screen: 'MyJobScreen',
       };
       await postCollectionDetails(envConfig.Notifications, data);
 

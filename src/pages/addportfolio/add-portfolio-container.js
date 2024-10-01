@@ -4,6 +4,7 @@ import AddPortfolioScreen from './add-portfolio-screen';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import { envConfig } from '../../assets/helpers/envApi';
+import { Alert } from 'react-native';
 
 const AddPortfolioContainer = ({route}) => {
   const portfolioDetails = route.params === undefined ? null : route.params;
@@ -28,7 +29,16 @@ const AddPortfolioContainer = ({route}) => {
         try {
           const imageUrls = [];
 
+          const maxFileSize = 3 * 1024;
           for (const image of response.assets) {
+            console.log(image.fileSize, maxFileSize);
+            if (image.fileSize > maxFileSize) {
+              Alert.alert(
+                'File Size Error',
+                `The file ${image.fileName} exceeds the maximum size of 3 MB. Please choose a smaller file.`
+              );
+              continue;
+            }
             const imageName = `image_${Date.now()}.jpg`;
             const storageRef = storage().ref(`images/${imageName}`);
             await storageRef.putFile(image.uri);

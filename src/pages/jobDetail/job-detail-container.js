@@ -225,6 +225,7 @@ const JobDetailContainer = ({route, navigation}) => {
       userId: postedBy,
       markasread: false,
       time: new Date(),
+      screen: 'MyJobScreen',
     };
     await postCollectionDetails(envConfig.Notifications, data);
   };

@@ -38,18 +38,18 @@ import HeaderComponent from '../../atoms/header/headerComponent';
 import {Color} from '../../assets/static/globalStyles';
 const CategoryList = ({categoriesData, selectedCategory, navigation, loader}) => {
   const styles = useMemo(() => CategoriesListStyles(), []);
+  const scrollViewRef = useRef();
 
   useEffect(() => {
     if (scrollViewRef.current && selectedCategory) {
       const index = categoriesData.findIndex(item => item.apiName === selectedCategory);
       if (index !== -1) {
-        const yOffset = index * 100; // Adjust this value according to your UI needs
+        const categoryHeight = 100;
+        const yOffset = index * categoryHeight;
         scrollViewRef.current.scrollTo({y: yOffset, animated: true});
       }
     }
   }, [selectedCategory, categoriesData]);
-
-  const scrollViewRef = useRef();
 
   const renderCategoryIcon = category => {
     switch (category) {

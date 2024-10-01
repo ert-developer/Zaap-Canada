@@ -86,6 +86,7 @@ const ProviderProfile = ({
   frontLoader,
   backLoader,
   indiaStateOptions,
+  saveAndNext,
 }) => {
   // const styles = ProviderProfileStyles();
 
@@ -809,6 +810,7 @@ const ProviderProfile = ({
                   textStyle={styles.textButton}
                   onPress={() => {
                     handleCategoriesChange(nextCategory);
+                    saveAndNext();
                   }}
                 />
               )}

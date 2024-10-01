@@ -168,6 +168,7 @@ const ChatScreenExample = ({data, allChat}) => {
       userId: userId,
       markasread: false,
       time: new Date(),
+      screen: 'Chat',
     };
     postCollectionDetails(envConfig.Notifications, data);
   };

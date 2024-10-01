@@ -100,6 +100,7 @@ const ProviderFeedbackScreen = ({
       userId: profiledetail.userId,
       markasread: false,
       time: Date.now(),
+      screen: 'MyJobScreen',
     };
     await postCollectionDetails(envConfig.Notifications, data);
   };
