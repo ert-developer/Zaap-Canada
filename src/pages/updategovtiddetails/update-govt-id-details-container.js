@@ -68,11 +68,11 @@ const UpdateGovtIdDetailsContainer = () => {
 
   const indiaGovDocs = [
     {name: 'Canadian passport', value: 'Canadian passport'},
-    {name: 'Permanent resident card', value: 'Permanent resident card'},
     {name: "Driver's License", value: 'driverslicense'},
-    {name: 'Work Permit', value: 'Work Permit'},
+    {name: 'Permanent resident card', value: 'Permanent resident card'},
+    {name: 'Provincial Identity Cards', value: 'Provincial Identity Cards'},
     {name: 'Study Permit', value: 'Study Permit'},
-    {name: 'Identity Cards', value: 'Identity Cards'},
+    {name: 'Work Permit', value: 'Work Permit'},
   ];
 
   const [formData, setFormData] = useState(generateInitialForm(updateGovtIdDetails, 'initialState'));

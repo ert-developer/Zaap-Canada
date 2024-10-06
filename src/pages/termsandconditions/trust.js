@@ -17,8 +17,8 @@ const Trustandsafety = () => {
 
       <Text style={styles.paragraph}>1. Safe Interactions and Transactions</Text>
       <Text style={styles.listItem}>
-        ● Verified Accounts: ZAAP - ZAAP - Hire or Work Locally verifies user accounts by requiring identity
-        documentation from service providers to enhance trust and credibility.
+        ● Verified Accounts: ZAAP - Hire or Work Locally verifies user accounts by requiring identity documentation from
+        service providers to enhance trust and credibility.
       </Text>
       <Text style={styles.listItem}>
         ● Secure Payments: All transactions on ZAAP - Hire or Work Locally are processed securely through trusted
@@ -88,6 +88,15 @@ const Trustandsafety = () => {
         ● Ongoing Enhancements: ZAAP - Hire or Work Locally is committed to continuously improving our safety measures
         by updating our tools, technology, and guidelines based on user feedback and emerging risks.
       </Text>
+
+      <Text style={styles.paragraph}>
+        At ZAAP - Hire or Work Locally, trust and safety are at the heart of our platform. We are committed to providing
+        a secure, reliable, and transparent environment for all our users. By following these guidelines and engaging
+        responsibly, both customers and service providers can enjoy a positive experience on ZAAP - Hire or Work
+        Locally. Should you have any concerns or encounter any issues, our support team is always here to assist you{' '}
+        \n\nTogether, we can build a trusted community where everyone thrives.
+      </Text>
+      <Text>{'  '}</Text>
     </ScrollView>
   );
 };

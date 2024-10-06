@@ -11,26 +11,19 @@ const CompletedJobsCard = ({completedJobs, timeAgoo}) => {
 
   const handleJobPress = job => {
     navigation.navigate('JobDeatil', {
-      imageSource: job.imageUrls[0],
-      category: job.data.category,
-      title: job.data.jobTitle,
-      description: job.data.jobDescription,
-      price: job.data.salary,
-      location: job?.locationDesc?.description,
-      postedBy: job.postedBy,
-      id: job.id,
-      jobAdType: job.jobAds.type,
+      title: job.jobTitle, //
+      category: job.category, //
+      subCategory: '--',
+      price: job.salary, //
+      description: job.jobDescription, //
+      location: job.locationDesc.description, //
+      starttime: '--',
+      startdate: '--',
+      isExpired: job.isExpired,
       createdOn: job.createdOn,
-      starttime: job.data.starttime,
-      startdate: job.data.startdate,
-      subCategory: job.data.subCategory,
-      images: job.imageUrls,
-      area: job.area,
-      lat: job.location.lat,
-      lng: job.location.lng,
-      address: job.address,
-      userName: job.userName,
-      IsPaid: job?.IsPaid ? job?.IsPaid : false,
+      images: job.imageUrl, //
+      area: job.area, //
+      address: job.address, //
     });
   };
   // console.log('loggggg', completedJobs);

@@ -84,7 +84,7 @@ const InvoiceDetailScreen = ({navigation}) => {
                   <View style={styles.infoRow}>
                     <Text style={styles.labelTextBold}>From:</Text>
                     {/* <Text style={styles.addressText}>{invoiceDetails.customerName}</Text> */}
-                    <Text style={styles.addressText}>ZAAPR Online services Pvt. Ltd, Ontario, Canada</Text>
+                    <Text style={styles.addressText}>ZAAP Ondemand inc., Toronto, Ontario, Canada</Text>
                   </View>
                   <View style={styles.infoRow}>
                     <Text style={styles.labelTextBold}>Bill to:</Text>

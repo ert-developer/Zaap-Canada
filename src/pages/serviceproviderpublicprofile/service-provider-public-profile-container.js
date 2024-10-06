@@ -6,7 +6,7 @@ import {doc, getDoc, updateDoc} from 'firebase/firestore';
 import {getDocs, collection, where, query} from 'firebase/firestore';
 import {db} from '../../../firebaseDb';
 import moment from 'moment';
-import { envConfig } from '../../assets/helpers/envApi';
+import {envConfig} from '../../assets/helpers/envApi';
 
 const ServiceProviderPublicProfileContainer = () => {
   const navigation = useNavigation();
@@ -72,7 +72,6 @@ const ServiceProviderPublicProfileContainer = () => {
       starRatingCount={starRatingCount}
       firstLetter={firstLetter}
       formattedDate={formattedDate}
-      // languages={['Telugu', 'Hindi']}
       languages={[knowLanguages]}
       setIsReviewOpen={setIsReviewOpen}
       handlePortfolioOpen={handlePortfolioOpen}

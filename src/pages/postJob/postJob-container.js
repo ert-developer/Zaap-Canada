@@ -16,7 +16,6 @@ import {useIsFocused} from '@react-navigation/native';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import {InvoiceNumber} from 'invoice-number';
-import handlePayment from '../../custom-hooks/payment/useRazorPayPayment';
 import {setEditJobStatus} from '../../redux/editjob/action';
 import {getDoc, doc, updateDoc} from 'firebase/firestore';
 import {db} from '../../../firebaseDb';
@@ -25,7 +24,7 @@ const initialFormData = Object.freeze({
   jobTitle: '',
   categories: '',
   subCategory: '',
-  salary: 0,
+  salary: '',
   phone: '',
   location: '',
   landmark: '',
@@ -73,7 +72,7 @@ const PostJobContainer = () => {
           return null;
         }
       } catch (error) {
-        console.error('Error fetching Payment Status data:', error);
+        console.error('Error fetching job data:', error);
         return null;
       } finally {
         setLoader(false);
@@ -460,17 +459,17 @@ const PostJobContainer = () => {
 
       // Define pricing for ads
       const featuredPricing = {
-        149: 1,
-        499: 3,
-        799: 5,
-        1499: 10,
+        19.99: 1,
+        54.99: 3,
+        89.99: 5,
+        169.99: 10,
       };
 
       const spotlightPricing = {
-        249: 1,
-        699: 3,
-        1099: 5,
-        2099: 10,
+        29.99: 1,
+        79.99: 3,
+        129.99: 5,
+        299.99: 10,
       };
 
       if (docSnapshot.exists) {
@@ -577,7 +576,7 @@ const PostJobContainer = () => {
         } else {
           try {
             setPaymentLoader(true);
-            let response = await handleCheckout(paymentAmount);
+            let response = await handleCheckout(parseFloat(paymentAmount));
             if (response && response['_documentPath']) {
               await purchasePremiumAds();
               handlePostJob();
@@ -707,9 +706,9 @@ const PostJobContainer = () => {
       // Update the job document in Firestore
       await updateDoc(jobRef, updatedJobDetails);
       Alert.alert('Job Details updated successfully');
+      navigation.navigate('HomeScreen');
       setFormData(initialFormData);
       dispatch(setEditJobStatus({jobId: null, editJobStatus: false}));
-      console.log('Job details updated successfully');
     } catch (error) {
       console.error('Error updating job details:', error);
     }

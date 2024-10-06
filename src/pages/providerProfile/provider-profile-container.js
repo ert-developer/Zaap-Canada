@@ -134,11 +134,11 @@ const accountType = [
 
 const indiaGovDocs = [
   {name: 'Canadian passport', value: 'Canadian passport'},
-  {name: 'Permanent resident card', value: 'Permanent resident card'},
   {name: "Driver's License", value: 'driverslicense'},
-  {name: 'Work Permit', value: 'Work Permit'},
+  {name: 'Permanent resident card', value: 'Permanent resident card'},
+  {name: 'Provincial Identity Cards', value: 'Provincial Identity Cards'},
   {name: 'Study Permit', value: 'Study Permit'},
-  {name: 'Identity Cards', value: 'Identity Cards'},
+  {name: 'Work Permit', value: 'Work Permit'},
 ];
 
 const indiaStateOptions = [
@@ -152,7 +152,8 @@ const indiaStateOptions = [
   {label: 'Nova Scotia', value: 'Nova Scotia'},
   {label: 'Prince Edward Island', value: 'Prince Edward Island'},
   {label: 'Newfoundland and Labrador', value: 'Newfoundland and Labrador'},
-];
+].sort((a, b) => a.label.localeCompare(b.label));
+
 const ProviderProfileContainer = ({navigation}) => {
   const dispatch = useDispatch();
 
@@ -219,7 +220,7 @@ const ProviderProfileContainer = ({navigation}) => {
       setFormData(prevState => ({...prevState, [field]: value, state: '', city: ''}));
       setStates(State.getStatesOfCountry(value));
     }
-    if (field === 'postal_code' && (!isInteger(value) || !isSixDigitNumber(value))) {
+    if (field === 'postal_code' && value.length > 7) {
       setFormErrors(prevState => ({...prevState, [field]: true}));
     } else if (field === 'city') {
       if (!isCharacter(value)) {
@@ -552,7 +553,7 @@ const ProviderProfileContainer = ({navigation}) => {
           }
           break;
         case 'Postal Code':
-          if (formData.postal_code.length !== 6) {
+          if (formData.postal_code.length > 7 || formData.postal_code.length < 3) {
             formErrors.postal_code = true;
             return false;
           }
@@ -679,7 +680,12 @@ const ProviderProfileContainer = ({navigation}) => {
         const to = 'help@zaapondemand.ca';
         const subject = 'New Application For Background Verification';
         const textMsg = 'New Application For Background Verification';
-        const bodyText = `New Application For Background Verification from ${formData.legal_name_on_id}. Check your dashboard for verification`;
+        const bodyText = `
+      div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+      <h2>New Application For Background verification</h2>
+      <p>New Application For Background Verification from ${formData.legal_name_on_id}. Check your dashboard for verification</p>
+    </div>
+`;
         mailSenter(to, subject, textMsg, bodyText);
 
         await updateCollectionDetails(envConfig.User, {isServiceProvider: false}, userID);

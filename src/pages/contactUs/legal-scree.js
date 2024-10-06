@@ -4,8 +4,6 @@ import {widthToDp} from '../../responsive/responsive';
 import TermsAndConditions from '../termsandconditions/terms-and-conditions';
 import AcceptableUsePolicy from '../termsandconditions/acceptable-use-policy';
 import Disclaimer from '../termsandconditions/disclaimer';
-import ContractorAgreement from '../termsandconditions/contractor-agreement';
-import Enduseraggrement from '../termsandconditions/enduseraggrement';
 import PrivacyPolicies from '../termsandconditions/privacy-policy';
 import {ScrollView} from 'react-native-gesture-handler';
 

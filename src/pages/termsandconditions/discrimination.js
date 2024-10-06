@@ -9,7 +9,7 @@ const Antidiscrimination = () => {
     <ScrollView style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.header}>ZAAP Anti-Discrimination Policy</Text>
-        {/* <Text style={styles.updated}>Last updated August 15, 2024</Text> */}
+        <Text style={styles.updated}>Last updated August 15, 2024</Text>
 
         <Text style={styles.paragraph}>
           At ZAAP - Hire or Work Locally, we are committed to fostering an inclusive and respectful environment for all
@@ -58,9 +58,11 @@ const Antidiscrimination = () => {
 
         <Text style={styles.paragraph}>5. Commitment to Diversity and Inclusion</Text>
         <Text style={styles.listItem}>
-          - At ZAAP - Hire or Work Locally is committed to creating a platform that celebrates diversity and promotes
-          equal opportunities for all users. We actively encourage an environment where everyone can regardless their
-          background or identity.
+          At ZAAP - Hire or Work Locally, we believe in fostering a diverse and inclusive community where everyone is
+          treated with respect and dignity. We are dedicated to upholding this Anti-Discrimination Policy to ensure a
+          fair and welcoming platform for all. If you experience or witness any form of discrimination, please report it
+          to our support team. Together, we can create a space where everyone has the opportunity to succeed, free from
+          bias or prejudice.
         </Text>
       </View>
     </ScrollView>

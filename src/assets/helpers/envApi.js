@@ -1,13 +1,6 @@
 const envType = 'prod'; // dev | uat | prod
 let envConfig;
-import {
-  GOOGLE_API_KEY_DEV,
-  RAZORPAY_API_KEY_DEV,
-  GOOGLE_API_KEY_UAT,
-  RAZORPAY_API_KEY_UAT,
-  GOOGLE_API_KEY_PROD,
-  RAZORPAY_API_KEY_PROD,
-} from '@env';
+import {GOOGLE_API_KEY_DEV, GOOGLE_API_KEY_UAT, GOOGLE_API_KEY_PROD} from '@env';
 
 console.log('This is env trigger');
 switch (envType) {

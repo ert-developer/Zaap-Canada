@@ -1,5 +1,5 @@
 import {useState, useRef} from 'react';
-import {View, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import {View, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, Linking, Text} from 'react-native';
 import CustomText from '../../atoms/text/textComponent';
 import {widthToDp} from '../../responsive/responsive';
 import {Color} from '../../assets/static/globalStyles';
@@ -11,7 +11,6 @@ const TermsAndConditions = () => {
     'USER REPRESENTATIONS',
     'USER REGISTRATION',
     'PURCHASES AND PAYMENT',
-    'POLICY',
     'PROHIBITED ACTIVITIES',
     'USER GENERATED CONTRIBUTIONS',
     'CONTRIBUTION LICENCE',
@@ -102,12 +101,12 @@ const TermsAndConditions = () => {
       <View>
         <CustomText text={'Terms and Conditions'} style={styles.termsCondtionsHeading} />
         {/* Add your terms and conditions here */}
-        <CustomText text={'Last updated August 15, 2024'} />
+        <CustomText text={'Last updated August 15, 2024'} style={styles.updated} />
         <CustomText text={'AGREEMENT TO OUR LEGAL TERMS'} style={styles.heading} />
         {/* Add more terms and conditions */}
         <CustomText
           text={
-            "We are ZAAP ONDEMAND INC, doing business as ZAAP - Hire or WorkLocally ('Company', 'we', 'us', or 'our'), a company registered in Canada at Toronto, Ontario"
+            "We are ZAAP ONDEMAND INC, doing business as ZAAP - Hire or Work Locally ('Company', 'we', 'us', or 'our'), a company registered in Canada at Toronto, Ontario"
           }
           style={styles.paragraph}
         />
@@ -119,10 +118,11 @@ const TermsAndConditions = () => {
         />
         <CustomText
           text={
-            'ZAAP is a classifieds on-demand jobs and services marketplace that connects customers with service providers who match their budget for a variety of services. Service providers can find daily job opportunities in their local area and work according to their skills and flexibility'
+            'ZAAP - Hire or Work Locally is an on-demand jobs and services marketplace that connects customers with skilled service providers, making it easy to hire or work locally, anytime, anywhere.'
           }
           style={styles.paragraph}
         />
+        <CustomText text={'You can contact us by email at help@zaapondemand.ca'} style={styles.paragraph} />
         <CustomText
           text={
             "These Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity ('you'), and ZAAP ONDEMAND INC, concerning your access to and use of the Services. You agree that by accessing the Services, you have read, understood, and agreed to be bound by all of these Legal Terms. IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND YOU MUST DISCONTINUE USE IMMEDIATELY."
@@ -155,7 +155,7 @@ const TermsAndConditions = () => {
             );
           })}
         </View>
-        <ScrollView ref={scrollViewRef} style={{backgroundColor: 'lightgrey'}}>
+        <ScrollView>
           <View onLayout={event => handleLayout('ourservices', event)}>
             <CustomText text={'1.OUR SERVICES'} style={styles.heading} />
             <CustomText
@@ -175,7 +175,7 @@ const TermsAndConditions = () => {
           />
           <CustomText
             text={
-              'Our Content and Marks are protected by copyright and trademark laws (and various other intellectual property rights and unfair competition laws) and treaties in Canada and around the world.'
+              'Our Content and Marks are protected by copyright and trademark laws (and various other intellectual property rights and unfair competition laws) and treaties in United States and around the world.'
             }
             style={styles.paragraph}
           />
@@ -357,19 +357,19 @@ const TermsAndConditions = () => {
           <CustomText text={'5. PURCHASES AND PAYMENT'} style={styles.heading} />
           <CustomText text={'We accept the following forms of payment:'} style={styles.paragraph} />
           <View>
-            {['Visa', 'Mastercard', 'American Express', 'Discover', 'Google Pay', 'Phone Pe', 'UPI'].map(cards => {
+            {['Visa', 'Mastercard', 'American Express', 'Discover'].map(cards => {
               return <CustomText text={`- ${cards}`} style={styles.paragraph} />;
             })}
           </View>
           <CustomText
             text={
-              'You agree to provide current, complete, and accurate purchase and account information for all purchases made via the Services. You further agree to promptly update account and payment information, including email address, payment method, and payment card expiration date, so that we can complete your transactions and contact you as needed. Sales tax will be added to the price of purchases as deemed required by us. We may change prices at any time.'
+              'You agree to provide current, complete, and accurate purchase and account information for all purchases made via the Services. You further agree to promptly update account and payment information, including email address, payment method, and payment card expiration date, so that we can complete your transactions and contact you as needed. Sales tax will be added to the price of purchases as deemed required by us. We may change prices at any time. All payments shall be in Canadian Dollar'
             }
             style={styles.paragraph}
           />
           <CustomText
             text={
-              'You agree to pay all charges at the prices then in effect for your purchases and any applicable fees, and you authorise us to charge your chosen payment provider for any such amounts upon placing your order. We reserve the right to correct any errors ormistakes in pricing, even if we have already requested or received payment.'
+              'You agree to pay all charges at the prices then in effect for your purchases and any applicable shipping fees, and you authorise us to charge your chosen payment provider for any such amounts upon placing your order. We reserve the right to correct any errors or mistakes in pricing, even if we have already requested or received payment.'
             }
             style={styles.paragraph}
           />
@@ -474,14 +474,11 @@ const TermsAndConditions = () => {
               {
                 ProhibitionPoints: 'Sell or otherwise transfer your profile',
               },
-              {
-                ProhibitionPoints: 'Sell or otherwise transfer your profile',
-              },
             ].map(points => {
               return <CustomText text={`- ${points.ProhibitionPoints}`} style={styles.paragraph} />;
             })}
           </View>
-          <CustomText text={'8. USER GENERATED CONTRIBUTIONS'} style={styles.heading} />
+          <CustomText text={'7. USER GENERATED CONTRIBUTIONS'} style={styles.heading} />
           <CustomText
             text={
               "The Services may invite you to chat, contribute to, or participate in blogs, message boards, online forums, and other functionality, and may provide you with the opportunity to create, submit, post, display, transmit, perform, publish, distribute, or broadcast content and materials to us or on the Services, including but not limited totext, writings, video, audio, photographs, graphics, comments, suggestions, or personal information or other material (collectively, 'Contributions'). Contributions may be viewable by other users of the Services and through third-party websites. As such, any Contributions you transmit may be treated as non-confidential and non-proprietary. When you create or make available any Contributions, you thereby represent and warrant that:"
@@ -555,7 +552,7 @@ const TermsAndConditions = () => {
               }
               style={styles.paragraph}
             />
-            <CustomText text={'9. CONTRIBUTION LICENCE'} style={styles.heading} />
+            <CustomText text={'8. CONTRIBUTION LICENCE'} style={styles.heading} />
             <CustomText
               text={
                 'By posting your Contributions to any part of the Services, you automatically grant, and you represent and warrant that you have the right to grant, to us an unrestricted, unlimited, irrevocable, perpetual, non-exclusive, transferable, royalty-free, fully-paid, worldwide right, and licence to host, use, copy, reproduce, disclose, sell, resell, publish, broadcast, retitle, archive, store, cache, publicly perform, publicly display, reformat, translate, transmit, excerpt (in whole or in part), and distribute such Contributions (including, without limitation, your image and voice) for any purpose, commercial, advertising, or otherwise, and to prepare derivative works of, or incorporate into other works, such Contributions, and grant and authorise sublicences of the foregoing. The use and distribution may occur in any media formats and through any media channels.'
@@ -580,7 +577,8 @@ const TermsAndConditions = () => {
               }
               style={styles.paragraph}
             />
-            <CustomText text={'10. GUIDELINES FOR REVIEWS'} style={styles.heading} />
+
+            <CustomText text={'9. GUIDELINES FOR REVIEWS'} style={styles.heading} />
             <CustomText
               text={
                 'We may provide you areas on the Services to leave reviews or ratings. When posting areview, you must comply with the following criteria: (1) you should have firsthand experience with the person/entity being reviewed; (2) your reviews should not contain offensive profanity, or abusive, racist, offensive, or hateful language; (3) your reviews should not contain discriminatory references based on religion, race, gender, national origin, age, marital status, sexual orientation, or disability; (4) your reviews should not contain references to illegal activity; (5) you should not be affiliated with competitors if posting negative reviews; (6) you should not make any conclusions as to the legality of conduct; (7) you may not post any false or misleading statements; and (8) you may not organise a campaign encouraging others to post reviews, whether positive or negative.'
@@ -593,7 +591,8 @@ const TermsAndConditions = () => {
               }
               style={styles.paragraph}
             />
-            <CustomText text={'11. MOBILE APPLICATION LICENCE'} style={styles.heading} />
+
+            <CustomText text={'10. MOBILE APPLICATION LICENCE'} style={styles.heading} />
             <CustomText text={'Use Licence'} style={styles.heading} />
             <CustomText
               text={
@@ -624,6 +623,10 @@ const TermsAndConditions = () => {
                 },
                 {
                   appleIOSpoints:
+                    'you represent and warrant that (i) you are not located in a country that is subject to a US government embargo, or that has been designated by the US government as a "terrorist supporting" country and (ii) you are not listed on any US government list of prohibited or restricted parties;',
+                },
+                {
+                  appleIOSpoints:
                     'You must comply with applicable third-party terms of agreement when using the App, e.g. if you have a VoIP application, then you must not be in violation of their wireless data service agreement when using the App and',
                 },
                 {
@@ -634,6 +637,34 @@ const TermsAndConditions = () => {
                 <CustomText key={points} text={`(${index + 1})${points.appleIOSpoints}`} style={styles.paragraph} />
               ))}
             </View>
+
+            <CustomText text={'11. THIRD-PARTY WEBSITES AND CONTENT'} style={styles.heading} />
+
+            <CustomText
+              text={
+                'The Services may contain (or you may be sent via the App) links to other websites ("Third-Party Websites") as well as articles, photographs, text, graphics, picturesdesigns, music, sound, video, information, applications, software, and other content or items belonging to or originating from third parties ("Third-Party Content").'
+              }
+              style={styles.paragraph}
+            />
+
+            <CustomText
+              text={
+                'Such ThirdParty Websites and Third-Party Content are not investigated, monitored, or checked for accuracy, appropriateness, or completeness by us, and we are not responsible for any Third-Party Websites accessed through the Services or any Third-Party Content posted on, available through, or installed from the Services, including the content, accuracy, offensiveness, opinions, reliability, privacy practices, or other policies of or contained in the Third-Party Websites or the Third-Party Content. Inclusion of, linking to, or permitting the use or installation of any Third-Party Websites or any ThirdParty Content does not imply approval or endorsement thereof by us. '
+              }
+              style={styles.paragraph}
+            />
+            <CustomText
+              text={
+                'If you decide to leave the Services and access the Third-Party Websites or to use or install any ThirdParty Content, you do so at your own risk, and you should be aware these Legal Terms no longer govern. You should review the applicable terms and policies, including privacy and data gathering practices, of any website to which you navigate from the Services or relating to any applications you use or install from the Services. Any purchases you make through Third-Party Websites will be through other websites and from other companies, and we take no responsibility whatsoever in relation to such purchases which are exclusively between you and the applicable third party'
+              }
+              style={styles.paragraph}
+            />
+            <CustomText
+              text={
+                'You agree and acknowledge that we do not endorse the products or services offered on Third-Party Websites and you shall hold us blameless from any harm caused by your purchase of such products or services. Additionally, you shall hold us blameless from any losses sustained by you or harm caused to you relating to or resulting in any way from any Third-Party Content or any contact with Third-Party Websites.'
+              }
+              style={styles.paragraph}
+            />
             <CustomText text={'12. ADVERTISERS'} style={styles.heading} />
             <CustomText
               text={
@@ -785,7 +816,7 @@ law of these Legal Terms shall be substantive law of Canada`}
             <CustomText text={'22. LIMITATIONS OF LIABILITY'} style={styles.heading} />
             <CustomText
               text={
-                'IN NO EVENT WILL WE OR OUR DIRECTORS, EMPLOYEES, OR AGENTS BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY DIRECT, INDIRECT, CONSEQUENTIAL, EXEMPLARY, INCIDENTAL, SPECIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFIT, LOST REVENUE, LOSS OF DATA, OR OTHER DAMAGES ARISING FROM YOUR USE OF THE SERVICES, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. NOTWITHSTANDING ANYTHING TO THE CONTRARY CONTAINED HEREIN, OUR LIABILITY TO YOU FOR ANY CAUSE WHATSOEVER AND REGARDLESS OF THE FORM OF THE ACTION, WILL AT ALL TIMES BE LIMITED TO THE LESSER OF THE AMOUNT PAID, IF ANY, BY YOU TO US OR . CERTAIN US STATE LAWS AND INTERNATIONAL LAWS DO NOT ALLOW LIMITATIONS ON IMPLIED WARRANTIES OR THE EXCLUSION OR LIMITATION OF CERTAIN DAMAGES. IF THESE LAWS APPLY TO YOU, SOME OR ALL OF THE ABOVE DISCLAIMERS OR LIMITATIONS MAY NOT APPLY TO YOU, AND YOU MAY HAVE ADDITIONAL RIGHTS.'
+                'IN NO EVENT WILL WE OR OUR DIRECTORS, EMPLOYEES, OR AGENTS BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY DIRECT, INDIRECT, CONSEQUENTIAL, EXEMPLARY, INCIDENTAL, SPECIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFIT, LOST REVENUE, LOSS OF DATA, OR OTHER DAMAGES ARISING FROM YOUR USE OF THE SERVICES, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. NOTWITHSTANDING ANYTHING TO THE CONTRARY CONTAINED HEREIN, OUR LIABILITY TO YOU FOR ANY CAUSE WHATSOEVER AND REGARDLESS OF THE FORM OF THE ACTION, WILL AT ALL TIMES BE LIMITED TO THE LESSER OF THE AMOUNT PAID, IF ANY, BY YOU TO US OR CAD $100. CERTAIN US STATE LAWS AND INTERNATIONAL LAWS DO NOT ALLOW LIMITATIONS ON IMPLIED WARRANTIES OR THE EXCLUSION OR LIMITATION OF CERTAIN DAMAGES. IF THESE LAWS APPLY TO YOU, SOME OR ALL OF THE ABOVE DISCLAIMERS OR LIMITATIONS MAY NOT APPLY TO YOU, AND YOU MAY HAVE ADDITIONAL RIGHTS.'
               }
               style={styles.paragraph}
             />
@@ -836,10 +867,18 @@ law of these Legal Terms shall be substantive law of Canada`}
             <CustomText text={'28. CONTACT US'} style={styles.heading} />
             <CustomText
               text={
-                'In order to resolve a complaint regarding the Services or to receive further information regarding use of the Services, please contact our support team by email at help@zaapondemand.ca'
+                'In order to resolve a complaint regarding the Services or to receive further information regarding use of the Services, please contact us at:'
               }
               style={styles.paragraph}
             />
+            <CustomText text={'ZAAP ONDEMAND INC'} style={styles.paragraph} />
+            <CustomText text={'Toronto, Ontario'} style={styles.paragraph} />
+            <CustomText text={'Canada'} style={styles.paragraph} />
+            <Text style={styles.link} onPress={() => Linking.openURL('mailto:help@zaapondemand.ca')}>
+              {' '}
+              help@zaapondemand.ca
+            </Text>
+
             <CustomText text={''} />
           </View>
         </ScrollView>
@@ -865,6 +904,15 @@ const styles = StyleSheet.create({
     marginVertical: widthToDp(2),
     textAlign: 'justify',
     fontWeight: '400',
+  },
+  link: {
+    color: '#1e90ff',
+  },
+  updated: {
+    fontSize: widthToDp(4),
+    fontWeight: 'bold',
+    marginVertical: widthToDp(2),
+    // color: Color.colorIndigo,
   },
 });
 

@@ -148,7 +148,7 @@ const ChatScreenExample = ({data, allChat}) => {
     const recicerUser = await getUserDetails(envConfig.User, userId);
     const fcmToken = recicerUser.fcmToken;
     try {
-      const response = fetch('https://push-notifications-server-lvzr.onrender.com/sendNotification', {
+      const response = fetch('https://canada-push-notifications-server.onrender.com/sendNotification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

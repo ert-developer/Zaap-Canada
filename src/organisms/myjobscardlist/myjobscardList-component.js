@@ -79,6 +79,7 @@ const MyjobsCardList = ({
   const handleJobPress = job => {
     navigation.navigate('JobDeatil', {
       imageSource: job.imageUrls[0],
+      id: job.jobId,
       title: job.jobTitle,
       category: job.category,
       subCategory: job.subCategory,

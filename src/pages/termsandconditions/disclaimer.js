@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, ScrollView, Text, View} from 'react-native';
 import {Color} from '../../assets/static/globalStyles';
 import {widthToDp} from '../../responsive/responsive';
+import CustomText from '../../atoms/text/textComponent';
 
 const Disclaimer = () => {
   return (
@@ -46,7 +47,7 @@ const Disclaimer = () => {
         <Text style={styles.sectionTitle}>AFFILIATES DISCLAIMER</Text>
         <Text style={styles.paragraph}>
           Our mobile application may contain links to affiliate websites, and we receive an affiliate commission for any
-          purchases made by you on the affiliate website using such links.
+          purchases made by you on the affiliate website using such links. Our affiliates include the following:
         </Text>
 
         <Text style={styles.sectionTitle}>TESTIMONIALS DISCLAIMER</Text>
@@ -70,6 +71,7 @@ const Disclaimer = () => {
           our views and opinions. We are not affiliated with users who provide testimonials, and users are not paid or
           otherwise compensated for their testimonials.
         </Text>
+        <CustomText text={''} style={styles.paragraph} />
       </View>
     </ScrollView>
   );

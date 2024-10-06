@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiUrl = 'https://zaap-mail-server-1.onrender.com/sendmail';
+const apiUrl = 'https://zaap-canada-email-server.onrender.com/sendmail';
 // const apiUrl = 'http://192.168.0.153:3000/sendmail';
 // const apiUrl = 'http://localhost:3000/sendmail';
 
