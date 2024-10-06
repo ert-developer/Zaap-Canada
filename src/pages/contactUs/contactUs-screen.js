@@ -26,7 +26,7 @@ const ContactUs = () => {
   };
 
   const handleEmailPress = () => {
-    const email = 'mailto:help@zaapondemand.in';
+    const email = 'mailto:help@zaapondemand.ca';
     Linking.canOpenURL(email)
       .then(supported => {
         return Linking.openURL(email);
@@ -51,7 +51,7 @@ const ContactUs = () => {
             <CustomText text={'Kindly email your question or concern at'} style={styles.contactUsDesscription} />
           </View>
           <TouchableOpacity style={styles.contactUsBtn} onPress={handleEmailPress}>
-            <CustomText text={'help@zaapondemand.in'} style={styles.btnText} />
+            <CustomText text={'help@zaapondemand.ca'} style={styles.btnText} />
           </TouchableOpacity>
         </View>
       </Modal>

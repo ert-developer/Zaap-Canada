@@ -107,7 +107,7 @@ const TermsAndConditions = () => {
         {/* Add more terms and conditions */}
         <CustomText
           text={
-            "We are Zaapr Online Services Private Limited, doing business as ZAAP - Hire or WorkLocally ('Company', 'we', 'us', or 'our'), a company registered in Canada at Toronto, Ontario"
+            "We are ZAAP ONDEMAND INC, doing business as ZAAP - Hire or WorkLocally ('Company', 'we', 'us', or 'our'), a company registered in Canada at Toronto, Ontario"
           }
           style={styles.paragraph}
         />
@@ -125,7 +125,7 @@ const TermsAndConditions = () => {
         />
         <CustomText
           text={
-            "These Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity ('you'), and Zaapr Online Services Private Limited, concerning your access to and use of the Services. You agree that by accessing the Services, you have read, understood, and agreed to be bound by all of these Legal Terms. IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND YOU MUST DISCONTINUE USE IMMEDIATELY."
+            "These Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity ('you'), and ZAAP ONDEMAND INC, concerning your access to and use of the Services. You agree that by accessing the Services, you have read, understood, and agreed to be bound by all of these Legal Terms. IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND YOU MUST DISCONTINUE USE IMMEDIATELY."
           }
           style={styles.paragraph}
         />

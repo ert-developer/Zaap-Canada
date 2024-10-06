@@ -11,7 +11,7 @@ const PrivacyPolicies = () => {
       <CustomText text={'Last updated: August 15, 2024'} />
       <CustomText
         text={
-          "This privacy notice for Zaapr Online Services Private Limited (doing business as ZAAP - Hire or Work Locally) ('we', 'us', or 'our'), describes how and why we might collect, store, use, and/or share ('process') your information when you use our services ('Services'), such as when you:"
+          "This privacy notice for ZAAP ONDEMAND INC (doing business as ZAAP - Hire or Work Locally) ('we', 'us', or 'our'), describes how and why we might collect, store, use, and/or share ('process') your information when you use our services ('Services'), such as when you:"
         }
         style={styles.paragraph}
       />
@@ -111,7 +111,7 @@ const PrivacyPolicies = () => {
       <CustomText text={'Sensitive Information. We do not process sensitive information.'} style={styles.paragraph} />
       <CustomText
         text={
-          'Payment Data. We may collect data necessary to process your payment if you choose to make purchases, such as your payment instrument number, and the security code associated with your payment instrument. All payment data is handled and stored by RazorPay, GooglePay and PhonePe. You may find their privacy notice link(s) here: https://razorpay.com/privacy/, https://pay.google.com/intl/en_in/about/policy/ and https://www.phonepe.com/privacy-policy.'
+          'Payment Data. We may collect data necessary to process your payment if you choose to make purchases, such as your payment instrument number, and the security code associated with your payment instrument. All payment data is handled and stored by , GooglePay and PhonePe. You may find their privacy notice link(s) here: https://razorpay.com/privacy/, https://pay.google.com/intl/en_in/about/policy/ and https://www.phonepe.com/privacy-policy.'
         }
         style={styles.paragraph}
       />

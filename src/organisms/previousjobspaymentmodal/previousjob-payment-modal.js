@@ -444,7 +444,7 @@ const PreviousJobsPaymentModal = () => {
           <li>Select the service provider who best matches your requirements and preferences.</li>
         </ol>
       
-        <p>If you need any assistance or have questions, reach out to our support team via email at <a href="mailto:help@zaapondemand.in">help@zaapondemand.in</a>.</p>
+        <p>If you need any assistance or have questions, reach out to our support team via email at <a href="mailto:help@zaapondemand.ca">help@zaapondemand.ca</a>.</p>
       
         <p>Thank you for your patience and understanding.</p>
       
@@ -484,7 +484,7 @@ const PreviousJobsPaymentModal = () => {
 
   <p>We urge you to adhere to confirmed bookings and avoid unnecessary cancellations. Maintaining a reliable and professional standard is crucial for the integrity of our platform and the satisfaction of our customers.</p>
 
-  <p>If you have any questions or wish to discuss this matter further, please contact us directly at <a href="mailto:help@zaapondemand.in">help@zaapondemand.in</a>.</p>
+  <p>If you have any questions or wish to discuss this matter further, please contact us directly at <a href="mailto:help@zaapondemand.ca">help@zaapondemand.ca</a>.</p>
 
   <p>Thank you for your prompt attention to this matter.</p>
 

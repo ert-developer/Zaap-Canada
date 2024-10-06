@@ -10,7 +10,7 @@ const Enduseraggrement = () => {
       <CustomText text={'End User Agreement'} style={styles.termsCondtionsHeading} />
       <CustomText text={'Last updated August 15, 2024'} />
       <CustomText
-        text={`ZAAP - Hire or Work Locally is licensed to You (End-User) by Zaapr Online Services Private Limited, located and registered at ontori, canada ('Licensor'), for use only under the terms of this Licence Agreement.`}
+        text={`ZAAP - Hire or Work Locally is licensed to You (End-User) by ZAAP ONDEMAND INC, located and registered at ontori, canada ('Licensor'), for use only under the terms of this Licence Agreement.`}
         style={styles.paragraph}
       />
       <CustomText
@@ -21,13 +21,13 @@ const Enduseraggrement = () => {
       />
       <CustomText
         text={
-          'The parties of this Licence Agreement acknowledge that the Services are not a Party to this Licence Agreement and are not bound by any provisions or obligations with regard to the Licensed Application, such as warranty, liability, maintenance and support thereof. Zaapr Online Services Private Limited, not the Services, is solely responsible for the Licensed Application and the content thereof.'
+          'The parties of this Licence Agreement acknowledge that the Services are not a Party to this Licence Agreement and are not bound by any provisions or obligations with regard to the Licensed Application, such as warranty, liability, maintenance and support thereof. ZAAP ONDEMAND INC, not the Services, is solely responsible for the Licensed Application and the content thereof.'
         }
         style={styles.paragraph}
       />
       <CustomText
         text={
-          "This Licence Agreement may not provide for usage rules for the Licensed Application that are in conflict with the latest Apple Media Services Terms and Conditions and Google Play Terms of Service ('Usage Rules').Zaapr Online Services Private Limited acknowledges that it had the opportunity to review the Usage Rules and this Licence Agreement is not conflicting with them."
+          "This Licence Agreement may not provide for usage rules for the Licensed Application that are in conflict with the latest Apple Media Services Terms and Conditions and Google Play Terms of Service ('Usage Rules').ZAAP ONDEMAND INC acknowledges that it had the opportunity to review the Usage Rules and this Licence Agreement is not conflicting with them."
         }
         style={styles.paragraph}
       />
@@ -78,13 +78,13 @@ const Enduseraggrement = () => {
       />
       <CustomText
         text={
-          "2.3 You may not share or make the Licensed Application available to third parties (unless to the degree allowed by the Usage Rules, and with Zaapr Online Services Private Limited's prior written consent), sell, rent, lend, lease or otherwise redistribute the Licensed Application."
+          "2.3 You may not share or make the Licensed Application available to third parties (unless to the degree allowed by the Usage Rules, and with ZAAP ONDEMAND INC's prior written consent), sell, rent, lend, lease or otherwise redistribute the Licensed Application."
         }
         style={styles.paragraph}
       />
       <CustomText
         text={
-          "2.4 You may not reverse engineer, translate, disassemble, integrate, decompile, remove, modify, combine, create derivative works or updates of, adapt, or attempt to derive the source code of the Licensed Application, or any part thereof (except with Zaapr Online Services Private Limited's prior written consent)."
+          "2.4 You may not reverse engineer, translate, disassemble, integrate, decompile, remove, modify, combine, create derivative works or updates of, adapt, or attempt to derive the source code of the Licensed Application, or any part thereof (except with ZAAP ONDEMAND INC's prior written consent)."
         }
         style={styles.paragraph}
       />
@@ -144,7 +144,7 @@ const Enduseraggrement = () => {
       />
       <CustomText
         text={
-          '4.2 Zaapr Online Services Private Limited and the End-User acknowledge that the Services have no obligation whatsoever to furnish any maintenance and support services with respect to the Licensed Application.'
+          '4.2 ZAAP ONDEMAND INC and the End-User acknowledge that the Services have no obligation whatsoever to furnish any maintenance and support services with respect to the Licensed Application.'
         }
         style={styles.paragraph}
       />
@@ -289,19 +289,19 @@ const Enduseraggrement = () => {
       />
       <CustomText
         text={
-          "9.2 No warranty is provided for the Licensed Application that is not executable on the device, that has been unauthorisedly modified, handled inappropriately or culpably, combined or installed with inappropriate hardware or software, used with inappropriate accessories, regardless if by Yourself or by third parties, or if there are any other reasons outside of Zaapr Online Services Private Limited's sphere of influence that affect the executability of the Licensed Application."
+          "9.2 No warranty is provided for the Licensed Application that is not executable on the device, that has been unauthorisedly modified, handled inappropriately or culpably, combined or installed with inappropriate hardware or software, used with inappropriate accessories, regardless if by Yourself or by third parties, or if there are any other reasons outside of ZAAP ONDEMAND INC's sphere of influence that affect the executability of the Licensed Application."
         }
         style={styles.paragraph}
       />
       <CustomText
         text={
-          '9.3 You are required to inspect the Licensed Application immediately after installing it and notify Zaapr Online Services Private Limited about issues discovered without delay by email provided in Contact Information.'
+          '9.3 You are required to inspect the Licensed Application immediately after installing it and notify ZAAP ONDEMAND INC about issues discovered without delay by email provided in Contact Information.'
         }
         style={styles.paragraph}
       />
       <CustomText
         text={
-          '9.4 If we confirm that the Licensed Application is defective, Zaapr Online Services Private Limited reserves a choice to remedy the situation either by means of solving the defect or substitute delivery'
+          '9.4 If we confirm that the Licensed Application is defective, ZAAP ONDEMAND INC reserves a choice to remedy the situation either by means of solving the defect or substitute delivery'
         }
         style={styles.paragraph}
       />
@@ -320,7 +320,7 @@ const Enduseraggrement = () => {
       <CustomText text={'10. PRODUCT CLAIMS'} style={styles.heading} />
       <CustomText
         text={
-          'Zaapr Online Services Private Limited and the End-User acknowledge that Zaapr Online Services Private Limited, and not the Services, is responsible for addressing any claims of the End-User or any third party relating to the Licensed Application or the End-Userʼs possession and/or use of that Licensed Application, including, but not limited to:'
+          'ZAAP ONDEMAND INC and the End-User acknowledge that ZAAP ONDEMAND INC, and not the Services, is responsible for addressing any claims of the End-User or any third party relating to the Licensed Application or the End-Userʼs possession and/or use of that Licensed Application, including, but not limited to:'
         }
         style={styles.paragraph}
       />
@@ -347,21 +347,21 @@ const Enduseraggrement = () => {
       <CustomText text={'12. CONTACT INFORMATION'} style={styles.heading} />
       <CustomText
         text={
-          'For general inquiries, complaints, questions or claims concerning the Licensed Application, please contact our support team by email at help@zaapondemand.in'
+          'For general inquiries, complaints, questions or claims concerning the Licensed Application, please contact our support team by email at help@zaapondemand.ca'
         }
         style={styles.paragraph}
       />
       <CustomText text={'13. TERMINATION'} style={styles.heading} />
       <CustomText
         text={
-          'The licence is valid until terminated by Zaapr Online Services Private Limited or by You. Your rights under this licence will terminate automatically and without notice from Zaapr Online Services Private Limited if You fail to adhere to any term(s) of this licence. Upon Licence termination, You shall stop all use of the Licensed Application, and destroy all copies, full or partial, of the Licensed Application.'
+          'The licence is valid until terminated by ZAAP ONDEMAND INC or by You. Your rights under this licence will terminate automatically and without notice from ZAAP ONDEMAND INC if You fail to adhere to any term(s) of this licence. Upon Licence termination, You shall stop all use of the Licensed Application, and destroy all copies, full or partial, of the Licensed Application.'
         }
         style={styles.paragraph}
       />
       <CustomText text={'14. THIRD-PARTY TERMS OF AGREEMENTS AND BENEFICIARY'} style={styles.heading} />
       <CustomText
         text={
-          'Zaapr Online Services Private Limited represents and warrants that Zaapr Online Services Private Limited will comply with applicable third-party terms of agreement when using Licensed Application.'
+          'ZAAP ONDEMAND INC represents and warrants that ZAAP ONDEMAND INC will comply with applicable third-party terms of agreement when using Licensed Application.'
         }
         style={styles.paragraph}
       />
@@ -374,7 +374,7 @@ const Enduseraggrement = () => {
       <CustomText text={'15. INTELLECTUAL PROPERTY RIGHTS'} style={styles.heading} />
       <CustomText
         text={
-          "Zaapr Online Services Private Limited and the End-User acknowledge that, in the event of any third-party claim that the Licensed Application or the End-User's possession and use of that Licensed Application infringes on the third party's intellectual property rights, Zaapr Online Services Private Limited, and not the Services, will be solely responsible for the investigation, defence, settlement, and discharge or any such intellectual property infringement claims."
+          "ZAAP ONDEMAND INC and the End-User acknowledge that, in the event of any third-party claim that the Licensed Application or the End-User's possession and use of that Licensed Application infringes on the third party's intellectual property rights, ZAAP ONDEMAND INC, and not the Services, will be solely responsible for the investigation, defence, settlement, and discharge or any such intellectual property infringement claims."
         }
         style={styles.paragraph}
       />

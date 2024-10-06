@@ -321,7 +321,8 @@ const ProviderProfileContainer = ({navigation}) => {
     const initialForm = {};
     categories.forEach(category => {
       category.inputFields.forEach(field => {
-        initialForm[field.name.toLowerCase().split(' ').join('_')] = value === 'initialState' ? '' : value[0][field.name.toLowerCase().split(' ').join('_')];
+        initialForm[field.name.toLowerCase().split(' ').join('_')] =
+          value === 'initialState' ? '' : value[0][field.name.toLowerCase().split(' ').join('_')];
       });
     });
     return initialForm;
@@ -675,7 +676,7 @@ const ProviderProfileContainer = ({navigation}) => {
         await deleteAndPostProviderDetails(envConfig.Provider, userID);
 
         let response = await postCollectionDetails(envConfig.Provider, providerDetails);
-        const to = 'help@zaapondemand.in';
+        const to = 'help@zaapondemand.ca';
         const subject = 'New Application For Background Verification';
         const textMsg = 'New Application For Background Verification';
         const bodyText = `New Application For Background Verification from ${formData.legal_name_on_id}. Check your dashboard for verification`;
