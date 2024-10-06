@@ -100,6 +100,7 @@ const ModalComponent = ({isVisible, onClose, userWorking}) => {
       userId: profiledetail.userId,
       markasread: false,
       time: new Date(),
+      screen: 'MyJobScreen',
     };
     await postCollectionDetails(envConfig.Notifications, data);
   };
@@ -141,7 +142,7 @@ const ModalComponent = ({isVisible, onClose, userWorking}) => {
     // Generate a unique room ID
     // const roomId = generateRoomId();
 
-    const snapshot = await database().ref(`/chatlist/${data.userId}/${user.userId}`).once('value');
+    const snapshot = await database().ref(`/${envConfig.chatlist}/${data.userId}/${user.userId}`).once('value');
     const roomDetails = snapshot.val();
     const roomId = roomDetails?.roomId || generateRoomId();
 
@@ -219,7 +220,7 @@ const ModalComponent = ({isVisible, onClose, userWorking}) => {
           otp: otpValue,
           otpValidationStatus: false,
         };
-        await database().ref(`myjobs/${user.userId}_${jobDetails.jobId}`).child('otpData').set(otpData);
+        await database().ref(`${envConfig.myjobs}/${user.userId}_${jobDetails.jobId}`).child('otpData').set(otpData);
 
         setModalVisible(true);
         iinchatScreenNavigation(serviceproviderData);

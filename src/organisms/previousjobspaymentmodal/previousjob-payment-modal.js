@@ -72,7 +72,7 @@ const PreviousJobsPaymentModal = () => {
 
   const getRoomDetails = async (userId1, userId2) => {
     try {
-      const snapshot = await database().ref(`/chatlist/${userId1}/${userId2}`).once('value');
+      const snapshot = await database().ref(`/${envConfig.chatlist}/${userId1}/${userId2}`).once('value');
       const roomDetails = snapshot.val();
       setRoomDetails(roomDetails);
     } catch (error) {
@@ -210,7 +210,7 @@ const PreviousJobsPaymentModal = () => {
 
   useEffect(() => {
     const isWorkDoneRef = database().ref(
-      `/myjobs/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}/isworkdone/isworkdone`,
+      `/${envConfig.myjobs}/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}/isworkdone/isworkdone`,
     );
 
     const handleSnapshot = snapshot => {
@@ -500,6 +500,7 @@ const PreviousJobsPaymentModal = () => {
         userId: selectedJobDetails.customerId,
         markasread: false,
         time: new Date(),
+        screen: 'MyJobScreen',
       };
       await postCollectionDetails(envConfig.Notifications, data);
 
@@ -549,7 +550,9 @@ const PreviousJobsPaymentModal = () => {
               <TouchableOpacity onPress={handlePhoneIconPress}>
                 <Call />
               </TouchableOpacity>
-              <MessageIcon onPress={handleMessageIconPress} opacity={chatIconOpacity} />
+              <TouchableOpacity onPress={handleMessageIconPress}>
+                <MessageIcon opacity={chatIconOpacity} />
+              </TouchableOpacity>
               {isOtpValid ? null : (
                 <Tooltip
                   isVisible={tooltipVisible}
@@ -953,6 +956,8 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     fontFamily: 'Helvetica',
     color: '#000',
+    marginTop: 2,
+    marginBottom: 2,
   },
   iconWithTick: {
     alignItems: 'center',

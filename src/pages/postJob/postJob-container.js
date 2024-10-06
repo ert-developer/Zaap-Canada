@@ -305,7 +305,6 @@ const PostJobContainer = () => {
     if (field === 'salary') {
       if (!isInteger(value) || Number(value) <= 0 || String(value).length > 6) {
         setFormErrors(prevState => ({...prevState, [field]: true}));
-        setFormData(prevState => ({...prevState, [field]: ''}));
       } else {
         setFormData(prevState => ({...prevState, [field]: Number(value)}));
       }

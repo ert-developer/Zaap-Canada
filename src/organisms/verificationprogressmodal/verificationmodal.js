@@ -16,7 +16,7 @@ const VerificationInProgressModal = ({visible, onClose}) => {
         <View style={styles.modalOverlay}>
           <TouchableWithoutFeedback>
             <View style={styles.modalContainer}>
-              <FastImage style={{width: 150, height: 150}} source={require('../../assets/CancelService.gif')} />
+              <FastImage style={{width: 100, height: 100}} source={require('../../assets/CancelService.gif')} />
               <CustomText text={'Verification In Progress'} style={styles.modalTitle} />
               <CustomText
                 text={'Your identity verification is currently in progress. Please wait until the process is complete.'}
@@ -39,7 +39,7 @@ const styles = {
   },
   modalContainer: {
     width: '80%',
-    padding: 20,
+    padding: 10,
     backgroundColor: 'white',
     borderRadius: 10,
     alignItems: 'center',

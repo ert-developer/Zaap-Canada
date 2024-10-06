@@ -54,7 +54,7 @@ const MyEarningScreen = () => {
         <View style={styles.cardContent}>
           <View style={styles.cardLeft}>
             <CustomText text={item.jobTitle} style={styles.jobTitle} />
-            <CustomText text={`Work Value $${item.salary}`} style={styles.bookingText} />
+            <CustomText text={`Service Value $${item.salary}`} style={styles.bookingText} />
             {/* platform fee */}
             <CustomText text={`Platform Fee $${getPlatformFee(item.salary)}`} style={styles.bookingText} />
             <CustomText text={`Booking ID  #${item.bookingId}`} style={styles.bookingText} />

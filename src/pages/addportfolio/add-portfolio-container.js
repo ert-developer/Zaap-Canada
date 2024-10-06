@@ -3,7 +3,8 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import AddPortfolioScreen from './add-portfolio-screen';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
-import { envConfig } from '../../assets/helpers/envApi';
+import {envConfig} from '../../assets/helpers/envApi';
+import {Alert} from 'react-native';
 
 const AddPortfolioContainer = ({route}) => {
   const portfolioDetails = route.params === undefined ? null : route.params;
@@ -27,13 +28,19 @@ const AddPortfolioContainer = ({route}) => {
       } else if (response.assets && response.assets.length > 0) {
         try {
           const imageUrls = [];
-
+          const maxFileSize = 3 * 1024 * 1024;
           for (const image of response.assets) {
+            console.log(image.fileSize, maxFileSize);
+            if (image.fileSize > maxFileSize) {
+              Alert.alert(
+                'File Size Error',
+                `The file ${image.fileName} exceeds the maximum size of 3 MB. Please choose a smaller file.`,
+              );
+              continue;
+            }
             const imageName = `image_${Date.now()}.jpg`;
             const storageRef = storage().ref(`images/${imageName}`);
             await storageRef.putFile(image.uri);
-
-            // Get the download URL
             const downloadURL = await storageRef.getDownloadURL();
             imageUrls.push(downloadURL);
           }

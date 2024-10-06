@@ -34,21 +34,7 @@ const ServiceProviderPublicProfileScreen = ({
   const styles = serviceProviderPublicprofileScreenStyle();
 
   // Determine how to format the languages for display
-  let firstLineLanguages = '';
-  let secondLineLanguages = '';
-  let thirdLineLanguages = '';
-  if (languages.length > 6) {
-    firstLineLanguages = languages.slice(0, 3).join(', ');
-    secondLineLanguages = languages.slice(3, 6).join(', ');
-    thirdLineLanguages = languages.slice(6).join(', ');
-  } else if (languages.length > 3) {
-    firstLineLanguages = languages.slice(0, 3).join(', ');
-    secondLineLanguages = languages.slice(3).join(', ');
-  } else if (languages.length > 0) {
-    firstLineLanguages = languages.join(', ');
-  } else {
-    firstLineLanguages = 'No languages specified'; // Default message when no languages are provided
-  }
+  let firstLineLanguages = languages[0].join(', ');
   const navigation = useNavigation();
 
   const handleReviewOpen = () => {
@@ -57,7 +43,7 @@ const ServiceProviderPublicProfileScreen = ({
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
-      <HeaderComponent text={'My Public Profie'} />
+      <HeaderComponent text={'My Public Profile'} />
       <ScrollView>
         <Image
           source={require('../../assets/staticImages/profile-cover-photo-new.jpg')}
@@ -107,12 +93,10 @@ const ServiceProviderPublicProfileScreen = ({
               <View style={styles.locationIconStyle}>
                 <LanguagesSVG />
               </View>
-              <Text style={styles.memberShipText}>
-                Languages Known: {firstLineLanguages}
-                {secondLineLanguages ? `\n                                   ${secondLineLanguages}` : ''}
-                {thirdLineLanguages ? `\n                                   ${thirdLineLanguages}` : ''}
-              </Text>
+              <Text style={styles.memberShipText}>Languages Known:</Text>
             </View>
+            <Text style={{...styles.memberShipText, fontWeight: '400', paddingLeft: 30}}>{firstLineLanguages}</Text>
+
             <View>
               {profileDetails?.bio ? (
                 <ReadMoreText text={profileDetails.bio} style={styles.profileBio} />

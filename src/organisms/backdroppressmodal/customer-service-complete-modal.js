@@ -14,7 +14,7 @@ const CustomerServiceCompletedModal = ({isVisiblecompleted, serviceCompleteClose
     <View>
       <Modal isVisible={isVisiblecompleted} style={styles.modalContainer} onBackdropPress={serviceCompleteClose}>
         <View style={styles.modalContent}>
-          <View style={{alignItems: 'center', justifyContent: 'center', padding: heightToDp(2)}}>
+          <View style={{alignItems: 'center', justifyContent: 'center', padding: heightToDp(0.5), width: 250}}>
             {/* <CancelPopupTick /> */}
             <FastImage
               style={{width: 100, height: 100}}

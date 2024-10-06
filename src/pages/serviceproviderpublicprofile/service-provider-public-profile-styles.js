@@ -45,6 +45,7 @@ function serviceProviderPublicprofileScreenStyle() {
       fontSize: FontSize.size_22,
       fontWeight: 'bold',
       color: Color.colorBlack,
+      marginLeft: 5,
     },
     verificationAndReviews: {
       flexDirection: 'row',

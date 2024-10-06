@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   View,
   ScrollView,
@@ -43,7 +43,7 @@ import Modal from 'react-native-modal';
 import ExpiredSVG from '../../assets/svgImage/jobDetail/expired';
 import HeaderComponent from '../../atoms/header/headerComponent';
 import SVGComponent from '../../assets/svgIcons/mapsvg';
-import FastImage from 'react-native-fast-image'; // Import FastImage
+import FastImage from 'react-native-fast-image';
 import VerificationInProgressModal from '../../organisms/verificationprogressmodal/verificationmodal';
 
 const JobDetail = ({
@@ -145,9 +145,22 @@ const JobDetail = ({
   const onCloseVerificationModal = () => {
     setVerificationModal(false);
   };
-
+  const [activeIndex, setActiveIndex] = useState(0);
   const [showAddImage, setShowAddImage] = useState(false);
   const [addImage, setAddImage] = useState(null);
+  const carouselRef = useRef(null);
+
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (carouselRef.current && images.length > 0) {
+        setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
+        carouselRef.current.snapToNext();
+      }
+    }, 3000); // 3 seconds for each scroll
+
+    return () => clearInterval(intervalId); // Cleanup on unmount
+  }, [images]);
 
   const onPressShowAddImage = addImage => {
     setAddImage(addImage);
@@ -156,9 +169,8 @@ const JobDetail = ({
 
   return (
     <>
-      <Modal isVisible={showPopup} style={styles.modalContainer} onBackdropPress={onClosePopup}>
+      <Modal isVisible={showPopup} style={styles.modalContainer} onBackdropPress={onClosePopup} onBackButtonPress={onClosePopup}>
         <View style={styles.modalContent}>
-          {/* Replace RightPopupSVG with FastImage */}
           <FastImage
             style={{width: 100, height: 100}}
             source={require('../../assets/Success.gif')}
@@ -187,13 +199,23 @@ const JobDetail = ({
           {/* ) : null} */}
         </Modal>
 
-        <Modal isVisible={showAddImage} onBackdropPress={() => setShowAddImage(false)}>
+        <Modal
+          isVisible={showAddImage}
+          onBackdropPress={() => setShowAddImage(false)}
+          onBackButtonPress={() => setShowAddImage(false)}>
           <View style={styles.addImageContainer}>
-            <Image
-              // eslint-disable-next-line react-native/no-inline-styles
-              style={styles.addimageStyles}
-              source={{uri: addImage}}
-              resizeMode="cover"
+            <FlatList
+              horizontal
+              pagingEnabled
+              data={images}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({item}) => (
+                <FastImage
+                  style={{width: screenWidth - 45, height: '100%'}}
+                  source={{uri: item}}
+                  resizeMode="contain"
+                />
+              )}
             />
           </View>
         </Modal>
@@ -203,6 +225,7 @@ const JobDetail = ({
             <View style={{marginTop: heightToDp(0.5), padding: heightToDp(1)}}>
               {images && images.length > 0 ? (
                 <Carousel
+                ref={carouselRef}
                   data={images}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({item}) => (

@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
     // borderColor: 'rgba(0, 0, 0.1)',
 
     // height: 100,
-    width: widthToDp(90),
-    height: heightToDp(30),
+    width: widthToDp(78),
+    height: heightToDp(27),
   },
   firstText: {
     fontSize: heightToDp(2),

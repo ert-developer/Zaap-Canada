@@ -7,10 +7,9 @@ import {BlurView} from '@react-native-community/blur';
 import Modal from 'react-native-modal';
 // import {Modal} from 'react-native';
 import {heightToDp} from '../../responsive/responsive';
-import {CloseSVG, ExternalLinkPopupLine} from '../../assets/svgImage/providerProfile';
 import {CloseIcon} from '../../assets/svgIcons/providerPaymentSvg';
-import {Constants} from '@stripe/stripe-react-native';
 import {useSelector} from 'react-redux';
+import {SmallExclamationSVG} from '../../assets/svgImage/providerProfile';
 
 const ServiceProviderPortfolioScreen = ({
   portfolioDetails,
@@ -42,8 +41,17 @@ const ServiceProviderPortfolioScreen = ({
     }
   };
 
+  function truncateText(text, maxLength) {
+    if (text.length > maxLength) {
+      return text.slice(0, maxLength) + '...';
+    }
+    return text;
+  }
   const renderItemForImageCard = ({item}) => {
     const firstImage = item.images && item.images.length > 0 ? item.images[0] : null;
+
+    const truncatedTitle = truncateText(item.title, 25);
+
     return (
       <TouchableOpacity onPress={() => onPressShowPortfolioDetails(item)} style={styles.imageContainer}>
         {firstImage ? (
@@ -53,7 +61,7 @@ const ServiceProviderPortfolioScreen = ({
         )}
         <BlurView style={styles.blurView} blurType="light" blurAmount={10}>
           <View style={styles.blurButtons}>
-            <Text style={styles.text}>{item.title}</Text>
+            <Text style={styles.text}>{truncatedTitle}</Text>
             <View>
               <LinkArrowSVG style={styles.linkSvgStyles} />
             </View>
@@ -62,6 +70,17 @@ const ServiceProviderPortfolioScreen = ({
       </TouchableOpacity>
     );
   };
+
+  const renderLinks = () => {
+    return eachPortfolioDetails.Link && eachPortfolioDetails.Link.length > 0
+      ? eachPortfolioDetails.Link.map((link, index) => (
+          <TouchableOpacity key={index} onPress={() => onPressPortfolioLink(link)}>
+            <CustomText text={link.toLowerCase()} style={styles.linkText} />
+          </TouchableOpacity>
+        ))
+      : null;
+  };
+
   return (
     <SafeAreaView>
       <Modal isVisible={showPortfolioPopup} style={styles.portfolioModalContainer}>
@@ -96,12 +115,10 @@ const ServiceProviderPortfolioScreen = ({
             <View style={styles.extranalLinkCon}>
               <CustomText text={'External Link'} style={styles.sectionTitle} />
               <View style={styles.linkInfoContainer}>
-                {/* <SmallExclamationSVG /> */}
+                <SmallExclamationSVG />
                 <CustomText text={'Click on the Link to Check & Re-direct'} style={styles.linkInfoText} />
               </View>
-              <TouchableOpacity onPress={() => onPressPortfolioLink(eachPortfolioDetails.Link)}>
-                <CustomText text={eachPortfolioDetails.Link} style={styles.linkText} />
-              </TouchableOpacity>
+              {renderLinks()}
             </View>
             <View style={styles.descriptionContainer}>
               <CustomText text={'Description'} style={styles.sectionTitle} />

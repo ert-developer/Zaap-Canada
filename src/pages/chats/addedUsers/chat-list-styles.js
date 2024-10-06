@@ -3,10 +3,22 @@ import {heightToDp, widthToDp} from '../../../responsive/responsive';
 import {Color, FontFamily, Padding} from '../../../assets/static/globalStyles';
 import {he} from 'date-fns/locale';
 
+const screenWidth = widthToDp(100);
+const screenHeight = heightToDp(105);
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Color.colorWhite,
-    height: '100%',
+    width: screenWidth - 32,
+    minHeight: screenHeight - 190,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    margin: 16,
+    paddingVertical: 10,
   },
   textItem: {
     color: 'red',
@@ -36,6 +48,7 @@ const styles = StyleSheet.create({
     height: heightToDp(80),
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#FFFFFF',
   },
 });
 

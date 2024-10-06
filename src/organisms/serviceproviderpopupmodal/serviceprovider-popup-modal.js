@@ -22,7 +22,6 @@ const ServiceProviderVerificationModal = ({closeModal}) => {
         <View style={styles.modalContent}>
           <View style={styles.firstTextContainer}>
             <View style={styles.container}>
-              {/* Using FastImage for a GIF from a URL */}
               <FastImage
                 style={{width: 100, height: 100}}
                 source={require('../../assets/BGCSubmited.gif')}
@@ -58,18 +57,13 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
   },
-  gif: {
-    width: 60,
-    height: 60,
-    // alignItems:"center"
-  },
   secondText: {
     fontSize: heightToDp(1.6),
     letterSpacing: widthToDp(0.2),
     fontFamily: 'Helvetica',
     textAlign: 'center',
     padding: widthToDp(2),
-    paddingHorizontal: widthToDp(15),
+    paddingHorizontal: widthToDp(10),
   },
   secondTextContainer: {
     marginBottom: heightToDp(1),
@@ -86,8 +80,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 19,
-    width: widthToDp(90),
-    height: heightToDp(45),
+    width: widthToDp(85),
+    height: heightToDp(35),
   },
   firstText: {
     fontSize: heightToDp(2.2),

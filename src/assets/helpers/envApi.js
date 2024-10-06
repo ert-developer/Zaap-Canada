@@ -1,7 +1,8 @@
-const envType = 'dev'; // dev | uat | prod
+const envType = 'prod'; // dev | uat | prod
 let envConfig;
 import {GOOGLE_API_KEY_DEV, GOOGLE_API_KEY_UAT, GOOGLE_API_KEY_PROD} from '@env';
 
+console.log('This is env trigger');
 switch (envType) {
   case 'dev':
     envConfig = {
@@ -31,6 +32,11 @@ switch (envType) {
       updateGovtIdDetails: 'updateGovtIdDetails_dev',
       selectedProfiles: 'selectedProfiles_dev',
       GOOGLE_API_KEY: GOOGLE_API_KEY_DEV,
+      RAZORPAY_API_KEY: RAZORPAY_API_KEY_DEV,
+      message: 'message_dev',
+      chatlist: 'chatlist_dev',
+      common: 'common_dev',
+      myjobs: 'myjobs_dev',
     };
     break;
   case 'uat':
@@ -62,6 +68,11 @@ switch (envType) {
       selectedProfiles: 'selectedProfiles_uat',
       // base url will put here
       GOOGLE_API_KEY: GOOGLE_API_KEY_UAT,
+      RAZORPAY_API_KEY: RAZORPAY_API_KEY_UAT,
+      message: 'message_uat',
+      chatlist: 'chatlist_uat',
+      common: 'common_uat',
+      myjobs: 'myjobs_uat',
     };
     break;
   case 'prod':
@@ -93,6 +104,11 @@ switch (envType) {
       selectedProfiles: 'selectedProfiles',
       // base url will put here
       GOOGLE_API_KEY: GOOGLE_API_KEY_PROD,
+      RAZORPAY_API_KEY: RAZORPAY_API_KEY_PROD,
+      message: 'message',
+      chatlist: 'chatlist',
+      common: 'common',
+      myjobs: 'myjobs',
     };
     break;
   default:

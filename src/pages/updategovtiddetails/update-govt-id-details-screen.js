@@ -66,7 +66,7 @@ const UpdateGovtIdDetailsScreen = ({
           <View key={index}>
             {/* Button to add more images */}
             <View style={styles.selfieLabelContainer}>
-              <CustomText text={'Selfie Ph'} style={styles.label} />
+              <CustomText text={'Selfie Photo'} style={styles.label} />
               <ExclamationSVG style={styles.exclamationIconStyles} />
             </View>
             <CustomTouchableOpacity

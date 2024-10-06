@@ -40,7 +40,7 @@ const ContactUs = () => {
         <View style={styles.modalContentContainer}>
           {/* <ContactUsSVG /> */}
           <FastImage
-            style={{width: 250, height: 250}}
+            style={{width: 225, height: 225}}
             source={require('../../assets/ContactSupport.gif')}
             resizeMode={FastImage.resizeMode.contain}
           />

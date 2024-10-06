@@ -4,11 +4,18 @@ import {widthToDp} from '../../responsive/responsive';
 import {Color} from '../../assets/static/globalStyles';
 
 const CustomTextInput = props => {
-  const {placeholder, value, onChangeText, style,maxLength} = props;
+  const {placeholder, value, onChangeText, style, maxLength} = props;
 
   return (
     // <View>
-    <TextInput style={[styles.input, style]} placeholder={placeholder} value={value} onChangeText={onChangeText}maxLength={maxLength} />
+    <TextInput
+      style={[styles.input, style]}
+      placeholder={placeholder}
+      value={value}
+      onChangeText={onChangeText}
+      maxLength={maxLength}
+      placeholderTextColor={Color.colorSilver}
+    />
     // </View>
   );
 };
