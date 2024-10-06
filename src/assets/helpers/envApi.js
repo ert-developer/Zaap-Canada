@@ -32,7 +32,6 @@ switch (envType) {
       updateGovtIdDetails: 'updateGovtIdDetails_dev',
       selectedProfiles: 'selectedProfiles_dev',
       GOOGLE_API_KEY: GOOGLE_API_KEY_DEV,
-      RAZORPAY_API_KEY: RAZORPAY_API_KEY_DEV,
       message: 'message_dev',
       chatlist: 'chatlist_dev',
       common: 'common_dev',
@@ -68,7 +67,6 @@ switch (envType) {
       selectedProfiles: 'selectedProfiles_uat',
       // base url will put here
       GOOGLE_API_KEY: GOOGLE_API_KEY_UAT,
-      RAZORPAY_API_KEY: RAZORPAY_API_KEY_UAT,
       message: 'message_uat',
       chatlist: 'chatlist_uat',
       common: 'common_uat',
@@ -104,7 +102,6 @@ switch (envType) {
       selectedProfiles: 'selectedProfiles',
       // base url will put here
       GOOGLE_API_KEY: GOOGLE_API_KEY_PROD,
-      RAZORPAY_API_KEY: RAZORPAY_API_KEY_PROD,
       message: 'message',
       chatlist: 'chatlist',
       common: 'common',
