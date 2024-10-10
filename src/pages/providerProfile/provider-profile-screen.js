@@ -14,24 +14,16 @@ import {
   FlatList,
 } from 'react-native';
 import CustomButton from '../../atoms/button/buttonComponent';
-import ProviderProfileStyles from './provider-profile-styles';
 import CustomText from '../../atoms/text/textComponent';
 import ServiceProviderVerificationModal from '../../organisms/serviceproviderpopupmodal/serviceprovider-popup-modal';
 
 import {
-  PersonalIcon,
-  BankDetailsIcon,
-  BackgroundCheckIcon,
-  TCIcon,
   GreenTickIcon,
   CameraIcon,
   FrontIcon,
   Back,
   PersonIconComplete,
-  PersonalIconStart,
-  BankDetailIconProgress,
   BankDetailIconCompleted,
-  BackGroundCheckInProgress,
   BackGroundCheckCompleted,
   TCIConInProgress,
 } from '../../assets/svgImage/providerProfile';
@@ -39,24 +31,19 @@ import CustomTouchableOpacity from '../../molecules/touchable-opacity/touchable-
 import TextAreaInputComponent from '../../atoms/textAreaInput/textAreaInput-component';
 import TextInputWithLabelComponent from '../../organisms/textInputWithLabel/textInputWithLabel-component';
 import DropdownSearchComponent from '../../organisms/dropDownSearch/dropDownSearch-component';
-import CustomCheckBox from '../../atoms/checkBox/checkBoxComponent';
 import DeleteCustomImage from '../../organisms/deleteImage/deleteImage-component';
-import {BackIcon} from '../../assets/svgImage/sideDrawer';
-import {TickMark} from '../../assets/svgIcons/providerPaymentSvg';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {setDate} from 'date-fns';
-// import {Dimensions, StyleSheet} from 'react-native';
 import {Border, Color, FontFamily, FontSize, Margin, Padding} from '../../assets/static/globalStyles';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 import HeaderComponent from '../../atoms/header/headerComponent';
 import {ExclamationSVG} from '../../assets/svgImage/providerProfile';
 import TextInputWithIconComponent from '../../organisms/textInputWithIcon/textInputWithIcon-component';
 import {CalenderSVG} from '../../assets/svgImage/profile';
-import CheckBox from '@react-native-community/checkbox';
 import Modal from 'react-native-modal';
 import ContractorAgreement from '../termsandconditions/contractor-agreement';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {envConfig} from '../../assets/helpers/envApi';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const ProviderProfile = ({
   categoriesData,
@@ -85,63 +72,8 @@ const ProviderProfile = ({
   photoLoader,
   frontLoader,
   backLoader,
-  indiaStateOptions,
   saveAndNext,
 }) => {
-  // const styles = ProviderProfileStyles();
-
-  // const [text, setText] = useState('');
-  // const [enteredTexts, setEnteredTexts] = useState([]);
-  // const [confirmAccountValid, setConfirmAccountValid] = useState(true);
-
-  // const handleConfirmAccountNumber = () => {};
-
-  // const handleTextChange = inputText => {
-  //   setText(inputText);
-  // };
-
-  // const handleAddText = () => {
-  //   if (text.trim() !== '') {
-  //     const updatedTexts = [...enteredTexts, text];
-  //     setEnteredTexts(updatedTexts);
-  //     formData.languages_known = updatedTexts;
-  //     setText('');
-  //   }
-  // };
-
-  // const handleDeleteText = index => {
-  //   const updatedTexts = [...enteredTexts];
-  //   updatedTexts.splice(index, 1);
-  //   setEnteredTexts(updatedTexts);
-  //   handleInputChange('languages_known', updatedTexts); // Update the field here with the latest texts
-  // };
-
-  // const handleTextInputSubmit = () => {
-  //   handleAddText();
-  // };
-
-  // const handleTextChange = inputText => {
-  //   setText(inputText);
-  // };
-
-  // const handleAddText = () => {
-  //   if (text.trim() !== '') {
-  //     setEnteredTexts([...enteredTexts, text]);
-  //     setText('');
-  //   }
-  // };
-
-  // const handleDeleteText = index => {
-  //   const updatedTexts = [...enteredTexts];
-  //   updatedTexts.splice(index, 1);
-  //   setEnteredTexts(updatedTexts);
-  // };
-
-  // const handleTextInputSubmit = () => {
-  //   handleAddText();
-  //   handleInputChange('language', enteredTexts);
-  // };
-
   const [open, setOpen] = useState(false);
   const [selectedLanguages, setSelectedLanguages] = useState(formData.languagesKnown || []);
   const [items, setItems] = useState(
@@ -209,64 +141,53 @@ const ProviderProfile = ({
 
   const handleCheckBoxClick = () => {
     setToggleCheckBox(!toggleCheckBox);
-    // setIsModalVisible3(true); // Show modal when checkbox is clicked
-  };
-
-  const [dob, setDob] = useState('');
-  const [showPicker, setShowPicker] = useState(false);
-  const toggleDatePicker = () => {
-    setShowPicker(!showPicker);
-    console.log('toggleDatePicker', toggleDatePicker);
   };
 
   const [idExpirationDate, setIdExpirationDate] = useState('');
   const [showIdExpirationPicker, setShowIdExpirationPicker] = useState(false);
-
-  // console.log("dob",dob)
-  const onChange = selectedDate => {
-    toggleDatePicker(); // Close the date picker
-    if (selectedDate) {
-      const currentDate = new Date(selectedDate);
-      const year = currentDate.getFullYear();
-      const month = currentDate.getMonth() + 1; // Months are zero-based
-      const day = currentDate.getDate();
-
-      // Format the date as YYYY-MM-DD
-      const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
-      setDob(formattedDate);
-
-      // Set the selected date to the state variable
-      setDob(formattedDate);
-      handleInputChange('date_of_birth', formattedDate); // Update the form data with the selected date
-    }
-  };
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const toggleIdExpirationDatePicker = () => {
     setShowIdExpirationPicker(!showIdExpirationPicker);
   };
 
-  const onIdExpirationDateChange = selectedDate => {
-    toggleIdExpirationDatePicker(); // Close the date picker
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirmDate = date => {
+    onChangeDate(date);
+    hideDatePicker();
+  };
+
+  const handleConfirmDate1 = selectedDate => {
     if (selectedDate) {
       const currentDate = new Date(selectedDate);
       const year = currentDate.getFullYear();
-      const month = currentDate.getMonth() + 1; // Months are zero-based
+      const month = currentDate.getMonth() + 1;
       const day = currentDate.getDate();
-
-      // Format the date as YYYY-MM-DD
       const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
       setIdExpirationDate(formattedDate);
 
-      // Update the form data with the selected date
       handleInputChange('id_expiration_date', formattedDate);
+      setShowIdExpirationPicker(false);
     }
   };
 
-  // Set the maximum date to the current date
-  const maxDate = new Date();
-
-  // Set the minimum date to January 1, 1990
-  const minDate = new Date(1990, 0, 1);
+  const onChangeDate = selectedDate => {
+    if (selectedDate) {
+      const currentDate = new Date(selectedDate);
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth() + 1;
+      const day = currentDate.getDate();
+      const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+      handleInputChange('date_of_birth', formattedDate);
+    }
+  };
 
   const renderInputsForCategory = () => {
     if (categoryData) {
@@ -274,31 +195,26 @@ const ProviderProfile = ({
         if (field.type === 'text' && field.name === 'Date of Birth') {
           return (
             <View key={index}>
-              {showPicker && (
-                <DateTimePicker
-                  mode="date"
-                  display="spinner"
-                  maximumDate={maxDate}
-                  minimumDate={new Date(1950, 0, 1)}
-                  timeZoneOffsetInMinutes={60}
-                  timeZoneOffsetInSeconds={3600}
-                  value={new Date()} // Set the initial value for the date
-                  onChange={(event, selectedDate) => onChange(selectedDate)}
-                />
-              )}
-              <Pressable onPress={toggleDatePicker}>
+              <Pressable onPress={showDatePicker}>
                 <TextInputWithIconComponent
                   label={field.name}
-                  value={dob}
+                  value={formData.date_of_birth}
                   onHandleChange={text => handleInputChange(field.name.toLowerCase().split(' ').join('_'), text)}
                   field={field.name.toLowerCase().split(' ').join('_')}
                   placeholder={field.name}
                   formErrors={formErrors}
                   editable={false}
                   icon={<CalenderSVG />}
-                  // onPress={toggleDatePicker}
+                  onPress={showDatePicker}
                 />
               </Pressable>
+              <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="date"
+                onConfirm={handleConfirmDate}
+                onCancel={hideDatePicker}
+                maximumDate={maxDate}
+              />
             </View>
           );
         } else if (field.type === 'text' && field.name === 'ID Expiration Date') {
@@ -307,16 +223,21 @@ const ProviderProfile = ({
 
           return (
             <View key={index}>
-              <Pressable onPress={!isDisabled ? toggleIdExpirationDatePicker : null} disabled={isDisabled}>
-                {showIdExpirationPicker && (
-                  <DateTimePicker
-                    mode="date"
-                    display="spinner"
-                    value={new Date()} // Set the initial value for the date
-                    onChange={(event, selectedDate) => onIdExpirationDateChange(selectedDate)}
-                  />
-                )}
-                <TextInputWithLabelComponent
+              {showIdExpirationPicker && (
+                <DateTimePickerModal
+                  isVisible={showIdExpirationPicker}
+                  mode="date"
+                  onConfirm={handleConfirmDate1}
+                  onCancel={() => setShowIdExpirationPicker(false)}
+                  minimumDate={new Date()}
+                />
+              )}
+              <Pressable
+                disabled={isDisabled}
+                onPress={!isDisabled ? toggleIdExpirationDatePicker : null}
+                pointerEvents="box-only" // Ensure TouchableOpacity handles the touch
+              >
+                <TextInputWithIconComponent
                   label={field.name}
                   value={isDisabled ? (formData.id_expiration_date = 'NA') : idExpirationDate}
                   onHandleChange={text => handleInputChange(field.name.toLowerCase().split(' ').join('_'), text)}
@@ -325,6 +246,7 @@ const ProviderProfile = ({
                   formErrors={formErrors}
                   editable={false} // Disable input when conditions match
                   icon={<CalenderSVG />}
+                  onPress={!isDisabled ? toggleIdExpirationDatePicker : null}
                 />
               </Pressable>
             </View>
@@ -332,16 +254,6 @@ const ProviderProfile = ({
         } else if (field.type === 'LANGUAGE' && field.name === 'Languages Known') {
           return (
             <View>
-              {/* <TextInputWithLabelComponent
-                key={index}
-                label={field.name}
-                value={text}
-                onHandleChange={text => handleTextChange(text)}
-                field={field.name.toLowerCase().split(' ').join('_')}
-                placeholder={'Type language name and press Enter'}
-                formErrors={formErrors}
-                onSubmitEditing={handleTextInputSubmit}
-              /> */}
               <CustomText text={'Languages Known'} style={styles.label} />
 
               <DropDownPicker
@@ -368,36 +280,9 @@ const ProviderProfile = ({
                 listMode="MODAL"
                 maxHeight={250}
               />
-
-              {/* <ScrollView horizontal={true}>
-                {enteredTexts.map((enteredText, index) => (
-                  <View key={index} style={{flexDirection: 'row', alignItems: 'center', marginRight: 10}}>
-                    <Text>{enteredText}</Text>
-                    <TouchableOpacity onPress={() => handleDeleteText(index)}>
-                      <Text style={{color: 'red', marginLeft: 3}}>X</Text>
-                    </TouchableOpacity>
-                  </View>
-                ))}
-              </ScrollView> */}
             </View>
           );
-        }
-        // } else if (field.type === 'LOCATION' && field.name === 'LOCATION') {
-        //   return (
-        //     <View>
-        //       <CustomText text={'LOCATION'} style={styles.label} />
-
-        //       <GooglePlacesInput
-        //         value={formData.location}
-        //         onHandleChange={value => console.log('val;ue', value)} // Check if this is the correct prop name
-        //         field={'location'}
-        //         placeholder={'Enter Address'}
-        //         formErrors={formErrors}
-        //       />
-        //     </View>
-        //   );
-        // }
-        else if (field.type === 'text' && field.name === 'Account Number') {
+        } else if (field.type === 'text' && field.name === 'Account Number') {
           return (
             <View>
               <TextInputWithLabelComponent

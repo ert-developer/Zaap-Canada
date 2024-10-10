@@ -78,7 +78,6 @@ const ProfileScreen = ({
   imageLoader,
 }) => {
   const styles = ProfileStyles();
-  const [showDatePicker, setshowDatePicker] = useState(false);
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
@@ -96,7 +95,6 @@ const ProfileScreen = ({
   };
 
   const onChangeDate = selectedDate => {
-    onChangeDatePicker();
     if (selectedDate) {
       const currentDate = new Date(selectedDate);
       const year = currentDate.getFullYear();
@@ -107,9 +105,8 @@ const ProfileScreen = ({
     }
   };
 
-  const onChangeDatePicker = () => {
-    setshowDatePicker(!showDatePicker);
-  };
+  const today = new Date();
+  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
 
   const [cities, setCities] = useState([]);
   const fetchCities = async text => {
@@ -221,13 +218,14 @@ const ProfileScreen = ({
             <View style={styles.selectDOB}>
               <Pressable onPress={showDatePicker1}>
                 <TextInputWithIconComponent
-                  label={'Date'}
-                  editable={false}
-                  placeholder={'Select DOB'}
+                  label={'Date of Birth'}
                   value={formData.dob}
-                  field={'dob'}
                   onHandleChange={text => updateField('dob', text)}
+                  field={'dob'}
+                  placeholder={'Select Date'}
                   formErrors={formErrors}
+                  editable={false}
+                  onPress={showDatePicker1}
                   icon={<CalenderSVG />}
                 />
               </Pressable>
@@ -237,24 +235,9 @@ const ProfileScreen = ({
                 mode="date"
                 onConfirm={handleConfirmDate}
                 onCancel={hideDatePicker}
-                maximumDate={new Date(new Date().setFullYear(new Date().getFullYear() - 18))}
+                maximumDate={maxDate}
               />
             </View>
-            {/* <View style={styles.column}>
-              <CustomText text="Gender" style={styles.label} />
-              <View style={[styles.input1, styles.inputWrapper, styles.firstPicker]}>
-                <DropdownSearchComponent
-                  selectedValue={formData.gender ? formData.gender : ''}
-                  onHandleChange={(fieldName, value) => handleGenderChange(value)}
-                  fieldName="gender"
-                  defaultOption={formData.gender ? formData.gender : 'Select Gender'}
-                  labelField="label"
-                  valueField="value"
-                  pickerOptions={genderOptions}
-                  formErrors={formErrors}
-                />
-              </View>
-            </View> */}
           </View>
           <View style={styles.inputContainer}>
             <TextInputWithLabelComponent

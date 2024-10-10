@@ -1,7 +1,6 @@
 import {Dimensions, StyleSheet} from 'react-native';
 import {Border, Color, FontFamily, FontSize, Margin, Padding} from '../../assets/static/globalStyles';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
-import LogoutContainer from '../log-out/logout-container';
 
 const {width: screenWidth} = Dimensions.get('window');
 
@@ -34,7 +33,7 @@ function LoginStyles() {
     topContent: {
       alignItems: 'center',
       justifyContent: 'center',
-      marginTop: heightToDp(5),
+      marginTop: -heightToDp(2),
     },
     row: {
       flexDirection: 'row',
@@ -72,7 +71,7 @@ function LoginStyles() {
     },
     zaaplogo: {
       alignSelf: 'center',
-      marginTop: heightToDp(15),
+      marginTop: heightToDp(10),
     },
     signIn: {
       color: Color.colorBlack,
@@ -176,7 +175,7 @@ function LoginStyles() {
       borderRadius: widthToDp(3),
       justifyContent: 'center',
       alignItems: 'center',
-      paddingBottom: 80,
+      paddingBottom: 100,
     },
     modalContentContainer2: {
       alignItems: 'center',

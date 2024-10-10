@@ -9,14 +9,11 @@ import useErrorHandler from '../../custom-hooks/error-handler/useErrorHandler.js
 import {addUserToChat} from '../../redux/chat/chatList/action';
 import {useSelector, useDispatch} from 'react-redux';
 import {loginRequest, loginSuccess, loginFailure} from '../../redux/auth/action';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {envConfig} from '../../assets/helpers/envApi';
-import Loc from '../../organisms/loc/loc';
-import {fetchServiceProviderDetails} from '../../redux/providerstatus/action';
-import {PermissionsAndroid, Platform} from 'react-native';
+import {Platform} from 'react-native';
 import {mailSenter} from '../../common/mailSender';
-import {CloseSVG} from '../../assets/svgImage/providerProfile';
 import {ActivityIndicator, View, Text} from 'react-native';
+import appleAuth, {AppleAuthError} from '@invertase/react-native-apple-authentication';
 
 const generateInvoiceId = () => {
   return Math.random().toString(36).substring(2, 10);
@@ -24,11 +21,11 @@ const generateInvoiceId = () => {
 
 const LoginContainer = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const {error, clearError, handleError} = useErrorHandler();
+  const {handleError} = useErrorHandler();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const AuthUser = useSelector(state => state.Auth);
-  const {isLogIn, user, authError} = AuthUser;
+  const {isLogIn} = AuthUser;
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -169,23 +166,14 @@ const LoginContainer = ({navigation}) => {
   const googleLogin = async () => {
     dispatch(loginRequest());
     setLoading(true);
-    console.log('loaderrrr');
     try {
       const authInfo = await onGoogleButtonPress();
-      // const {displayName, email, phoneNumber, photoURL, uid, invoiceId} = authInfo?.user;
-      // let authUser = {
-      //   displayName: displayName,
-      //   email: email,
-      //   imageURL: photoURL,
-      //   userId: uid,
-      //   invoiceId: invoiceId,
-      // };
 
       dispatch(addUserToChat(authInfo));
       dispatch(loginSuccess(authInfo));
       setLoading(false);
     } catch (err) {
-      __DEV__ & console.error('Google sign-in failed:', err);
+      console.log('Google sign-in failed:', err);
       setLoading(false);
       dispatch(loginFailure(err));
     }
@@ -321,6 +309,124 @@ const LoginContainer = ({navigation}) => {
     }
   }
 
+  const onAppleButtonPress = async () => {
+    try {
+      // Perform the Apple login request
+      const generateNonce = () => {
+        return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+      };
+
+      const nonce = generateNonce();
+
+      const appleAuthRequestResponse = await appleAuth.performRequest({
+        requestedOperation: appleAuth.Operation.LOGIN,
+        requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
+        nonce: nonce, // Include nonce here
+      });
+      // Retrieve necessary data from the response
+      const {fullName, identityToken} = appleAuthRequestResponse;
+
+      if (!identityToken) {
+        throw new Error('Apple identity token is missing');
+      }
+
+      const appleCredential = auth.AppleAuthProvider.credential(identityToken, nonce);
+
+      const authInfo = await auth().signInWithCredential(appleCredential);
+
+      const email = authInfo.additionalUserInfo.profile.email;
+      const userId = authInfo.user.uid;
+
+      const userRef = firestore().collection(envConfig.User).doc(userId);
+      const userSnapshot = await userRef.get();
+
+      // Check if user already exists
+      if (userSnapshot.exists) {
+        console.log('User with the same email already exists', {email});
+        const userData = userSnapshot.data();
+
+        // Save FCM token for the existing user
+        await saveFcmToken(userId);
+        dispatch(addUserToChat(userData));
+        dispatch(loginSuccess(userData));
+      } else {
+        // Create a new user object
+        const invoiceId = generateInvoiceId();
+        const userData = {
+          creationTime: Date.now(),
+          displayName: typeof fullName === 'object' ? 'Apple User' : fullName,
+          email: email || 'N/A',
+          userId: userId,
+          invoiceId: invoiceId,
+          isServiceProvider: 'no',
+        };
+
+        const to = email;
+        const subject = 'Welcome to ZAAP – Your Local Marketplace Awaits!';
+        const bodyText = `
+        <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+          <h2>Hello There,</h2>
+          <p>Welcome to <strong>ZAAP</strong> 🎉</p>
+          <p>Thank you for downloading and registering with us. We’re excited to have you join our vibrant community and can’t wait for you to explore everything ZAAP has to offer!</p>
+          
+          <h3>For Our Customers:</h3>
+          <ul style="padding-left: 20px;">
+            <li><strong>Hire Locally, Anytime:</strong> Find talent right in your neighborhood, whenever you need it. With ZAAP, you can hire professionals who fit your budget and deliver the quality you’re looking for.</li>
+            <li><strong>One-Stop Shop:</strong> Everything you need is at your fingertips. Post job listings, browse profiles, and connect with skilled service providers—all from one convenient platform.</li>
+          </ul>
+      
+          <h3>For Our Service Providers:</h3>
+          <ul style="padding-left: 20px;">
+            <li><strong>Work Locally, Flexibly:</strong> Discover job opportunities in your neighborhood that match your skills and schedule. With ZAAP, you can find work that suits your expertise and offers the flexibility you need.</li>
+            <li><strong>Showcase Your Skills:</strong> Create a standout profile and attract customers looking for your specific talents. Your next opportunity is just a few clicks away!</li>
+          </ul>
+          
+          <hr style="border: 1px solid #ccc; margin: 20px 0;">
+          
+          <h3>Need Assistance? We’re Here to Help!</h3>
+          <p>If you have any questions or need support, our team is ready to assist you. Check out the Help Center in the app for answers to common questions, or reach out to us at 
+            <a href="mailto:help@zaapondemand.in" style="color: #4CAF50;">help@zaapondemand.in</a>
+          </p>
+          
+          <h3>Stay Connected:</h3>
+          <p>Follow us on social media to stay updated with the latest news, tips, and special offers:</p>
+          <ul style="padding-left: 20px;">
+            <li><a href="https://www.facebook.com" style="color: #4CAF50;">Facebook</a></li>
+            <li><a href="https://www.twitter.com" style="color: #4CAF50;">Twitter</a></li>
+            <li><a href="https://www.instagram.com" style="color: #4CAF50;">Instagram</a></li>
+          </ul>
+          
+          <p>We’re thrilled to help you hire or work locally, anytime and anywhere. Let’s make great things happen together!</p>
+          
+          <p>Warm regards,<br>Team ZAAP</p>
+        </div>
+      `;
+
+        const textMsg =
+          'Welcome to ZAAP! Thank you for registering with us. Explore our platform to find local talent or work. Need help? Email us at help@zaapondemand.in and stay connected on Facebook, Twitter, and Instagram.';
+
+        // Send a welcome email
+        mailSenter(to, subject, textMsg, bodyText);
+
+        // Store new user data in Firestore
+        await userRef.set(userData);
+        await saveFcmToken(userId);
+        dispatch(addUserToChat(userData));
+        dispatch(loginSuccess(userData));
+      }
+    } catch (err) {
+      console.error('Apple Sign-In error:', err);
+      if (err.code === AppleAuthError.CANCELED) {
+        console.log('User canceled the login process');
+      } else if (err.code === 'NETWORK_ERROR') {
+        console.error('Network error occurred:', err);
+      } else {
+        console.error('Unexpected error:', err);
+      }
+      handleError(err); // Custom error handling logic
+    }
+  };
+
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
@@ -337,7 +443,7 @@ const LoginContainer = ({navigation}) => {
   return (
     <>
       {loading && (
-        <View style={{height:"100%", justifyContent: 'center', alignItems: 'center', backgroundColor: 'fffff'}}>
+        <View style={{height: '100%', justifyContent: 'center', alignItems: 'center', backgroundColor: 'fffff'}}>
           <ActivityIndicator size="large" color="#0000ff" />
           <Text>Logging in, please wait...</Text>
         </View>
@@ -345,6 +451,7 @@ const LoginContainer = ({navigation}) => {
       <LoginScreen
         googleLogin={googleLogin}
         facebookLogin={onFacebookButtonPress}
+        onAppleButtonPress={onAppleButtonPress}
         isLoggedIn={isLogIn}
         navigation={navigation}
         modalVisible={modalVisible}

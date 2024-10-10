@@ -1,10 +1,9 @@
 import React, {useMemo, useState} from 'react';
-import {FlatList, Linking, SafeAreaView, StatusBar, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Linking, SafeAreaView, StatusBar, Text, TouchableOpacity, View} from 'react-native';
 import CustomButton from '../../atoms/button/buttonComponent';
 import LoginStyles from './login-styles';
 import CustomText from '../../atoms/text/textComponent';
-import {One, Two, Three, Four, Five, Six, Seven, GoogleIcon, FbIcon} from '../../assets/svgImage/login';
-import {ZaapLogo} from '../../assets/svgImage/zaaplogo';
+import {GoogleIcon, FbIcon, AppleIcon} from '../../assets/svgImage/login';
 import CustomTouchableOpacity from '../../molecules/touchable-opacity/touchable-opacity-component';
 import CustomModelComponent from '../../atoms/model/model-component';
 import Logo from '../../assets/svgImage/loginLogo';
@@ -12,9 +11,8 @@ import {SmallExclamationSVG} from '../../assets/svgImage/providerProfile';
 import FastImage from 'react-native-fast-image';
 import Modal from 'react-native-modal';
 import LegalScreen from '../contactUs/legal-scree';
-import {Image} from 'react-native';
 
-const LoginScreen = ({googleLogin, facebookLogin, toggleModal, modalVisible, setModalVisible, tc, logoutPress}) => {
+const LoginScreen = ({googleLogin, facebookLogin, toggleModal, modalVisible, setModalVisible, onAppleButtonPress}) => {
   const styles = useMemo(() => LoginStyles(), []);
   // const [isModalVisible, setModalVisible] = useState(false);
   // const toggleModal = () => {
@@ -44,7 +42,7 @@ const LoginScreen = ({googleLogin, facebookLogin, toggleModal, modalVisible, set
             <CustomText text={'Need Help?'} style={styles.contactUsHeading} />
             <View style={styles.contactUsDesCon}>
               <CustomText
-                text={'Our dedicated support team is here to help you.\n Kindly emial your question or concern at'}
+                text={'Our dedicated support team is here to help you.\n Kindly email your question or concern at'}
                 style={styles.contactUsDesscription}
               />
             </View>
@@ -63,7 +61,6 @@ const LoginScreen = ({googleLogin, facebookLogin, toggleModal, modalVisible, set
           </TouchableOpacity>
         </View>
 
-        {/* {modalVisible && <View style={styles.overlay} />} */}
         <Logo width={200} height={150} style={styles.zaaplogo} />
         <CustomText text="Welcome to ZAAP" style={styles.title} />
         <View style={styles.infoContainer}>
@@ -71,11 +68,20 @@ const LoginScreen = ({googleLogin, facebookLogin, toggleModal, modalVisible, set
           <CustomText text="Hire or Work Locally" style={styles.info} />
         </View>
         <View style={styles.topContent}>
+          <TouchableOpacity onPress={onAppleButtonPress} style={[styles.row, styles.appleButton]}>
+            <AppleIcon style={styles.icon} />
+            <CustomButton
+              title="    Continue with Apple ID"
+              style={[styles.googleButton]}
+              textStyle={styles.text}
+              onPress={onAppleButtonPress}
+            />
+          </TouchableOpacity>
+
           <TouchableOpacity style={styles.row} onPress={googleLogin}>
             <GoogleIcon style={styles.icon} />
             <CustomButton
-              title="Continue with Google"
-              // iconUri="https://i.ibb.co/j82DCcR/search.png"
+              title="  Continue with Google"
               style={[styles.googleButton]}
               textStyle={styles.text}
               onPress={googleLogin}
@@ -84,8 +90,7 @@ const LoginScreen = ({googleLogin, facebookLogin, toggleModal, modalVisible, set
           <TouchableOpacity style={styles.row} onPress={facebookLogin}>
             <FbIcon style={styles.icon} />
             <CustomButton
-              title="Continue with Facebook"
-              // iconUri="https://i.ibb.co/j82DCcR/search.png"
+              title="      Continue with Facebook"
               style={[styles.googleButton]}
               textStyle={styles.text}
               onPress={facebookLogin}
@@ -101,8 +106,6 @@ const LoginScreen = ({googleLogin, facebookLogin, toggleModal, modalVisible, set
         </View>
         <CustomModelComponent modalVisible={modalVisible} setModalVisible={setModalVisible}>
           <View style={styles.modalContent}>
-            {/* <CustomText text="Terms and Conditions" style={styles.modalTitle} />
-            <CustomText text={tc} style={styles.modalText} /> */}
             <LegalScreen />
             <CustomButton
               title="Agree & Close"
@@ -112,7 +115,6 @@ const LoginScreen = ({googleLogin, facebookLogin, toggleModal, modalVisible, set
             />
           </View>
         </CustomModelComponent>
-        {/* isModalVisible&&<CustomModal toggleModal={toggleModal} text={"User Signed out Successfully"}/> */}
       </View>
     </SafeAreaView>
   );

@@ -16,23 +16,17 @@ import Modal from 'react-native-modal';
 import CustomModal from '../../molecules/custommodal';
 import {RightPopupSVG} from '../../assets/svgIcons/premiumads/premium-ads-screen-svgs';
 import {ActivityIndicator} from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {useState} from 'react';
 
 const UpdateGovtIdDetailsScreen = ({
   updateGovtIdDetails,
-  showDatePicker,
-  toggleDatePicker,
-  dob,
-  onChangeDate,
   handleInputChange,
   formErrors,
   formData,
   handleOpenCamera,
   handleDeleteImage,
   govDocuments,
-  toggleIdExpirationDatePicker,
-  onIdExpirationDateChange,
-  idExpirationDate,
-  showIdExpirationPicker,
   onSubmitGovtIdDetails,
   showPopup,
   onClosePopup,
@@ -58,6 +52,55 @@ const UpdateGovtIdDetailsScreen = ({
       }
     }
   };
+
+  const [idExpirationDate, setIdExpirationDate] = useState('');
+  const [showIdExpirationPicker, setShowIdExpirationPicker] = useState(false);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const toggleIdExpirationDatePicker = () => {
+    setShowIdExpirationPicker(!showIdExpirationPicker);
+  };
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirmDate = date => {
+    onChangeDate(date);
+    hideDatePicker();
+  };
+
+  const handleConfirmDate1 = selectedDate => {
+    if (selectedDate) {
+      const currentDate = new Date(selectedDate);
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth() + 1;
+      const day = currentDate.getDate();
+      const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+      setIdExpirationDate(formattedDate);
+
+      handleInputChange('id_expiration_date', formattedDate);
+      setShowIdExpirationPicker(false);
+    }
+  };
+
+  const onChangeDate = selectedDate => {
+    if (selectedDate) {
+      const currentDate = new Date(selectedDate);
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth() + 1;
+      const day = currentDate.getDate();
+      const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+      handleInputChange('date_of_birth', formattedDate);
+    }
+  };
+
+  const today = new Date();
+  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
 
   const renderGovtDetailsFields = () => {
     return updateGovtIdDetails[0].inputFields.map((field, index) => {
@@ -103,30 +146,26 @@ const UpdateGovtIdDetailsScreen = ({
       } else if (field.type === 'date' && field.name === 'Date of Birth') {
         return (
           <View key={index}>
-            {showDatePicker && (
-              <DateTimePicker
-                mode="date"
-                display="spinner"
-                maximumDate={new Date()}
-                minimumDate={new Date(1950, 0, 1)}
-                timeZoneOffsetInMinutes={60}
-                timeZoneOffsetInSeconds={3600}
-                value={new Date()} // Set the initial value for the date
-                onChange={(event, selectedDate) => onChangeDate(selectedDate)}
-              />
-            )}
-            <Pressable onPress={toggleDatePicker}>
+            <Pressable onPress={showDatePicker}>
               <TextInputWithIconComponent
                 label={field.name}
-                value={dob}
+                value={formData.date_of_birth}
                 onHandleChange={text => handleInputChange(field.name.toLowerCase().split(' ').join('_'), text)}
                 field={field.name.toLowerCase().split(' ').join('_')}
                 placeholder={field.name}
                 formErrors={formErrors}
                 editable={false}
                 icon={<CalenderSVG />}
+                onPress={showDatePicker}
               />
             </Pressable>
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode="date"
+              onConfirm={handleConfirmDate}
+              onCancel={hideDatePicker}
+              maximumDate={maxDate}
+            />
           </View>
         );
       } else if (field.type === 'picker') {
@@ -163,29 +202,31 @@ const UpdateGovtIdDetailsScreen = ({
           </View>
         );
       } else if (field.type === 'date' && field.name === 'ID Expiration Date') {
+        const selectedDoc = formData.id_type; // Get the selected document from formData
+        const isDisabled = selectedDoc === 'Aadhar' || selectedDoc === 'Voter ID' || selectedDoc === '';
+
         return (
           <View key={index}>
             {showIdExpirationPicker && (
-              <DateTimePicker
+              <DateTimePickerModal
+                isVisible={showIdExpirationPicker}
                 mode="date"
-                display="spinner"
-                minimumDate={new Date(1950, 0, 1)}
-                timeZoneOffsetInMinutes={60}
-                timeZoneOffsetInSeconds={3600}
-                value={new Date()} // Set the initial value for the date
-                onChange={(event, selectedDate) => onIdExpirationDateChange(selectedDate)}
+                onConfirm={handleConfirmDate1}
+                onCancel={() => setShowIdExpirationPicker(false)}
+                minimumDate={new Date()}
               />
             )}
-            <Pressable onPress={toggleIdExpirationDatePicker}>
+            <Pressable disabled={isDisabled} onPress={!isDisabled ? toggleIdExpirationDatePicker : null}>
               <TextInputWithIconComponent
                 label={field.name}
-                value={idExpirationDate}
+                value={isDisabled ? (formData.id_expiration_date = 'NA') : idExpirationDate}
                 onHandleChange={text => handleInputChange(field.name.toLowerCase().split(' ').join('_'), text)}
                 field={field.name.toLowerCase().split(' ').join('_')}
                 placeholder={field.name}
                 formErrors={formErrors}
-                editable={false}
+                editable={false} // Disable input when conditions match
                 icon={<CalenderSVG />}
+                onPress={!isDisabled ? toggleIdExpirationDatePicker : null}
               />
             </Pressable>
           </View>

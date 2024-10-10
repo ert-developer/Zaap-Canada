@@ -93,7 +93,6 @@ const PostJobScreen = ({
 }) => {
   // const styles = useMemo(() => PostJobStyles(), []);
   const styles = PostJobStyles();
-  const [showDatePicker, setshowDatePicker] = useState(false);
   const [checked, setChecked] = useState(formData.starttime === 'AnyTime');
 
   const toggleCheckbox = () => {
@@ -120,7 +119,6 @@ const PostJobScreen = ({
   };
 
   const onChangeDate = selectedDate => {
-    onChangeDatePicker();
     if (selectedDate) {
       const currentDate = new Date(selectedDate);
       const year = currentDate.getFullYear();
@@ -129,10 +127,6 @@ const PostJobScreen = ({
       const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
       handleChange('startdate', formattedDate);
     }
-  };
-
-  const onChangeDatePicker = () => {
-    setshowDatePicker(!showDatePicker);
   };
 
   const showTimePicker = () => {

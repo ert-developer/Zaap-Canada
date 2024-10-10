@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Zaap C</string>
+	<string>Zaap</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -40,9 +40,9 @@
 	<key>CFBundleVersion</key>
 	<string>2</string>
 	<key>FacebookAppID</key>
-	<string>484439831215924</string>
+	<string>732582058911892</string>
 	<key>FacebookClientToken</key>
-	<string>b25662b5145da8432b165ff78de5e935</string>
+	<string>b243a468c49b8daf8434c20f18f08d99</string>
 	<key>FacebookDisplayName</key>
 	<string>zaap</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -65,21 +65,23 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>$(PRODUCT_NAME) requires access to Apple Music to enhance the user experience.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>$(PRODUCT_NAME) We need access to your camera for capturing photos.</string>
+	<string>$(PRODUCT_NAME) requires access to your camera for capturing photos for profile images and posting job-related photos</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>$(PRODUCT_NAME) We need your location for providing location-based services.</string>
+	<string>$(PRODUCT_NAME) needs access to your location to provide real-time updates and directions for job opportunities near your location, even when the app is running in the background.</string>
 	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
 	<dict>
-		<key>Needlocationaccess</key>
-		<string>We need your location for providing location-based services.</string>
+		<key>JobNavigation</key>
+		<string>$(PRODUCT_NAME) need your location to provide accurate navigation and job tracking for job postings nearby.</string>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>$(PRODUCT_NAME) We need your location for providing location-based services.</string>
+	<string>$(PRODUCT_NAME) needs access to your location to show job opportunities near you and provide accurate directions to job sites.</string>
 	<key>NSMediaLibraryUsageDescription</key>
-	<string>We need access to your media library to select photos.</string>
+	<string>$(PRODUCT_NAME)We need access to your media library to select photos for job postings and profile images.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(PRODUCT_NAME) We need access to your photo library to select photos.</string>
+	<string>$(PRODUCT_NAME) needs access to your photo library to upload images for job postings and profile pictures.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -102,6 +104,7 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
+		<string>push-to-talk</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
