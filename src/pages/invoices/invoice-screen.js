@@ -92,7 +92,7 @@ const InvoiceScreen = () => {
             text={'Currently, no invoices have been generated for your account'}
             style={styles.emptyInvoiceHeading}
           />
-          <CustomText text={'View invoices post-transaction'} />
+          <CustomText text={'View invoices post-transaction'} style={{fontWeight: '500'}} />
         </View>
       ) : (
         <ScrollView>

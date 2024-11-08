@@ -55,6 +55,7 @@ export const reportStyles = () => {
       textAlign: 'center',
       padding: widthToDp(2),
       color: Color.colorBlack,
+      fontWeight: '500',
     },
     textArea: {
       borderWidth: 1,

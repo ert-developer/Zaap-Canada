@@ -16,7 +16,7 @@ function ContactStyles() {
     },
     contactUsHeading: {color: Color.colorIndigo2, fontSize: widthToDp(4.5), fontWeight: 'bold'},
     contactUsDesCon: {marginVertical: widthToDp(3)},
-    contactUsDesscription: {fontSize: widthToDp(3), textAlign: 'center'},
+    contactUsDesscription: {fontSize: widthToDp(3), textAlign: 'center', fontWeight: '500'},
     contactUsBtn: {
       backgroundColor: Color.colorIndigo2,
       borderRadius: widthToDp(2),

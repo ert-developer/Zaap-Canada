@@ -189,6 +189,9 @@ const ProviderProfile = ({
     }
   };
 
+  const today = new Date();
+  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+
   const renderInputsForCategory = () => {
     if (categoryData) {
       return categoryData.inputFields.map((field, index) => {
@@ -1546,7 +1549,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   contactUsDesCon: {marginVertical: widthToDp(3)},
-  contactUsDesscription: {fontSize: widthToDp(3.4), fontWeight: '700', fontFamily: FontFamily.helvetica},
+  contactUsDesscription: {fontSize: widthToDp(3.4), fontWeight: '500', fontFamily: FontFamily.helvetica},
   contactUsBtn: {
     backgroundColor: Color.colorIndigo2,
     borderRadius: widthToDp(2),

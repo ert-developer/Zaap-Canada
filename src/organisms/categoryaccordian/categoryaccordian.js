@@ -30,7 +30,9 @@ const CategoryAccordian = ({selectedCategory, categoryName, SubCategories, rende
 
   const renderSubCategoryItem = ({item}) => (
     <TouchableOpacity style={styles.subCategoryItem} onPress={() => getSubCatName(item)}>
-      <Text style={styles.subCategoryText}>{item}</Text>
+      <View style={{borderBottomWidth: 1, borderBottomColor: 'lightgray'}}>
+        <Text style={styles.subCategoryText}>{item}</Text>
+      </View>
     </TouchableOpacity>
   );
 
@@ -63,8 +65,6 @@ const CategoryAccordian = ({selectedCategory, categoryName, SubCategories, rende
 
 const styles = StyleSheet.create({
   subCategoryText: {
-    borderBottomWidth: 1,
-    borderBottomColor: 'lightgray',
     fontSize: heightToDp(2),
     color: '#464183',
     padding: 5,

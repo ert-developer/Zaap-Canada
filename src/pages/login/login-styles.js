@@ -185,7 +185,7 @@ function LoginStyles() {
     },
     contactUsHeading: {color: Color.colorIndigo2, fontSize: heightToDp(2.7), fontWeight: 'bold'},
     contactUsDesCon: {marginBottom: widthToDp(2)},
-    contactUsDesscription: {fontSize: widthToDp(3), textAlign: 'center'},
+    contactUsDesscription: {fontSize: widthToDp(3), textAlign: 'center', fontWeight: '500'},
     contactUsBtn: {
       backgroundColor: Color.colorIndigo2,
       borderRadius: widthToDp(2),
