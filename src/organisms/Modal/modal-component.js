@@ -8,7 +8,6 @@ import CustomText from '../../atoms/text/textComponent';
 import ZaapLogoSvgComponent from '../../assets/svgIcons/zaaplogosvg/zaaplogosvg';
 import ArrowSvgComponent from '../../assets/svgIcons/arrrowiconsvg/arrowiconsvg';
 import {useNavigation} from '@react-navigation/native';
-import usePayment from '../../custom-hooks/payment/usePayment';
 import {useSelector, useDispatch} from 'react-redux';
 import CardJobs from '../../molecules/job-card/jobCard';
 import {postCollectionDetails} from '../../common/collection';
@@ -144,7 +143,6 @@ const ModalComponent = ({isVisible, setModalVisible1, onClose, userWorking}) => 
     );
   };
 
-  const {handleCheckout} = usePayment();
   const dispatch = useDispatch();
 
   const iinchatScreenNavigation = async data => {
@@ -214,9 +212,9 @@ const ModalComponent = ({isVisible, setModalVisible1, onClose, userWorking}) => 
 
     try {
       const paymentAmount = parseFloat(amount + platformFee);
-      const response = await handleCheckout(paymentAmount);
+      // const response = await handleCheckout(paymentAmount);
 
-      if (response && response['_documentPath']) {
+      if (true) {
         await Promise.all([
           postCollectionDetails(envConfig.selectedProfiles, selectedProfileDetails),
           postCollectionDetails(envConfig.SelectedJobs, selectedJobs),
@@ -318,14 +316,14 @@ const ModalComponent = ({isVisible, setModalVisible1, onClose, userWorking}) => 
               </View>
               <View style={{padding: heightToDp(2)}}>
                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                  <CustomText text={'Total Pay'} style={styles.totalFeeHead} />
+                  <CustomText text={'Total'} style={styles.totalFeeHead} />
                   <CustomText text={`₹${amount + platformFee}`} style={styles.totalFeeHead} />
                 </View>
               </View>
 
               <View style={styles.payAndBackButtonContainer}>
                 <CustomButton
-                  title={loader ? <ActivityIndicator color={'white'} size={20} /> : 'Pay'}
+                  title={loader ? <ActivityIndicator color={'white'} size={20} /> : 'Coming Soon'}
                   style={styles.payButton}
                   textStyle={styles.payBtnText}
                   onPress={clickOnHandlePayment}

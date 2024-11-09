@@ -79,23 +79,23 @@ const ContactUs = () => {
                 onPress={() => gotoContactUsQuestionsScreen('Getting Started')}>
                 <CustomText text="Getting Started" style={styles.categoryButtonText} />
               </CustomButton>
-              <CustomButton style={styles.categoryButton} onPress={() => gotoContactUsQuestionsScreen('Ad Posting')}>
+              {/* <CustomButton style={styles.categoryButton} onPress={() => gotoContactUsQuestionsScreen('Ad Posting')}>
                 <CustomText text="Ad Posting" style={styles.categoryButtonText} />
               </CustomButton>
               <CustomButton style={styles.categoryButton} onPress={() => gotoContactUsQuestionsScreen('Hiring')}>
                 <CustomText text="Hiring" style={styles.categoryButtonText} />
-              </CustomButton>
-              <CustomButton style={styles.categoryButton} onPress={() => gotoContactUsQuestionsScreen('Premium Ads')}>
+              </CustomButton> */}
+              {/* <CustomButton style={styles.categoryButton} onPress={() => gotoContactUsQuestionsScreen('Premium Ads')}>
                 <CustomText text="Premium Ads" style={styles.categoryButtonText} />
-              </CustomButton>
+              </CustomButton> */}
               <CustomButton
                 style={styles.categoryButton}
                 onPress={() => gotoContactUsQuestionsScreen('Background Verification')}>
                 <CustomText text="Background Verification" style={styles.categoryButtonText} />
               </CustomButton>
-              <CustomButton style={styles.categoryButton} onPress={() => gotoContactUsQuestionsScreen('Payments')}>
+              {/* <CustomButton style={styles.categoryButton} onPress={() => gotoContactUsQuestionsScreen('Payments')}>
                 <CustomText text="Payments" style={styles.categoryButtonText} />
-              </CustomButton>
+              </CustomButton> */}
               <CustomButton
                 style={styles.categoryButton}
                 onPress={() => gotoContactUsQuestionsScreen('Service Provider Portfolio')}>

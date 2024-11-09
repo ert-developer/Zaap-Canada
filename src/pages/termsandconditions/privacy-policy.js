@@ -143,13 +143,13 @@ const PrivacyPolicies = () => {
       <Text style={styles.subHeading}>Sensitive Information</Text>
       <Text>We do not process sensitive information.</Text>
 
-      <Text style={styles.subHeading}>Payment Data</Text>
+      {/* <Text style={styles.subHeading}>Payment Data</Text>
       <Text>
         We may collect data necessary to process your payment if you choose to make purchases, such as your payment
         instrument number, and the security code associated with your payment instrument. All payment data is handled
         and stored by Stripe. You may find their privacy notice link(s) here:
         <Text style={styles.link}>https://stripe.com/in/privacy</Text>.
-      </Text>
+      </Text> */}
 
       <Text style={styles.subHeading}>Social Media Login Data</Text>
       <Text>

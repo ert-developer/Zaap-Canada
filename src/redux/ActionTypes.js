@@ -1,5 +1,3 @@
-import {Constants} from '@stripe/stripe-react-native';
-
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 export const FETCH_JOBS = 'FETCH_JOBS';
 export const TOGGLE_CATEGORY = 'TOGGLE_CATEGORY';

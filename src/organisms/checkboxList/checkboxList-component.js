@@ -17,12 +17,12 @@ const CheckboxListComponent = ({setExposureValue, exposureValue, postPaymentMode
         <CircleCheckbox value={'free'} color={'#5A2DAF'} />
         <CustomText text={'Free Ad'} style={styles.text} />
       </View>
-      <View style={styles.row}>
+      {/* <View style={styles.row}>
         <CircleCheckbox value={'paid'} color={'#5A2DAF'} />
         <View>
           <CustomText text={'Premium Ad'} style={styles.text} />
         </View>
-      </View>
+      </View> */}
       {/* <View style={styles.premiumAdTextCon}>
         <Text style={styles.subText}>More Visibility</Text>
         <Text style={styles.subText}>Priority Placement</Text>

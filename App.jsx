@@ -3,16 +3,13 @@ import {Platform, SafeAreaView, StatusBar} from 'react-native';
 import 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
 import NavigationStack from './src/navigation/authentication/navigation';
-import {StripeProvider} from '@stripe/stripe-react-native';
 import {Provider} from 'react-redux';
 import {MD3LightTheme as DefaultTheme, PaperProvider} from 'react-native-paper';
 import {PersistGate} from 'redux-persist/integration/react';
 
 import {persistor, store} from './src/redux/store/store';
-import CurrentLocation from './src/organisms/currentLocation/currentLocation';
 import LocationListener from './src/organisms/locationListner/locationListner';
 import Geocoding from 'react-native-geocoding';
-import PremiumAdsContainer from './src/pages/premiumads/premium-ads-container';
 import {envConfig} from './src/assets/helpers/envApi';
 
 const App = () => {
@@ -40,20 +37,18 @@ const App = () => {
   }, []);
 
   return (
-    <StripeProvider publishableKey="pk_test_51PwPaRGHwmXpGIGPT6JDGkA1rBP7aHBQFMGFY2wM00HVEBIV875vVr59GVrvRN4K4w2SbPFMcf5SXWtQJQ8oby2x00iQl4fe53">
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>
-          <PaperProvider theme={theme}>
-            <StatusBar barStyle={'dark-content'} />
-            <SafeAreaView style={{flex: 1}}>
-              <NavigationStack />
-              {/* <CurrentLocation /> */}
-              <LocationListener />
-            </SafeAreaView>
-          </PaperProvider>
-        </PersistGate>
-      </Provider>
-    </StripeProvider>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <PaperProvider theme={theme}>
+          <StatusBar barStyle={'dark-content'} />
+          <SafeAreaView style={{flex: 1}}>
+            <NavigationStack />
+            {/* <CurrentLocation /> */}
+            <LocationListener />
+          </SafeAreaView>
+        </PaperProvider>
+      </PersistGate>
+    </Provider>
   );
 };
 

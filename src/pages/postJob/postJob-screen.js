@@ -481,7 +481,7 @@ const PostJobScreen = ({
 
                     <View style={[styles.row, styles.inputContainer]}>
                       <View style={styles.column}>
-                        <CustomText text={'Make your Ad Premium (Optional)'} style={styles.label} />
+                        <CustomText text={'Post free Ad'} style={styles.label} />
                         <CheckboxListComponent
                           setExposureValue={setExposureValue}
                           exposureValue={exposureValue}

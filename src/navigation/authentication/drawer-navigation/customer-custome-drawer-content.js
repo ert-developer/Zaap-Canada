@@ -155,7 +155,7 @@ export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
       title: 'Hey friendsCheck out this app',
       message: `Hey! This app made me think of you. It's great for finding "Flexible Work" or "Hiring" someone within your budget across various sectors. Check out ZAAP and explore the world of possibilities—sign up now! 
 
-      Android App - https://play.google.com/store/apps/ 
+      Android App - https://play.google.com/store/apps/details?id=com.zaap-canada 
       
       IOS App - https://www.apple.com/in/app-store/`,
       social: RNShare.Social.WHATSAPP,
@@ -306,13 +306,13 @@ export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
           isSelected={state.routes[state.index].name === 'MyJobScreen'}
           style={{backgroundColor: state.routes[state.index].name === 'MyJobScreen' ? Color.colorLightWhite : 'white'}}
         />
-        <DrawerItemWithArrow
+        {/* <DrawerItemWithArrow
           label="Premium Ads"
           icon={() => <PremiumAdsSVG />}
           onPress={() => navigation.navigate('PremiumAds')}
           isSelected={state.routes[state.index].name === 'PremiumAds'}
           style={{backgroundColor: state.routes[state.index].name === 'PremiumAds' ? Color.colorLightWhite : 'white'}}
-        />
+        /> */}
 
         <DrawerItemWithArrow
           label="Invoices"

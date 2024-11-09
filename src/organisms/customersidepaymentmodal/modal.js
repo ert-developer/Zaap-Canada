@@ -29,7 +29,6 @@ import {FeedbackBannerSvg} from '../../assets/svgImage/bottomDrawer';
 import {AirbnbRating} from 'react-native-ratings';
 import WorkDoneModal from '../customermodals/workdonemodal';
 import Service_CancelPopupAfter_otp from '../customermodals/servicecancelmodal';
-import usePayment from '../../custom-hooks/payment/usePayment';
 import {Color} from '../../assets/static/globalStyles';
 import CustomerServiceCompletedModal from '../backdroppressmodal/customer-service-complete-modal';
 import {db} from '../../../firebaseDb';
@@ -41,8 +40,6 @@ import TextAreaInputComponent from '../../atoms/textAreaInput/textAreaInput-comp
 import {envConfig} from '../../assets/helpers/envApi';
 
 const CustomerSidePaymentModel = () => {
-  const {handleCheckout} = usePayment();
-
   const user = useSelector(state => state.Auth.user);
   const userID = user.userId;
 
@@ -549,9 +546,9 @@ const CustomerSidePaymentModel = () => {
         setPaymentLoader(false);
         return;
       }
-      let response = await handleCheckout(parseFloat(tipAmount));
+      // let response = await handleCheckout(parseFloat(tipAmount));
 
-      if (response && response['_documentPath']) {
+      if (true) {
         handleServiceCompleted();
         setServiceCompleted(true);
       }

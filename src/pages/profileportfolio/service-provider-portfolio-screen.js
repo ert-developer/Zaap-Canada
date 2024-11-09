@@ -9,7 +9,6 @@ import Modal from 'react-native-modal';
 import {heightToDp} from '../../responsive/responsive';
 import {CloseSVG, ExternalLinkPopupLine, SmallExclamationSVG} from '../../assets/svgImage/providerProfile';
 import {CloseIcon} from '../../assets/svgIcons/providerPaymentSvg';
-import {Constants} from '@stripe/stripe-react-native';
 import {useSelector} from 'react-redux';
 
 const ServiceProviderPortfolioScreen = ({

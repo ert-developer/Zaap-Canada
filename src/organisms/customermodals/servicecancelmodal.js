@@ -90,7 +90,7 @@ const Service_CancelPopupAfter_otp = ({
               </View>
               <View style={{gap: 20, marginTop: heightToDp(2), flexDirection: 'row'}}>
                 <CustomButton
-                  title={'PAY'}
+                  title={'COMING SOON'}
                   style={{
                     padding: heightToDp(1),
                     backgroundColor: '#00BF63',

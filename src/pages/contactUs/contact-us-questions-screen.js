@@ -19,7 +19,7 @@ const questionsList = [
         id: 1,
         question: 'How do I create an account on ZAAP?',
         answer:
-          'You can sign up for ZAAP using your Gmail or Facebook account for a quick and easy registration process.',
+          'You can sign up for ZAAP using your Gmail or Facebook account or Apple ID for a quick and easy registration process.',
       },
       {
         id: 2,

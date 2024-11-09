@@ -19,8 +19,6 @@ import ProviderFeedbackContainer from '../../../pages/providerFeedback/provider-
 import ProviderPaymentContainer from '../../../pages/providerpayment/provider-payment-container';
 import PreviousJobsPaymentContainer from '../../../pages/previousjobspayment/previousjobs-payment-container';
 const Stack = createStackNavigator();
-import PaymentContainer from '../../../pages/payment/payment-container';
-import popularJobscontainer from '../../../pages/popularMore/moreJobs-container';
 import SearchJobsContainer from '../../../pages/searchJobs/searchJobs-container';
 import MoreJobscontainer from '../../../pages/popularMore/moreJobs-container';
 import FavouritConatiner from '../../../pages/favourite/favourite-container';
@@ -63,7 +61,6 @@ const PostAuthStack = () => {
         headerShown: false,
       }}>
       <Stack.Screen name="ProviderFeedbackScreen" component={ProviderFeedbackContainer} />
-      <Stack.Screen name="PaymentScreen" component={PaymentContainer} />
       <Stack.Screen name="FavouriteScreen" component={FavouritConatiner} />
       <Stack.Screen name="IdentityVerificationScreen" component={IdentityVerificationContainer} />
       <Stack.Screen name="ProviderPaymentScreen" component={ProviderPaymentContainer} />

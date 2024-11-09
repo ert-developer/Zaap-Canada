@@ -1,4 +1,4 @@
-const envType = 'dev'; // dev | uat | prod
+const envType = 'prod'; // dev | uat | prod
 let envConfig;
 import {GOOGLE_API_KEY_DEV, GOOGLE_API_KEY_UAT, GOOGLE_API_KEY_PROD} from '@env';
 

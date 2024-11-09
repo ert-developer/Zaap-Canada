@@ -6,7 +6,6 @@ import {Alert, BackHandler, Platform} from 'react-native';
 import {fetchCollectionDetails, getJobDetails, postCollectionDetails} from '../../common/collection';
 import {postJobRequest, postJobSuccess, postJobFailure} from '../../redux/myJobs/action';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import usePayment from '../../custom-hooks/payment/usePayment';
 import {envConfig} from '../../assets/helpers/envApi';
 import {uploadImage} from '../../common/camera';
 import {fetchMyJobs} from '../../redux/myJobs/action';
@@ -181,7 +180,6 @@ const PostJobContainer = () => {
   const [featuredPayment, setFeaturedPayment] = useState(0);
   const [spotlightPayment, setSpotlightPayment] = useState(0);
 
-  const {handleCheckout} = usePayment();
   const {isPaymenting, paymentData} = useSelector(state => state.payment);
 
   const navigation = useNavigation();
@@ -582,8 +580,8 @@ const PostJobContainer = () => {
         } else {
           try {
             setPaymentLoader(true);
-            let response = await handleCheckout(parseFloat(paymentAmount));
-            if (response && response['_documentPath']) {
+            // let response = await handleCheckout(parseFloat(paymentAmount));
+            if (true) {
               await purchasePremiumAds();
               handlePostJob();
             } else {

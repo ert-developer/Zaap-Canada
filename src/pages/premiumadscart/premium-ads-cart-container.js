@@ -4,7 +4,6 @@ import firestore from '@react-native-firebase/firestore';
 import {useSelector} from 'react-redux';
 import {useRoute} from '@react-navigation/native';
 import {Alert} from 'react-native';
-import usePayment from '../../custom-hooks/payment/usePayment';
 import {useNavigation} from '@react-navigation/native';
 import {envConfig} from '../../assets/helpers/envApi';
 
@@ -19,7 +18,6 @@ const PremiumAdsCartContainer = () => {
   const user = useSelector(state => state.Auth.user);
   const userId = user.userId;
 
-  const {handleCheckout} = usePayment();
   const navigation = useNavigation();
 
   const route = useRoute();
@@ -77,8 +75,8 @@ const PremiumAdsCartContainer = () => {
         return;
       }
       // Start payment process
-      let response = await handleCheckout(parseFloat(finalAmount));
-      if (response && response['_documentPath']) {
+      // let response = await handleCheckout(parseFloat(finalAmount));
+      if (true) {
         const collectionRef = firestore().collection(envConfig.Premium_ads);
         const docRef = collectionRef.doc(userId); // Use the user's ID as the document ID
         // Prepare the data to update or create the document
