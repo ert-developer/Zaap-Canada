@@ -179,7 +179,7 @@ const MyJobService = ({filteredJobs, selectedJobs}) => {
     <SafeAreaView style={styles.frameParent}>
       <ScrollView
         refreshControl={<RefreshControl refreshing={load} onRefresh={OnRefreshHandler} />}
-        style={{backgroundColor: Color.colorWhite, height: '100%', paddingTop: 20}}>
+        style={{backgroundColor: Color.colorWhite, height: '190%', paddingTop: 20}}>
         {loader ? (
           <ActivityIndicator color={'black'} size="large" />
         ) : (

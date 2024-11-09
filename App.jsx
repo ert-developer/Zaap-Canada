@@ -38,9 +38,8 @@ const App = () => {
     Geocoding?.init(`${envConfig.GOOGLE_API_KEY}`);
     // You may also want to check other global configurations or perform other app-level setup here.
   }, []);
-
   return (
-    <StripeProvider publishableKey="pk_test_51PwPaRGHwmXpGIGPT6JDGkA1rBP7aHBQFMGFY2wM00HVEBIV875vVr59GVrvRN4K4w2SbPFMcf5SXWtQJQ8oby2x00iQl4fe53">
+    <StripeProvider publishableKey={envConfig.STRIPE_API_KEY}>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <PaperProvider theme={theme}>

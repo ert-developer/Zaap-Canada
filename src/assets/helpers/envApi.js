@@ -1,6 +1,13 @@
-const envType = 'dev'; // dev | uat | prod
+const envType = 'prod'; // dev | uat | prod
 let envConfig;
-import {GOOGLE_API_KEY_DEV, GOOGLE_API_KEY_UAT, GOOGLE_API_KEY_PROD} from '@env';
+import {
+  GOOGLE_API_KEY_DEV,
+  GOOGLE_API_KEY_UAT,
+  GOOGLE_API_KEY_PROD,
+  STRIPE_API_KEY_UAT,
+  STRIPE_API_KEY_DEV,
+  STRIPE_API_KEY_PROD,
+} from '@env';
 
 switch (envType) {
   case 'dev':
@@ -31,6 +38,7 @@ switch (envType) {
       updateGovtIdDetails: 'updateGovtIdDetails_dev',
       selectedProfiles: 'selectedProfiles_dev',
       GOOGLE_API_KEY: GOOGLE_API_KEY_DEV,
+      STRIPE_API_KEY: STRIPE_API_KEY_DEV,
       message: 'message_dev',
       chatlist: 'chatlist_dev',
       common: 'common_dev',
@@ -66,6 +74,7 @@ switch (envType) {
       selectedProfiles: 'selectedProfiles_uat',
       // base url will put here
       GOOGLE_API_KEY: GOOGLE_API_KEY_UAT,
+      STRIPE_API_KEY: STRIPE_API_KEY_UAT,
       message: 'message_uat',
       chatlist: 'chatlist_uat',
       common: 'common_uat',
@@ -101,6 +110,7 @@ switch (envType) {
       selectedProfiles: 'selectedProfiles',
       // base url will put here
       GOOGLE_API_KEY: GOOGLE_API_KEY_PROD,
+      STRIPE_API_KEY: STRIPE_API_KEY_PROD,
       message: 'message',
       chatlist: 'chatlist',
       common: 'common',
