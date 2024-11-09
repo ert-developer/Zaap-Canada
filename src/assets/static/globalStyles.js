@@ -1,5 +1,3 @@
-import {color} from '@rneui/base';
-
 // Colors.js
 export const Color = {
   pageBgColor: '#FCFBFF',

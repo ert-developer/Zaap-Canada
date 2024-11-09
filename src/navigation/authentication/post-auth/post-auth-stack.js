@@ -28,7 +28,6 @@ import IdentityVerificationContainer from '../../../pages/identityverification/i
 import ChatListContainer from '../../../pages/chats/addedUsers/chat-list-container';
 import ChatContainer from '../../../pages/chats/message/message-container';
 import ChatListContainerList from '../../../pages/chats/allUsers/chat-all-container';
-import ViewProfileContainer from '../../../pages/viewprofile/viewProfile-container';
 import ReportContainer from '../../../pages/report/report-container';
 import SubCategoryContainer from '../../../pages/subcategory/subcategory-container';
 import ContactUsQuestionsScreen from '../../../pages/contactUs/contact-us-questions-screen';
@@ -83,7 +82,6 @@ const PostAuthStack = () => {
       <Stack.Screen name="nearMe" component={LocationConatiner} />
       <Stack.Screen name="maps" component={NearMeConatiner} />
       <Stack.Screen name="SubCategoryScreen" component={SubCategoryContainer} />
-      <Stack.Screen name="ViewProfile" component={ViewProfileContainer} />
       <Stack.Screen name="Report" component={ReportContainer} />
       <Stack.Screen name="contactUsQuestions" component={ContactUsQuestionsScreen} />
       <Stack.Screen name="OneChat" component={ChatContainer} />

@@ -1,16 +1,12 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {
   FlatList,
   SafeAreaView,
   StatusBar,
   View,
   Image,
-  StyleSheet,
-  Pressable,
   ScrollView,
   ActivityIndicator,
-  Alert,
-  CustomTouchableOpacity,
   Text,
   TouchableOpacity,
 } from 'react-native';
@@ -23,20 +19,11 @@ import CustomText from '../../atoms/text/textComponent';
 import DeleteCustomImage from '../../organisms/deleteImage/deleteImage-component';
 import CustomModelComponent from '../../atoms/model/model-component';
 import ButtonIconLabelComponent from '../../atoms/buttonIconlabel/buttonIconlabel-component';
-import {BackIcon} from '../../assets/svgImage/sideDrawer';
-import ButtonIconComponent from '../../atoms/buttonIcon/buttonIcon-component';
-import {useSelector} from 'react-redux';
 import DropdownSearchComponent from '../../organisms/dropDownSearch/dropDownSearch-component';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import TextInputWithIconComponent from '../../organisms/textInputWithIcon/textInputWithIcon-component';
 import ServiceProviderProfileStyles from './service-provider-profile-styles';
-import ProfileUpdatePopup from '../../organisms/popupmodal/pop-up-modal';
 import HeaderComponent from '../../atoms/header/headerComponent';
-import moment from 'moment';
 import {Color} from '../../assets/static/globalStyles';
-import {NewExclamationSVG, SmallExclamationSVG} from '../../assets/svgImage/providerProfile';
-import Tooltip from 'react-native-walkthrough-tooltip';
-import {color} from '@rneui/base';
+import {SmallExclamationSVG} from '../../assets/svgImage/providerProfile';
 import Modal from 'react-native-modal';
 import FastImage from 'react-native-fast-image';
 import DropDownPicker from 'react-native-dropdown-picker';
