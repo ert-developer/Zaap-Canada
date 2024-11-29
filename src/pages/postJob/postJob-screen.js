@@ -11,6 +11,7 @@ import {
   Pressable,
   ActivityIndicator,
   Image,
+  KeyboardAvoidingView,
   // Modal,
 } from 'react-native';
 import Modal from 'react-native-modal';
@@ -66,12 +67,6 @@ const PostJobScreen = ({
   postPaymentMode,
   isPostingJobs,
   isPaymenting,
-  toggle,
-  isModal,
-  closeModal,
-  jobModal,
-  availableBalance,
-  setAvailableBalance,
   adType,
   setAdType,
   usedCheckBox,
@@ -199,295 +194,303 @@ const PostJobScreen = ({
         </Modal>
       )}
 
-      <SafeAreaView style={[styles.safeArea]}>
-        <StatusBar barStyle="light-content" />
-        <HeaderComponent text={'Post Your Ad'} setScreenType={setScreenType} screenType={screenType} />
-        <ScrollView style={styles.scrollView} keyboardShouldPersistTaps="handled" contentContainerStyle={{flexGrow: 1}}>
-          <View style={styles.container}>
-            {/* <CustomText text={`POST YOUR AD${screenType === 'job-form' ? '(1/2)' : '(2/2)'}`} style={styles.pageTitle} /> */}
-            {screenType === 'job-form' ? (
-              <View>
-                {/* JOB TITLE */}
-                <View style={styles.inputContainer}>
-                  <TextInputWithLabelComponent
-                    label={'Title'}
-                    value={formData.jobTitle}
-                    onHandleChange={text => handleChange('jobTitle', text)}
-                    field={'jobTitle'}
-                    placeholder={'Looking for... or Wanted....'}
-                    formErrors={formErrors}
-                    maxLength={50}
-                    // firstPicker={{color: '#000'}}
-                  />
-                  <CustomText text={`${50 - formData.jobTitle.length} Characters left`} style={styles.charLeftText} />
-                </View>
-                {/* JOB CATEGORY & SUB CATEGORY */}
-                <View style={[styles.row, styles.inputContainer]}>
-                  <View style={styles.column}>
-                    <CustomText text={'Category'} style={styles.label} />
-                    <View style={[styles.input, styles.inputWrapper, styles.firstPicker]}>
-                      <DropdownSearchComponent
-                        selectedValue={`${formData.categories}`}
-                        onHandleChange={handleChange}
-                        fieldName={'categories'}
-                        defaultOption={'Category'}
-                        labelField={'name'}
-                        valueField={'name'}
-                        pickerOptions={sortedCategories}
-                        formErrors={formErrors}
-                      />
-                    </View>
-                  </View>
-
-                  <View style={styles.column}>
-                    <CustomText text={'Subcategory'} style={styles.label} />
-                    <View style={[styles.input, styles.inputWrapper]}>
-                      <DropdownSearchComponent
-                        selectedValue={formData.subCategory}
-                        onHandleChange={handleChange}
-                        fieldName={'subCategory'}
-                        defaultOption={'Sub-Category'}
-                        labelField={'name'}
-                        valueField={'name'}
-                        pickerOptions={(
-                          categories.find(category => category.name === formData.categories)?.SubCategories || []
-                        )
-                          .slice() // Create a copy of the array
-                          .sort((a, b) => a.localeCompare(b)) // Sort the subcategories alphabetically
-                          .map(subcategory => ({
-                            option: subcategory,
-                            name: subcategory,
-                            id: subcategory,
-                          }))}
-                        formErrors={formErrors}
-                      />
-                    </View>
-                  </View>
-                </View>
-
-                {/* Salary & Phone Number */}
-                <View style={[styles.row, styles.inputContainer]}>
-                  <View style={styles.column}>
+      <KeyboardAvoidingView
+        style={{flex: 1}}
+        behavior={'padding'}
+        keyboardVerticalOffset={100} // Adjust based on your UI
+      >
+        <SafeAreaView style={[styles.safeArea]}>
+          <StatusBar barStyle="light-content" />
+          <HeaderComponent text={'Post Your Ad'} setScreenType={setScreenType} screenType={screenType} />
+          <ScrollView
+            style={styles.scrollView}
+            keyboardShouldPersistTaps="handled"
+            contentContainerStyle={{flexGrow: 1}}>
+            <View style={styles.container}>
+              {/* <CustomText text={`POST YOUR AD${screenType === 'job-form' ? '(1/2)' : '(2/2)'}`} style={styles.pageTitle} /> */}
+              {screenType === 'job-form' ? (
+                <View>
+                  {/* JOB TITLE */}
+                  <View style={styles.inputContainer}>
                     <TextInputWithLabelComponent
-                      label={'Budget'}
-                      value={formData.salary.toString()}
-                      onHandleChange={text => handleChange('salary', text)}
-                      field={'salary'}
-                      placeholder={'eg: $100'}
+                      label={'Title'}
+                      value={formData.jobTitle}
+                      onHandleChange={text => handleChange('jobTitle', text)}
+                      field={'jobTitle'}
+                      placeholder={'Looking for... or Wanted....'}
                       formErrors={formErrors}
-                      firstPicker={styles.firstPicker}
+                      maxLength={50}
+                      // firstPicker={{color: '#000'}}
                     />
+                    <CustomText text={`${50 - formData.jobTitle.length} Characters left`} style={styles.charLeftText} />
                   </View>
-
-                  <View style={styles.column}>
-                    <TextInputWithLabelComponent
-                      label={'Phone Number'}
-                      value={formData.phone}
-                      onHandleChange={text => handleChange('phone', text)}
-                      field={'phone'}
-                      placeholder={'+1'}
-                      formErrors={formErrors}
-                    />
-                  </View>
-                </View>
-
-                {/* Date */}
-
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <View style={{width: '51%'}}>
-                    <Pressable onPress={showDatePicker1}>
-                      <TextInputWithIconComponent
-                        label={'Date'}
-                        editable={false}
-                        placeholder={'Select Date'}
-                        value={formData.startdate}
-                        placeholderTextColor={Color.colorSilver}
-                        firstPicker={styles.firstPicker}
-                        field={'startdate'}
-                        formErrors={formErrors}
-                        icon={<CalenderSVG />}
-                      />
-                    </Pressable>
-
-                    <DateTimePickerModal
-                      isVisible={isDatePickerVisible}
-                      mode="date"
-                      onConfirm={handleConfirmDate}
-                      onCancel={hideDatePicker}
-                      minimumDate={new Date()}
-                    />
-                  </View>
-
-                  <View style={{width: '51%'}}>
-                    <Pressable onPress={checked ? null : showTimePicker} style={{flex: 1}}>
-                      <TextInputWithIconComponent
-                        label={'Time'}
-                        editable={false}
-                        placeholder={'Select Time'}
-                        value={formData.starttime}
-                        firstPicker={styles.firstPicker}
-                        formErrors={formErrors}
-                        field={'starttime'}
-                        placeholderTextColor={Color.colorSilver}
-                        icon={<PlaceholderClockSVG />}
-                      />
-
-                      <DateTimePickerModal
-                        isVisible={isTimePickerVisible}
-                        mode="time"
-                        onConfirm={handleConfirmTime}
-                        onCancel={hideTimePicker}
-                        is24Hour={false}
-                      />
-                    </Pressable>
-                  </View>
-                </View>
-                <View style={styles.checkboxContainer}>
-                  <CustomText text="Anytime" style={styles.checkboxLabel} />
-                  <TouchableOpacity onPress={toggleCheckbox} style={styles.checkbox}>
-                    <Icon
-                      name={checked ? 'check-box' : 'check-box-outline-blank'}
-                      size={24} // Adjust size as needed
-                      color={checked ? '#007AFF' : '#B0B0B0'} // Adjust colors as needed
-                    />
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.inputContainer}>
-                  <CustomText text={'Location'} style={styles.label} />
-                  <GooglePlacesInput
-                    value={formData.location}
-                    onHandleChange={onLocationHandleChange}
-                    field={'location'}
-                    placeholder={'Enter Address'}
-                    formErrors={formErrors}
-                  />
-                </View>
-                {/* AREA */}
-                <View style={styles.inputContainer}>
-                  <CustomText text={'Area'} style={styles.label} />
-                  <GooglePlacesInput
-                    value={formData.area}
-                    // onHandleChange={text => handleChange('area', text.location)}
-                    onHandleChange={text => handleChange('area', text.location)}
-                    field={'area'}
-                    placeholder={'Enter Area'}
-                    formErrors={formErrors}
-                  />
-                </View>
-                <View style={styles.column}>
-                  <CustomText text={'Address'} style={styles.label} />
-                  <TextAreaInputComponent
-                    style={{...styles.input, textAlignVertical: 'top'}}
-                    onChangeText={value => handleChange('address', value)}
-                    value={formData.address}
-                    placeholder={'Enter Address'}
-                    placeholderTextColor={'silver'}
-                    editable
-                    multiline
-                    numberOfLines={4}
-                    fieldName={'address'}
-                    formErrors={formErrors}
-                    maxLength={200}
-                  />
-                </View>
-                <View style={styles.inputContainer}>
-                  <CustomText text={'Description'} style={styles.label} />
-                  <TextAreaInputComponent
-                    style={{...styles.input, textAlignVertical: 'top'}}
-                    onChangeText={value => handleChange('description', value)}
-                    value={formData.description}
-                    placeholder={'Give complete information of job'}
-                    placeholderTextColor={'silver'}
-                    editable
-                    multiline
-                    numberOfLines={10}
-                    fieldName={'description'}
-                    formErrors={formErrors}
-                    maxLength={3000}
-                  />
-                  <CustomText
-                    text={`${3000 - formData.description.length} Characters left`}
-                    style={{...styles.charLeftText, marginTop: 10}}
-                  />
-                </View>
-
-                <View styles={styles.row}>
-                  <CustomModelComponent modalVisible={modalVisible} setModalVisible={setModalVisible}>
-                    <View style={styles.centeredView}>
-                      <View style={styles.modalView}>
-                        <CustomText text={'Upload Photo'} style={styles.selectPhotoTitle} />
-                        <View style={styles.row}>
-                          <ButtonIconLabelComponent handlePress={() => onUploadImage('camera')} label={'Camera'}>
-                            <CameraIcon width="35px" height="35px" />
-                          </ButtonIconLabelComponent>
-
-                          <ButtonIconLabelComponent handlePress={() => onUploadImage('gallery')} label={'gallery'}>
-                            <GalleryIcon width="35px" height="35px" />
-                          </ButtonIconLabelComponent>
-                        </View>
-                        <CustomButton
-                          title="Cancel"
-                          onPress={() => setModalVisible(!modalVisible)}
-                          style={styles.cancelButton}
-                          textStyle={styles.cancelTextStyle}
+                  {/* JOB CATEGORY & SUB CATEGORY */}
+                  <View style={[styles.row, styles.inputContainer]}>
+                    <View style={styles.column}>
+                      <CustomText text={'Category'} style={styles.label} />
+                      <View style={[styles.input, styles.inputWrapper, styles.firstPicker]}>
+                        <DropdownSearchComponent
+                          selectedValue={`${formData.categories}`}
+                          onHandleChange={handleChange}
+                          fieldName={'categories'}
+                          defaultOption={'Category'}
+                          labelField={'name'}
+                          valueField={'name'}
+                          pickerOptions={sortedCategories}
+                          formErrors={formErrors}
                         />
                       </View>
                     </View>
-                  </CustomModelComponent>
 
-                  {/* To Display the job post images */}
-                  <FlatList
-                    data={formData.images}
-                    renderItem={renderItemImages}
-                    keyExtractor={(item, index) => index.toString()}
-                    numColumns={4}
-                    contentContainerStyle={styles.grid}
-                    extraData={imagesLoader} // Trigger re-render when imagesLoader state changes
-                  />
+                    <View style={styles.column}>
+                      <CustomText text={'Subcategory'} style={styles.label} />
+                      <View style={[styles.input, styles.inputWrapper]}>
+                        <DropdownSearchComponent
+                          selectedValue={formData.subCategory}
+                          onHandleChange={handleChange}
+                          fieldName={'subCategory'}
+                          defaultOption={'Sub-Category'}
+                          labelField={'name'}
+                          valueField={'name'}
+                          pickerOptions={(
+                            categories.find(category => category.name === formData.categories)?.SubCategories || []
+                          )
+                            .slice() // Create a copy of the array
+                            .sort((a, b) => a.localeCompare(b)) // Sort the subcategories alphabetically
+                            .map(subcategory => ({
+                              option: subcategory,
+                              name: subcategory,
+                              id: subcategory,
+                            }))}
+                          formErrors={formErrors}
+                        />
+                      </View>
+                    </View>
+                  </View>
 
-                  {/* <CustomButton style={styles.addPhotoButton} onPress={() => setModalVisible(true)}> */}
-                  <TouchableOpacity
-                    style={[
-                      styles.addPhotoButton,
-                      imagesLoader && styles.disabledButton, // Optional style when loading
-                    ]}
-                    onPress={() => !imagesLoader && setModalVisible(true)} // Disable button if loading
-                    disabled={imagesLoader} // Disable interaction
-                  >
-                    {imagesLoader ? (
-                      <ActivityIndicator size="small" color="#ffffff" /> // Add margin for spacing
-                    ) : (
-                      <>
-                        <FilledAddIconSVG style={styles.icon} />
-                        <CustomText text={'Add Photos'} style={styles.addPhotosText} />
-                      </>
-                    )}
-                  </TouchableOpacity>
+                  {/* Salary & Phone Number */}
+                  <View style={[styles.row, styles.inputContainer]}>
+                    <View style={styles.column}>
+                      <TextInputWithLabelComponent
+                        label={'Budget'}
+                        value={formData.salary.toString()}
+                        onHandleChange={text => handleChange('salary', text)}
+                        field={'salary'}
+                        placeholder={'eg: $100'}
+                        formErrors={formErrors}
+                        firstPicker={styles.firstPicker}
+                      />
+                    </View>
 
-                  {/* <View style={styles.icon}>
+                    <View style={styles.column}>
+                      <TextInputWithLabelComponent
+                        label={'Phone Number'}
+                        value={formData.phone}
+                        onHandleChange={text => handleChange('phone', text)}
+                        field={'phone'}
+                        placeholder={'+1'}
+                        formErrors={formErrors}
+                      />
+                    </View>
+                  </View>
+
+                  {/* Date */}
+
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={{width: '51%'}}>
+                      <Pressable onPress={showDatePicker1}>
+                        <TextInputWithIconComponent
+                          label={'Date'}
+                          editable={false}
+                          placeholder={'Select Date'}
+                          value={formData.startdate}
+                          placeholderTextColor={Color.colorSilver}
+                          firstPicker={styles.firstPicker}
+                          field={'startdate'}
+                          formErrors={formErrors}
+                          icon={<CalenderSVG />}
+                        />
+                      </Pressable>
+
+                      <DateTimePickerModal
+                        isVisible={isDatePickerVisible}
+                        mode="date"
+                        onConfirm={handleConfirmDate}
+                        onCancel={hideDatePicker}
+                        minimumDate={new Date()}
+                      />
+                    </View>
+
+                    <View style={{width: '51%'}}>
+                      <Pressable onPress={checked ? null : showTimePicker} style={{flex: 1}}>
+                        <TextInputWithIconComponent
+                          label={'Time'}
+                          editable={false}
+                          placeholder={'Select Time'}
+                          value={formData.starttime}
+                          firstPicker={styles.firstPicker}
+                          formErrors={formErrors}
+                          field={'starttime'}
+                          placeholderTextColor={Color.colorSilver}
+                          icon={<PlaceholderClockSVG />}
+                        />
+
+                        <DateTimePickerModal
+                          isVisible={isTimePickerVisible}
+                          mode="time"
+                          onConfirm={handleConfirmTime}
+                          onCancel={hideTimePicker}
+                          is24Hour={false}
+                        />
+                      </Pressable>
+                    </View>
+                  </View>
+                  <View style={styles.checkboxContainer}>
+                    <CustomText text="Anytime" style={styles.checkboxLabel} />
+                    <TouchableOpacity onPress={toggleCheckbox} style={styles.checkbox}>
+                      <Icon
+                        name={checked ? 'check-box' : 'check-box-outline-blank'}
+                        size={24} // Adjust size as needed
+                        color={checked ? '#007AFF' : '#B0B0B0'} // Adjust colors as needed
+                      />
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.inputContainer}>
+                    <CustomText text={'Location'} style={styles.label} />
+                    <GooglePlacesInput
+                      value={formData.location}
+                      onHandleChange={onLocationHandleChange}
+                      field={'location'}
+                      placeholder={'Enter Address'}
+                      formErrors={formErrors}
+                    />
+                  </View>
+                  {/* AREA */}
+                  <View style={styles.inputContainer}>
+                    <CustomText text={'Area'} style={styles.label} />
+                    <GooglePlacesInput
+                      value={formData.area}
+                      // onHandleChange={text => handleChange('area', text.location)}
+                      onHandleChange={text => handleChange('area', text.location)}
+                      field={'area'}
+                      placeholder={'Enter Area'}
+                      formErrors={formErrors}
+                    />
+                  </View>
+                  <View style={styles.column}>
+                    <CustomText text={'Address'} style={styles.label} />
+                    <TextAreaInputComponent
+                      style={{...styles.input, textAlignVertical: 'top'}}
+                      onChangeText={value => handleChange('address', value)}
+                      value={formData.address}
+                      placeholder={'Enter Address'}
+                      placeholderTextColor={'silver'}
+                      editable
+                      multiline
+                      numberOfLines={4}
+                      fieldName={'address'}
+                      formErrors={formErrors}
+                      maxLength={200}
+                    />
+                  </View>
+                  <View style={styles.inputContainer}>
+                    <CustomText text={'Description'} style={styles.label} />
+                    <TextAreaInputComponent
+                      style={{...styles.input, textAlignVertical: 'top'}}
+                      onChangeText={value => handleChange('description', value)}
+                      value={formData.description}
+                      placeholder={'Give complete information of job'}
+                      placeholderTextColor={'silver'}
+                      editable
+                      multiline
+                      numberOfLines={10}
+                      fieldName={'description'}
+                      formErrors={formErrors}
+                      maxLength={3000}
+                    />
+                    <CustomText
+                      text={`${3000 - formData.description.length} Characters left`}
+                      style={{...styles.charLeftText, marginTop: 10}}
+                    />
+                  </View>
+
+                  <View styles={styles.row}>
+                    <CustomModelComponent modalVisible={modalVisible} setModalVisible={setModalVisible}>
+                      <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                          <CustomText text={'Upload Photo'} style={styles.selectPhotoTitle} />
+                          <View style={styles.row}>
+                            <ButtonIconLabelComponent handlePress={() => onUploadImage('camera')} label={'Camera'}>
+                              <CameraIcon width="35px" height="35px" />
+                            </ButtonIconLabelComponent>
+
+                            <ButtonIconLabelComponent handlePress={() => onUploadImage('gallery')} label={'gallery'}>
+                              <GalleryIcon width="35px" height="35px" />
+                            </ButtonIconLabelComponent>
+                          </View>
+                          <CustomButton
+                            title="Cancel"
+                            onPress={() => setModalVisible(!modalVisible)}
+                            style={styles.cancelButton}
+                            textStyle={styles.cancelTextStyle}
+                          />
+                        </View>
+                      </View>
+                    </CustomModelComponent>
+
+                    {/* To Display the job post images */}
+                    <FlatList
+                      data={formData.images}
+                      renderItem={renderItemImages}
+                      keyExtractor={(item, index) => index.toString()}
+                      numColumns={4}
+                      contentContainerStyle={styles.grid}
+                      extraData={imagesLoader} // Trigger re-render when imagesLoader state changes
+                    />
+
+                    {/* <CustomButton style={styles.addPhotoButton} onPress={() => setModalVisible(true)}> */}
+                    <TouchableOpacity
+                      style={[
+                        styles.addPhotoButton,
+                        imagesLoader && styles.disabledButton, // Optional style when loading
+                      ]}
+                      onPress={() => !imagesLoader && setModalVisible(true)} // Disable button if loading
+                      disabled={imagesLoader} // Disable interaction
+                    >
+                      {imagesLoader ? (
+                        <ActivityIndicator size="small" color="#ffffff" /> // Add margin for spacing
+                      ) : (
+                        <>
+                          <FilledAddIconSVG style={styles.icon} />
+                          <CustomText text={'Add Photos'} style={styles.addPhotosText} />
+                        </>
+                      )}
+                    </TouchableOpacity>
+
+                    {/* <View style={styles.icon}>
                       <FilledAddIconSVG style={styles.addIcon} />
                     </View>
                     <CustomText text={'Add Photos'} style={styles.addPhotosText} /> */}
-                  {/* </CustomButton> */}
+                    {/* </CustomButton> */}
+                  </View>
                 </View>
-              </View>
-            ) : screenType === 'preview-form' ? (
-              <View>
-                {isPostingJobs | isPaymenting ? (
-                  <JobListCard />
-                ) : (
-                  <>
-                    <CardImageListComponent formData={formData} jobPostScreen={jobPostScreen} />
+              ) : screenType === 'preview-form' ? (
+                <View>
+                  {isPostingJobs | isPaymenting ? (
+                    <JobListCard />
+                  ) : (
+                    <>
+                      <CardImageListComponent formData={formData} jobPostScreen={jobPostScreen} />
 
-                    <View style={[styles.row, styles.inputContainer]}>
-                      <View style={styles.column}>
-                        <CustomText text={'Make your Ad Premium (Optional)'} style={styles.label} />
-                        <CheckboxListComponent
-                          setExposureValue={setExposureValue}
-                          exposureValue={exposureValue}
-                          postPaymentMode={postPaymentMode}
-                        />
-                        {/* <View style={styles.tagContainer}>
+                      <View style={[styles.row, styles.inputContainer]}>
+                        <View style={styles.column}>
+                          <CustomText text={'Make your Ad Premium (Optional)'} style={styles.label} />
+                          <CheckboxListComponent
+                            setExposureValue={setExposureValue}
+                            exposureValue={exposureValue}
+                            postPaymentMode={postPaymentMode}
+                          />
+                          {/* <View style={styles.tagContainer}>
                           <FlatList
                             data={showTags}
                             renderItem={renderTags}
@@ -495,26 +498,26 @@ const PostJobScreen = ({
                           />
                         </View> */}
 
-                        {exposureValue === 'paid' ? (
-                          <>
-                            <DropDownComponent
-                              data={advertisementOptions}
-                              handleChange={handleChange}
-                              formData={formData}
-                              formErrors={formErrors}
-                              GetFeaturePaymentAmount={GetFeaturePaymentAmount}
-                              GetSpotlightPaymentAmount={GetSpotlightPaymentAmount}
-                              adType={adType}
-                              setAdType={setAdType}
-                              usedCheckBox={usedCheckBox}
-                              setUsedCheckBox={setUsedCheckBox}
-                              setAvailable={setAvailable}
-                              available={available}
-                              setPaymentAmount={setPaymentAmount}
-                              paymentAmount={paymentAmount}
-                              // handleTags={handleTags}
-                            />
-                            {/* <View style={styles.amountButtonCon}>
+                          {exposureValue === 'paid' ? (
+                            <>
+                              <DropDownComponent
+                                data={advertisementOptions}
+                                handleChange={handleChange}
+                                formData={formData}
+                                formErrors={formErrors}
+                                GetFeaturePaymentAmount={GetFeaturePaymentAmount}
+                                GetSpotlightPaymentAmount={GetSpotlightPaymentAmount}
+                                adType={adType}
+                                setAdType={setAdType}
+                                usedCheckBox={usedCheckBox}
+                                setUsedCheckBox={setUsedCheckBox}
+                                setAvailable={setAvailable}
+                                available={available}
+                                setPaymentAmount={setPaymentAmount}
+                                paymentAmount={paymentAmount}
+                                // handleTags={handleTags}
+                              />
+                              {/* <View style={styles.amountButtonCon}>
                               <TouchableOpacity style={styles.balanceBtn}>
                                 <CustomText
                                   text={'AVAILABLE BALANCE'}
@@ -525,10 +528,10 @@ const PostJobScreen = ({
                                 <CustomText text={'BUY'} />
                               </TouchableOpacity>
                             </View> */}
-                          </>
-                        ) : null}
+                            </>
+                          ) : null}
 
-                        {/* <DropDownComponent
+                          {/* <DropDownComponent
                           data={advertisementOptions}
                           handleChange={handleChange}
                           formData={formData}
@@ -537,76 +540,77 @@ const PostJobScreen = ({
                           // handleTags={handleTags}
                           // style={styles.premiumAdInput}
                         /> */}
+                        </View>
                       </View>
-                    </View>
-                  </>
-                )}
-              </View>
-            ) : null}
-            {editablestatus.editJobStatus === true ? (
-              <View style={styles.updateBtnContainer}>
-                <CustomButton
-                  title={'Cancel'}
-                  style={styles.cancelBtn}
-                  textStyle={styles.nextText}
-                  onPress={() => cancelUpdatedJob()}
-                />
-                <CustomButton
-                  title={'Update'}
-                  style={styles.updateBtn}
-                  textStyle={styles.nextText}
-                  onPress={() => updateJobDetails(editablestatus.jobId)}
-                />
-              </View>
-            ) : (
-              <View style={[styles.row]}>
-                {screenType === 'preview-form' ? (
-                  isPostingJobs | isPaymenting ? (
-                    <CustomLoader visible={isPostingJobs} />
-                  ) : available === 'AVAILABLE' && usedCheckBox === true ? (
-                    <CustomButton
-                      title={'Use & Submit Ad'}
-                      style={styles.nextButton}
-                      textStyle={styles.nextText}
-                      // onPress={() => onHandleSubmitJob(formData.advertisement.pay > 0 ? true : false)}
-                      onPress={() => onHandleSubmitJob('used')}
-                    />
+                    </>
+                  )}
+                </View>
+              ) : null}
+              {editablestatus.editJobStatus === true ? (
+                <View style={styles.updateBtnContainer}>
+                  <CustomButton
+                    title={'Cancel'}
+                    style={styles.cancelBtn}
+                    textStyle={styles.nextText}
+                    onPress={() => cancelUpdatedJob()}
+                  />
+                  <CustomButton
+                    title={'Update'}
+                    style={styles.updateBtn}
+                    textStyle={styles.nextText}
+                    onPress={() => updateJobDetails(editablestatus.jobId)}
+                  />
+                </View>
+              ) : (
+                <View style={[styles.row]}>
+                  {screenType === 'preview-form' ? (
+                    isPostingJobs | isPaymenting ? (
+                      <CustomLoader visible={isPostingJobs} />
+                    ) : available === 'AVAILABLE' && usedCheckBox === true ? (
+                      <CustomButton
+                        title={'Use & Submit Ad'}
+                        style={styles.nextButton}
+                        textStyle={styles.nextText}
+                        // onPress={() => onHandleSubmitJob(formData.advertisement.pay > 0 ? true : false)}
+                        onPress={() => onHandleSubmitJob('used')}
+                      />
+                    ) : (
+                      <CustomButton
+                        title={
+                          formData.advertisement.pay > 0 ? (
+                            paymentLoader ? (
+                              <ActivityIndicator
+                                size={30}
+                                color={'white'}
+                                style={{justifyContent: 'center', alignItems: 'center'}}
+                              />
+                            ) : (
+                              'Pay & Submit Ad'
+                            )
+                          ) : (
+                            'Submit Ad'
+                          )
+                        }
+                        // onPress={() => onHandleSubmitJob(formData.advertisement.pay > 0 ? false : true)}
+                        onPress={() => onHandleSubmitJob(true)}
+                        style={styles.nextButton}
+                        textStyle={styles.nextText}
+                      />
+                    )
                   ) : (
                     <CustomButton
-                      title={
-                        formData.advertisement.pay > 0 ? (
-                          paymentLoader ? (
-                            <ActivityIndicator
-                              size={30}
-                              color={'white'}
-                              style={{justifyContent: 'center', alignItems: 'center'}}
-                            />
-                          ) : (
-                            'Pay & Submit Ad'
-                          )
-                        ) : (
-                          'Submit Ad'
-                        )
-                      }
-                      // onPress={() => onHandleSubmitJob(formData.advertisement.pay > 0 ? false : true)}
-                      onPress={() => onHandleSubmitJob(true)}
+                      title={'Next'}
+                      onPress={() => onHandleSubmitJob(false)}
                       style={styles.nextButton}
                       textStyle={styles.nextText}
                     />
-                  )
-                ) : (
-                  <CustomButton
-                    title={'Next'}
-                    onPress={() => onHandleSubmitJob(false)}
-                    style={styles.nextButton}
-                    textStyle={styles.nextText}
-                  />
-                )}
-              </View>
-            )}
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+                  )}
+                </View>
+              )}
+            </View>
+          </ScrollView>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     </>
   );
 };

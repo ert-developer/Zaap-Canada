@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet, Image} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Color} from '../../assets/static/globalStyles';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
@@ -8,8 +8,8 @@ import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import database from '@react-native-firebase/database';
 import {useDispatch, useSelector} from 'react-redux';
 import {setUnreadMessages, clearUnreadMessages} from '../../redux/unreadmessages/action';
-import CustomImage from '../../atoms/image/imageComponent';
 import moment from 'moment/moment';
+import {envConfig} from '../../assets/helpers/envApi';
 
 export const ChatCard = ({data}) => {
   const {displayName, photoURL, roomId, imageUrl, isServiceProvider} = data;
@@ -22,7 +22,7 @@ export const ChatCard = ({data}) => {
 
   useFocusEffect(() => {
     const checkUnreadMessages = async () => {
-      const snapshot = await database().ref(`/messages/${roomId}`).once('value');
+      const snapshot = await database().ref(`/${envConfig.message}/${roomId}`).once('value');
       const allMessages = snapshot.val();
 
       if (allMessages) {
@@ -77,13 +77,13 @@ export const ChatCard = ({data}) => {
 
   const handlePress = async () => {
     // Mark unread messages as read
-    const snapshot = await database().ref(`/messages/${roomId}`).once('value');
+    const snapshot = await database().ref(`/${envConfig.message}/${roomId}`).once('value');
     const allMessages = snapshot.val();
 
     Object.keys(allMessages || {}).forEach(async messageKey => {
       const message = allMessages[messageKey];
       if (message.markasread === false && message.from !== userId) {
-        await database().ref(`/messages/${roomId}/${messageKey}`).update({markasread: true});
+        await database().ref(`/${envConfig.message}/${roomId}/${messageKey}`).update({markasread: true});
       }
     });
 

@@ -1,18 +1,11 @@
 import React, {useEffect, useState} from 'react';
 // import ProfileScreen from './profile-screen';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import useErrorHandler from '../../custom-hooks/error-handler/useErrorHandler.js';
-import {fetchCollectionDetails, getUserDetails, updateCollectionDetails} from '../../common/collection';
-import {Alert} from 'react-native';
+import {fetchCollectionDetails, updateCollectionDetails} from '../../common/collection';
 import {useDispatch, useSelector} from 'react-redux';
 import {logError} from '../../utils/logger/logger';
-import CustomLoader from '../../organisms/customLoader';
 import {envConfig} from '../../assets/helpers/envApi';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import auth from '@react-native-firebase/auth';
-import {logoutSuccess} from '../../redux/auth/action.js';
-import {loginSuccess} from '../../redux/auth/action';
 import storage from '@react-native-firebase/storage';
 import SeriveProviderProfileScreen from './service-provider-profile-screen';
 import {firebase} from '@react-native-firebase/firestore';
@@ -182,7 +175,7 @@ const ServiceProviderProfileContainer = ({navigation}) => {
       setImageLoader(true);
 
       const imageName = `image_${Date.now()}.jpg`;
-      const storageRef = storage().ref(`images/${imageName}`);
+      const storageRef = storage().ref(`${envConfig.images}/${imageName}`);
       await storageRef.putFile(uri);
 
       // Get the download URL after the upload is complete

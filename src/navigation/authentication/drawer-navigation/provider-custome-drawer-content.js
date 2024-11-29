@@ -172,7 +172,7 @@ export const ProviderCustomDrawerContent = ({props, state, navigation}) => {
       title: 'Hey friendsCheck out this app',
       message: `Hey! This app made me think of you. It's great for finding "Flexible Work" or "Hiring" someone within your budget across various sectors. Check out ZAAP and explore the world of possibilities—sign up now! 
 
-      Android App - https://play.google.com/store/apps/details?id=com.zaap-canada
+      Android App - https://play.google.com/store/apps/details?id=com.zaap_canada
       
       IOS App - https://apps.apple.com/app/zaap-ondemand/id6737913133`,
       url: 'https://apps.apple.com/app/zaap-ondemand/id6737913133', //should keep the link of the app

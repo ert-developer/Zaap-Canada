@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   FlatList,
+  KeyboardAvoidingView,
 } from 'react-native';
 import CustomButton from '../../atoms/button/buttonComponent';
 import CustomText from '../../atoms/text/textComponent';
@@ -32,7 +33,6 @@ import TextAreaInputComponent from '../../atoms/textAreaInput/textAreaInput-comp
 import TextInputWithLabelComponent from '../../organisms/textInputWithLabel/textInputWithLabel-component';
 import DropdownSearchComponent from '../../organisms/dropDownSearch/dropDownSearch-component';
 import DeleteCustomImage from '../../organisms/deleteImage/deleteImage-component';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import {Border, Color, FontFamily, FontSize, Margin, Padding} from '../../assets/static/globalStyles';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 import HeaderComponent from '../../atoms/header/headerComponent';
@@ -54,7 +54,6 @@ const ProviderProfile = ({
   handleCategoriesChange,
   countries,
   states,
-  navigation,
   data,
   categoryData,
   nextCategory,
@@ -62,7 +61,6 @@ const ProviderProfile = ({
   indiaGovDocs,
   handleOpenCamera,
   onHandleDeleteImage,
-  govDocuments,
   handleSubmit,
   showVerificationModal,
   handleCategoriesChangeonTop,
@@ -72,6 +70,7 @@ const ProviderProfile = ({
   photoLoader,
   frontLoader,
   backLoader,
+  submitLoader,
   saveAndNext,
 }) => {
   const [open, setOpen] = useState(false);
@@ -868,18 +867,25 @@ const ProviderProfile = ({
   };
 
   return (
-    <SafeAreaView style={[styles.safeArea]}>
-      {/* <BackgroundCheckIcon /> */}
-      <HeaderComponent text={'Identity Verification'} />
-      <View style={styles.header}>{renderCategoryButtons()}</View>
-      <StatusBar barStyle="light-content" />
-      <ScrollView style={styles.scrollView} contentContainerStyle={{flexGrow: 1}}>
-        <View style={styles.container}>
-          <View style={styles.form}>{renderInputsForCategory()}</View>
-          {showVerificationModal && <ServiceProviderVerificationModal />}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <KeyboardAvoidingView style={{flex: 1}} behavior={'padding'}>
+      <SafeAreaView style={[styles.safeArea]}>
+        <HeaderComponent text={'Identity Verification'} />
+        <View style={styles.header}>{renderCategoryButtons()}</View>
+        <StatusBar barStyle="light-content" />
+        <ScrollView style={styles.scrollView} contentContainerStyle={{flexGrow: 1}}>
+          <View style={styles.container}>
+            {submitLoader ? (
+              <View>
+                <ActivityIndicator size={'large'} />
+              </View>
+            ) : (
+              <View style={styles.form}>{renderInputsForCategory()}</View>
+            )}
+            {showVerificationModal && <ServiceProviderVerificationModal />}
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 

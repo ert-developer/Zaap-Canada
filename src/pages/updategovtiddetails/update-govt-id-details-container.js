@@ -100,7 +100,7 @@ const UpdateGovtIdDetailsContainer = () => {
       const imageUrls = [];
       if (response.assets && response.assets.length > 0) {
         response.assets.forEach(image => {
-          const storageRef = storage().ref(`verification-images/${Date.now()}-${image.fileName}`);
+          const storageRef = storage().ref(`${envConfig.vertification_images}/${Date.now()}-${image.fileName}`);
           const uploadTask = storageRef.putFile(image.uri);
 
           uploadTask.on(
@@ -152,6 +152,12 @@ const UpdateGovtIdDetailsContainer = () => {
         case 'PERSONAL PHOTO':
           if (!formData.personal_photo) {
             setFormErrors(prevState => ({...prevState, personal_photo: true}));
+            return false;
+          }
+          break;
+        case 'Date of Birth':
+          if (!formData.date_of_birth) {
+            setFormErrors(prevState => ({...prevState, date_of_birth: true}));
             return false;
           }
           break;

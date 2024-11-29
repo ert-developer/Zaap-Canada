@@ -64,7 +64,7 @@ const PreviousJobsPaymentModal = () => {
 
   const getRoomDetails = async (userId1, userId2) => {
     try {
-      const snapshot = await database().ref(`/chatlist/${userId1}/${userId2}`).once('value');
+      const snapshot = await database().ref(`/${envConfig.chatlist}/${userId1}/${userId2}`).once('value');
       const roomDetails = snapshot.val();
       setRoomDetails(roomDetails);
     } catch (error) {
@@ -127,7 +127,7 @@ const PreviousJobsPaymentModal = () => {
   const validateOtp = async () => {
     try {
       const snapshot = await database()
-        .ref(`myjobs/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}`)
+        .ref(`${envConfig.myjobs}/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}`)
         .child('otpData')
         .once('value');
       const otpData = snapshot.val();
@@ -142,7 +142,7 @@ const PreviousJobsPaymentModal = () => {
             setModalVisible(true);
             // Alert.alert("otp is valid")
             database()
-              .ref(`myjobs/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}`)
+              .ref(`${envConfig.myjobs}/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}`)
               .child('otpData')
               .update({otpValidationStatus: true});
           } else {
@@ -160,7 +160,7 @@ const PreviousJobsPaymentModal = () => {
   };
   useEffect(() => {
     const otpValidationStatusRef = database()
-      .ref(`myjobs/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}`)
+      .ref(`${envConfig.myjobs}/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}`)
       .child('otpData');
 
     const handleOtpValidationStatus = snapshot => {
@@ -183,7 +183,7 @@ const PreviousJobsPaymentModal = () => {
 
   useEffect(() => {
     const isWorkDoneRef = database().ref(
-      `/myjobs/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}/isworkdone/isworkdone`,
+      `/${envConfig.myjobs}/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}/isworkdone/isworkdone`,
     );
 
     const handleSnapshot = snapshot => {
@@ -197,20 +197,6 @@ const PreviousJobsPaymentModal = () => {
       isWorkDoneRef.off('value', handleSnapshot);
     };
   }, []);
-
-  // console.log("isWorkDonepreviousjobs",isWorkDone)
-
-  const workFinished = () => {
-    const otpData = {
-      isworkdone: true,
-    };
-
-    // Store the OTP in a common location in the Firebase Realtime Database
-    database()
-      .ref(`myjobs/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}`)
-      .child('isWorkFinished')
-      .set(otpData);
-  };
 
   const [isWorkFinished, setIsWorkFinished] = useState(false);
   const [jobDetails, setJobDetails] = useState('');
@@ -265,10 +251,10 @@ const PreviousJobsPaymentModal = () => {
     } else {
       if (roomDetails.isDisabled) {
         await database()
-          .ref(`/chatlist/${roomDetails.customerId}/${roomDetails.providerId}`)
+          .ref(`/${envConfig.chatlist}/${roomDetails.customerId}/${roomDetails.providerId}`)
           .update({isDisabled: false});
         await database()
-          .ref(`/chatlist/${roomDetails.providerId}/${roomDetails.customerId}`)
+          .ref(`/${envConfig.chatlist}/${roomDetails.providerId}/${roomDetails.customerId}`)
           .update({isDisabled: false});
         roomDetails.isDisabled = false;
       }
@@ -463,277 +449,275 @@ const PreviousJobsPaymentModal = () => {
   };
 
   return (
-    <View>
-      <Modal isVisible={open} style={styles.modalContainer}>
-        <Text
-          onPress={() => {
-            navigation.goBack();
-          }}
-          style={{height: '100%', width: '100%'}}>
-          {' '}
-        </Text>
-        <View style={styles.modalContent}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              margin: heightToDp(1.8),
-            }}>
-            <View style={{flexDirection: 'row', alignItems: 'center', gap: heightToDp(1)}}>
-              {employerData?.imageUrl ? (
-                <Image source={{uri: employerData?.imageUrl}} style={styles.profilePhoto} />
-              ) : (
-                <Image source={require('../../assets/default-profile.png')} style={styles.profilePhoto} />
-              )}
-              <View>
-                <CustomText
-                  text={employerData?.displayName}
-                  style={{fontFamily: 'Roboto', color: '#000000', fontSize: heightToDp(1.9)}}
-                />
-                <Text style={{fontFamily: 'Roboto', color: '#000000', fontSize: heightToDp(1.6)}}>Employer</Text>
-              </View>
-            </View>
-            <View style={{flexDirection: 'row', alignItems: 'center', gap: heightToDp(2.5)}}>
-              {/* <Call />
-              <MessageIcon /> */}
-              <TouchableOpacity onPress={handlePhoneIconPress}>
-                <Call />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={handleMessageIconPress}>
-                <MessageIcon opacity={chatIconOpacity} />
-              </TouchableOpacity>
-              {isOtpValid ? null : (
-                <Tooltip
-                  isVisible={tooltipVisible}
-                  content={
-                    <View>
-                      <TouchableOpacity onPress={openGoogleMaps}>
-                        <View style={{borderBottomWidth: 1, borderBottomColor: '#BCBCBC'}}>
-                          <CustomText text={'View Direction'} />
-                        </View>
-                        <View>
-                          <Text>{`https://www.google.co........`}</Text>
-                        </View>
-                      </TouchableOpacity>
-                    </View>
-                  }
-                  onClose={() => setTooltipVisible(false)}>
-                  <TouchableOpacity onPress={() => setTooltipVisible(true)}>
-                    <MapIconSvg />
-                  </TouchableOpacity>
-                </Tooltip>
-              )}
-            </View>
-          </View>
-          <View>
-            <DottedLines />
-            <View style={styles.bookingConfirmed}>
-              {showFeedback ? (
-                <FeedbackBannerSvg />
-              ) : isWorkDone ? (
-                <BookingConfirm />
-              ) : isOtpValid ? (
-                <InProgresBannersSvg />
-              ) : (
-                <BookingConfirm />
-              )}
+    <Modal isVisible={open} style={styles.modalContainer}>
+      <Text
+        onPress={() => {
+          navigation.goBack();
+        }}
+        style={{height: '100%', width: '100%'}}>
+        {' '}
+      </Text>
+      <View style={styles.modalContent}>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            margin: heightToDp(1.8),
+          }}>
+          <View style={{flexDirection: 'row', alignItems: 'center', gap: heightToDp(1)}}>
+            {employerData?.imageUrl ? (
+              <Image source={{uri: employerData?.imageUrl}} style={styles.profilePhoto} />
+            ) : (
+              <Image source={require('../../assets/default-profile.png')} style={styles.profilePhoto} />
+            )}
+            <View>
               <CustomText
-                text={
-                  showFeedback
-                    ? 'WORK FEEDBACK'
-                    : isWorkDone
-                    ? 'WORK COMPLETED'
-                    : isOtpValid
-                    ? 'IN-PROGRESS'
-                    : 'BOOKING CONFIRMED'
-                }
-                style={styles.bookingconfirmText}
+                text={employerData?.displayName}
+                style={{fontFamily: 'Roboto', color: '#000000', fontSize: heightToDp(1.9)}}
               />
+              <Text style={{fontFamily: 'Roboto', color: '#000000', fontSize: heightToDp(1.6)}}>Employer</Text>
             </View>
           </View>
+          <View style={{flexDirection: 'row', alignItems: 'center', gap: heightToDp(2.5)}}>
+            {/* <Call />
+              <MessageIcon /> */}
+            <TouchableOpacity onPress={handlePhoneIconPress}>
+              <Call />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleMessageIconPress}>
+              <MessageIcon opacity={chatIconOpacity} />
+            </TouchableOpacity>
+            {isOtpValid ? null : (
+              <Tooltip
+                isVisible={tooltipVisible}
+                content={
+                  <View>
+                    <TouchableOpacity onPress={openGoogleMaps}>
+                      <View style={{borderBottomWidth: 1, borderBottomColor: '#BCBCBC'}}>
+                        <CustomText text={'View Direction'} />
+                      </View>
+                      <View>
+                        <Text>{`https://www.google.co........`}</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                }
+                onClose={() => setTooltipVisible(false)}>
+                <TouchableOpacity onPress={() => setTooltipVisible(true)}>
+                  <MapIconSvg />
+                </TouchableOpacity>
+              </Tooltip>
+            )}
+          </View>
+        </View>
+        <View>
+          <DottedLines />
+          <View style={styles.bookingConfirmed}>
+            {showFeedback ? (
+              <FeedbackBannerSvg />
+            ) : isWorkDone ? (
+              <BookingConfirm />
+            ) : isOtpValid ? (
+              <InProgresBannersSvg />
+            ) : (
+              <BookingConfirm />
+            )}
+            <CustomText
+              text={
+                showFeedback
+                  ? 'WORK FEEDBACK'
+                  : isWorkDone
+                  ? 'WORK COMPLETED'
+                  : isOtpValid
+                  ? 'IN-PROGRESS'
+                  : 'BOOKING CONFIRMED'
+              }
+              style={styles.bookingconfirmText}
+            />
+          </View>
+        </View>
 
-          {showFeedback ? (
-            <View style={{padding: heightToDp(2)}}>
-              <View style={{marginBottom: heightToDp(7)}}>
-                <CustomText text={'Rate the Employer'} style={{fontFamily: 'Roboto', color: '#545454'}} />
-                <View style={{flexDirection: 'row', alignItems: 'center', marginVertical: heightToDp(1)}}>
-                  <AirbnbRating
-                    count={5}
-                    reviews={reviews}
-                    defaultRating={rating}
-                    size={30}
-                    onFinishRating={handleRatingChange}
-                    starStyle={{marginHorizontal: 6}}
-                    showRating={false}
-                  />
-                  <Text style={{marginLeft: 10}}>{reviews[Math.floor(rating) - 1]}</Text>
-                </View>
-              </View>
-              <CustomButton
-                title={'SUBMIT'}
-                style={{padding: heightToDp(1.4), backgroundColor: '#464183', borderRadius: heightToDp(1)}}
-                onPress={handleFeedbackStars}
-              />
-            </View>
-          ) : isOtpValid ? (
-            <View style={{padding: heightToDp(1)}}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginVertical: heightToDp(4),
-                  marginHorizontal: heightToDp(4),
-                  gap: heightToDp(3),
-                }}>
-                <View>
-                  <View style={{alignItems: 'center'}}>
-                    <ProfileVerified />
-                    <CustomText text={'VERIFY'} style={styles.statusText} />
-                    <TickMark />
-                  </View>
-                </View>
-                <View>
-                  <View style={{alignItems: 'center'}}>
-                    <WorkInProgressCompleted />
-                    <CustomText text={'WORK STARTED'} style={styles.statusText} />
-                    <TickMark />
-                  </View>
-                </View>
-                <View>
-                  <View style={{alignItems: 'center'}}>
-                    {isWorkDone ? <WorkCompleted /> : <WorkCompleteInProgress />}
-
-                    <CustomText text={'COMPLETED'} style={styles.statusText} />
-                    <TickMark style={{opacity: isWorkDone ? 1 : 0}} />
-                  </View>
-                </View>
-              </View>
-              {isWorkDone ? (
-                <CustomButton
-                  title={'NEXT'}
-                  style={{padding: heightToDp(1.4), backgroundColor: '#464183', borderRadius: heightToDp(1)}}
-                  onPress={() => setFeedback(true)}
+        {showFeedback ? (
+          <View style={{padding: heightToDp(2)}}>
+            <View style={{marginBottom: heightToDp(7)}}>
+              <CustomText text={'Rate the Employer'} style={{fontFamily: 'Roboto', color: '#545454'}} />
+              <View style={{flexDirection: 'row', alignItems: 'center', marginVertical: heightToDp(1)}}>
+                <AirbnbRating
+                  count={5}
+                  reviews={reviews}
+                  defaultRating={rating}
+                  size={30}
+                  onFinishRating={handleRatingChange}
+                  starStyle={{marginHorizontal: 6}}
+                  showRating={false}
                 />
-              ) : (
-                <View style={{alignItems: 'center', marginBottom: 30}}>
-                  <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
-                    <NewInfoIcon />
-                    <Text style={{fontFamily: 'Roboto', fontSize: heightToDp(1.7)}}>Kindly request the Customer </Text>
-                  </View>
-                  <Text style={{fontFamily: 'Roboto', fontSize: heightToDp(1.4)}}>
-                    to Click “Work Done” upon completion{' '}
-                  </Text>
-                </View>
-              )}
+                <Text style={{marginLeft: 10}}>{reviews[Math.floor(rating) - 1]}</Text>
+              </View>
             </View>
-          ) : (
-            <View style={{padding: heightToDp(2)}}>
-              <View style={{flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between'}}>
-                <View>
-                  <View style={{alignItems: 'center'}}>
-                    <ProfileVerified />
-                    <CustomText text={'Verify'} style={styles.statusText} />
-                    <TickMark />
-                  </View>
-                </View>
-                <View>
-                  <View style={{alignItems: 'center'}}>
-                    <WorkInProgressStart />
-                    <CustomText text={'Work started'} style={styles.statusText} />
-                    <TickMark />
-                  </View>
-                </View>
-                <View>
-                  <View style={{alignItems: 'center'}}>
-                    <WorkInProgress />
-                    <CustomText text={'COMPLETED'} style={styles.statusText} />
-                    <TickMark style={{opacity: 0}} />
-                  </View>
-                </View>
-                <View>
-                  <View style={{alignItems: 'center'}}>
-                    <NewReviewSvg />
-                    <CustomText text={'Verify'} style={styles.statusText} />
-                    <TickMark style={{opacity: 0}} />
-                  </View>
+            <CustomButton
+              title={'SUBMIT'}
+              style={{padding: heightToDp(1.4), backgroundColor: '#464183', borderRadius: heightToDp(1)}}
+              onPress={handleFeedbackStars}
+            />
+          </View>
+        ) : isOtpValid ? (
+          <View style={{padding: heightToDp(1)}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginVertical: heightToDp(4),
+                marginHorizontal: heightToDp(4),
+                gap: heightToDp(3),
+              }}>
+              <View>
+                <View style={{alignItems: 'center'}}>
+                  <ProfileVerified />
+                  <CustomText text={'VERIFY'} style={styles.statusText} />
+                  <TickMark />
                 </View>
               </View>
-
               <View>
-                <View style={{marginVertical: heightToDp(3)}}>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      marginVertical: heightToDp(1),
-                      gap: heightToDp(0.5),
-                    }}>
-                    <NewInfoIcon />
-
-                    <Text style={{fontSize: heightToDp(1.3), color: Color.colorBlack}}>
-                      Ask customer to provide Validation key to begin the work
-                    </Text>
-                  </View>
-
-                  <View style={styles.centeredButtonContainer}>
-                    <CommonOtpInput
-                      handleChange={handleOtpChange}
-                      numberOfInputs={4}
-                      inputStyles={{
-                        backgroundColor: '#BCBCBC',
-                        width: 45,
-                        height: 45,
-                        fontSize: 16,
-                        color: '#000',
-                        textAlign: 'center',
-                      }}
-                      containerStyles={{flexDirection: 'row'}}
-                    />
-                  </View>
+                <View style={{alignItems: 'center'}}>
+                  <WorkInProgressCompleted />
+                  <CustomText text={'WORK STARTED'} style={styles.statusText} />
+                  <TickMark />
                 </View>
+              </View>
+              <View>
+                <View style={{alignItems: 'center'}}>
+                  {isWorkDone ? <WorkCompleted /> : <WorkCompleteInProgress />}
+
+                  <CustomText text={'COMPLETED'} style={styles.statusText} />
+                  <TickMark style={{opacity: isWorkDone ? 1 : 0}} />
+                </View>
+              </View>
+            </View>
+            {isWorkDone ? (
+              <CustomButton
+                title={'NEXT'}
+                style={{padding: heightToDp(1.4), backgroundColor: '#464183', borderRadius: heightToDp(1)}}
+                onPress={() => setFeedback(true)}
+              />
+            ) : (
+              <View style={{alignItems: 'center', marginBottom: 30}}>
+                <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+                  <NewInfoIcon />
+                  <Text style={{fontFamily: 'Roboto', fontSize: heightToDp(1.7)}}>Kindly request the Customer </Text>
+                </View>
+                <Text style={{fontFamily: 'Roboto', fontSize: heightToDp(1.4)}}>
+                  to Click “Work Done” upon completion{' '}
+                </Text>
+              </View>
+            )}
+          </View>
+        ) : (
+          <View style={{padding: heightToDp(2)}}>
+            <View style={{flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between'}}>
+              <View>
+                <View style={{alignItems: 'center'}}>
+                  <ProfileVerified />
+                  <CustomText text={'Verify'} style={styles.statusText} />
+                  <TickMark />
+                </View>
+              </View>
+              <View>
+                <View style={{alignItems: 'center'}}>
+                  <WorkInProgressStart />
+                  <CustomText text={'Work started'} style={styles.statusText} />
+                  <TickMark />
+                </View>
+              </View>
+              <View>
+                <View style={{alignItems: 'center'}}>
+                  <WorkInProgress />
+                  <CustomText text={'COMPLETED'} style={styles.statusText} />
+                  <TickMark style={{opacity: 0}} />
+                </View>
+              </View>
+              <View>
+                <View style={{alignItems: 'center'}}>
+                  <NewReviewSvg />
+                  <CustomText text={'Verify'} style={styles.statusText} />
+                  <TickMark style={{opacity: 0}} />
+                </View>
+              </View>
+            </View>
+
+            <View>
+              <View style={{marginVertical: heightToDp(3)}}>
                 <View
                   style={{
                     flexDirection: 'row',
                     alignItems: 'center',
-                    justifyContent: 'space-between',
-                    alignSelf: 'center',
+                    marginVertical: heightToDp(1),
+                    gap: heightToDp(0.5),
                   }}>
-                  <CustomButton
-                    title={'START WORK'}
-                    style={styles.startWorkButton}
-                    textStyle={styles.startWorkBtnText}
-                    onPress={validateOtp}
-                  />
+                  <NewInfoIcon />
 
-                  <CustomButton
-                    title={'Cancel Service'}
-                    style={styles.cancelService}
-                    textStyle={styles.cancelBtnText}
-                    onPress={() => {
-                      onPressCancelPopup();
+                  <Text style={{fontSize: heightToDp(1.3), color: Color.colorBlack}}>
+                    Ask customer to provide Validation key to begin the work
+                  </Text>
+                </View>
+
+                <View style={styles.centeredButtonContainer}>
+                  <CommonOtpInput
+                    handleChange={handleOtpChange}
+                    numberOfInputs={4}
+                    inputStyles={{
+                      backgroundColor: '#BCBCBC',
+                      width: 45,
+                      height: 45,
+                      fontSize: 16,
+                      color: '#000',
+                      textAlign: 'center',
                     }}
+                    containerStyles={{flexDirection: 'row'}}
                   />
                 </View>
               </View>
-            </View>
-          )}
-        </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  alignSelf: 'center',
+                }}>
+                <CustomButton
+                  title={'START WORK'}
+                  style={styles.startWorkButton}
+                  textStyle={styles.startWorkBtnText}
+                  onPress={validateOtp}
+                />
 
-        <ServiceCompletedNodal isVisiblecompleted={isWorkFinished} serviceCompleteClose={serviceCompleteClose} />
-        {VerificationPopUp && <VerificationSuccessModal toggleModal={onModalClose} />}
-        {showWrongOtpModal && <WrongOtpMdal toggleModal={closeInvalidOtpPopup} />}
-        {cancelPopup && (
-          <ServiceProviderCanceldModal
-            isVisible={cancelPopup}
-            onPressGoBackCancelPopup={onPressGoBackCancelPopup}
-            onPressCancelService={onPressCancelService}
-            setCancelPopup={setCancelPopup}
-          />
+                <CustomButton
+                  title={'Cancel Service'}
+                  style={styles.cancelService}
+                  textStyle={styles.cancelBtnText}
+                  onPress={() => {
+                    onPressCancelPopup();
+                  }}
+                />
+              </View>
+            </View>
+          </View>
         )}
-      </Modal>
-    </View>
+      </View>
+
+      <ServiceCompletedNodal isVisiblecompleted={isWorkFinished} serviceCompleteClose={serviceCompleteClose} />
+      {VerificationPopUp && <VerificationSuccessModal toggleModal={onModalClose} />}
+      {showWrongOtpModal && <WrongOtpMdal toggleModal={closeInvalidOtpPopup} />}
+      {cancelPopup && (
+        <ServiceProviderCanceldModal
+          isVisible={cancelPopup}
+          onPressGoBackCancelPopup={onPressGoBackCancelPopup}
+          onPressCancelService={onPressCancelService}
+          setCancelPopup={setCancelPopup}
+        />
+      )}
+    </Modal>
   );
 };
 

@@ -1,24 +1,17 @@
 import React, {useEffect} from 'react';
-import {View, Text, StyleSheet, Pressable, Image, Alert, ActivityIndicator} from 'react-native';
+import {View, StyleSheet, Image, ActivityIndicator} from 'react-native';
 import Modal from 'react-native-modal';
 import CustomButton from '../../atoms/button/buttonComponent';
-import SvgComponent from '../../assets/svgIcons/hennaSvg/svghenna';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 import CustomText from '../../atoms/text/textComponent';
-import ZaapLogoSvgComponent from '../../assets/svgIcons/zaaplogosvg/zaaplogosvg';
-import ArrowSvgComponent from '../../assets/svgIcons/arrrowiconsvg/arrowiconsvg';
 import {useNavigation} from '@react-navigation/native';
 import usePayment from '../../custom-hooks/payment/usePayment';
 import {useSelector, useDispatch} from 'react-redux';
-import CardJobs from '../../molecules/job-card/jobCard';
 import {postCollectionDetails} from '../../common/collection';
 import {fetchSelectedProfileDetails} from '../../redux/selectedprofiledetails/action';
 // import { FeedbacjobkSVGComponent } from '../../assets/svgIcons/feebackpaymentmodal';
-import {fetchAppliedJobsSuccess} from '../../redux/appliedjobs/action';
 import {fetchSelectedJobs} from '../../redux/selectedjobs/action';
 import MyjobsCardList from '../myjobscardlist/myjobscardList-component';
-import {fetchCompletedJobs} from '../../redux/completedjobs/action';
-import CustomModal from '../../molecules/custommodal';
 import {useState} from 'react';
 import BookingConfirmedModal from '../../molecules/modals/bookingconfirmedmodal';
 import database from '@react-native-firebase/database';
@@ -26,13 +19,11 @@ import {generateRoomId} from '../../utils';
 import {YouAreHiringSvg} from '../../assets/svgImage/bottomDrawer';
 import {doc, getDoc, updateDoc} from 'firebase/firestore';
 import {db} from '../../../firebaseDb';
-import {Code} from 'react-content-loader/native';
 import {Color} from '../../assets/static/globalStyles';
 import {getUserDetails} from '../../common/collection';
-import {mailSenter} from '../../common/mailSender';
 import {collection, query, where, getDocs} from 'firebase/firestore';
-import getPlatformFee from '../../common/platformFee';
 import {envConfig} from '../../assets/helpers/envApi';
+import {PUSH_NOTIFICATION_SERVER_URL} from '@env';
 
 const ModalComponent = ({isVisible, setModalVisible1, onClose, userWorking}) => {
   const user = useSelector(state => state.Auth.user);
@@ -77,7 +68,7 @@ const ModalComponent = ({isVisible, setModalVisible1, onClose, userWorking}) => 
     const appliedUser = await getUserDetails(envConfig.User, profiledetail.userId);
     const token = appliedUser.fcmToken;
     try {
-      const response = await fetch('https://canada-push-notifications-server.onrender.com/sendNotification', {
+      const response = await fetch(`${PUSH_NOTIFICATION_SERVER_URL}/sendNotification`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -156,12 +147,12 @@ const ModalComponent = ({isVisible, setModalVisible1, onClose, userWorking}) => 
     const roomId = roomDetails?.roomId || generateRoomId();
 
     await database()
-      .ref(`/chatlist/${data.userId}/${user.userId}`)
+      .ref(`/${envConfig.chatlist}/${data.userId}/${user.userId}`)
       .update({...user, roomId, isDisabled: false})
       .then(() => console.log('Data updated for current user'));
 
     await database()
-      .ref(`/chatlist/${user.userId}/${data.userId}`)
+      .ref(`/${envConfig.chatlist}/${user.userId}/${data.userId}`)
       .update({...data, roomId, isDisabled: false})
       .then(() => console.log('Data updated for other user'));
   };
@@ -229,7 +220,7 @@ const ModalComponent = ({isVisible, setModalVisible1, onClose, userWorking}) => 
           otp: otpValue,
           otpValidationStatus: false,
         };
-        await database().ref(`myjobs/${user.userId}_${jobDetails.jobId}`).child('otpData').set(otpData);
+        await database().ref(`${envConfig.myjobs}/${user.userId}_${jobDetails.jobId}`).child('otpData').set(otpData);
 
         setModalVisible(true);
         iinchatScreenNavigation(serviceproviderData);

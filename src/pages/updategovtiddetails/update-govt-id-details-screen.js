@@ -13,7 +13,6 @@ import DropdownSearchComponent from '../../organisms/dropDownSearch/dropDownSear
 import TextInputWithLabelComponent from '../../organisms/textInputWithLabel/textInputWithLabel-component';
 import {TouchableOpacity} from 'react-native';
 import Modal from 'react-native-modal';
-import CustomModal from '../../molecules/custommodal';
 import {RightPopupSVG} from '../../assets/svgIcons/premiumads/premium-ads-screen-svgs';
 import {ActivityIndicator} from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';

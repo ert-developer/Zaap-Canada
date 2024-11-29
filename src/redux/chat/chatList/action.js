@@ -1,11 +1,12 @@
 import database from '@react-native-firebase/database';
 import {logDebug} from '../../../utils/logger/logger';
+import {envConfig} from '../../../assets/helpers/envApi';
 
 export const getUserList = (userId, callback) => {
   return async dispatch => {
     try {
       database()
-        .ref('/users')
+        .ref(`/${envConfig.users}`)
         .once('value')
         .then(snapshot => {
           const listUser = Object.values(snapshot.val());
@@ -19,34 +20,12 @@ export const getUserList = (userId, callback) => {
     }
   };
 };
-export const getUserListById = (userId, callback) => {
-  return async dispatch => {
-    try {
-      database()
-        .ref(`/users/${userId}`)
-        .on('value', snapshot => {
-          if (snapshot.val() != null) {
-            const result = Object.values(snapshot.val());
-            callback(result);
-          }
-        });
-      // .then(snapshot => {
-      //     const listUser = Object.values(snapshot.val())
-
-      //     callback(listUser)
-      //     logDebug(snapshot.val());
-      // });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-};
 
 export const addUserToChat = userData => {
   return async dispatch => {
     try {
       const reference = database()
-        .ref(`/users/${userData.userId}`)
+        .ref(`/${envConfig.users}/${userData.userId}`)
         .set(userData)
         .then(response => {
           // alert("success");
@@ -65,7 +44,7 @@ export const addUserToChat = userData => {
 export const getChatList = (id, callback) => {
   try {
     database()
-      .ref(`/chatlist/${id}`)
+      .ref(`/${envConfig.chatlist}/${id}`)
       .on('value', snapshot => {
         const data = snapshot.val();
         // Check if data is not null or undefined
@@ -74,6 +53,7 @@ export const getChatList = (id, callback) => {
           // console.log('User data: ', data);
         } else {
           // Handle the case where data is null or undefined
+          console.log('Data is null or undefined');
           // You might want to call the callback with an empty array or handle it differently
           callback([]);
         }

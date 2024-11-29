@@ -200,7 +200,7 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
                         <CheckBox
                           style={{transform: [{scaleX: 0.7}, {scaleY: 0.7}]}}
                           value={checkedIndex === index}
-                          onValueChange={() => featuredHandleCheckboxPress(index)}
+                          // onValueChange={() => featuredHandleCheckboxPress(index)}
                         />
                         <CustomText text={`  ${ad.count} AD`} style={styles.adsCountText} />
                       </View>
@@ -217,7 +217,7 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
                       <CheckBox
                         style={{transform: [{scaleX: 0.7}, {scaleY: 0.7}]}}
                         value={checkedIndex === 3}
-                        onValueChange={() => featuredHandleCheckboxPress(3)}
+                        // onValueChange={() => featuredHandleCheckboxPress(3)}
                       />
                       <CustomText text={' 10 AD'} style={styles.adsCountText} />
                     </View>
@@ -245,7 +245,7 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
                         <CheckBox
                           style={{transform: [{scaleX: 0.7}, {scaleY: 0.7}]}}
                           value={spotLightCheckedIndex === index}
-                          onValueChange={() => spotlightHandleCheckboxPress(index)}
+                          // onValueChange={() => spotlightHandleCheckboxPress(index)}
                         />
                         <CustomText text={`  ${ad.count} AD`} style={styles.adsCountText} />
                       </View>
@@ -262,7 +262,7 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
                       <CheckBox
                         style={{transform: [{scaleX: 0.7}, {scaleY: 0.7}]}}
                         value={spotLightCheckedIndex === 3}
-                        onValueChange={() => spotlightHandleCheckboxPress(3)}
+                        // onValueChange={() => spotlightHandleCheckboxPress(3)}
                       />
                       <CustomText text={' 10 AD'} style={styles.adsCountText} />
                     </View>

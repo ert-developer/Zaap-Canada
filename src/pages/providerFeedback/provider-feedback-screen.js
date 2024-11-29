@@ -30,6 +30,7 @@ import {Color} from '../../assets/static/globalStyles';
 import {EmptyPortfolioSVG} from '../../assets/svgImage/portfolio/portfolio';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 import {envConfig} from '../../assets/helpers/envApi';
+import {PUSH_NOTIFICATION_SERVER_URL} from '@env';
 
 const ProviderFeedbackScreen = ({
   firstLetter,
@@ -78,7 +79,7 @@ const ProviderFeedbackScreen = ({
     const appliedUser = await getUserDetails(envConfig.User, profiledetail.userId);
     const token = appliedUser.fcmToken;
     try {
-      const response = await fetch('https://push-notifications-server-lvzr.onrender.com/sendNotification', {
+      const response = await fetch(`${PUSH_NOTIFICATION_SERVER_URL}/sendNotification`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -105,17 +106,17 @@ const ProviderFeedbackScreen = ({
     await postCollectionDetails(envConfig.Notifications, data);
   };
   const iinchatScreenNavigation = async data => {
-    const snapshot = await database().ref(`/chatlist/${data.userId}/${user.userId}`).once('value');
+    const snapshot = await database().ref(`/${envConfig.chatlist}/${data.userId}/${user.userId}`).once('value');
     const roomDetails = snapshot.val();
     const roomId = roomDetails?.roomId || generateRoomId();
 
     await database()
-      .ref(`/chatlist/${data.userId}/${user.userId}`)
+      .ref(`/${envConfig.chatlist}/${data.userId}/${user.userId}`)
       .update({...user, roomId, isDisabled: false})
       .then(() => console.log('Data updated for current user'));
 
     await database()
-      .ref(`/chatlist/${user.userId}/${data.userId}`)
+      .ref(`/${envConfig.chatlist}/${user.userId}/${data.userId}`)
       .update({...data, roomId, isDisabled: false})
       .then(() => console.log('Data updated for other user'));
   };

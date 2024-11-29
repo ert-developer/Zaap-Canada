@@ -12,9 +12,9 @@ import {db} from '../../../firebaseDb';
 import moment from 'moment';
 import RNShare from 'react-native-share';
 import {Alert} from 'react-native';
-import {set} from 'date-fns';
 import {envConfig} from '../../assets/helpers/envApi';
 import {setEditJobStatus} from '../../redux/editjob/action';
+import {PUSH_NOTIFICATION_SERVER_URL} from '@env';
 
 const JobDetailContainer = ({route, navigation}) => {
   const {
@@ -203,7 +203,7 @@ const JobDetailContainer = ({route, navigation}) => {
   const sendnotification = async () => {
     try {
       const token = await getfcmtoken();
-      const response = fetch('https://canada-push-notifications-server.onrender.com/sendNotification', {
+      const response = fetch(`${PUSH_NOTIFICATION_SERVER_URL}/sendNotification`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

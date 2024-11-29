@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {getChatList} from '../../../redux/chat/chatList/action';
 import ChatListScreen from './chat-list-screen';
 import {useNavigation} from '@react-navigation/native';
-import {err} from 'react-native-svg/lib/typescript/xml';
 
 const ChatListContainer = () => {
   const providerStatus = useSelector(state => state.providerverification.providerDetails);
   const isVerified = providerStatus[0]?.isverified;
 
-  const dispatch = useDispatch();
   const userDetails = useSelector(state => state.Auth.user);
   const {userId} = userDetails;
   const [chatList, setChatList] = useState([]);

@@ -86,19 +86,19 @@ const CustomerSidePaymentModel = () => {
 
     // Update isDisabled field for the current user and the other user
     await database()
-      .ref(`/chatlist/${userid1}/${userid2}`)
+      .ref(`/${envConfig.chatlist}/${userid1}/${userid2}`)
       .update({isDisabled: updatedIsDisabledValue})
       .then(() => console.log('isDisabled updated for current user'));
 
     await database()
-      .ref(`/chatlist/${userid2}/${userid1}`)
+      .ref(`/${envConfig.chatlist}/${userid2}/${userid1}`)
       .update({isDisabled: updatedIsDisabledValue})
       .then(() => console.log('isDisabled updated for other user'));
   };
 
   const getRoomDetails = (userId1, userId2) => {
     return database()
-      .ref(`/chatlist/${userId1}/${userId2}`)
+      .ref(`/${envConfig.chatlist}/${userId1}/${userId2}`)
       .once('value')
       .then(snapshot => {
         const roomDetails = snapshot.val();
@@ -125,8 +125,8 @@ const CustomerSidePaymentModel = () => {
       return;
     } else {
       if (roomDetails.isDisabled) {
-        await database().ref(`/chatlist/${userID}/${profileUserID}`).update({isDisabled: false});
-        await database().ref(`/chatlist/${profileUserID}/${userID}`).update({isDisabled: false});
+        await database().ref(`/${envConfig.chatlist}/${userID}/${profileUserID}`).update({isDisabled: false});
+        await database().ref(`/${envConfig.chatlist}/${profileUserID}/${userID}`).update({isDisabled: false});
         roomDetails.isDisabled = false;
       }
       navigation.navigate('OneChat', {chatDetail: roomDetails});
@@ -143,7 +143,7 @@ const CustomerSidePaymentModel = () => {
 
   useEffect(() => {
     database()
-      .ref(`myjobs/${userID}_${jobDetails.jobId}/`)
+      .ref(`${envConfig.myjobs}/${userID}_${jobDetails.jobId}/`)
       .once('value')
       .then(snapshot => {
         const otpDetails = snapshot.val();
@@ -153,14 +153,12 @@ const CustomerSidePaymentModel = () => {
       });
   }, [otp, userID, jobDetails]);
 
-  const [isReviewVisible, setReviewVisible] = useState(false);
   const [isServiceCompleted, setServiceCompleted] = useState(false);
   const [isServiceCancelled, setServiceCancelled] = useState(false);
   const onCloseModal = () => {
     setServiceCancelled(false);
   };
   const [onFeedbackText, setFeedbackText] = useState('');
-  const [feedbackError, setFeedbackError] = useState('');
 
   const [loader, setLoader] = useState(false);
 
@@ -240,10 +238,6 @@ const CustomerSidePaymentModel = () => {
     WorkDone();
 
     setWorkDonePopup(false);
-  };
-
-  const handleReview = () => {
-    setReviewVisible(true);
   };
 
   const onChangeText = event => {
@@ -374,7 +368,7 @@ const CustomerSidePaymentModel = () => {
   };
 
   useEffect(() => {
-    const otpValidationStatusRef = database().ref(`myjobs/${userID}_${jobDetails.jobId}`).child('otpData');
+    const otpValidationStatusRef = database().ref(`${envConfig.myjobs}/${userID}_${jobDetails.jobId}`).child('otpData');
 
     const handleOtpValidationStatus = snapshot => {
       const validationStatus = snapshot.val();
@@ -399,7 +393,7 @@ const CustomerSidePaymentModel = () => {
     const otpData = {
       isworkdone: true,
     };
-    database().ref(`myjobs/${userID}_${jobDetails.jobId}`).child('isworkdone').set(otpData);
+    database().ref(`${envConfig.myjobs}/${userID}_${jobDetails.jobId}`).child('isworkdone').set(otpData);
 
     const selectedProfileRef = firestore().collection(envConfig.selectedProfiles);
     const snapshot = await selectedProfileRef.where('jobId', '==', jobDetails.jobId).get();
@@ -419,7 +413,7 @@ const CustomerSidePaymentModel = () => {
   const [isWorkDone, setIsWorkDone] = useState(null);
 
   useEffect(() => {
-    const isWorkDoneRef = database().ref(`myjobs/${userID}_${jobDetails.jobId}/isworkdone/isworkdone`);
+    const isWorkDoneRef = database().ref(`${envConfig.myjobs}/${userID}_${jobDetails.jobId}/isworkdone/isworkdone`);
 
     const handleSnapshot = snapshot => {
       const value = snapshot.val();
@@ -748,9 +742,12 @@ const CustomerSidePaymentModel = () => {
         IsBookingConfirmed: false,
         cancelCandidateDetails: cancelCandidateDetails,
       });
-      database().ref(`myjobs/${selectedJobDetails.postedBy}_${selectedJobDetails.jobId}`).child('otpData').update({
-        otpValidationStatus: false,
-      });
+      database()
+        .ref(`${envConfig.myjobs}/${selectedJobDetails.postedBy}_${selectedJobDetails.jobId}`)
+        .child('otpData')
+        .update({
+          otpValidationStatus: false,
+        });
       setOtpValid(false);
       const selectedProfileRef = firestore().collection(envConfig.selectedProfiles);
       const snapshot = await selectedProfileRef.where('jobId', '==', selectedJobDetails.jobId).get();
@@ -802,9 +799,12 @@ const CustomerSidePaymentModel = () => {
         // selectedCandidateDetails: FieldValue.delete(),
       });
       // console.log(selectedJobDetails, 'ghjkbhnjmkhjikm');
-      database().ref(`myjobs/${selectedJobDetails.postedBy}_${selectedJobDetails.jobId}`).child('otpData').update({
-        otpValidationStatus: false, // Clear the existing validation status
-      });
+      database()
+        .ref(`${envConfig.myjobs}/${selectedJobDetails.postedBy}_${selectedJobDetails.jobId}`)
+        .child('otpData')
+        .update({
+          otpValidationStatus: false, // Clear the existing validation status
+        });
       setOtpValid(false);
 
       // delete the selected Profile of SP from firebase selectedProfiles_dev

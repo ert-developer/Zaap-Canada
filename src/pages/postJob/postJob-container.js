@@ -11,7 +11,6 @@ import {envConfig} from '../../assets/helpers/envApi';
 import {uploadImage} from '../../common/camera';
 import {fetchMyJobs} from '../../redux/myJobs/action';
 import {fetchAllJobs} from '../../redux/home/action';
-import CustomModal from '../../molecules/custommodal';
 import {useIsFocused} from '@react-navigation/native';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
@@ -265,7 +264,7 @@ const PostJobContainer = () => {
 
           await Promise.all(
             newImages.map(async image => {
-              const storageRef = storage().ref(`images/${Date.now()}-${image.fileName}`);
+              const storageRef = storage().ref(`${envConfig.images}/${Date.now()}-${image.fileName}`);
               await storageRef.putFile(image.uri);
               const downloadURL = await storageRef.getDownloadURL();
               imageUrls.push(downloadURL);
@@ -442,7 +441,7 @@ const PostJobContainer = () => {
       if (Platform.OS === 'ios') {
         setTimeout(() => {
           setPopUps(true);
-        }, 200); // 200ms delay for iOS
+        }, 400); // 200ms delay for iOS
       } else {
         setPopUps(true); // Directly set popUps to true for other platforms
       }

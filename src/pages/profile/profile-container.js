@@ -183,7 +183,7 @@ const ProfileContainer = ({navigation}) => {
       setImageLoader(true);
 
       const imageName = `image_${Date.now()}.jpg`;
-      const storageRef = storage().ref(`images/${imageName}`);
+      const storageRef = storage().ref(`${envConfig.images}/${imageName}`);
       await storageRef.putFile(uri);
 
       // Get the download URL after the upload is complete

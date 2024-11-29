@@ -3,9 +3,7 @@ import {
   View,
   ScrollView,
   SafeAreaView,
-  StatusBar,
   TouchableOpacity,
-  StyleSheet,
   Image,
   ActivityIndicator,
   Text,
@@ -16,9 +14,9 @@ import CustomText from '../../atoms/text/textComponent';
 import CustomButton from '../../atoms/button/buttonComponent';
 import JobDetailStyles from './job-detail-styles';
 import CustomImage from '../../atoms/image/imageComponent';
-import CategorySVG, {AppliedSVg} from '../../assets/svgImage/jobDetail';
+import CategorySVG from '../../assets/svgImage/jobDetail';
 import {JobDetailsLockSvg} from '../../assets/svgImage/jobDetail';
-import MapView, {Marker, Circle} from 'react-native-maps';
+import MapView, {Circle} from 'react-native-maps';
 import {
   PostedBy,
   Where,
@@ -131,7 +129,7 @@ const JobDetail = ({
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (carouselRef.current && images.length > 0) {
-        setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
+        setActiveIndex(prevIndex => (prevIndex + 1) % images.length);
         carouselRef.current.snapToNext();
       }
     }, 3000); // 3 seconds for each scroll
@@ -179,7 +177,7 @@ const JobDetail = ({
 
         <Modal isVisible={showAddImage} onBackdropPress={() => setShowAddImage(false)}>
           <View style={styles.addImageContainer}>
-          <FlatList
+            <FlatList
               horizontal
               pagingEnabled
               data={images}
@@ -307,7 +305,7 @@ const JobDetail = ({
                           content={
                             <View>
                               <Text>{'Unlock Complete Address'}</Text>
-                              <Text>{'After Booking Confirmatio'}</Text>
+                              <Text>{'After Booking Confirmation'}</Text>
                             </View>
                           }
                           onClose={() => setTooltipVisible(false)}>

@@ -1,4 +1,4 @@
-const envType = 'prod'; // dev | uat | prod
+const envType = 'dev'; // dev | uat | prod
 let envConfig;
 import {
   GOOGLE_API_KEY_DEV,
@@ -43,6 +43,9 @@ switch (envType) {
       chatlist: 'chatlist_dev',
       common: 'common_dev',
       myjobs: 'myjobs_dev',
+      users: 'users_dev',
+      images: 'images_dev',
+      vertification_images: 'vertification_images_dev',
     };
     break;
   case 'uat':
@@ -79,6 +82,9 @@ switch (envType) {
       chatlist: 'chatlist_uat',
       common: 'common_uat',
       myjobs: 'myjobs_uat',
+      users: 'users_uat',
+      images: 'images_uat',
+      vertification_images: 'vertification_images_uat',
     };
     break;
   case 'prod':
@@ -115,6 +121,9 @@ switch (envType) {
       chatlist: 'chatlist',
       common: 'common',
       myjobs: 'myjobs',
+      users: 'users',
+      images: 'images',
+      vertification_images: 'vertification_images',
     };
     break;
   default:

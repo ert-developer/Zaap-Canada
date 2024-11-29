@@ -1,18 +1,10 @@
-import React, {useEffect, useState, useCallback} from 'react';
-import {ActivityIndicator, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {differenceInDays, differenceInHours} from 'date-fns';
 import MyJobService from './myJob-screen';
-import {fetchMyJobs} from '../../../redux/myJobs/action';
 import {fetchServiceProviderDetails} from '../../../redux/providerstatus/action';
-import {fetchAppliedJobProfiles} from '../../../redux/applicantprofiledetails/action';
-import {fetchAllJobs} from '../../../redux/home/action';
 import {fetchSelectedJobs} from '../../../redux/selectedjobs/action';
 import {updateProviderStatus} from '../../../redux/providerstatus/action';
 import {fetchSelectedProfileDetails} from '../../../redux/selectedprofiledetails/action';
-import ChattModal from '../../../organisms/chatmodal';
-import ServiceProviderVerificationModal from '../../../organisms/serviceproviderpopupmodal/serviceprovider-popup-modal';
-import LoadingIndicator from '../../../atoms/loadingIndicator/LoadingIndicator';
 import moment from 'moment';
 import {ScrollView} from 'react-native-gesture-handler';
 
@@ -47,7 +39,7 @@ const MyJobServiceContainer = () => {
       const currentDate = new Date();
       const recentJobs = sortedJobs.filter(job => {
         const daysDifference = moment(currentDate).diff(moment(job.createdOn), 'days');
-        return daysDifference < 5;
+        return daysDifference < 45;
       });
 
       setRecentJobs(recentJobs);

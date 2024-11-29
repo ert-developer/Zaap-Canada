@@ -5,38 +5,32 @@ import {
   Animated,
   FlatList,
   Image,
+  KeyboardAvoidingView,
   SafeAreaView,
   ScrollView,
   StatusBar,
   Text,
   TextInput,
   View,
-  Keyboard,
 } from 'react-native';
 import {useSelector} from 'react-redux';
-import CustomButton from '../../../atoms/button/buttonComponent';
 import CustomText from '../../../atoms/text/textComponent';
 import CustomTouchableOpacity from '../../../molecules/touchable-opacity/touchable-opacity-component';
-import BackHeader from '../../../organisms/backheader/back-header';
 import ChatStyles from './message-styles';
 import {Border, Color, Padding} from '../../../assets/static/globalStyles';
-import {CameraIcon} from '../../../assets/svgIcons/postJob';
 import {Camera} from '../../../assets/svgImage/chat';
-import {heightArea, heightToDp, widthToDp} from '../../../responsive/responsive';
-import BackIcon from '../../../assets/svgIcons/common';
+import {heightToDp, widthToDp} from '../../../responsive/responsive';
 import HeaderComponent from '../../../atoms/header/headerComponent';
 import {getUserDetails, postCollectionDetails} from '../../../common/collection';
 import {envConfig} from '../../../assets/helpers/envApi';
 import moment from 'moment';
+import {PUSH_NOTIFICATION_SERVER_URL} from '@env';
 
 const ChatScreenExample = ({data, allChat}) => {
   const user = useSelector(state => state.Auth.user);
   const serviceProviderDetails = useSelector(state => state.providerverification.providerDetails);
 
-  let {photoURL, imageUrl, isServiceProvider} = data;
-  if (photoURL) {
-    isServiceProvider = true;
-  }
+  const {photoURL, imageUrl, isServiceProvider} = data;
   const styles = useMemo(() => ChatStyles(), []);
   const [messages, setMessages] = useState(allChat);
   const [newMessage, setNewMessage] = useState('');
@@ -101,6 +95,7 @@ const ChatScreenExample = ({data, allChat}) => {
                 color: item.from !== user.userId ? Color.colorBlack : Color.colorWhite,
                 borderRadius: Border.br_16,
                 overflow: 'hidden',
+                maxWidth: widthToDp(70),
               }}>
               {item.message}
             </Text>
@@ -113,12 +108,11 @@ const ChatScreenExample = ({data, allChat}) => {
             ? renderAvatar(imageUrl)
             : renderAvatar(serviceProviderDetails[0].imageURL)
           : null}
-        {isServiceProvider === true
+        {isServiceProvider === true || isServiceProvider === undefined
           ? item.from !== user.userId
             ? renderAvatar(photoURL)
             : renderAvatar(user.imageUrl)
           : null}
-        {isServiceProvider === undefined ? renderAvatar(undefined) : null}
 
         {item.from !== user.userId && (
           <View style={{flexDirection: 'column'}}>
@@ -129,6 +123,7 @@ const ChatScreenExample = ({data, allChat}) => {
                 color: item.from !== user.userId ? Color.colorBlack : Color.colorWhite,
                 borderRadius: Border.br_16,
                 overflow: 'hidden',
+                maxWidth: widthToDp(70),
               }}>
               {item.message}
             </Text>
@@ -139,8 +134,6 @@ const ChatScreenExample = ({data, allChat}) => {
     );
   };
 
-  console.log(isServiceProvider);
-
   const keyExtractor = (item, index) => index.toString();
 
   const sendNotification = async messageData => {
@@ -148,7 +141,7 @@ const ChatScreenExample = ({data, allChat}) => {
     const recicerUser = await getUserDetails(envConfig.User, userId);
     const fcmToken = recicerUser.fcmToken;
     try {
-      const response = fetch('https://push-notifications-server-lvzr.onrender.com/sendNotification', {
+      const response = fetch(`${PUSH_NOTIFICATION_SERVER_URL}/sendNotification`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -186,10 +179,9 @@ const ChatScreenExample = ({data, allChat}) => {
       markasread: false,
     };
 
-    const newReference = database().ref(`/messages/${data.roomId}`).push();
+    const newReference = database().ref(`/${envConfig.message}/${data.roomId}`).push();
 
     newReference.set(messageData).then(() => sendNotification(messageData));
-
     const updatedMessages = [...messages, {id: 1, sender: 'user', message: newMessage}];
     setMessages(updatedMessages);
     setNewMessage('');
@@ -218,69 +210,69 @@ const ChatScreenExample = ({data, allChat}) => {
   };
 
   return (
-    <SafeAreaView style={[styles.safeArea]}>
-      <StatusBar barStyle="light-content" />
-      <HeaderComponent text={data.displayName} navigateToHome />
-      <ScrollView
-        keyboardShouldPersistTaps="handled"
-        style={styles.scrollView}
-        contentContainerStyle={{flexGrow: 1}}
-        ref={scrollViewRef}>
-        <View style={styles.container}>
-          <View>
-            {renderAvatar()}
-            <CustomText text={data.displayName} style={styles.displayName} />
-            {/* <CustomButton
-              title="View Profile"
-              style={styles.button}
-              textStyle={styles.buttonText}
-              onPress={navigateProfile}
-            /> */}
-          </View>
-          <CustomText
-            text={isServiceProvider === false || isServiceProvider === 'no' ? 'Customer' : 'Service Provider'}
-            style={styles.date}
-          />
-          <FlatList
-            ref={flatListRef}
-            data={allChat}
-            renderItem={renderMessage}
-            keyExtractor={keyExtractor}
-            // style={{flex: 1}}
-            // ref={ref => {
-            //   scrollViewRef.current = ref;
-            // }}
-            onContentSizeChange={() => flatListRef.current.scrollToEnd({animated: true})}
-          />
-
-          <View style={{alignItems: 'center', paddingBottom: heightToDp(2)}}>
-            {data.isDisabled ? <CustomText text={'Chat is Disabled'} style={styles.chatDisable} /> : null}
-          </View>
-          {data.isDisabled ? null : (
-            <View style={styles.input}>
-              <TextInput
-                style={styles.inputField}
-                placeholder="  Type a message..."
-                value={newMessage}
-                onChangeText={text => setNewMessage(text)}
-                editable={data.isDisabled ? false : true}
-                placeholderTextColor={Color.colorSilver}
-              />
-              <View style={[styles.row, styles.camsend]}>
-                <Camera />
-                <CustomTouchableOpacity
-                  onPress={() => {
-                    handleSend();
-                    // Keyboard.dismiss();
-                  }}>
-                  <CustomText text="Send" style={styles.sendButton} />
-                </CustomTouchableOpacity>
-              </View>
+    <KeyboardAvoidingView
+      style={{flex: 1}}
+      behavior={'padding'}
+      keyboardVerticalOffset={50} // Adjust based on your UI
+    >
+      <SafeAreaView style={[styles.safeArea]}>
+        <StatusBar barStyle="light-content" />
+        <HeaderComponent text={data.displayName} navigateToHome />
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          style={styles.scrollView}
+          contentContainerStyle={{flexGrow: 1}}
+          ref={scrollViewRef}>
+          <View style={styles.container}>
+            <View>
+              {renderAvatar()}
+              <CustomText text={data.displayName} style={styles.displayName} />
             </View>
-          )}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+            <CustomText
+              text={isServiceProvider === false || isServiceProvider === 'no' ? 'Customer' : 'Service Provider'}
+              style={styles.date}
+            />
+            <FlatList
+              ref={flatListRef}
+              data={allChat}
+              renderItem={renderMessage}
+              keyExtractor={keyExtractor}
+              onContentSizeChange={() => flatListRef.current.scrollToEnd({animated: true})}
+            />
+
+            <View style={{alignItems: 'center', paddingBottom: heightToDp(2)}}>
+              {data.isDisabled ? <CustomText text={'Chat is Disabled'} style={styles.chatDisable} /> : null}
+            </View>
+          </View>
+        </ScrollView>
+        {data.isDisabled ? null : (
+          <View style={styles.input}>
+            <TextInput
+              style={[styles.inputField, {flex: 1}]}
+              placeholder="  Type a message..."
+              value={newMessage}
+              onChangeText={text => setNewMessage(text)}
+              editable={!data.isDisabled}
+              placeholderTextColor={Color.colorSilver}
+              multiline
+            />
+
+            {/* Actions: Camera Icon + Send Button */}
+            <View style={[styles.row, styles.camsend]}>
+              <Camera />
+              <CustomTouchableOpacity
+                onPress={() => {
+                  handleSend();
+                }}
+                style={{marginLeft: 10}} // Optional: Add spacing between Camera and Send
+              >
+                <CustomText text="Send" style={styles.sendButton} />
+              </CustomTouchableOpacity>
+            </View>
+          </View>
+        )}
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
