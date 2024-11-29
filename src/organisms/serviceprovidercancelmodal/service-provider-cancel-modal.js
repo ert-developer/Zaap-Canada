@@ -64,9 +64,10 @@ const ServiceProviderCanceldModal = ({
                 resizeMode={FastImage.resizeMode.contain}
               />
 
-              <CustomText text={'Hey there! Quick check: Are you'} style={styles.modaltext} />
-              <CustomText text={'considering cancelling the service'} style={styles.modaltext} />
-              <CustomText text={'before its complete? '} style={styles.modaltext} />
+              <CustomText
+                text={'Hey there! Quick check: \nAre you considering cancelling the service before its complete? '}
+                style={styles.modaltext}
+              />
               <View style={styles.popupNoteTextCon}>
                 <CustomText
                   text={
