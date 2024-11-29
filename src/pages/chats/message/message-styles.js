@@ -113,7 +113,7 @@ function ChatStyles() {
       width: widthToDp(90),
       alignSelf: 'center',
     },
-    sendButton: {color: Color.colorBlack, fontFamily: FontFamily.helvetica, marginHorizontal: Margin.m_10},
+    sendButton: {color: Color.colorBlack, fontFamily: FontFamily.helvetica},
     row: {flexDirection: 'row'},
     camsend: {justifyContent: 'center', alignItems: 'center'},
     date: {
