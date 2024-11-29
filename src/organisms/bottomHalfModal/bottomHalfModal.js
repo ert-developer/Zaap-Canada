@@ -30,7 +30,7 @@ function BottomHalfModal({onPermissionGranted}) {
     AppState.addEventListener('change', handleAppStateChange);
 
     return () => {
-      AppState.removeEventListener('change', handleAppStateChange);
+      // AppState.removeEventListener('change', handleAppStateChange);
     };
   }, [appState]);
 

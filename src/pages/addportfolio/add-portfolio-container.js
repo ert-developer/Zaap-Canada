@@ -39,7 +39,7 @@ const AddPortfolioContainer = ({route}) => {
               continue;
             }
             const imageName = `image_${Date.now()}.jpg`;
-            const storageRef = storage().ref(`images/${imageName}`);
+            const storageRef = storage().ref(`${envConfig.images}/${imageName}`);
             await storageRef.putFile(image.uri);
             const downloadURL = await storageRef.getDownloadURL();
             imageUrls.push(downloadURL);

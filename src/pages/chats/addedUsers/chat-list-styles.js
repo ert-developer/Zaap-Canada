@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     margin: 16,
-    paddingVertical: 10,
   },
   textItem: {
     color: 'red',

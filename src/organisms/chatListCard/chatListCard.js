@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Color} from '../../assets/static/globalStyles';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 import CustomText from '../../atoms/text/textComponent';
@@ -7,9 +7,8 @@ import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import database from '@react-native-firebase/database';
 import {useDispatch, useSelector} from 'react-redux';
 import {setUnreadMessages, clearUnreadMessages} from '../../redux/unreadmessages/action';
-import CustomImage from '../../atoms/image/imageComponent';
 import moment from 'moment/moment';
-import envConfig from '../../assets/helpers/envApi';
+import {envConfig} from '../../assets/helpers/envApi';
 
 export const ChatCard = ({data}) => {
   const {displayName, photoURL, roomId, imageUrl, isServiceProvider} = data;

@@ -1,23 +1,17 @@
-import React, {useEffect, useState, useCallback} from 'react';
-import {ActivityIndicator, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {differenceInDays, differenceInHours} from 'date-fns';
+import {differenceInDays} from 'date-fns';
 import MyJobService from './myJob-screen';
-import {fetchMyJobs} from '../../../redux/myJobs/action';
 import {fetchServiceProviderDetails} from '../../../redux/providerstatus/action';
-import {fetchAppliedJobProfiles} from '../../../redux/applicantprofiledetails/action';
-import {fetchAllJobs} from '../../../redux/home/action';
 import {fetchSelectedJobs} from '../../../redux/selectedjobs/action';
 import {updateProviderStatus} from '../../../redux/providerstatus/action';
 import {fetchSelectedProfileDetails} from '../../../redux/selectedprofiledetails/action';
-import ChattModal from '../../../organisms/chatmodal';
-import ServiceProviderVerificationModal from '../../../organisms/serviceproviderpopupmodal/serviceprovider-popup-modal';
-import LoadingIndicator from '../../../atoms/loadingIndicator/LoadingIndicator';
+
 const MyJobServiceContainer = () => {
   const selectedJobs = useSelector(state => state.selectedJobs.selectedJobs);
   const [loading, setIsLoading] = useState(true);
 
-  const providerStatus = useSelector(state => state.providerverification.providerDetails);
   const user = useSelector(state => state.Auth.user);
   // const providerVerify = user?.isServiceProvider;
 
@@ -28,7 +22,6 @@ const MyJobServiceContainer = () => {
   const {jobs, categories} = useSelector(state => state.home);
   // const jobss= jobs.slice(0,3)
 
-  const appliedjobs = useSelector(state => state.appliedjobs.appliedJobsDetails);
   const userId = user.userId;
   const filteredSelectedJobs = selectedJobs.filter(job => job.candidateUserId === userId);
 
@@ -54,7 +47,7 @@ const MyJobServiceContainer = () => {
     const recentJobs = sortedJobs.filter(job => {
       const daysDifference = differenceInDays(currentDate, new Date(job.createdOn));
       // setIsLoading(false);
-      return daysDifference < 5;
+      return daysDifference < 45;
     });
 
     setRecentJobs(recentJobs);

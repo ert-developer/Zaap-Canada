@@ -3,9 +3,7 @@ import {
   View,
   ScrollView,
   SafeAreaView,
-  StatusBar,
   TouchableOpacity,
-  StyleSheet,
   Image,
   ActivityIndicator,
   Text,
@@ -18,7 +16,7 @@ import JobDetailStyles from './job-detail-styles';
 import CustomImage from '../../atoms/image/imageComponent';
 import CategorySVG, {AppliedSVg} from '../../assets/svgImage/jobDetail';
 import {JobDetailsLockSvg} from '../../assets/svgImage/jobDetail';
-import MapView, {Marker, Circle} from 'react-native-maps';
+import MapView, {Circle} from 'react-native-maps';
 import {
   PostedBy,
   Where,
@@ -119,13 +117,7 @@ const JobDetail = ({
   // } else {
   //   result = 'No name provided';
   // }
-  const postedCustomerUrl = postedCustomer[0]?.imageUrl
-    ? postedCustomer[0].imageUrl
-    : 'https://lh3.googleusercontent.com/a-/AOh14GjkcNgdIcCDlLTtU7zYP0OCKHr9welDwEDj9zC9=s96-c';
   const postedCustomerName = postedCustomer[0]?.displayName ? postedCustomer[0]?.displayName : userName;
-  const city = postedCustomer[0]?.city;
-  const province = postedCustomer[0]?.provinces;
-  // console.log("latt",lat,'long',lng)
 
   const onPressViewProfile = () => {
     navigation.navigate('viewProfile', {postedBy});
@@ -150,11 +142,10 @@ const JobDetail = ({
   const [addImage, setAddImage] = useState(null);
   const carouselRef = useRef(null);
 
-
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (carouselRef.current && images.length > 0) {
-        setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
+        setActiveIndex(prevIndex => (prevIndex + 1) % images.length);
         carouselRef.current.snapToNext();
       }
     }, 3000); // 3 seconds for each scroll
@@ -169,7 +160,11 @@ const JobDetail = ({
 
   return (
     <>
-      <Modal isVisible={showPopup} style={styles.modalContainer} onBackdropPress={onClosePopup} onBackButtonPress={onClosePopup}>
+      <Modal
+        isVisible={showPopup}
+        style={styles.modalContainer}
+        onBackdropPress={onClosePopup}
+        onBackButtonPress={onClosePopup}>
         <View style={styles.modalContent}>
           <FastImage
             style={{width: 100, height: 100}}
@@ -225,7 +220,7 @@ const JobDetail = ({
             <View style={{marginTop: heightToDp(0.5), padding: heightToDp(1)}}>
               {images && images.length > 0 ? (
                 <Carousel
-                ref={carouselRef}
+                  ref={carouselRef}
                   data={images}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({item}) => (
@@ -333,7 +328,7 @@ const JobDetail = ({
                           content={
                             <View>
                               <Text>{'Unlock Complete Address'}</Text>
-                              <Text>{'After Booking Confirmatio'}</Text>
+                              <Text>{'After Booking Confirmation'}</Text>
                             </View>
                           }
                           onClose={() => setTooltipVisible(false)}>

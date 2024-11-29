@@ -112,7 +112,7 @@
 
 // export default usePayment;
 
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {useStripe} from '@stripe/stripe-react-native';
 import {Alert} from 'react-native';
 import {paymentRequest, paymentSuccess, paymentFailure} from '../../redux/payment/action';
@@ -120,6 +120,7 @@ import {useSelector, useDispatch} from 'react-redux';
 // import useErrorHandler from '../error-handler/useErrorHandler';
 import {postCollectionDetails} from '../../common/collection';
 import {envConfig} from '../../assets/helpers/envApi';
+import {STRIPE_SERVER_URL} from '@env';
 
 const usePayment = () => {
   const {initPaymentSheet, presentPaymentSheet} = useStripe();
@@ -143,7 +144,7 @@ const usePayment = () => {
         cust_phone: '1234567880',
       };
 
-      const response = await fetch('https://zaap-stripe-server.onrender.com/api/payments/payment-sheet', {
+      const response = await fetch(`${STRIPE_SERVER_URL}/api/payments/payment-sheet`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

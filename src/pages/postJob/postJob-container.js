@@ -265,7 +265,7 @@ const PostJobContainer = () => {
 
           await Promise.all(
             newImages.map(async image => {
-              const storageRef = storage().ref(`images/${Date.now()}-${image.fileName}`);
+              const storageRef = storage().ref(`${envConfig.images}/${Date.now()}-${image.fileName}`);
               await storageRef.putFile(image.uri);
               const downloadURL = await storageRef.getDownloadURL();
               imageUrls.push(downloadURL);

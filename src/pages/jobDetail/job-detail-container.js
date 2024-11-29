@@ -15,6 +15,7 @@ import {Alert} from 'react-native';
 import {set} from 'date-fns';
 import {envConfig} from '../../assets/helpers/envApi';
 import {setEditJobStatus} from '../../redux/editjob/action';
+import {PUSH_NOTIFICATION_SERVER_URL} from '@env';
 
 const JobDetailContainer = ({route, navigation}) => {
   const {
@@ -150,7 +151,7 @@ const JobDetailContainer = ({route, navigation}) => {
   const shareJobDetails = async () => {
     const shareOptions = {
       title: 'Check out this job',
-      message: `Job Title: ${title}\nPrice: ${price}\nDate: ${startdate} \nI've found this Job on ZAAP - Hire or Work Locally.\nDownload the app to apply for this job.\n\n playstorelink: https://play.google.com/store/apps \n appstorelink: https://apps.apple.com/`,
+      message: `Job Title: ${title}\nPrice: ${price}\nDate: ${startdate} \nI've found this Job on ZAAP - Ondemand.\nDownload the app to apply for this job.\n\n Playstore ink: https://play.google.com/store/apps/details?id=com.zaap_canada \n Appstore link: https://apps.apple.com/app/zaap-ondemand/id6737913133`,
       social: RNShare.Social.WHATSAPP,
     };
     try {
@@ -203,7 +204,7 @@ const JobDetailContainer = ({route, navigation}) => {
   const sendnotification = async () => {
     try {
       const token = await getfcmtoken();
-      const response = fetch('https://canada-push-notifications-server.onrender.com/sendNotification', {
+      const response = fetch(`${PUSH_NOTIFICATION_SERVER_URL}/sendNotification`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

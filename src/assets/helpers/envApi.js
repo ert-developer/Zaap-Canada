@@ -1,8 +1,14 @@
-const envType = 'prod'; // dev | uat | prod
+const envType = 'dev'; // dev | uat | prod
 let envConfig;
-import {GOOGLE_API_KEY_DEV, GOOGLE_API_KEY_UAT, GOOGLE_API_KEY_PROD} from '@env';
+import {
+  GOOGLE_API_KEY_DEV,
+  GOOGLE_API_KEY_UAT,
+  GOOGLE_API_KEY_PROD,
+  STRIPE_API_KEY_UAT,
+  STRIPE_API_KEY_DEV,
+  STRIPE_API_KEY_PROD,
+} from '@env';
 
-console.log('This is env trigger');
 switch (envType) {
   case 'dev':
     envConfig = {
@@ -32,10 +38,14 @@ switch (envType) {
       updateGovtIdDetails: 'updateGovtIdDetails_dev',
       selectedProfiles: 'selectedProfiles_dev',
       GOOGLE_API_KEY: GOOGLE_API_KEY_DEV,
+      STRIPE_API_KEY: STRIPE_API_KEY_DEV,
       message: 'message_dev',
       chatlist: 'chatlist_dev',
       common: 'common_dev',
       myjobs: 'myjobs_dev',
+      users: 'users_dev',
+      images: 'images_dev',
+      vertification_images: 'vertification_images_dev',
     };
     break;
   case 'uat':
@@ -67,10 +77,14 @@ switch (envType) {
       selectedProfiles: 'selectedProfiles_uat',
       // base url will put here
       GOOGLE_API_KEY: GOOGLE_API_KEY_UAT,
+      STRIPE_API_KEY: STRIPE_API_KEY_UAT,
       message: 'message_uat',
       chatlist: 'chatlist_uat',
       common: 'common_uat',
       myjobs: 'myjobs_uat',
+      users: 'users_uat',
+      images: 'images_uat',
+      vertification_images: 'vertification_images_uat',
     };
     break;
   case 'prod':
@@ -102,10 +116,14 @@ switch (envType) {
       selectedProfiles: 'selectedProfiles',
       // base url will put here
       GOOGLE_API_KEY: GOOGLE_API_KEY_PROD,
+      STRIPE_API_KEY: STRIPE_API_KEY_PROD,
       message: 'message',
       chatlist: 'chatlist',
       common: 'common',
       myjobs: 'myjobs',
+      users: 'users',
+      images: 'images',
+      vertification_images: 'vertification_images',
     };
     break;
   default:

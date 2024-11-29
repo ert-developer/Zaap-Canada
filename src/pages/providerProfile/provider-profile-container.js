@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Alert} from 'react-native';
 import ProviderProfile from './provider-profile-screen';
-import {Country, State, City} from 'country-state-city';
+import {Country, State} from 'country-state-city';
 import {useSelector, useDispatch} from 'react-redux';
 import {uploadImage} from '../../common/camera';
 import {fetchCollectionDetails, postCollectionDetails, updateCollectionDetails} from '../../common/collection';
@@ -78,7 +78,7 @@ const categoriesOptions = [
       },
       {name: 'Date of Birth', type: 'text', totalWidth: true},
       // {name: 'ID Category', type: 'picker', totalWidth: true},
-      {name: 'ID TYPE', type: 'picker', totalWidth: true},
+      {name: 'ID Type', type: 'picker', totalWidth: true},
       {name: 'ID Number', type: 'text', totalWidth: true},
       {name: 'ID Expiration Date', type: 'text', totalWidth: true},
       {name: 'FRONT', type: 'buttonIcon', totalWidth: false},
@@ -246,6 +246,7 @@ const ProviderProfileContainer = ({navigation}) => {
   const [photoLoader, setPhotoLoader] = useState(false);
   const [frontLoader, setFrontLoader] = useState(false);
   const [backLoader, setBackLoader] = useState(false);
+  const [submitLoader, setSubmitLoader] = useState(false);
 
   // Function to handle opening the camera and triggering the loader
   const handleOpenCamera = (sourceType, fieldName) => {
@@ -273,7 +274,7 @@ const ProviderProfileContainer = ({navigation}) => {
       const imageUrls = [];
       if (response.assets && response.assets.length > 0) {
         response.assets.forEach(image => {
-          const storageRef = storage().ref(`verification-images/${Date.now()}-${image.fileName}`);
+          const storageRef = storage().ref(`${envConfig.verification_images}/${Date.now()}-${image.fileName}`);
           const uploadTask = storageRef.putFile(image.uri);
 
           uploadTask.on(
@@ -345,10 +346,7 @@ const ProviderProfileContainer = ({navigation}) => {
       if (!querySnapshot.empty) {
         querySnapshot.forEach(async doc => {
           await firestore().collection(collectionName).doc(doc.id).delete();
-          console.log('Document deleted');
         });
-      } else {
-        console.log('user filling for the first time');
       }
     } catch (error) {
       console.error('Error deleting and posting provider details:', error);
@@ -363,7 +361,6 @@ const ProviderProfileContainer = ({navigation}) => {
     };
     await deleteAndPostProviderDetails(envConfig.Provider, userID);
     let response = await postCollectionDetails(envConfig.Provider, providerDetails);
-    console.log('response', response);
     dispatch(fetchServiceProviderDetails(userID));
   };
 
@@ -435,19 +432,19 @@ const ProviderProfileContainer = ({navigation}) => {
             return false;
           }
           break;
-        case 'DATE OF BIRTH':
+        case 'Date of Birth':
           if (!formData.date_of_birth) {
             setFormErrors(prevState => ({...prevState, date_of_birth: true}));
             return false;
           }
           break;
-        case 'ID TYPE':
+        case 'ID Type':
           if (!formData.id_type) {
             setFormErrors(prevState => ({...prevState, id_type: true}));
             return false;
           }
           break;
-        case 'ID NUMBER':
+        case 'ID Number':
           if (!formData.id_number) {
             setFormErrors(prevState => ({...prevState, id_number: true}));
             return false;
@@ -667,6 +664,7 @@ const ProviderProfileContainer = ({navigation}) => {
       Alert.alert('please fill form completely');
     } else {
       try {
+        setSubmitLoader(true);
         let providerDetails = {
           createdOn: Date.now(),
           provider_id: userID,
@@ -689,14 +687,14 @@ const ProviderProfileContainer = ({navigation}) => {
         mailSenter(to, subject, textMsg, bodyText);
 
         await updateCollectionDetails(envConfig.User, {isServiceProvider: false}, userID);
-        const data = {
-          title: 'New Application For Background Verification',
-          message: `New Application For Background Verification from ${formData.legal_name_on_id}`,
-          userId: userID,
-          markasread: false,
-          time: new Date(),
-        };
-        await postCollectionDetails(envConfig.Notifications, data);
+        // const data = {
+        //   title: 'New Application For Background Verification',
+        //   message: `New Application For Background Verification from ${formData.legal_name_on_id}`,
+        //   userId: userID,
+        //   markasread: false,
+        //   time: new Date(),
+        // };
+        // await postCollectionDetails(envConfig.Notifications, data);
 
         // let response = await updateCollectionDetails(envConfig.Provider, providerDetails, userID);
         // dispatch(providerSuccess(response));
@@ -713,6 +711,8 @@ const ProviderProfileContainer = ({navigation}) => {
       } catch (error) {
         // dispatch(providerFailure(error));
         console.error('Error adding job data to Firestore:', error);
+      } finally {
+        setSubmitLoader(false);
       }
     }
   };
@@ -746,6 +746,7 @@ const ProviderProfileContainer = ({navigation}) => {
       photoLoader={photoLoader}
       frontLoader={frontLoader}
       backLoader={backLoader}
+      submitLoader={submitLoader}
       indiaStateOptions={indiaStateOptions}
       saveAndNext={saveAndNext}
     />

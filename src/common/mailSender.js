@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const apiUrl = 'https://zaap-canada-email-server.onrender.com/sendmail';
+import {MAIL_SERVER_URL} from '@env';
 // const apiUrl = 'http://192.168.0.153:3000/sendmail';
 // const apiUrl = 'http://localhost:3000/sendmail';
 
@@ -13,7 +12,7 @@ export const mailSenter = (to, subject, textMsg, bodyText) => {
     body: `<p>${bodyText}</p>`,
   };
   axios
-    .post(apiUrl, mailData)
+    .post(`${MAIL_SERVER_URL}/sendmail`, mailData)
     .then(response => {})
     .catch(error => {
       console.error('Error:', error.response.data);

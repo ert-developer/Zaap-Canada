@@ -4,17 +4,12 @@ import {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import CustomText from '../../atoms/text/textComponent';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
-import {Live} from '../../assets/svgImage/home';
 import {
   Call,
-  IIcon,
-  Lines,
   MessageIcon,
-  ProfileVerify,
   WorkInProgressStart,
   TickMark,
   WorkInProgressCompleted,
-  WorkCompleteStarted,
   WorkCompleted,
   WorkInProgress,
   WorkCompleteInProgress,
@@ -22,31 +17,28 @@ import {
 } from '../../assets/svgIcons/providerPaymentSvg';
 import CustomButton from '../../atoms/button/buttonComponent';
 import ServiceCompletedNodal from '../backdroppressmodal/Service-completed-Modal';
-import ServiceCanceldModal from '../backdroppressmodal/service-cancelled-modal';
 import CommonOtpInput from '../../molecules/customotpinput/customotp';
 import database from '@react-native-firebase/database';
 import {useNavigation} from '@react-navigation/native';
 import {MapIconSvg} from '../../assets/svgIcons/providerPaymentSvg';
 import {DottedLines} from '../../assets/svgImage/bottomDrawer';
 import {BookingConfirm} from '../../assets/svgImage/bottomDrawer';
-import {SmallDottedLines} from '../../assets/svgImage/bottomDrawer';
 import {NewInfoIcon} from '../../assets/svgImage/bottomDrawer';
 import {InProgresBannersSvg} from '../../assets/svgImage/bottomDrawer';
 import Tooltip from 'react-native-walkthrough-tooltip';
 import {FeedbackBannerSvg} from '../../assets/svgImage/bottomDrawer';
 import {AirbnbRating} from 'react-native-ratings';
 import {NewReviewSvg} from '../../assets/svgImage/bottomDrawer';
-import {postCollectionDetails, getUserDetails, deleteDocument} from '../../common/collection';
+import {postCollectionDetails} from '../../common/collection';
 import VerificationSuccessModal from '../../molecules/custommodal';
 import {db} from '../../../firebaseDb';
 import ServiceProviderCanceldModal from '../serviceprovidercancelmodal/service-provider-cancel-modal';
 import WrongOtpMdal from '../../molecules/custommodal/wrong-otp-popup';
-import FastImage from 'react-native-fast-image';
 import firestore from '@react-native-firebase/firestore';
 import {collection, query, where, getDocs} from 'firebase/firestore';
-import {Padding, Margin, FontFamily, FontSize, Color} from '../../assets/static/globalStyles';
+import {Color} from '../../assets/static/globalStyles';
 import {mailSenter} from '../../common/mailSender';
-import {doc, updateDoc, getDoc, FieldValue} from 'firebase/firestore';
+import {doc, updateDoc, getDoc} from 'firebase/firestore';
 import {envConfig} from '../../assets/helpers/envApi';
 
 const PreviousJobsPaymentModal = () => {
@@ -127,10 +119,6 @@ const PreviousJobsPaymentModal = () => {
   };
   const [isWorkStartedButton, setWorkStartedButton] = useState(false);
   const [otpEntered, setOtpEntered] = useState('');
-  const [isWorkStarted, setWorkStarted] = useState(false);
-
-  const [isComplete, setComplete] = useState(false);
-  // const [isFinish,setFinish]=useState(false)
 
   const [isOtpValid, setOtpValid] = useState();
   const handleOtpChange = code => {
@@ -139,22 +127,10 @@ const PreviousJobsPaymentModal = () => {
     setWorkStartedButton(code.length > 0);
   };
 
-  const handleStartWork = () => {
-    setWorkStarted(true);
-  };
-
-  const handleComplete = () => {
-    setComplete(true);
-  };
-
-  // const handleFinish = ()=>{
-  //   setFinish(true)
-  // }
-
   const validateOtp = async () => {
     try {
       const snapshot = await database()
-        .ref(`myjobs/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}`)
+        .ref(`${envConfig.myjobs}/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}`)
         .child('otpData')
         .once('value');
       const otpData = snapshot.val();
@@ -169,7 +145,7 @@ const PreviousJobsPaymentModal = () => {
             setModalVisible(true);
             // Alert.alert("otp is valid")
             database()
-              .ref(`myjobs/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}`)
+              .ref(`${envConfig.myjobs}/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}`)
               .child('otpData')
               .update({otpValidationStatus: true});
           } else {
@@ -187,7 +163,7 @@ const PreviousJobsPaymentModal = () => {
   };
   useEffect(() => {
     const otpValidationStatusRef = database()
-      .ref(`myjobs/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}`)
+      .ref(`${envConfig.myjobs}/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}`)
       .child('otpData');
 
     const handleOtpValidationStatus = snapshot => {
@@ -234,7 +210,7 @@ const PreviousJobsPaymentModal = () => {
 
     // Store the OTP in a common location in the Firebase Realtime Database
     database()
-      .ref(`myjobs/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}`)
+      .ref(`${envConfig.myjobs}/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}`)
       .child('isWorkFinished')
       .set(otpData);
   };
@@ -259,8 +235,6 @@ const PreviousJobsPaymentModal = () => {
   // }, []); // Empty dependency array means this effect runs once when the component mounts
   const [jobDetails, setJobDetails] = useState('');
 
-  let phoneNumber;
-
   useEffect(() => {
     const getJobDetails = async () => {
       const docRef = doc(db, envConfig.Jobs, selectedJobDetails.jobId);
@@ -269,7 +243,6 @@ const PreviousJobsPaymentModal = () => {
       const docSnap = await getDoc(docRef);
       const docData = docSnap.data();
       setJobDetails(docData);
-      phoneNumber = jobDetails.phone; // Replace this with your actual phone number
     };
 
     getJobDetails();
@@ -277,7 +250,7 @@ const PreviousJobsPaymentModal = () => {
 
   const handlePhoneIconPress = () => {
     // Use the `tel:` scheme to open the phone dialer with the specified number
-    const dialerUrl = `tel:${phoneNumber}`;
+    const dialerUrl = `tel:${jobDetails.phone}`;
 
     // Check if the Linking module is supported
     if (Linking.canOpenURL(dialerUrl)) {
@@ -308,10 +281,10 @@ const PreviousJobsPaymentModal = () => {
     } else {
       if (roomDetails.isDisabled) {
         await database()
-          .ref(`/chatlist/${roomDetails.customerId}/${roomDetails.providerId}`)
+          .ref(`/${envConfig.chatlist}/${roomDetails.customerId}/${roomDetails.providerId}`)
           .update({isDisabled: false});
         await database()
-          .ref(`/chatlist/${roomDetails.providerId}/${roomDetails.customerId}`)
+          .ref(`/${envConfig.chatlist}/${roomDetails.providerId}/${roomDetails.customerId}`)
           .update({isDisabled: false});
         roomDetails.isDisabled = false;
       }

@@ -1,21 +1,49 @@
 <resources>
-
-    <!-- Base application theme. -->
+    <!-- Define colors -->
     <color name="white">#FFFFFF</color>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="android:forceDarkAllowed">false</item>
-        <item name="android:textColor">#000000</item>
-        <item name="android:windowBackground">#FFFFFF</item> <!-- Change to white for light mode -->
+    <color name="black">#000000</color>
+    <color name="gray">#808080</color>
+    <color name="default_text_color">#000000</color>
+    <color name="default_background_color">#FFFFFF</color>
+
+    <!-- Main App Theme -->
+   <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Base Colors -->
+        <item name="android:textColorPrimary">@color/default_text_color</item>
+        <item name="android:textColorSecondary">@color/gray</item>
+        <item name="android:colorPrimary">@color/black</item>
+        <item name="android:colorAccent">@color/black</item>
+        <item name="android:buttonTint">@color/black</item>
+
+        <!-- Backgrounds and Preview -->
+        <item name="android:windowBackground">@color/default_background_color</item>
         <item name="android:windowDisablePreview">true</item>
-        <item name="android:windowIsTranslucent">false</item> <!-- Typically set to false for full backgrounds -->
+        <item name="android:windowIsTranslucent">false</item>
+
+        <!-- Action Bar and Title -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
-        <!-- Dropdown specific styles -->
-        <item name="android:textColorHint">#808080</item>
-        <item name="android:popupBackground">#FFFFFF</item>
-        <item name="android:textColorPrimary">#000000</item>
+        <!-- Dialogs -->
+        <item name="android:dialogTheme">@style/CustomDialog</item>
+
+        <!-- Inputs -->
+        <item name="android:textColorHint">@color/gray</item>
+        <item name="android:popupBackground">@color/default_background_color</item>
     </style>
 
+    <!-- Custom Dialog Theme -->
+    <style name="CustomDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:buttonStyle">@style/CustomDialogButton</item>
+    </style>
+
+    <!-- Custom Dialog Button Style -->
+    <style name="CustomDialogButton" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!-- Custom Button Style -->
+    <style name="CustomButton" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/default_text_color</item>
+    </style>
 </resources>

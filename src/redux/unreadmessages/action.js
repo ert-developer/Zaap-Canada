@@ -3,7 +3,7 @@ export const CLEAR_UNREAD_MESSAGES = 'CLEAR_UNREAD_MESSAGES';
 export const FETCH_UNREAD_MESSAGES = 'FETCH_UNREAD_MESSAGES';
 
 import database from '@react-native-firebase/database';
-import envConfig from '../../assets/helpers/envApi';
+import {envConfig} from '../../assets/helpers/envApi';
 
 export const fetchUnreadMessages = userId => {
   return async dispatch => {

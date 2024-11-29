@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux';
 import {getDocs, collection, where, query, doc} from 'firebase/firestore';
 import {db} from '../../../firebaseDb';
 import {useNavigation} from '@react-navigation/native';
+import {envConfig} from '../../assets/helpers/envApi';
 const SubCategoryContainer = () => {
   const subcatname = useSelector(state => state.subCategory.SubCategoryName);
   const navigation = useNavigation();
@@ -11,7 +12,7 @@ const SubCategoryContainer = () => {
   const [subCategory, setSubCategory] = useState('');
   const handleSubCategoryName = async () => {
     try {
-      const q = query(collection(db, 'Jobs_dev'), where('data.subCategory', 'array-contains', subcatname));
+      const q = query(collection(db, envConfig.Jobs), where('data.subCategory', 'array-contains', subcatname));
       const querySnapshot = await getDocs(q);
       const data = querySnapshot.docs.map(doc => doc.data());
       data.map((item, index) => {

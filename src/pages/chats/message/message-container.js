@@ -1,10 +1,7 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {ChatScreen, Example} from './chat-screen';
-import {useSelector} from 'react-redux';
 import ChatScreenExample from './message-screen';
 import database from '@react-native-firebase/database';
-import envConfig from '../../../assets/helpers/envApi';
+import {envConfig} from '../../../assets/helpers/envApi';
 
 const ChatContainer = props => {
   const data = props.route.params.chatDetail;
@@ -13,7 +10,7 @@ const ChatContainer = props => {
 
   useEffect(() => {
     const onChildAdd = database()
-      .ref(`/messages/${data.roomId}`)
+      .ref(`/${envConfig.message}/${data.roomId}`)
       .on('child_added', snapshot => {
         setAllChat(state => [...state, snapshot.val()]);
       });

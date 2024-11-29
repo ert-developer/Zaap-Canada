@@ -1,8 +1,7 @@
-import {useState, useEffect, useCallback} from 'react';
+import React, {useState, useCallback} from 'react';
 import {View, TouchableOpacity, Text, ToastAndroid} from 'react-native';
 import CustomButton from '../../../atoms/button/buttonComponent';
 import CustomTouchableOpacity from '../../../molecules/touchable-opacity/touchable-opacity-component';
-import CustomImage from '../../../atoms/image/imageComponent';
 import CustomText from '../../../atoms/text/textComponent';
 import {
   HomeSVG,
@@ -21,8 +20,6 @@ import {drawerStyles} from './styles';
 import {heightToDp} from '../../../responsive/responsive';
 import {Color} from '../../../assets/static/globalStyles';
 import {useSelector, useDispatch} from 'react-redux';
-import {envConfig} from '../../../assets/helpers/envApi';
-import {fetchCollectionDetails} from '../../../common/collection';
 import auth from '@react-native-firebase/auth';
 import {logoutSuccess} from '../../../redux/auth/action';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
@@ -33,6 +30,8 @@ import DeleteAccountModal from '../../../organisms/deletemodal/deletemodal';
 import VerificationInProgressModal from '../../../organisms/verificationprogressmodal/verificationmodal';
 import DeviceInfo from 'react-native-device-info';
 import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
+import {Platform} from 'react-native';
+import {Image} from 'react-native';
 
 export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
   const styles = drawerStyles();
@@ -40,19 +39,8 @@ export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
 
   const [myprofile, setMyprofile] = useState(true);
   const [isModalVisible, setModalVisible] = useState(false);
-  const [curruserDetails, setCurrentUser] = useState([]);
   const user = useSelector(state => state.Auth.user);
-  const uid = user?.userId;
-
-  useEffect(() => {
-    const getBGCStatus = async () => {
-      const providerDevData = await fetchCollectionDetails(envConfig.Provider);
-      const response = providerDevData.filter(item => item.provider_id === uid);
-      setCurrentUser(response);
-    };
-
-    getBGCStatus();
-  }, [setCurrentUser, curruserDetails]);
+  const providerStatus = useSelector(state => state.providerverification.providerDetails);
 
   const handleLogout = async () => {
     try {
@@ -150,9 +138,9 @@ export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
       title: 'Hey friendsCheck out this app',
       message: `Hey! This app made me think of you. It's great for finding "Flexible Work" or "Hiring" someone within your budget across various sectors. Check out ZAAP and explore the world of possibilities—sign up now! 
 
-      Android App - https://play.google.com/store/apps/ 
+      Android App - https://play.google.com/store/apps/details?id=com.zaap_canada
       
-      IOS App - https://www.apple.com/in/app-store/`,
+      IOS App - https://apps.apple.com/app/zaap-ondemand/id6737913133`,
       social: RNShare.Social.WHATSAPP,
     };
     try {
@@ -162,32 +150,29 @@ export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
     }
   };
 
-  const ProfileCard = () => {
+  const ProfileCard = React.memo(() => {
     return (
       <View style={styles.userProfileCard}>
         {!user?.imageUrl ? (
-          <CustomImage style={styles.styleImage} source={require('../../../assets/default-profile.png')} />
+          <Image style={styles.styleImage} source={require('../../../assets/default-profile.png')} />
         ) : (
-          <CustomImage source={{uri: user?.imageUrl}} style={styles.styleImage} />
+          <Image source={{uri: user?.imageUrl}} style={styles.styleImage} />
         )}
         <View style={{flexDirection: 'column', alignItems: 'flex-start'}}>
           <CustomText style={[styles.styleTitle]} text={user?.displayName} />
           <View>
-            {curruserDetails[0]?.isverified === 'in progress' && (
+            {providerStatus[0]?.isverified === 'in progress' && (
               <CustomText style={styles.inProgressText} text="BGC In-Progress" />
             )}
           </View>
         </View>
       </View>
     );
-  };
+  });
 
   const IdentityVerificationContainer = useCallback(async () => {
     try {
-      const providerDevData = await fetchCollectionDetails(envConfig.Provider);
-      const response = providerDevData.filter(item => item.provider_id === uid);
-      setCurrentUser(response);
-      if (response.length && response[0]?.isverified === 'in progress') {
+      if (providerStatus[0]?.isverified === 'in progress') {
         setModalVisible(true);
       } else {
         navigation.navigate('IdentityVerificationScreen');
@@ -195,14 +180,14 @@ export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
     } catch (error) {
       console.error('Error fetching user details:', error);
     }
-  }, [uid, navigation]);
+  }, [providerStatus]);
 
   const appVersion = DeviceInfo.getVersion();
 
   const result = myprofile ? (
     <View style={{padding: 10}}>
       <ProfileCard />
-      {curruserDetails[0]?.isverified === 'in progress' ? (
+      {providerStatus[0]?.isverified === 'in progress' ? (
         <CustomButton
           title={'JOIN AS A SERVICE PROVIDER'}
           style={styles.providerLabelDisabled}
@@ -269,7 +254,11 @@ export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
           /> */}
         </View>
         <View style={styles.versionContainer}>
-          <CustomText text={`Android Version: ${appVersion}`} style={styles.versionText} />
+          {Platform.OS === 'ios' ? (
+            <CustomText text={`iOS Version: ${appVersion}`} style={styles.versionText} />
+          ) : (
+            <CustomText text={`Android Version: ${appVersion}`} style={styles.versionText} />
+          )}
         </View>
       </View>
     </View>

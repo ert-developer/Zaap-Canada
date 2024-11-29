@@ -6,11 +6,10 @@ import CustomText from '../../atoms/text/textComponent';
 import CustomImage from '../../atoms/image/imageComponent';
 import {LocationSVG, PersonSVG, StartSVG} from '../../assets/svgImage/profile';
 import CustomLoader from '../../../src/molecules/customLoader/customLoader';
+import {differenceInDays} from 'date-fns';
 
 const ViewCustomerProfileScreen = ({userDetails, customerPreJobsList, starRatingCount, feedbackData, loader}) => {
   const styles = viewCustomerProfileStyles();
-
-  console.log(customerPreJobsList, 'lll');
 
   return (
     <SafeAreaView>
@@ -68,6 +67,7 @@ const ViewCustomerProfileScreen = ({userDetails, customerPreJobsList, starRating
               <FlatList
                 data={customerPreJobsList
                   .slice() // Create a copy to avoid mutating the original list
+                  .filter(job => differenceInDays(new Date(), new Date(job.createdOn)) < 45) // Filter jobs within 45 days
                   .sort((a, b) => b.createdOn - a.createdOn)} // Sort by 'createdOn' descending
                 renderItem={({item}) => <JobList item={item} handleJobPress={null} />}
                 keyExtractor={(item, index) => String(index)}

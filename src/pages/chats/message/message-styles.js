@@ -44,7 +44,6 @@ function ChatStyles() {
       width: widthToDp(20),
       height: widthToDp(20),
       borderRadius: widthToDp(10), // Should be half of the width and height for a perfect circle
-      backgroundColor: '#5A2DAF', //
       justifyContent: 'center',
       alignItems: 'center',
       marginRight: widthToDp(3),
@@ -72,7 +71,6 @@ function ChatStyles() {
       width: 30,
       height: 30,
       borderRadius: 20,
-      backgroundColor: '#5A2DAF',
       justifyContent: 'center',
       alignItems: 'center',
       // marginRight: 2,
@@ -106,18 +104,16 @@ function ChatStyles() {
     input: {
       flexDirection: 'row',
       alignItems: 'center',
-      // padding: 4,
       backgroundColor: '#E6E6E6',
       borderRadius: Border.br_24,
-      height: heightToDp(6),
-      position: 'fixed',
-      //   left: Margin.m_10,
+      maxHeight: heightToDp(7),
+      marginVertical: 5,
+      position: 'sticky',
       justifyContent: 'space-between',
       width: widthToDp(90),
-      //   top: heightToDp(80),
       alignSelf: 'center',
     },
-    sendButton: {color: Color.colorBlack, fontFamily: FontFamily.helvetica, marginHorizontal: Margin.m_10},
+    sendButton: {color: Color.colorBlack, fontFamily: FontFamily.helvetica},
     row: {flexDirection: 'row'},
     camsend: {justifyContent: 'center', alignItems: 'center'},
     date: {

@@ -4,8 +4,7 @@ import Modal from 'react-native-modal';
 import CustomText from '../../atoms/text/textComponent';
 import CustomButton from '../../atoms/button/buttonComponent';
 import ModalComponent from '../../organisms/Modal/modal-component';
-import ProviderFeedbackStyles from './provider-feedback-styles';
-import {useState, useMemo, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import moment from 'moment';
 import {collection, getDocs, query, where} from 'firebase/firestore';
@@ -18,23 +17,20 @@ import {MembershipSVGComponent} from '../../assets/svgIcons/membershipsvg/member
 import ProfileLocationSVGComponent from '../../assets/svgIcons/profilelocationsymbol/profile-location-symbol';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ArrowIcon from 'react-native-vector-icons/FontAwesome';
-import Collapsible from 'react-native-collapsible';
-import {JobCategory} from '../../assets/svgImage/jobDetail';
 import {LanguagesSVG} from '../../assets/svgIcons/membershipsvg/membershipsvg';
 import {doc, getDoc, updateDoc} from 'firebase/firestore';
 import {Rating} from 'react-native-ratings';
 import CustomLoader from '../../molecules/customLoader/customLoader';
 import ReadMoreText from '../../organisms/readmore/read-more';
-import JobDetail from '../jobDetail/job-detail-screen';
 import {fetchSelectedJobs} from '../../redux/selectedjobs/action';
 import {fetchSelectedProfileDetails} from '../../redux/selectedprofiledetails/action';
 import {postCollectionDetails, getUserDetails} from '../../common/collection';
 import {generateRoomId} from '../../../src/utils/index';
-import {is} from 'date-fns/locale';
 import {Color} from '../../assets/static/globalStyles';
 import {EmptyPortfolioSVG} from '../../assets/svgImage/portfolio/portfolio';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 import {envConfig} from '../../assets/helpers/envApi';
+import {PUSH_NOTIFICATION_SERVER_URL} from '@env';
 
 const ProviderFeedbackScreen = ({
   firstLetter,
@@ -85,7 +81,7 @@ const ProviderFeedbackScreen = ({
     const appliedUser = await getUserDetails(envConfig.User, profiledetail.userId);
     const token = appliedUser.fcmToken;
     try {
-      const response = await fetch('https://canada-push-notifications-server.onrender.com/sendNotification', {
+      const response = await fetch(`${PUSH_NOTIFICATION_SERVER_URL}/sendNotification`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -120,12 +116,12 @@ const ProviderFeedbackScreen = ({
     const roomId = roomDetails?.roomId || generateRoomId();
 
     await database()
-      .ref(`/chatlist/${data.userId}/${user.userId}`)
+      .ref(`/${envConfig.chatlist}/${data.userId}/${user.userId}`)
       .update({...user, roomId, isDisabled: false})
       .then(() => console.log('Data updated for current user'));
 
     await database()
-      .ref(`/chatlist/${user.userId}/${data.userId}`)
+      .ref(`/${envConfig.chatlist}/${user.userId}/${data.userId}`)
       .update({...data, roomId, isDisabled: false})
       .then(() => console.log('Data updated for other user'));
   };

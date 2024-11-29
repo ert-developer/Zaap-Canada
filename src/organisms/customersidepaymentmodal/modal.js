@@ -5,35 +5,25 @@ import CustomText from '../../atoms/text/textComponent';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 import {
   Call,
-  IIcon,
-  Lines,
   MessageIcon,
   ProfileVerified,
   ReviewIcon,
-  ReviewSuccess,
   TickMark,
-  ReviewInProgress,
   WorkCompleteInProgress,
   WorkInProgressStart,
-  WorkInProgressCompleted,
-  WorkcompletedSvg,
   WorkCompleteStarted,
 } from '../../assets/svgIcons/providerPaymentSvg';
 import {WorkCompleted} from '../../assets/svgIcons/providerPaymentSvg';
 import CustomButton from '../../atoms/button/buttonComponent';
-import ServiceCompletedNodal from '../backdroppressmodal/Service-completed-Modal';
 import ServiceCanceldModal from '../backdroppressmodal/service-cancelled-modal';
-import CustomTextInput from '../../atoms/textInput/textInputComponent';
 import database from '@react-native-firebase/database';
-import {useSelector, useDispatch} from 'react-redux';
-import {deleteDocument, postCollectionDetails} from '../../common/collection';
+import {useSelector} from 'react-redux';
+import {postCollectionDetails} from '../../common/collection';
 import {fetchCompletedJobs} from '../../redux/completedjobs/action';
-import CustomModal from '../../molecules/custommodal';
 import {useNavigation} from '@react-navigation/native'; // Add this import
 import {ActivityIndicator} from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
-import {Profileimageeee} from '../../assets/svgImage/bottomDrawer';
-import {YouAreHiringSvg, DottedLines, InProgressSvg, ServiceFeedback} from '../../assets/svgImage/bottomDrawer';
+import {DottedLines} from '../../assets/svgImage/bottomDrawer';
 import {BookingConfirm, InProgresBannersSvg} from '../../assets/svgImage/bottomDrawer';
 import {FeedbackBannerSvg} from '../../assets/svgImage/bottomDrawer';
 import {AirbnbRating} from 'react-native-ratings';
@@ -44,22 +34,8 @@ import {Color} from '../../assets/static/globalStyles';
 import CustomerServiceCompletedModal from '../backdroppressmodal/customer-service-complete-modal';
 import {db} from '../../../firebaseDb';
 import {getJobDetails} from '../../common/collection';
-import {set} from 'date-fns';
-import FastImage from 'react-native-fast-image';
 import {mailSenter} from '../../common/mailSender';
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  updateDoc,
-  doc,
-  getDoc,
-  deleteDoc,
-  FieldValue,
-  Transaction,
-} from 'firebase/firestore';
-import {ca} from 'date-fns/locale';
+import {collection, query, where, getDocs, updateDoc, doc, getDoc} from 'firebase/firestore';
 import {TransparentLoader} from '../loader/loader';
 import TextAreaInputComponent from '../../atoms/textAreaInput/textAreaInput-component';
 import {envConfig} from '../../assets/helpers/envApi';
@@ -110,19 +86,19 @@ const CustomerSidePaymentModel = () => {
 
     // Update isDisabled field for the current user and the other user
     await database()
-      .ref(`/chatlist/${userid1}/${userid2}`)
+      .ref(`/${envConfig.chatlist}/${userid1}/${userid2}`)
       .update({isDisabled: updatedIsDisabledValue})
       .then(() => console.log('isDisabled updated for current user'));
 
     await database()
-      .ref(`/chatlist/${userid2}/${userid1}`)
+      .ref(`/${envConfig.chatlist}/${userid2}/${userid1}`)
       .update({isDisabled: updatedIsDisabledValue})
       .then(() => console.log('isDisabled updated for other user'));
   };
 
   const getRoomDetails = (userId1, userId2) => {
     return database()
-      .ref(`/chatlist/${userId1}/${userId2}`)
+      .ref(`/${envConfig.chatlist}/${userId1}/${userId2}`)
       .once('value')
       .then(snapshot => {
         const roomDetails = snapshot.val();
@@ -159,33 +135,13 @@ const CustomerSidePaymentModel = () => {
     getRoomDetails(userID, profileUserID);
   }, []);
 
-  const [isModalVisible, setModalVisible] = useState(false);
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
-
-  const dispatch = useDispatch();
-
-  const handleDeleteCollection = async () => {
-    try {
-      const commonRef = database().ref(`/${envConfig.common}`);
-
-      await commonRef.remove();
-
-      Alert.alert('Success', 'Successfully deleted /common collection');
-    } catch (error) {
-      console.error('Error deleting /common collection:', error.message);
-      Alert.alert('Error', 'Failed to delete /common collection');
-    }
-  };
-
   const [isOtpValid, setOtpValid] = useState(false);
   const [otp, setOtp] = useState('****');
   const [otpLoading, setOtpLoading] = useState(true);
 
   useEffect(() => {
     database()
-      .ref(`myjobs/${userID}_${jobDetails.jobId}/`)
+      .ref(`${envConfig.myjobs}/${userID}_${jobDetails.jobId}/`)
       .once('value')
       .then(snapshot => {
         const otpDetails = snapshot.val();
@@ -195,14 +151,12 @@ const CustomerSidePaymentModel = () => {
       });
   }, [otp, userID, jobDetails]);
 
-  const [isReviewVisible, setReviewVisible] = useState(false);
   const [isServiceCompleted, setServiceCompleted] = useState(false);
   const [isServiceCancelled, setServiceCancelled] = useState(false);
   const onCloseModal = () => {
     setServiceCancelled(false);
   };
   const [onFeedbackText, setFeedbackText] = useState('');
-  const [feedbackError, setFeedbackError] = useState('');
 
   const [loader, setLoader] = useState(false);
 
@@ -282,10 +236,6 @@ const CustomerSidePaymentModel = () => {
     WorkDone();
 
     setWorkDonePopup(false);
-  };
-
-  const handleReview = () => {
-    setReviewVisible(true);
   };
 
   const onChangeText = event => {
@@ -475,47 +425,11 @@ const CustomerSidePaymentModel = () => {
     };
   }, []);
 
-  const [isWorkFinished, setIsWorkFinished] = useState(null);
-
-  // useEffect(() => {
-  //   const isWorkFinishedRef = database().ref('/common/isWorkFinished/isworkdone');
-
-  //   const handleSnapshot = (snapshot) => {
-  //     const value = snapshot.val();
-  //     setIsWorkFinished(value);
-  //     // Perform actions with the updated isWorkFinished value
-  //   };
-
-  //   isWorkFinishedRef.on('value', handleSnapshot);
-
-  //   return () => {
-  //     isWorkFinishedRef.off('value', handleSnapshot);
-  //   };
-  // }, []);
-
   const [showFeedback, setFeedback] = useState(false);
 
   const [cancelPopupAfterOtp, setCancelPopupAfterOtp] = useState(false);
   const onCancel_Afterotp = async () => {
-    // const to = `sankeertherra01@gmail.com, ${providerStatus[0].email_id}`;
-    // const subject = 'Service Cancelled';
-    // const textMsg = 'The service has been cancelled by the customer';
-    // const bodyText = 'The service has been cancelled by the customer';
-    // mailSenter(to, subject, textMsg, bodyText);
     setCancelPopupAfterOtp(true);
-    // const data = {
-    //   title: 'Service Cancelled',
-    //   message: `Service Cancelled by ${user.displayName} for ${providerStatus[0].legal_name_on_id} on ${jobDetails.jobTitle} with an amount of ${jobDetails.salary}`,
-    //   userId: profiledetail.userId,
-    //   markasread: false,
-    //   time: new Date(),
-    // };
-    // await postCollectionDetails('Notifications_dev', data);
-    // const otpValidationStatusRef = database().ref(`myjobs/${userID}_${jobDetails.jobId}`).child('otpValidationStatus');
-    // otpValidationStatusRef.remove();
-    //Currently Commenting the below code as it will remove the otpData from the firebase need to check whether it is required or not
-    // const otpDataRef = database().ref(`myjobs/${userID}_${jobDetails.jobId}`).child('otpData');
-    // otpDataRef.remove();
   };
   const sendRemoveMail = async () => {
     const to = providerStatus[0].email_id;
@@ -596,11 +510,6 @@ const CustomerSidePaymentModel = () => {
         handleServiceCompleted();
         setServiceCompleted(true);
       }
-      // if (response && response['_documentPath']) {
-      //   setServiceCompleted(true);
-      // } else {
-      //   Alert.alert('Cancel', 'Canceled Payment.', [{text: 'OK'}]);
-      // }
     } catch (error) {
       console.log('errror', error);
     }
@@ -685,7 +594,6 @@ const CustomerSidePaymentModel = () => {
     return cancellationFee;
   }
   const justremoveJob = async () => {
-    console.log('Job Deleted');
     try {
       await handleUpdateIsDisabledClick(user.userId, profiledetail.userId);
       await handleExpiredJobs();

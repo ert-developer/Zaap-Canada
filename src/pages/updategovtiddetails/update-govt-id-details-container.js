@@ -4,7 +4,6 @@ import {uploadImage} from '../../common/camera';
 import {fetchCollectionDetails} from '../../common/collection';
 import {envConfig} from '../../assets/helpers/envApi';
 import storage from '@react-native-firebase/storage';
-import firestore from '@react-native-firebase/firestore';
 import {useSelector} from 'react-redux';
 import {Alert} from 'react-native';
 import {postCollectionDetails} from '../../common/collection';
@@ -164,7 +163,7 @@ const UpdateGovtIdDetailsContainer = () => {
       const imageUrls = [];
       if (response.assets && response.assets.length > 0) {
         response.assets.forEach(image => {
-          const storageRef = storage().ref(`verification-images/${Date.now()}-${image.fileName}`);
+          const storageRef = storage().ref(`${envConfig.verification_images}/${Date.now()}-${image.fileName}`);
           const uploadTask = storageRef.putFile(image.uri);
 
           uploadTask.on(

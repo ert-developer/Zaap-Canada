@@ -6,7 +6,6 @@ import {
   StatusBar,
   Text,
   Pressable,
-  TextInput,
   StyleSheet,
   Dimensions,
   TouchableOpacity,
@@ -14,24 +13,16 @@ import {
   FlatList,
 } from 'react-native';
 import CustomButton from '../../atoms/button/buttonComponent';
-import ProviderProfileStyles from './provider-profile-styles';
 import CustomText from '../../atoms/text/textComponent';
 import ServiceProviderVerificationModal from '../../organisms/serviceproviderpopupmodal/serviceprovider-popup-modal';
 
 import {
-  PersonalIcon,
-  BankDetailsIcon,
-  BackgroundCheckIcon,
-  TCIcon,
   GreenTickIcon,
   CameraIcon,
   FrontIcon,
   Back,
   PersonIconComplete,
-  PersonalIconStart,
-  BankDetailIconProgress,
   BankDetailIconCompleted,
-  BackGroundCheckInProgress,
   BackGroundCheckCompleted,
   TCIConInProgress,
 } from '../../assets/svgImage/providerProfile';
@@ -39,12 +30,8 @@ import CustomTouchableOpacity from '../../molecules/touchable-opacity/touchable-
 import TextAreaInputComponent from '../../atoms/textAreaInput/textAreaInput-component';
 import TextInputWithLabelComponent from '../../organisms/textInputWithLabel/textInputWithLabel-component';
 import DropdownSearchComponent from '../../organisms/dropDownSearch/dropDownSearch-component';
-import CustomCheckBox from '../../atoms/checkBox/checkBoxComponent';
 import DeleteCustomImage from '../../organisms/deleteImage/deleteImage-component';
-import {BackIcon} from '../../assets/svgImage/sideDrawer';
-import {TickMark} from '../../assets/svgIcons/providerPaymentSvg';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {setDate} from 'date-fns';
 // import {Dimensions, StyleSheet} from 'react-native';
 import {Border, Color, FontFamily, FontSize, Margin, Padding} from '../../assets/static/globalStyles';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
@@ -85,7 +72,7 @@ const ProviderProfile = ({
   photoLoader,
   frontLoader,
   backLoader,
-  indiaStateOptions,
+  submitLoader,
   saveAndNext,
 }) => {
   // const styles = ProviderProfileStyles();
@@ -1002,7 +989,13 @@ const ProviderProfile = ({
       <StatusBar barStyle="light-content" />
       <ScrollView style={styles.scrollView} contentContainerStyle={{flexGrow: 1}}>
         <View style={styles.container}>
-          <View style={styles.form}>{renderInputsForCategory()}</View>
+          {submitLoader ? (
+            <View>
+              <ActivityIndicator size={'large'} />
+            </View>
+          ) : (
+            <View style={styles.form}>{renderInputsForCategory()}</View>
+          )}
           {showVerificationModal && <ServiceProviderVerificationModal />}
         </View>
       </ScrollView>
