@@ -150,7 +150,7 @@ const JobDetailContainer = ({route, navigation}) => {
   const shareJobDetails = async () => {
     const shareOptions = {
       title: 'Check out this job',
-      message: `Job Title: ${title}\nPrice: ${price}\nDate: ${startdate} \nI've found this Job on ZAAP - Hire or Work Locally.\nDownload the app to apply for this job.\n\n playstorelink: https://play.google.com/store/apps/details?id=com.zaap-canada \n appstorelink: https://apps.apple.com/app/zaap-ondemand/id6737913133`,
+      message: `Job Title: ${title}\nPrice: ${price}\nDate: ${startdate} \nI've found this Job on ZAAP - Hire or Work Locally.\nDownload the app to apply for this job.\n\n playstorelink: https://play.google.com/store/apps/details?id=com.zaap_canada \n appstorelink: https://apps.apple.com/app/zaap-ondemand/id6737913133`,
       social: RNShare.Social.WHATSAPP,
     };
     try {
