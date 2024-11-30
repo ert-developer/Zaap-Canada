@@ -540,7 +540,7 @@ const ProviderProfile = ({
                     //     };
                     //   })
                     // : Above is for canada
-                    field.name === 'ID TYPE'
+                    field.name === 'ID Type'
                     ? indiaGovDocs
                     : field.name === 'Gender'
                     ? genderOptions
