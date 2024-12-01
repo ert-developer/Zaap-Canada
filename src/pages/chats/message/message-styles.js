@@ -107,10 +107,11 @@ function ChatStyles() {
       backgroundColor: '#E6E6E6',
       borderRadius: Border.br_24,
       maxHeight: heightToDp(7),
-      marginVertical: 5,
-      position: 'sticky',
+      position: 'fixed',
+      //   left: Margin.m_10,
       justifyContent: 'space-between',
       width: widthToDp(90),
+      //   top: heightToDp(80),
       alignSelf: 'center',
     },
     sendButton: {color: Color.colorBlack, fontFamily: FontFamily.helvetica},
@@ -123,7 +124,7 @@ function ChatStyles() {
       textAlign: 'center',
     },
     inputField: {
-      //   width: widthToDp(90),
+      width: widthToDp(96),
       marginLeft: Margin.m_10,
     },
   });

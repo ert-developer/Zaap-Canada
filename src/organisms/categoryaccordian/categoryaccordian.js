@@ -46,7 +46,7 @@ const CategoryAccordian = ({selectedCategory, categoryName, SubCategories, rende
       </TouchableOpacity>
 
       <Collapsible collapsed={collapsed}>
-        <ScrollView style={styles.scrollContainer}>
+        <ScrollView style={{height: 'auto'}}>
           <View style={{marginTop: 2}}>
             <FlatList
               data={SubCategories}

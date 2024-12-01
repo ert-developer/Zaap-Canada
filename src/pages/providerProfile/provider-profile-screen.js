@@ -250,10 +250,8 @@ const ProviderProfile = ({
   };
 
   // Set the maximum date to the current date
-  const maxDate = new Date();
-
-  // Set the minimum date to January 1, 1990
-  const minDate = new Date(1990, 0, 1);
+  const today = new Date();
+  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
 
   const renderInputsForCategory = () => {
     if (categoryData) {
@@ -301,6 +299,7 @@ const ProviderProfile = ({
                     display="spinner"
                     value={new Date()} // Set the initial value for the date
                     onChange={(event, selectedDate) => onIdExpirationDateChange(selectedDate)}
+                    minimumDate={new Date()}
                   />
                 )}
                 <TextInputWithLabelComponent
@@ -615,32 +614,15 @@ const ProviderProfile = ({
                 fieldName={field.name.toLowerCase().split(' ').join('_')}
                 defaultOption={`Select ${field.name}`}
                 labelField={'name'}
-                valueField={['Account Type', 'ID TYPE', 'Gender'].includes(field.name) ? 'name' : 'isoCode'}
+                valueField={['Account Type', 'ID Type', 'Gender'].includes(field.name) ? 'name' : 'isoCode'}
                 pickerOptions={
                   field.name === 'Country'
                     ? countries
                     : field.name === 'State'
                     ? states
-                    : // : field.name === 'City'
-                    // ? cities
-                    field.name === 'Account Type'
+                    : field.name === 'Account Type'
                     ? accountType
-                    : // : field.name === 'ID Category'
-                    // ? govDocuments
-                    // field.name === 'ID TYPE'
-                    // ? (
-                    //     govDocuments.find(category => {
-                    //       return category.name === formData.id_category;
-                    //     })?.documents || []
-                    //   ).map(subcategory => {
-                    //     return {
-                    //       option: subcategory,
-                    //       name: subcategory,
-                    //       id: subcategory,
-                    //     };
-                    //   })
-                    // : Above is for canada
-                    field.name === 'ID TYPE'
+                    : field.name === 'ID Type'
                     ? indiaGovDocs
                     : field.name === 'Gender'
                     ? genderOptions

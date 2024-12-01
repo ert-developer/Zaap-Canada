@@ -12,7 +12,6 @@ import {db} from '../../../firebaseDb';
 import moment from 'moment';
 import RNShare from 'react-native-share';
 import {Alert} from 'react-native';
-import {set} from 'date-fns';
 import {envConfig} from '../../assets/helpers/envApi';
 import {setEditJobStatus} from '../../redux/editjob/action';
 import {PUSH_NOTIFICATION_SERVER_URL} from '@env';
@@ -112,8 +111,11 @@ const JobDetailContainer = ({route, navigation}) => {
   const [refresh, setRefresh] = useState(false);
   const [postedCustomer, setPostedUser] = useState([]);
   const dispatch = useDispatch();
-  const jobDetails = useSelector(state => state.checkProfileJob.jobDetails); // Job Details
-  const profiledetail = useSelector(state => state.applicantProfileDetails.profileDetails); //service provider profile details
+  // const jobDetails = useSelector(state => state.checkProfileJob.jobDetails); // Job Details
+  const {jobs} = useSelector(state => state.home);
+  const jobApplicantsDetails = jobs
+    .filter(each => each.jobApplications && each.id === id)
+    .map(each => each.jobApplications);
 
   useEffect(() => {
     const fetchPostedCustomerDetails = async postedBy => {
@@ -201,10 +203,11 @@ const JobDetailContainer = ({route, navigation}) => {
     }
   };
   const isapplied = appliedjobs.length > 0;
+
   const sendnotification = async () => {
     try {
       const token = await getfcmtoken();
-      const response = fetch(`${PUSH_NOTIFICATION_SERVER_URL}/sendNotification`, {
+      const response = await fetch(`${PUSH_NOTIFICATION_SERVER_URL}/sendNotification`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -216,11 +219,28 @@ const JobDetailContainer = ({route, navigation}) => {
         }),
       });
 
-      const data = await response.json();
+      // Check if the response is OK (status code 200-299)
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      // Check Content-Type header
+      const contentType = response.headers.get('Content-Type');
+      if (contentType && contentType.includes('application/json')) {
+        // If the response is JSON, parse it
+        const data = await response.json();
+        console.log('Notification response data:', data);
+      } else {
+        // Otherwise, handle it as plain text
+        const responseText = await response.text();
+        console.log('Raw response text:', responseText);
+      }
     } catch (error) {
       console.error('Error sending notification:', error);
     }
-    const data = {
+
+    // Prepare and send notification data to the collection
+    const notificationData = {
       title: 'New Job Application',
       message: `${user.displayName} has applied for your job ${title}`,
       userId: postedBy,
@@ -228,7 +248,12 @@ const JobDetailContainer = ({route, navigation}) => {
       time: new Date(),
       screen: 'MyJobScreen',
     };
-    await postCollectionDetails(envConfig.Notifications, data);
+
+    try {
+      await postCollectionDetails(envConfig.Notifications, notificationData);
+    } catch (error) {
+      console.error('Error posting notification details:', error);
+    }
   };
 
   const handleSubmitApplyJob = async curruserDetails => {
@@ -263,6 +288,7 @@ const JobDetailContainer = ({route, navigation}) => {
           setRefresh(false);
           return;
         } else {
+          console.log('User has already applied to this job', appliedJobData);
           let response = await postCollectionDetails(envConfig.AppliedJobs, appliedJobData);
 
           await updateDoc(doc(db, envConfig.Jobs, items.id), {
@@ -316,8 +342,7 @@ const JobDetailContainer = ({route, navigation}) => {
     setLoading(true);
     const selectedJobsCollection = collection(db, envConfig.SelectedJobs);
 
-    const q = query(selectedJobsCollection, where('candidateUserId', '==', user.userId), where('jobId', '==', id));
-
+    const q = query(selectedJobsCollection, where('jobId', '==', id));
     try {
       const querySnapshot = await getDocs(q);
 
@@ -357,9 +382,22 @@ const JobDetailContainer = ({route, navigation}) => {
             try {
               // Perform the delete operation
               await deleteDoc(doc(db, envConfig.Jobs, id));
-              // Optionally, you can show a success message or refresh the list of jobs
-              Alert.alert('Success', 'Job has been deleted successfully.');
-              navigation.navigate('HomeScreen');
+
+              // Show success message and handle "OK" button click
+              Alert.alert(
+                'Success',
+                'Job has been deleted successfully.',
+                [
+                  {
+                    text: 'OK',
+                    onPress: () => {
+                      // Optionally, refresh the list of jobs or perform other actions
+                      navigation.navigate('HomeScreen');
+                    },
+                  },
+                ],
+                {cancelable: false},
+              );
             } catch (error) {
               // Handle any errors that occur during the delete operation
               console.error('Error deleting job:', error);
@@ -421,6 +459,7 @@ const JobDetailContainer = ({route, navigation}) => {
       IsPaid={IsPaid}
       handleDeleteJob={handleDeleteJob}
       navigateToPostJobScreen={navigateToPostJobScreen}
+      jobApplicantsDetails={jobApplicantsDetails}
     />
   );
 };

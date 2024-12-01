@@ -1,14 +1,16 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
+import {Color, FontFamily} from '../../assets/static/globalStyles';
 
 const notificationstyles = () => {
   const screenWidth = Dimensions.get('window').width;
   const styles = StyleSheet.create({
-    notext: {
-      fontSize: heightToDp(2),
+    noData: {
+      fontSize: widthToDp(5),
       textAlign: 'center',
-      color: '#464183',
-      fontFamily: 'poppins-regular',
+      fontWeight: '500',
+      fontFamily: FontFamily.helvetica,
+      color: Color.colorSilver,
     },
     loadingContainer: {
       height: heightToDp(100),
@@ -44,7 +46,7 @@ const notificationstyles = () => {
       shadowRadius: 2,
     },
     title: {
-      fontSize: heightToDp(2.5),
+      fontSize: heightToDp(2.2),
       fontWeight: 'bold',
       color: '#464183',
       fontFamily: 'poppins-bold',
@@ -70,7 +72,7 @@ const notificationstyles = () => {
     button: {
       backgroundColor: '#464183',
       borderRadius: 20,
-      paddingVertical: heightToDp(1.5),
+      paddingVertical: heightToDp(1),
       paddingHorizontal: widthToDp(5),
       alignItems: 'center',
       justifyContent: 'center',

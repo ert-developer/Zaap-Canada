@@ -1,5 +1,5 @@
 import {Color, FontSize, Padding} from '../../assets/static/globalStyles';
-import {heightToDp, widthToDp} from '../../responsive/responsive';
+import {widthToDp} from '../../responsive/responsive';
 
 const {StyleSheet} = require('react-native');
 
@@ -140,18 +140,16 @@ const premiumAdsCartStyles = () => {
       // padding: 20,
       borderRadius: 5,
       alignItems: 'center',
-      width: widthToDp(90),
-      height: heightToDp(32),
+      paddingVertical: 10,
       // height: heightToDp(30),
     },
     modalSuccessText: {
       color: Color.colorIndigo2,
       fontWeight: 'bold',
       fontSize: FontSize.size_18,
-      marginVertical: widthToDp(2),
     },
     modalSuccessDescriptionText: {
-      FontSize: FontSize.size_10,
+      fontSize: FontSize.size_10,
       color: Color.colorBlack,
       textAlign: 'center',
       paddingHorizontal: Padding.p_30,

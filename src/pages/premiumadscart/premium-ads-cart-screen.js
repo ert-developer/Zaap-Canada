@@ -54,7 +54,7 @@ const PremiumAdsCartScreen = ({
               <CustomText text={'Success! Premium Ads Purchased'} style={styles.modalSuccessText} />
               <CustomText
                 text={
-                  'You ads now benefit from priority placement and enhanced visibility.\n Find premium ad details in My Account'
+                  'You ads now benefit from priority placement and enhanced visibility. Find premium ad details in My Account'
                 }
                 style={styles.modalSuccessDescriptionText}
               />

@@ -1,18 +1,6 @@
 import database from '@react-native-firebase/database';
-import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useMemo, useRef, useState} from 'react';
-import {
-  Animated,
-  FlatList,
-  Image,
-  KeyboardAvoidingView,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import {Animated, FlatList, Image, SafeAreaView, ScrollView, StatusBar, Text, TextInput, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import CustomText from '../../../atoms/text/textComponent';
 import CustomTouchableOpacity from '../../../molecules/touchable-opacity/touchable-opacity-component';
@@ -24,6 +12,7 @@ import HeaderComponent from '../../../atoms/header/headerComponent';
 import {getUserDetails, postCollectionDetails} from '../../../common/collection';
 import {envConfig} from '../../../assets/helpers/envApi';
 import moment from 'moment';
+import {KeyboardAvoidingView} from 'react-native';
 import {PUSH_NOTIFICATION_SERVER_URL} from '@env';
 
 const ChatScreenExample = ({data, allChat}) => {
@@ -210,61 +199,67 @@ const ChatScreenExample = ({data, allChat}) => {
   };
 
   return (
-    <SafeAreaView style={[styles.safeArea]}>
-      <StatusBar barStyle="light-content" />
-      <HeaderComponent text={data.displayName} navigateToHome />
-      <ScrollView
-        keyboardShouldPersistTaps="handled"
-        style={styles.scrollView}
-        contentContainerStyle={{flexGrow: 1}}
-        ref={scrollViewRef}>
-        <View style={styles.container}>
-          <View>
-            {renderAvatar()}
-            <CustomText text={data.displayName} style={styles.displayName} />
-          </View>
-          <CustomText
-            text={isServiceProvider === false || isServiceProvider === 'no' ? 'Customer' : 'Service Provider'}
-            style={styles.date}
-          />
-          <FlatList
-            ref={flatListRef}
-            data={allChat}
-            renderItem={renderMessage}
-            keyExtractor={keyExtractor}
-            onContentSizeChange={() => flatListRef.current.scrollToEnd({animated: true})}
-          />
+    <KeyboardAvoidingView
+      style={{flex: 1}}
+      behavior={'height'}
+      keyboardVerticalOffset={50} // Adjust based on your UI
+    >
+      <SafeAreaView style={[styles.safeArea]}>
+        <StatusBar barStyle="light-content" />
+        <HeaderComponent text={data.displayName} navigateToHome />
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          style={styles.scrollView}
+          contentContainerStyle={{flexGrow: 1}}
+          ref={scrollViewRef}>
+          <View style={styles.container}>
+            <View>
+              {renderAvatar()}
+              <CustomText text={data.displayName} style={styles.displayName} />
+            </View>
+            <CustomText
+              text={isServiceProvider === false || isServiceProvider === 'no' ? 'Customer' : 'Service Provider'}
+              style={styles.date}
+            />
+            <FlatList
+              ref={flatListRef}
+              data={allChat}
+              renderItem={renderMessage}
+              keyExtractor={keyExtractor}
+              onContentSizeChange={() => flatListRef.current.scrollToEnd({animated: true})}
+            />
 
-          <View style={{alignItems: 'center', paddingBottom: heightToDp(2)}}>
-            {data.isDisabled ? <CustomText text={'Chat is Disabled'} style={styles.chatDisable} /> : null}
+            <View style={{alignItems: 'center', paddingBottom: heightToDp(2)}}>
+              {data.isDisabled ? <CustomText text={'Chat is Disabled'} style={styles.chatDisable} /> : null}
+            </View>
           </View>
-        </View>
-      </ScrollView>
-      {data.isDisabled ? null : (
-        <View style={styles.input}>
-          <TextInput
-            style={[styles.inputField, {flex: 1}]}
-            placeholder="  Type a message..."
-            value={newMessage}
-            onChangeText={text => setNewMessage(text)}
-            editable={!data.isDisabled}
-            placeholderTextColor={Color.colorSilver}
-            multiline
-          />
+        </ScrollView>
+        {data.isDisabled ? null : (
+          <View style={styles.input}>
+            <TextInput
+              style={[styles.inputField, {flex: 1}]}
+              placeholder="  Type a message..."
+              value={newMessage}
+              onChangeText={text => setNewMessage(text)}
+              editable={!data.isDisabled}
+              placeholderTextColor={Color.colorSilver}
+              multiline
+            />
 
-          {/* Actions: Camera Icon + Send Button */}
-          <View style={[styles.row, styles.camsend]}>
-            <Camera />
-            <CustomTouchableOpacity
-              onPress={() => {
-                handleSend();
-              }}>
-              <CustomText text="Send" style={styles.sendButton} />
-            </CustomTouchableOpacity>
+            {/* Actions: Camera Icon + Send Button */}
+            <View style={[styles.row, styles.camsend]}>
+              <Camera />
+              <CustomTouchableOpacity
+                onPress={() => {
+                  handleSend();
+                }}>
+                <CustomText text="Send" style={styles.sendButton} />
+              </CustomTouchableOpacity>
+            </View>
           </View>
-        </View>
-      )}
-    </SafeAreaView>
+        )}
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 

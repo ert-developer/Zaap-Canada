@@ -218,6 +218,12 @@ const UpdateGovtIdDetailsContainer = () => {
             return false;
           }
           break;
+        case 'Date of Birth':
+          if (!formData.date_of_birth) {
+            setFormErrors(prevState => ({...prevState, date_of_birth: true}));
+            return false;
+          }
+          break;
         case 'ID Category':
           if (!formData.id_category) {
             setFormErrors(prevState => ({...prevState, id_category: true}));

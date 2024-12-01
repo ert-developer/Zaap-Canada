@@ -9,25 +9,16 @@ import {
   Text,
   FlatList,
   Dimensions,
+  Alert,
 } from 'react-native';
 import CustomText from '../../atoms/text/textComponent';
 import CustomButton from '../../atoms/button/buttonComponent';
 import JobDetailStyles from './job-detail-styles';
 import CustomImage from '../../atoms/image/imageComponent';
-import CategorySVG, {AppliedSVg} from '../../assets/svgImage/jobDetail';
+import CategorySVG from '../../assets/svgImage/jobDetail';
 import {JobDetailsLockSvg} from '../../assets/svgImage/jobDetail';
 import MapView, {Circle} from 'react-native-maps';
-import {
-  PostedBy,
-  Where,
-  JobDescription,
-  Budget,
-  JobCategory,
-  Like,
-  Share,
-  Detail,
-  RedHeartIcon,
-} from '../../assets/svgImage/jobDetail';
+import {Where, JobDescription, Budget, Like, Share, Detail, RedHeartIcon} from '../../assets/svgImage/jobDetail';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 import ClockSVG from '../../assets/svgImage/jobDetail/clock';
 import CalenderSVG from '../../assets/svgImage/jobDetail/calender';
@@ -36,7 +27,6 @@ import {useNavigation} from '@react-navigation/native';
 import ReportSVG from '../../assets/svgImage/jobDetail/report';
 import Carousel from 'react-native-snap-carousel';
 import Tooltip from 'react-native-walkthrough-tooltip';
-import {JobDetailsUnLockSvg} from '../../assets/svgImage/jobDetail';
 import Modal from 'react-native-modal';
 import ExpiredSVG from '../../assets/svgImage/jobDetail/expired';
 import HeaderComponent from '../../atoms/header/headerComponent';
@@ -86,6 +76,7 @@ const JobDetail = ({
   IsPaid,
   handleDeleteJob,
   navigateToPostJobScreen,
+  jobApplicantsDetails,
 }) => {
   const screenWidth = Dimensions.get('window').width;
   const [tooltipVisible, setTooltipVisible] = useState(false);
@@ -156,6 +147,14 @@ const JobDetail = ({
   const onPressShowAddImage = addImage => {
     setAddImage(addImage);
     setShowAddImage(true);
+  };
+
+  const handleEditJob = jobID => {
+    if (jobApplicantsDetails.length === 0) {
+      navigateToPostJobScreen(jobID);
+    } else {
+      Alert.alert('Warning', 'You cannot edit the job details if you have applicants for your job');
+    }
   };
 
   return (
@@ -540,7 +539,7 @@ const JobDetail = ({
                 title="EDIT"
                 style={styles.editBtn}
                 textStyle={{fontSize: heightToDp(2.5)}}
-                onPress={() => navigateToPostJobScreen(jobID)}
+                onPress={() => handleEditJob(jobID)}
               />
             </View>
           )
