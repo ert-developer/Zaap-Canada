@@ -2,7 +2,6 @@ import React, {useState, useEffect, useCallback} from 'react';
 import {View, TouchableOpacity, Text, ToastAndroid} from 'react-native';
 import CustomButton from '../../../atoms/button/buttonComponent';
 import CustomTouchableOpacity from '../../../molecules/touchable-opacity/touchable-opacity-component';
-import CustomImage from '../../../atoms/image/imageComponent';
 import CustomText from '../../../atoms/text/textComponent';
 import {
   HomeSVG,
@@ -42,6 +41,8 @@ export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const user = useSelector(state => state.Auth.user);
   const providerStatus = useSelector(state => state.providerverification.providerDetails);
+
+  const filtered = providerStatus.filter(each => each.provider_id === user.userId);
 
   const handleLogout = async () => {
     try {
@@ -162,7 +163,7 @@ export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
         <View style={{flexDirection: 'column', alignItems: 'flex-start'}}>
           <CustomText style={[styles.styleTitle]} text={user?.displayName} />
           <View>
-            {providerStatus[0]?.isverified === 'in progress' && (
+            {filtered[0]?.isverified === 'in progress' && (
               <CustomText style={styles.inProgressText} text="BGC In-Progress" />
             )}
           </View>
@@ -173,7 +174,7 @@ export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
 
   const IdentityVerificationContainer = useCallback(async () => {
     try {
-      if (providerStatus[0]?.isverified === 'in progress') {
+      if (filtered[0]?.isverified === 'in progress') {
         setModalVisible(true);
       } else {
         navigation.navigate('IdentityVerificationScreen');
@@ -181,14 +182,14 @@ export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
     } catch (error) {
       console.error('Error fetching user details:', error);
     }
-  }, [providerStatus]);
+  }, [filtered]);
 
   const appVersion = DeviceInfo.getVersion();
 
   const result = myprofile ? (
     <View style={{padding: 10}}>
       <ProfileCard />
-      {providerStatus[0]?.isverified === 'in progress' ? (
+      {filtered[0]?.isverified === 'in progress' ? (
         <CustomButton
           title={'JOIN AS A SERVICE PROVIDER'}
           style={styles.providerLabelDisabled}

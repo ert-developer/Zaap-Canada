@@ -44,6 +44,7 @@ import ContractorAgreement from '../termsandconditions/contractor-agreement';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {envConfig} from '../../assets/helpers/envApi';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const ProviderProfile = ({
   categoriesData,
@@ -515,32 +516,15 @@ const ProviderProfile = ({
                 fieldName={field.name.toLowerCase().split(' ').join('_')}
                 defaultOption={`Select ${field.name}`}
                 labelField={'name'}
-                valueField={['Account Type', 'ID TYPE', 'Gender'].includes(field.name) ? 'name' : 'isoCode'}
+                valueField={['Account Type', 'ID Type', 'Gender'].includes(field.name) ? 'name' : 'isoCode'}
                 pickerOptions={
                   field.name === 'Country'
                     ? countries
                     : field.name === 'State'
                     ? states
-                    : // : field.name === 'City'
-                    // ? cities
-                    field.name === 'Account Type'
+                    : field.name === 'Account Type'
                     ? accountType
-                    : // : field.name === 'ID Category'
-                    // ? govDocuments
-                    // field.name === 'ID TYPE'
-                    // ? (
-                    //     govDocuments.find(category => {
-                    //       return category.name === formData.id_category;
-                    //     })?.documents || []
-                    //   ).map(subcategory => {
-                    //     return {
-                    //       option: subcategory,
-                    //       name: subcategory,
-                    //       id: subcategory,
-                    //     };
-                    //   })
-                    // : Above is for canada
-                    field.name === 'ID Type'
+                    : field.name === 'ID Type'
                     ? indiaGovDocs
                     : field.name === 'Gender'
                     ? genderOptions
@@ -732,7 +716,7 @@ const ProviderProfile = ({
         return <BankDetailIconCompleted />;
 
       case 'BACKGROUND CHECK':
-        return <BackGroundCheckCompleted width={36} height={36} />;
+        return <BackGroundCheckCompleted />;
 
       case 'TERMS AND CONDITIONS':
         return <TCIConInProgress />;
@@ -825,8 +809,7 @@ const ProviderProfile = ({
                   height: 2.5,
                   backgroundColor: categoriesData[index].flag ? 'green' : '#ccc',
                   width: index === 0 ? widthToDp(17) : index === 1 ? widthToDp(16) : widthToDp(13),
-
-                  marginTop: heightToDp(6.2),
+                  marginTop: heightToDp(5.5),
                 }}
               />
             )}

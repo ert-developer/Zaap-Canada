@@ -78,7 +78,7 @@ const categoriesOptions = [
       },
       {name: 'Date of Birth', type: 'text', totalWidth: true},
       // {name: 'ID Category', type: 'picker', totalWidth: true},
-      {name: 'ID TYPE', type: 'picker', totalWidth: true},
+      {name: 'ID Type', type: 'picker', totalWidth: true},
       {name: 'ID Number', type: 'text', totalWidth: true},
       {name: 'ID Expiration Date', type: 'text', totalWidth: true},
       {name: 'FRONT', type: 'buttonIcon', totalWidth: false},
@@ -165,7 +165,7 @@ const ProviderProfileContainer = ({navigation}) => {
   const [cities, setCities] = useState([]);
   const [documents, setDocuments] = useState([]);
   const AuthUser = useSelector(state => state.Auth);
-  const {isLogIn, user, authError, isLogOut} = AuthUser;
+  const {user} = AuthUser;
   const [showVerificationModal, setShowVerificationModal] = useState(false);
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
@@ -202,7 +202,7 @@ const ProviderProfileContainer = ({navigation}) => {
   const isTenDigitNumber = value => /^\d{0,10}$/.test(value);
   const isEmailValid = value => /^[^\s@]*@[^\s@]*\.[^\s@]*$/.test(value);
   const nameRegex = /^[a-zA-Z\s]*$/;
-  const isSixDigitNumber = value => /^\d{0,6}$/.test(value);
+  // const isSixDigitNumber = value => /^\d{0,6}$/.test(value);
 
   const onHandleInputChange = (field, value) => {
     setFormErrors(prevState => ({...prevState, [field]: false}));
