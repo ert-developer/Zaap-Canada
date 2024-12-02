@@ -18,7 +18,7 @@ const ServiceProviderVerificationModal = ({closeModal}) => {
   // };
   return (
     <View>
-      <Modal isVisible={true} onBackdropPress={closeModal} style={styles.modalContainer}>
+      <Modal isVisible={true} onBackdropPress={closeModal} style={styles.modalContainer} onBackButtonPress={closeModal}>
         <View style={styles.modalContent}>
           <View style={styles.firstTextContainer}>
             <View style={styles.container}>
@@ -60,9 +60,10 @@ const styles = StyleSheet.create({
   secondText: {
     fontSize: heightToDp(1.6),
     letterSpacing: widthToDp(0.2),
+    color: Color.colorBlack,
     fontFamily: 'Helvetica',
     textAlign: 'center',
-    padding: widthToDp(2),
+    // padding: widthToDp(2),
     paddingHorizontal: widthToDp(10),
   },
   secondTextContainer: {
@@ -80,18 +81,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 19,
-    width: widthToDp(85),
-    height: heightToDp(35),
+    paddingHorizontal: 10,
+    paddingVertical: 15,
   },
   firstText: {
     fontSize: heightToDp(2.2),
     textAlign: 'center',
     fontFamily: 'Helvetica',
     color: Color.colorIndigo2,
-    padding: widthToDp(2),
-    paddingHorizontal: widthToDp(15),
     fontWeight: '800',
-    // marginBottom: heightToDp(0.3),
+    marginBottom: 10,
     // letterSpacing: widthToDp(0.1),
   },
   bactohome: {
@@ -101,13 +100,13 @@ const styles = StyleSheet.create({
     color: '#fff',
     borderRadius: 8,
     backgroundColor: Color.colorIndigo2,
-    width: heightToDp(40),
+    width: '60%',
     padding: heightToDp(1),
     borderRadius: heightToDp(7),
     fontSize: 16,
     letterSpacing: 0.4,
     borderRadius: heightToDp(1),
-    // marginTop: heightToDp(1),
+    marginTop: heightToDp(1),
   },
 });
 
