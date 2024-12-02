@@ -44,7 +44,7 @@ const notificationstyles = () => {
       shadowRadius: 2,
     },
     title: {
-      fontSize: heightToDp(2.5),
+      fontSize: heightToDp(2.2),
       fontWeight: 'bold',
       color: '#464183',
       fontFamily: 'poppins-bold',
@@ -70,7 +70,7 @@ const notificationstyles = () => {
     button: {
       backgroundColor: '#464183',
       borderRadius: 20,
-      paddingVertical: heightToDp(1.5),
+      paddingVertical: heightToDp(1),
       paddingHorizontal: widthToDp(5),
       alignItems: 'center',
       justifyContent: 'center',

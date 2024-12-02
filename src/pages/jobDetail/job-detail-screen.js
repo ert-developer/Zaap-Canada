@@ -9,6 +9,7 @@ import {
   Text,
   FlatList,
   Dimensions,
+  Alert,
 } from 'react-native';
 import CustomText from '../../atoms/text/textComponent';
 import CustomButton from '../../atoms/button/buttonComponent';
@@ -84,6 +85,7 @@ const JobDetail = ({
   IsPaid,
   handleDeleteJob,
   navigateToPostJobScreen,
+  jobApplications,
 }) => {
   const screenWidth = Dimensions.get('window').width;
   const [tooltipVisible, setTooltipVisible] = useState(false);
@@ -139,6 +141,14 @@ const JobDetail = ({
   const onPressShowAddImage = addImage => {
     setAddImage(addImage);
     setShowAddImage(true);
+  };
+
+  const handleEditJob = jobID => {
+    if (jobApplicantsDetails.length === 0) {
+      navigateToPostJobScreen(jobID);
+    } else {
+      Alert.alert('Warning', 'You cannot edit the job details if you have applicants for your job');
+    }
   };
 
   return (
@@ -235,13 +245,10 @@ const JobDetail = ({
                     <View>
                       <View style={{flexDirection: 'row', alignItems: 'center'}}>
                         <CategorySVG />
-                        <CustomText text={category} style={{marginLeft: 4, fontWeight: '400', fontSize: 10}} />
-                      </View>
-                      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                        <CustomText
-                          text={subCategory}
-                          style={{marginLeft: widthToDp(6), fontWeight: '400', fontSize: 10}}
-                        />
+                        <View>
+                          <CustomText text={category} style={{marginLeft: 4, fontWeight: '400', fontSize: 10}} />
+                          <CustomText text={subCategory} style={{marginLeft: 4, fontWeight: '400', fontSize: 10}} />
+                        </View>
                       </View>
                     </View>
                   ) : (
@@ -249,7 +256,7 @@ const JobDetail = ({
                       <CategorySVG />
                       <CustomText text={category} style={{marginLeft: 4, fontWeight: '400', fontSize: 10}} />
                       <CustomText text={'-'} />
-                      <CustomText text={subCategory} style={{marginLeft: 5, fontWeight: '400', fontSize: 10}} />
+                      <CustomText text={subCategory} style={{marginLeft: 4, fontWeight: '400', fontSize: 10}} />
                     </View>
                   )}
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -264,10 +271,10 @@ const JobDetail = ({
                 <View style={styles.dynamicDescription}>
                   <View style={styles.conatiner}>
                     <JobDescription />
-                    <CustomText text={'Work Description'} style={styles.textSTyle} />
-                  </View>
-                  <View style={styles.desc}>
-                    <CustomText text={description} style={styles.dynamicTextStyle} />
+                    <View>
+                      <CustomText text={'Work Description'} style={styles.textSTyle} />
+                      <CustomText text={description} style={styles.dynamicTextStyle} />
+                    </View>
                   </View>
                 </View>
               </View>
@@ -276,10 +283,10 @@ const JobDetail = ({
                 <View>
                   <View style={styles.conatiner}>
                     <Budget />
-                    <CustomText text={'Budget'} style={styles.textSTyle} />
-                  </View>
-                  <View style={styles.desc}>
-                    <CustomText text={`$ ${price}`} style={styles.dynamicTextStyle} />
+                    <View>
+                      <CustomText text={'Budget'} style={styles.textSTyle} />
+                      <CustomText text={`$ ${price}`} style={styles.dynamicTextStyle} />
+                    </View>
                   </View>
                 </View>
               </View>
@@ -295,7 +302,26 @@ const JobDetail = ({
                         width: '90%',
                         justifyContent: 'space-between',
                       }}>
-                      <CustomText text={'Address'} style={styles.textSTyle} />
+                      <View>
+                        <CustomText text={'Address'} style={styles.textSTyle} />
+                        {loading ? (
+                          <ActivityIndicator color={'black'} size="large" />
+                        ) : isSelected[0] ? (
+                          <CustomText text={address} style={[styles.dynamicTextStyle, styles.location]} />
+                        ) : (
+                          <View>
+                            {/* <CustomText text={'*'.repeat(location.length)} /> */}
+                            {/* <CustomText text={'*'.repeat(location)} /> */}
+
+                            <CustomText
+                              // text={'Address visible only after getting selected for a job.'}
+                              text={`${areaDesc}, ${location.split(',')[0]}`}
+                              style={styles.locationAndAreaTextStyles}
+                            />
+                          </View>
+                        )}
+                      </View>
+
                       {/* <JobDetailsLockSvg /> */}
                       {isSelected[0] ? (
                         <Image source={require('../../assets/unlocked.png')} style={styles.unlocked} />
@@ -316,24 +342,7 @@ const JobDetail = ({
                       )}
                     </View>
                   </View>
-                  <View style={styles.desc}>
-                    {loading ? (
-                      <ActivityIndicator color={'black'} size="large" />
-                    ) : isSelected[0] ? (
-                      <CustomText text={address} style={[styles.dynamicTextStyle, styles.location]} />
-                    ) : (
-                      <View>
-                        {/* <CustomText text={'*'.repeat(location.length)} /> */}
-                        {/* <CustomText text={'*'.repeat(location)} /> */}
-
-                        <CustomText
-                          // text={'Address visible only after getting selected for a job.'}
-                          text={`${areaDesc}, ${location.split(',')[0]}`}
-                          style={styles.locationAndAreaTextStyles}
-                        />
-                      </View>
-                    )}
-                  </View>
+                  <View style={styles.desc}></View>
                 </View>
               </View>
               <View>
@@ -341,10 +350,10 @@ const JobDetail = ({
                 <View style={styles.containerpadding}>
                   <View style={[styles.conatiner, {marginTop: heightToDp(1)}]}>
                     <CalenderSVG />
-                    <CustomText text={'Date'} style={styles.textSTyle} />
-                  </View>
-                  <View style={styles.desc}>
-                    <CustomText text={startdate} style={[styles.dynamicTextStyle, styles.location]} />
+                    <View>
+                      <CustomText text={'Date'} style={styles.textSTyle} />
+                      <CustomText text={startdate} style={[styles.dynamicTextStyle, styles.location]} />
+                    </View>
                   </View>
                 </View>
               </View>
@@ -353,10 +362,10 @@ const JobDetail = ({
                 <View>
                   <View style={[styles.conatiner, {marginTop: heightToDp(1)}]}>
                     <ClockSVG />
-                    <CustomText text={'Time'} style={styles.textSTyle} />
-                  </View>
-                  <View style={styles.desc}>
-                    <CustomText text={starttime} style={[styles.dynamicTextStyle, styles.location]} />
+                    <View>
+                      <CustomText text={'Time'} style={styles.textSTyle} />
+                      <CustomText text={starttime} style={[styles.dynamicTextStyle, styles.location]} />
+                    </View>
                   </View>
                 </View>
               </View>
@@ -483,7 +492,7 @@ const JobDetail = ({
                 title="EDIT"
                 style={styles.editBtn}
                 textStyle={{fontSize: heightToDp(2.5)}}
-                onPress={() => navigateToPostJobScreen(jobID)}
+                onPress={() => handleEditJob(jobID)}
               />
             </View>
           )

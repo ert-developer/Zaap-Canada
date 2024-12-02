@@ -140,15 +140,12 @@ const premiumAdsCartStyles = () => {
       // padding: 20,
       borderRadius: 5,
       alignItems: 'center',
-      width: widthToDp(90),
-      height: heightToDp(25),
-      // height: heightToDp(30),
+      paddingVertical: 10,
     },
     modalSuccessText: {
       color: Color.colorIndigo2,
       fontWeight: 'bold',
       fontSize: FontSize.size_18,
-      marginVertical: widthToDp(2),
     },
     modalSuccessDescriptionText: {
       FontSize: FontSize.size_10,

@@ -106,8 +106,8 @@ function ChatStyles() {
       alignItems: 'center',
       backgroundColor: '#E6E6E6',
       borderRadius: Border.br_24,
-      maxHeight: heightToDp(7),
-      marginVertical: 5,
+      height: heightToDp(6),
+      maxHeight: 85,
       position: 'sticky',
       justifyContent: 'space-between',
       width: widthToDp(90),
@@ -125,6 +125,7 @@ function ChatStyles() {
     inputField: {
       //   width: widthToDp(90),
       marginLeft: Margin.m_10,
+      padding: 10,
     },
   });
 

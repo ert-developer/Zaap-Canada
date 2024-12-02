@@ -88,7 +88,9 @@ const PremiumAdsScreen = ({isSpotlightOrFeatured, setIsSpotlightOrFeatured, prem
             />
             <View style={styles.availableAdsContainer}>
               <View style={styles.availableAndUsedCon}>
-                <CustomText text={'Available'} style={styles.premiumAdsAvailableStatus} />
+                <View style={{borderBottomWidth: 1, overflow: 'hidden', borderBottomColor: Color.colorSilver}}>
+                  <CustomText text={'Available'} style={styles.premiumAdsAvailableStatus} />
+                </View>
                 <CustomText
                   text={`${
                     isSpotlightOrFeatured

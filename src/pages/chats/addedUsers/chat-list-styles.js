@@ -9,7 +9,7 @@ const screenHeight = heightToDp(105);
 const styles = StyleSheet.create({
   container: {
     width: screenWidth - 32,
-    minHeight: screenHeight - 190,
+    minHeight: screenHeight - 270,
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
     elevation: 3,
@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     margin: 16,
+    borderColor: Color.colorSilver,
+    borderWidth: 1,
   },
   textItem: {
     color: 'red',

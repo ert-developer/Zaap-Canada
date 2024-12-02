@@ -9,7 +9,7 @@ function JobDetailStyles() {
       fontFamily: 'Helvetica',
       fontWeight: '700',
       color: Color.colorBlack,
-      fontSize: widthToDp(6),
+      fontSize: widthToDp(5.5),
       marginBottom: heightToDp(1.5),
     },
     unlocked: {
@@ -20,8 +20,9 @@ function JobDetailStyles() {
       color: '#000000',
       fontFamily: 'Helvetica',
       fontWeight: '400',
-      fontSize: heightToDp(2),
+      fontSize: 16,
       marginTop: heightToDp(0.5),
+      paddingLeft: widthToDp(2),
     },
     location: {
       width: widthToDp(49),
@@ -189,6 +190,7 @@ function JobDetailStyles() {
     },
     locationAndAreaTextStyles: {
       fontSize: widthToDp(3),
+      paddingLeft: widthToDp(2),
     },
     applyBtnStyles: {
       width: '45%',

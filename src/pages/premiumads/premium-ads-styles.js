@@ -62,6 +62,7 @@ const premiumAdsStyles = () => {
     },
     premiumAdsAvailableStatus: {
       borderBottomWidth: 1,
+      overflow: 'hidden',
       borderBottomColor: Color.colorSilver,
       textAlign: 'center',
       color: Color.colorBlack,

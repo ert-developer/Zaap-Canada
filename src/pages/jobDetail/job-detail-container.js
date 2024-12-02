@@ -111,8 +111,9 @@ const JobDetailContainer = ({route, navigation}) => {
   const [refresh, setRefresh] = useState(false);
   const [postedCustomer, setPostedUser] = useState([]);
   const dispatch = useDispatch();
-  const jobDetails = useSelector(state => state.checkProfileJob.jobDetails); // Job Details
-  const profiledetail = useSelector(state => state.applicantProfileDetails.profileDetails); //service provider profile details
+  // const jobDetails = useSelector(state => state.checkProfileJob.jobDetails); // Job Details
+  const {jobs} = useSelector(state => state.home);
+  const jobApplications = jobs.filter(each => each.jobApplications && each.id === id).map(each => each.jobApplications);
 
   useEffect(() => {
     const fetchPostedCustomerDetails = async postedBy => {
@@ -420,6 +421,7 @@ const JobDetailContainer = ({route, navigation}) => {
       IsPaid={IsPaid}
       handleDeleteJob={handleDeleteJob}
       navigateToPostJobScreen={navigateToPostJobScreen}
+      jobApplications={jobApplications}
     />
   );
 };
