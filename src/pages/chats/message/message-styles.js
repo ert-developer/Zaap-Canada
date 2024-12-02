@@ -106,7 +106,7 @@ function ChatStyles() {
       alignItems: 'center',
       backgroundColor: '#E6E6E6',
       borderRadius: Border.br_24,
-      maxHeight: heightToDp(7),
+      maxHeight: 87,
       position: 'fixed',
       //   left: Margin.m_10,
       justifyContent: 'space-between',

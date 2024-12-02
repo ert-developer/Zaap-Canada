@@ -207,7 +207,7 @@ export const CustomerCustomDrawerContent = ({props, state, navigation}) => {
 
       <View style={{marginTop: heightToDp(2)}}>
         <DrawerItemWithArrow
-          label="Home"
+          label=" Home"
           icon={() => <HomeSVG />}
           onPress={() => navigation.navigate('HomeScreenStack')}
           isSelected={state.routes[state.index].name === 'HomeScreenStack'}

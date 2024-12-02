@@ -32,7 +32,7 @@ const ServiceCompletedNodal = ({isVisiblecompleted, serviceCompleteClose}) => {
               <CustomText text={'Great Work! Your earnings'} style={styles.successPopupHead} />
               <CustomText text={'will be deposited within 48 hours'} style={styles.successPopupHead} />
             </View>
-            <Text style={styles.successPopupdesc}>Maxiumize Your Income by</Text>
+            <Text style={styles.successPopupdesc}>Maximize Your Income by</Text>
             <Text style={styles.successPopupdesc}>Exploring More Tasks Nearby</Text>
           </View>
 

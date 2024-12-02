@@ -438,7 +438,7 @@ const HomeContainer = ({navigation}) => {
           ...doc.data(),
         }));
         if (categoryDatasearchData.length === 0) {
-          setcategoriesSearlist([{id: 'no-data', name: 'No such cateogry found'}]);
+          setcategoriesSearlist([{id: 'no-data', name: `Oops! It seems we don't have this category yet`}]);
         } else {
           setcategoriesSearlist(categoryDatasearchData);
         }
