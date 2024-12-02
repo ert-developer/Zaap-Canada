@@ -10,37 +10,20 @@ import {
   Pressable,
   ActivityIndicator,
   Text,
-  Alert,
   TouchableOpacity,
 } from 'react-native';
 import CustomButton from '../../atoms/button/buttonComponent';
 import CustomImage from '../../atoms/image/imageComponent';
 import ProfileStyles from './profile-styles';
-import CustomTouchableOpacity from '../../molecules/touchable-opacity/touchable-opacity-component';
-import {
-  CalenderSVG,
-  CameraIcon,
-  GalleryIcon,
-  LocationSVG,
-  PersonSVG,
-  ProfilePopupSVG,
-  StartSVG,
-} from '../../assets/svgImage/profile';
+import {CalenderSVG, CameraIcon, GalleryIcon} from '../../assets/svgImage/profile';
 import TextAreaInputComponent from '../../atoms/textAreaInput/textAreaInput-component';
 import TextInputWithLabelComponent from '../../organisms/textInputWithLabel/textInputWithLabel-component';
 import CustomText from '../../atoms/text/textComponent';
-import CustomPicker from '../../atoms/picker/picker-component';
-import DeleteCustomImage from '../../organisms/deleteImage/deleteImage-component';
 import CustomModelComponent from '../../atoms/model/model-component';
 import ButtonIconLabelComponent from '../../atoms/buttonIconlabel/buttonIconlabel-component';
-import {BackIcon} from '../../assets/svgImage/sideDrawer';
-import ButtonIconComponent from '../../atoms/buttonIcon/buttonIcon-component';
-import {useSelector} from 'react-redux';
 import DropdownSearchComponent from '../../organisms/dropDownSearch/dropDownSearch-component';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import TextInputWithIconComponent from '../../organisms/textInputWithIcon/textInputWithIcon-component';
 import HeaderComponent from '../../atoms/header/headerComponent';
-import JobList from '../../organisms/jobList/jobList';
 import {BlueCameraIcon} from '../../assets/svgImage/profile';
 import Modal from 'react-native-modal';
 import FastImage from 'react-native-fast-image';

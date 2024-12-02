@@ -536,6 +536,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Zaap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Zaap Canada";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -571,6 +572,7 @@
 				DEVELOPMENT_TEAM = Y7QKTB3W94;
 				INFOPLIST_FILE = Zaap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Zaap Canada";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

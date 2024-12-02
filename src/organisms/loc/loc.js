@@ -1,9 +1,8 @@
 // CurrentLocation.js
 
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import Geolocation from 'react-native-geolocation-service';
 import Geocoding from 'react-native-geocoding';
-import CustomText from '../../atoms/text/textComponent';
 import {Alert, StyleSheet} from 'react-native';
 import {Color, FontFamily, FontSize, Margin} from '../../assets/static/globalStyles';
 import {check, PERMISSIONS, request, openSettings} from 'react-native-permissions';
