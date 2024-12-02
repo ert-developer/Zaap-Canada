@@ -45,7 +45,7 @@ switch (envType) {
       myjobs: 'myjobs_dev',
       users: 'users_dev',
       images: 'images_dev',
-      vertification_images: 'vertification_images_dev',
+      verification_images: 'verification_images_dev',
     };
     break;
   case 'uat':
@@ -84,7 +84,7 @@ switch (envType) {
       myjobs: 'myjobs_uat',
       users: 'users_uat',
       images: 'images_uat',
-      vertification_images: 'vertification_images_uat',
+      verification_images: 'verification_images_uat',
     };
     break;
   case 'prod':
@@ -123,7 +123,7 @@ switch (envType) {
       myjobs: 'myjobs',
       users: 'users',
       images: 'images',
-      vertification_images: 'vertification_images',
+      verification_images: 'verification_images',
     };
     break;
   default:
