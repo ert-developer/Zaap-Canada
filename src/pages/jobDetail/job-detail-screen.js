@@ -18,17 +18,7 @@ import CustomImage from '../../atoms/image/imageComponent';
 import CategorySVG from '../../assets/svgImage/jobDetail';
 import {JobDetailsLockSvg} from '../../assets/svgImage/jobDetail';
 import MapView, {Circle} from 'react-native-maps';
-import {
-  PostedBy,
-  Where,
-  JobDescription,
-  Budget,
-  JobCategory,
-  Like,
-  Share,
-  Detail,
-  RedHeartIcon,
-} from '../../assets/svgImage/jobDetail';
+import {Where, JobDescription, Budget, Like, Share, Detail, RedHeartIcon} from '../../assets/svgImage/jobDetail';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
 import ClockSVG from '../../assets/svgImage/jobDetail/clock';
 import CalenderSVG from '../../assets/svgImage/jobDetail/calender';
@@ -37,7 +27,6 @@ import {useNavigation} from '@react-navigation/native';
 import ReportSVG from '../../assets/svgImage/jobDetail/report';
 import Carousel from 'react-native-snap-carousel';
 import Tooltip from 'react-native-walkthrough-tooltip';
-import {JobDetailsUnLockSvg} from '../../assets/svgImage/jobDetail';
 import Modal from 'react-native-modal';
 import ExpiredSVG from '../../assets/svgImage/jobDetail/expired';
 import HeaderComponent from '../../atoms/header/headerComponent';

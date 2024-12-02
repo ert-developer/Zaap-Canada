@@ -249,7 +249,7 @@ const ChatScreenExample = ({data, allChat}) => {
           <View style={styles.input}>
             <TextInput
               style={[styles.inputField, {flex: 1}]}
-              placeholder="  Type a message..."
+              placeholder="Type a message..."
               value={newMessage}
               onChangeText={text => setNewMessage(text)}
               editable={!data.isDisabled}

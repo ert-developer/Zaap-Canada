@@ -1,5 +1,16 @@
 import Modal from 'react-native-modal';
-import {View, StyleSheet, Image, Text, Alert, TextInput, TouchableOpacity, Linking} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  Alert,
+  TextInput,
+  TouchableOpacity,
+  Linking,
+  ScrollView,
+  KeyboardAvoidingView,
+} from 'react-native';
 import {useState, useEffect} from 'react';
 import CustomText from '../../atoms/text/textComponent';
 import {heightToDp, widthToDp} from '../../responsive/responsive';
@@ -900,327 +911,350 @@ const CustomerSidePaymentModel = () => {
           }}
           style={{height: '100%', width: '100%'}}></Text>
         <View style={styles.modalContent}>
-          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', margin: 15}}>
-            <View style={styles.profilePicContainer}>
-              {/* <Profileimageeee /> */}
-              {/* {providerStatus[0]?.imageURL ? (
+          <KeyboardAvoidingView behavior={'padding'}>
+            <ScrollView>
+              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', margin: 15}}>
+                <View style={styles.profilePicContainer}>
+                  {/* <Profileimageeee /> */}
+                  {/* {providerStatus[0]?.imageURL ? (
                 <View style={styles.imageContainer}>
                   <Image source={{uri: providerStatus[0]?.imageURL}} style={styles.image} />
                 </View>
               ) : (
                 <CustomText text={result} style={styles.namelogo} />
               )} */}
-              {!providerStatus[0]?.personal_photo ? (
-                <Image src={providerStatus[0]?.imageURL} style={styles.image} />
-              ) : (
-                <Image src={providerStatus[0]?.personal_photo[0]} style={styles.image} />
-              )}
+                  {!providerStatus[0]?.personal_photo ? (
+                    <Image src={providerStatus[0]?.imageURL} style={styles.image} />
+                  ) : (
+                    <Image src={providerStatus[0]?.personal_photo[0]} style={styles.image} />
+                  )}
+                  <View>
+                    <CustomText text={providerStatus[0]?.legal_name_on_id} style={styles.heading} />
+                    <Text style={styles.subHeading}>Service Provider</Text>
+                  </View>
+                </View>
+                <View style={{flexDirection: 'row', gap: 20}}>
+                  <TouchableOpacity onPress={handlePhoneIconPress}>
+                    <Call />
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={handleChatIconPress}>
+                    <MessageIcon opacity={chatIconOpacity} />
+                  </TouchableOpacity>
+                </View>
+              </View>
               <View>
-                <CustomText text={providerStatus[0]?.legal_name_on_id} style={styles.heading} />
-                <Text style={styles.subHeading}>Service Provider</Text>
-              </View>
-            </View>
-            <View style={{flexDirection: 'row', gap: 20}}>
-              <TouchableOpacity onPress={handlePhoneIconPress}>
-                <Call />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={handleChatIconPress}>
-                <MessageIcon opacity={chatIconOpacity} />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View>
-            <View>
-              <DottedLines />
-              <View style={styles.bookingConfirmedSvgContainer}>
-                {showFeedback ? (
-                  <FeedbackBannerSvg />
-                ) : isWorkDone ? (
-                  <BookingConfirm />
-                ) : isOtpValid ? (
-                  <InProgresBannersSvg />
-                ) : (
-                  <BookingConfirm />
-                )}
-                <CustomText
-                  text={
-                    showFeedback
-                      ? 'SERVICE FEEDBACK'
-                      : isWorkDone
-                      ? 'WORK COMPLETED'
-                      : isOtpValid
-                      ? 'IN-PROGRESS'
-                      : 'BOOKING CONFIRMED'
-                  }
-                  style={styles.bookingCOnfirmedText}
-                />
-              </View>
-            </View>
-            <View style={{padding: heightToDp(2)}}>
-              {showFeedback ? (
                 <View>
-                  <View>
-                    <CustomText text={'Rate the Service Provider'} style={{color: '#545454', fontFamily: 'Roboto'}} />
-                    <View style={{flexDirection: 'row', alignItems: 'center', marginVertical: heightToDp(1)}}>
-                      <AirbnbRating
-                        count={5}
-                        reviews={reviews}
-                        defaultRating={rating}
-                        size={30}
-                        onFinishRating={handleRatingChange}
-                        starStyle={{marginHorizontal: 6}}
-                        showRating={false}
-                      />
-                      <Text style={{marginLeft: 10}}>{reviews[Math.floor(rating) - 1]}</Text>
-                    </View>
-                  </View>
-                  <View
-                    style={{
-                      marginVertical: heightToDp(3),
-                      borderTopWidth: 1,
-                      borderTopColor: Color.colorSilver,
-                      borderBottomWidth: 1,
-                      borderBottomColor: Color.colorSilver,
-                      marginBottom: heightToDp(2),
-                      marginTop: heightToDp(2),
-                      paddingBottom: heightToDp(4),
-                      paddingTop: heightToDp(2),
-                    }}>
+                  <DottedLines />
+                  <View style={styles.bookingConfirmedSvgContainer}>
+                    {showFeedback ? (
+                      <FeedbackBannerSvg />
+                    ) : isWorkDone ? (
+                      <BookingConfirm />
+                    ) : isOtpValid ? (
+                      <InProgresBannersSvg />
+                    ) : (
+                      <BookingConfirm />
+                    )}
                     <CustomText
-                      text={'Testimonials'}
-                      style={{color: '#545454', fontSize: heightToDp(2.1), marginBottom: heightToDp(1)}}
+                      text={
+                        showFeedback
+                          ? 'SERVICE FEEDBACK'
+                          : isWorkDone
+                          ? 'WORK COMPLETED'
+                          : isOtpValid
+                          ? 'IN-PROGRESS'
+                          : 'BOOKING CONFIRMED'
+                      }
+                      style={styles.bookingCOnfirmedText}
                     />
-
-                    <View style={{width: '100%', height: 90, backgroundColor: 'white', borderRadius: heightToDp(1)}}>
-                      <TextAreaInputComponent
+                  </View>
+                </View>
+                <View style={{padding: heightToDp(2)}}>
+                  {showFeedback ? (
+                    <View>
+                      <View>
+                        <CustomText
+                          text={'Rate the Service Provider'}
+                          style={{color: '#545454', fontFamily: 'Roboto'}}
+                        />
+                        <View style={{flexDirection: 'row', alignItems: 'center', marginVertical: heightToDp(1)}}>
+                          <AirbnbRating
+                            count={5}
+                            reviews={reviews}
+                            defaultRating={rating}
+                            size={30}
+                            onFinishRating={handleRatingChange}
+                            starStyle={{marginHorizontal: 6}}
+                            showRating={false}
+                          />
+                          <Text style={{marginLeft: 10}}>{reviews[Math.floor(rating) - 1]}</Text>
+                        </View>
+                      </View>
+                      <View
                         style={{
-                          flex: 1,
-                          fontSize: 16,
-                          borderWidth: 1,
-                          borderColor: 'gray',
-                          borderRadius: 5,
-                          padding: 10, // Optional: adds padding to make it look cleaner
-                          textAlignVertical: 'top',
-                        }}
-                        placeholder="Enter text here"
-                        onChangeText={onChangeText}
-                        numberOfLines={4}
-                      />
-                    </View>
-                  </View>
-                  <View>
-                    <CustomText
-                      text={'Tip (Optional)'}
-                      style={{color: '#545454', fontFamily: 'Roboto', marginBottom: heightToDp(0.3)}}
-                    />
-                    <Text style={{color: '#545454', fontFamily: 'Roboto', fontSize: heightToDp(1.4)}}>
-                      Make their day a little brighter with your generosity,
-                    </Text>
-                    <Text style={{color: '#545454', fontFamily: 'Roboto', fontSize: heightToDp(1.4)}}>
-                      100% of what you leave goes directly to your provider
-                    </Text>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        marginVertical: heightToDp(2),
-                      }}>
-                      {percentageOptions.map(({percentage, label}, index) => (
-                        <TouchableOpacity key={index} onPress={() => handleTextClick(percentage)}>
-                          <View
+                          marginVertical: heightToDp(3),
+                          borderTopWidth: 1,
+                          borderTopColor: Color.colorSilver,
+                          borderBottomWidth: 1,
+                          borderBottomColor: Color.colorSilver,
+                          marginBottom: heightToDp(2),
+                          marginTop: heightToDp(2),
+                          paddingBottom: heightToDp(4),
+                          paddingTop: heightToDp(2),
+                        }}>
+                        <CustomText
+                          text={'Testimonials'}
+                          style={{color: '#545454', fontSize: heightToDp(2.1), marginBottom: heightToDp(1)}}
+                        />
+
+                        <View
+                          style={{width: '100%', height: 90, backgroundColor: 'white', borderRadius: heightToDp(1)}}>
+                          <TextAreaInputComponent
                             style={{
+                              flex: 1,
+                              fontSize: 16,
                               borderWidth: 1,
-                              borderColor: selectedText === percentage ? 'green' : '#D9D9D9',
-                              padding: heightToDp(1.5),
-                              borderRadius: heightToDp(0.5),
+                              borderColor: 'gray',
+                              borderRadius: 5,
+                              padding: 10, // Optional: adds padding to make it look cleaner
+                              textAlignVertical: 'top',
+                            }}
+                            placeholder="Enter text here"
+                            onChangeText={onChangeText}
+                            numberOfLines={4}
+                          />
+                        </View>
+                      </View>
+                      <View>
+                        <CustomText
+                          text={'Tip (Optional)'}
+                          style={{color: '#545454', fontFamily: 'Roboto', marginBottom: heightToDp(0.3)}}
+                        />
+                        <Text style={{color: '#545454', fontFamily: 'Roboto', fontSize: heightToDp(1.4)}}>
+                          Make their day a little brighter with your generosity,
+                        </Text>
+                        <Text style={{color: '#545454', fontFamily: 'Roboto', fontSize: heightToDp(1.4)}}>
+                          100% of what you leave goes directly to your provider
+                        </Text>
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            marginVertical: heightToDp(2),
+                          }}>
+                          {percentageOptions.map(({percentage, label}, index) => (
+                            <TouchableOpacity key={index} onPress={() => handleTextClick(percentage)}>
+                              <View
+                                style={{
+                                  borderWidth: 1,
+                                  borderColor: selectedText === percentage ? 'green' : '#D9D9D9',
+                                  padding: heightToDp(1.5),
+                                  borderRadius: heightToDp(0.5),
+                                }}>
+                                <Text
+                                  style={{
+                                    color: selectedText === percentage ? 'green' : '#000000',
+                                    fontWeight: 'bold',
+                                    fontSize: heightToDp(2),
+                                  }}>
+                                  {showAmount && selectedText === percentage && percentage !== 'Others'
+                                    ? `$${(jobDetails.salary * percentage) / 100}`
+                                    : label}
+                                </Text>
+                              </View>
+                            </TouchableOpacity>
+                          ))}
+                        </View>
+
+                        {selectedText === 'Others' && (
+                          <View style={{alignItems: 'center', marginBottom: heightToDp(2)}}>
+                            <TextInput
+                              value={customText}
+                              onChangeText={text => {
+                                // Remove non-numeric characters
+                                const numericText = text.replace(/[^0-9]/g, '');
+                                setCustomText(numericText);
+                              }}
+                              placeholder="Enter custom text"
+                              placeholderTextColor={Color.colorSilver}
+                              style={{
+                                borderWidth: 1,
+                                borderColor: '#D9D9D9',
+                                padding: 10,
+                                borderRadius: 10,
+                                width: 150,
+                                alignItems: 'center',
+                              }}
+                              keyboardType="numeric" // Optional: this will open numeric keypad
+                            />
+                          </View>
+                        )}
+
+                        <CustomButton
+                          title={
+                            paymentLoader ? (
+                              <ActivityIndicator
+                                size={30}
+                                color={'white'}
+                                style={{justifyContent: 'center', alignItems: 'center'}}
+                              />
+                            ) : (
+                              'SUBMIT'
+                            )
+                          }
+                          style={{padding: heightToDp(1.4), backgroundColor: '#464183', borderRadius: heightToDp(1)}}
+                          onPress={() => {
+                            if (selectedText) {
+                              cliclHandlePayment();
+                            } else {
+                              handleServiceCompleted();
+                            }
+                          }}
+                        />
+                      </View>
+                    </View>
+                  ) : isOtpValid ? (
+                    <View>
+                      <View
+                        style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: heightToDp(3)}}>
+                        <View style={styles.iconWithTick}>
+                          <View style={styles.profileVerifyLineContainer}>
+                            <ProfileVerified />
+                          </View>
+                          <CustomText text={'Verify'} style={styles.statusText} />
+                          <TickMark style={styles.verifytick} />
+                        </View>
+                        <View style={styles.iconWithTick}>
+                          <View style={styles.profileVerifyLineContainer}>
+                            {isWorkDone ? <WorkCompleted /> : <WorkInProgressStart />}
+                          </View>
+                          <CustomText text={'WORK STARTED'} style={styles.statusText} />
+                          <TickMark style={styles.verifytick} />
+                        </View>
+                        <View style={styles.iconWithTick}>
+                          <View style={styles.profileVerifyLineContainer}>
+                            {isWorkDone ? <WorkCompleteStarted /> : <WorkCompleteInProgress />}
+                          </View>
+                          <CustomText text={'COMPLETED'} style={styles.statusText} />
+                          <TickMark style={{opacity: isWorkDone ? 1 : 0}} />
+                        </View>
+                        <View style={styles.iconWithTick}>
+                          <View style={styles.profileVerifyLineContainer}>
+                            <ReviewIcon />
+                          </View>
+                          <CustomText text={'REVIEW'} style={styles.statusText} />
+                          <TickMark style={{opacity: 0}} />
+                        </View>
+                      </View>
+                      {isWorkDone ? (
+                        <CustomButton
+                          title={'REVIEW'}
+                          style={{padding: heightToDp(1.4), backgroundColor: '#464183', borderRadius: heightToDp(1)}}
+                          onPress={() => setFeedback(true)}
+                        />
+                      ) : (
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                          <CustomButton
+                            title={'WORK DONE'}
+                            style={styles.WorkDoneButton}
+                            onPress={() => setWorkDonePopup(true)}
+                          />
+                          <CustomButton
+                            title={'CANCEL SERVICE'}
+                            style={styles.CancelButton}
+                            onPress={onCancel_Afterotp}
+                          />
+                        </View>
+                      )}
+                    </View>
+                  ) : (
+                    <View style={{margin: heightToDp(1)}}>
+                      <CustomText
+                        text={'Validation Code'}
+                        style={{
+                          textAlign: 'center',
+                          marginBottom: heightToDp(2),
+                          color: '#000000',
+                          fontFamily: 'Roboto',
+                          fontSize: heightToDp(2.3),
+                        }}
+                      />
+
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          alignSelf: 'center',
+                          borderWidth: 1,
+                          borderColor: '#D9D9D9',
+                          paddingVertical: widthToDp(5),
+                          // paddingTop: heightToDp(2),
+                          // paddingBottom: heightToDp(2),
+                          // paddingLeft: heightToDp(1),
+                          // paddingRight: heightToDp(1),
+                          borderRadius: 5,
+                          // marginBottom: heightToDp(2),
+                        }}>
+                        {otp.split('').map((digit, index) => (
+                          <View
+                            key={index}
+                            style={{
+                              backgroundColor: '#D9D9D9',
+                              marginHorizontal: 18,
+                              padding: 4,
+                              borderRadius: 5,
+                              alignItems: 'center', // Center horizontally
+                              justifyContent: 'center', // Center vertically
+                              height: 40, // Set a fixed height to ensure vertical centering
+                              width: 40, // Set a fixed width for consistent spacing
                             }}>
                             <Text
                               style={{
-                                color: selectedText === percentage ? 'green' : '#000000',
+                                fontSize: 20,
+                                letterSpacing: 0, // Reset letterSpacing to avoid extra spacing
                                 fontWeight: 'bold',
-                                fontSize: heightToDp(2),
+                                color: 'black',
                               }}>
-                              {showAmount && selectedText === percentage && percentage !== 'Others'
-                                ? `$${(jobDetails.salary * percentage) / 100}`
-                                : label}
+                              {digit}
                             </Text>
                           </View>
-                        </TouchableOpacity>
-                      ))}
-                    </View>
-
-                    {selectedText === 'Others' && (
-                      <View style={{alignItems: 'center', marginBottom: heightToDp(2)}}>
-                        <TextInput
-                          value={customText}
-                          onChangeText={text => {
-                            // Remove non-numeric characters
-                            const numericText = text.replace(/[^0-9]/g, '');
-                            setCustomText(numericText);
-                          }}
-                          placeholder="Enter custom text"
-                          placeholderTextColor={Color.colorSilver}
-                          style={{
-                            borderWidth: 1,
-                            borderColor: '#D9D9D9',
-                            padding: 10,
-                            borderRadius: 10,
-                            width: 150,
-                            alignItems: 'center',
-                          }}
-                          keyboardType="numeric" // Optional: this will open numeric keypad
-                        />
+                        ))}
                       </View>
-                    )}
-
-                    <CustomButton
-                      title={
-                        paymentLoader ? (
-                          <ActivityIndicator
-                            size={30}
-                            color={'white'}
-                            style={{justifyContent: 'center', alignItems: 'center'}}
-                          />
-                        ) : (
-                          'SUBMIT'
-                        )
-                      }
-                      style={{padding: heightToDp(1.4), backgroundColor: '#464183', borderRadius: heightToDp(1)}}
-                      onPress={() => {
-                        if (selectedText) {
-                          cliclHandlePayment();
-                        } else {
-                          handleServiceCompleted();
-                        }
-                      }}
-                    />
-                  </View>
-                </View>
-              ) : isOtpValid ? (
-                <View>
-                  <View style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: heightToDp(3)}}>
-                    <View style={styles.iconWithTick}>
-                      <View style={styles.profileVerifyLineContainer}>
-                        <ProfileVerified />
-                      </View>
-                      <CustomText text={'Verify'} style={styles.statusText} />
-                      <TickMark style={styles.verifytick} />
-                    </View>
-                    <View style={styles.iconWithTick}>
-                      <View style={styles.profileVerifyLineContainer}>
-                        {isWorkDone ? <WorkCompleted /> : <WorkInProgressStart />}
-                      </View>
-                      <CustomText text={'WORK STARTED'} style={styles.statusText} />
-                      <TickMark style={styles.verifytick} />
-                    </View>
-                    <View style={styles.iconWithTick}>
-                      <View style={styles.profileVerifyLineContainer}>
-                        {isWorkDone ? <WorkCompleteStarted /> : <WorkCompleteInProgress />}
-                      </View>
-                      <CustomText text={'COMPLETED'} style={styles.statusText} />
-                      <TickMark style={{opacity: isWorkDone ? 1 : 0}} />
-                    </View>
-                    <View style={styles.iconWithTick}>
-                      <View style={styles.profileVerifyLineContainer}>
-                        <ReviewIcon />
-                      </View>
-                      <CustomText text={'REVIEW'} style={styles.statusText} />
-                      <TickMark style={{opacity: 0}} />
-                    </View>
-                  </View>
-                  {isWorkDone ? (
-                    <CustomButton
-                      title={'REVIEW'}
-                      style={{padding: heightToDp(1.4), backgroundColor: '#464183', borderRadius: heightToDp(1)}}
-                      onPress={() => setFeedback(true)}
-                    />
-                  ) : (
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                      <Text
+                        style={{
+                          textAlign: 'center',
+                          color: '#555555',
+                          fontFamily: 'Roboto',
+                          fontSize: heightToDp(1.7),
+                        }}>
+                        Kindly pass this code to the Service Provider
+                      </Text>
+                      <Text
+                        style={{
+                          textAlign: 'center',
+                          color: '#555555',
+                          fontFamily: 'Roboto',
+                          marginBottom: heightToDp(8),
+                          fontSize: heightToDp(1.7),
+                        }}>
+                        while starting the work for validation
+                      </Text>
                       <CustomButton
-                        title={'WORK DONE'}
-                        style={styles.WorkDoneButton}
-                        onPress={() => setWorkDonePopup(true)}
+                        title={'CANCEL SERVICE'}
+                        style={styles.cancelserviceButton}
+                        textStyle={{
+                          color: '#FFFFFF',
+                          fontSize: heightToDp(2.2),
+                          fontFamily: 'Roboto',
+                          fontWeight: 'bold',
+                        }}
+                        onPress={handleCancelService}
                       />
-                      <CustomButton title={'CANCEL SERVICE'} style={styles.CancelButton} onPress={onCancel_Afterotp} />
                     </View>
                   )}
                 </View>
-              ) : (
-                <View style={{margin: heightToDp(1)}}>
-                  <CustomText
-                    text={'Validation Code'}
-                    style={{
-                      textAlign: 'center',
-                      marginBottom: heightToDp(2),
-                      color: '#000000',
-                      fontFamily: 'Roboto',
-                      fontSize: heightToDp(2.3),
-                    }}
-                  />
-
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignSelf: 'center',
-                      borderWidth: 1,
-                      borderColor: '#D9D9D9',
-                      paddingVertical: widthToDp(5),
-                      // paddingTop: heightToDp(2),
-                      // paddingBottom: heightToDp(2),
-                      // paddingLeft: heightToDp(1),
-                      // paddingRight: heightToDp(1),
-                      borderRadius: 5,
-                      // marginBottom: heightToDp(2),
-                    }}>
-                    {otp.split('').map((digit, index) => (
-                      <View
-                        key={index}
-                        style={{
-                          backgroundColor: '#D9D9D9',
-                          marginHorizontal: 18,
-                          padding: 4,
-                          borderRadius: 5,
-                          alignItems: 'center', // Center horizontally
-                          justifyContent: 'center', // Center vertically
-                          height: 40, // Set a fixed height to ensure vertical centering
-                          width: 40, // Set a fixed width for consistent spacing
-                        }}>
-                        <Text
-                          style={{
-                            fontSize: 20,
-                            letterSpacing: 0, // Reset letterSpacing to avoid extra spacing
-                            fontWeight: 'bold',
-                            color: 'black',
-                          }}>
-                          {digit}
-                        </Text>
-                      </View>
-                    ))}
-                  </View>
-                  <Text
-                    style={{textAlign: 'center', color: '#555555', fontFamily: 'Roboto', fontSize: heightToDp(1.7)}}>
-                    Kindly pass this code to the Service Provider
-                  </Text>
-                  <Text
-                    style={{
-                      textAlign: 'center',
-                      color: '#555555',
-                      fontFamily: 'Roboto',
-                      marginBottom: heightToDp(8),
-                      fontSize: heightToDp(1.7),
-                    }}>
-                    while starting the work for validation
-                  </Text>
-                  <CustomButton
-                    title={'CANCEL SERVICE'}
-                    style={styles.cancelserviceButton}
-                    textStyle={{color: '#FFFFFF', fontSize: heightToDp(2.2), fontFamily: 'Roboto', fontWeight: 'bold'}}
-                    onPress={handleCancelService}
-                  />
-                </View>
-              )}
-            </View>
-          </View>
+              </View>
+            </ScrollView>
+          </KeyboardAvoidingView>
         </View>
         <CustomerServiceCompletedModal
           isVisiblecompleted={isServiceCompleted}
