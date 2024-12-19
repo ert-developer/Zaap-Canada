@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     borderColor: Color.colorSilver,
     borderBottomWidth: 1,
     padding: 10,
-    marginVertical: 5,
+    marginVertical: 3,
   },
   avatarContainer: {
     width: widthToDp(12),
