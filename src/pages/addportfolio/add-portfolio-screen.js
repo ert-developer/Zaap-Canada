@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {ScrollView, TouchableOpacity, View, Linking, SafeAreaView, Image, Alert, ActivityIndicator} from 'react-native';
 import {useSelector} from 'react-redux';
-import {useNavigation} from '@react-navigation/native';
 import HeaderComponent from '../../atoms/header/headerComponent';
 import TextInputWithLabelComponent from '../../organisms/textInputWithLabel/textInputWithLabel-component';
 import CustomText from '../../atoms/text/textComponent';
@@ -12,8 +11,8 @@ import ExternalLinkPopup from '../../molecules/portfoliolinkmodal/externallinkpo
 import PortfolioAddPopup from '../../molecules/portfoliolinkmodal/addportfoliomodal';
 import PortfolioUpdatePopup from '../../molecules/portfoliolinkmodal/updatee';
 import {postCollectionDetails} from '../../common/collection';
+import 'react-native-get-random-values';
 import uuid from 'react-native-uuid';
-import firestore from '@react-native-firebase/firestore';
 import TextAreaInputComponent from '../../atoms/textAreaInput/textAreaInput-component';
 import {envConfig} from '../../assets/helpers/envApi';
 
@@ -26,7 +25,6 @@ const AddPortfolioScreen = ({
   loading,
 }) => {
   const user = useSelector(state => state.Auth.user);
-  const navigation = useNavigation();
   const styles = addPortfolioStyles();
 
   const [openExternalLinkPopup, setExternalLinkPopup] = useState(false);
@@ -67,14 +65,6 @@ const AddPortfolioScreen = ({
   const handleRemoveExternalLink = index => {
     const updatedLinks = externalLinks.filter((_, i) => i !== index);
     setExternalLinks(updatedLinks);
-  };
-
-  const addNewLink = link => {
-    setExternalLinks([...externalLinks, link]);
-  };
-
-  const openLink = () => {
-    Linking.openURL(externalLinks);
   };
 
   const validate = () => {

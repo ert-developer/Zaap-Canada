@@ -117,7 +117,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
     marginHorizontal: widthToDp(2),
-    marginBottom: heightToDp(2),
     borderRadius: 8,
     // marginTop: heightToDp(1),
     borderColor: Color.colorSilver,

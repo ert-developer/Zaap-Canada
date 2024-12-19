@@ -535,13 +535,13 @@
 				DEVELOPMENT_TEAM = Y7QKTB3W94;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Zaap/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Zaap Canada";
+				INFOPLIST_KEY_CFBundleDisplayName = Zaap;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -571,13 +571,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y7QKTB3W94;
 				INFOPLIST_FILE = Zaap/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Zaap Canada";
+				INFOPLIST_KEY_CFBundleDisplayName = Zaap;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.2;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
