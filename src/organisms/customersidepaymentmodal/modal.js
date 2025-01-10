@@ -396,15 +396,25 @@ const CustomerSidePaymentModel = () => {
     const selectedProfileRef = firestore().collection(envConfig.selectedProfiles);
     const snapshot = await selectedProfileRef.where('jobId', '==', jobDetails.jobId).get();
 
-    if (snapshot.empty) {
+    const appliedProfileRef = firestore().collection(envConfig.AppliedJobs);
+    const snapshot2 = await appliedProfileRef.get();
+    const filteredDocs = snapshot2.docs.filter(doc => doc.data().items?.id === jobDetails.jobId);
+
+    if (filteredDocs.length === 0 || snapshot.empty) {
       console.log(`No document with given ID found.`);
       return;
     }
 
+    filteredDocs.forEach(async doc => {
+      await doc.ref.delete();
+      console.log(`Document with ID ${doc.id} deleted successfully from applied jobs.`);
+    });
+
     snapshot.forEach(async doc => {
       await doc.ref.delete();
-      console.log(`Document with ID ${doc.id} deleted successfully.`);
+      console.log(`Document with ID ${doc.id} deleted successfully from selected jobs`);
     });
+
     // Store the OTP in a common location in the Firebase Realtime Database
   };
 
@@ -1128,7 +1138,13 @@ const CustomerSidePaymentModel = () => {
                     {otp.split('').map((digit, index) => (
                       <View
                         key={index}
-                        style={{backgroundColor: '#D9D9D9', marginHorizontal: 18, padding: 4, borderRadius: 5}}>
+                        style={{
+                          backgroundColor: '#D9D9D9',
+                          marginHorizontal: 18,
+                          paddingHorizontal: widthToDp(4),
+                          paddingVertical: heightToDp(1),
+                          borderRadius: 5,
+                        }}>
                         <Text style={{fontSize: 20, letterSpacing: 20, fontWeight: 'bold', color: 'black'}}>
                           {digit}
                         </Text>

@@ -169,7 +169,6 @@ const LoginContainer = ({navigation}) => {
   const googleLogin = async () => {
     dispatch(loginRequest());
     setLoading(true);
-    console.log('loaderrrr');
     try {
       const authInfo = await onGoogleButtonPress();
       // const {displayName, email, phoneNumber, photoURL, uid, invoiceId} = authInfo?.user;

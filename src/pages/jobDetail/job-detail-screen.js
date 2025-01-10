@@ -93,21 +93,6 @@ const JobDetail = ({
   const circleCenter = {latitude: lat, longitude: lng};
   const radius = 3000; // 3 kilometers in meters
 
-  // can be used for profile image with a name
-
-  // let result
-  // if (userName) {
-  //   const names = userName.split(' ');
-  //   if (names.length === 1) {
-  //     // Only first name provided
-  //     result = names[0].charAt(0);
-  //   } else if (names.length >= 2) {
-  //     // Both first and last names provided
-  //     result = `${names[0].charAt(0)}${names[names.length - 1].charAt(0)}`;
-  //   }
-  // } else {
-  //   result = 'No name provided';
-  // }
   const postedCustomerName = postedCustomer[0]?.displayName ? postedCustomer[0]?.displayName : userName;
 
   const onPressViewProfile = () => {
@@ -150,11 +135,12 @@ const JobDetail = ({
   };
 
   const handleEditJob = jobID => {
-    if (jobApplicantsDetails.length === 0) {
-      navigateToPostJobScreen(jobID);
-    } else {
-      Alert.alert('Warning', 'You cannot edit the job details if you have applicants for your job');
-    }
+    // if (jobApplicantsDetails.length === 0) {
+    //   navigateToPostJobScreen(jobID);
+    // } else {
+    //   Alert.alert('Warning', 'You cannot edit the job details if you have applicants for your job');
+    // }
+    navigateToPostJobScreen(jobID);
   };
 
   return (

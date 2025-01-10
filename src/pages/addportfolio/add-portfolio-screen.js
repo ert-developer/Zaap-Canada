@@ -12,8 +12,8 @@ import ExternalLinkPopup from '../../molecules/portfoliolinkmodal/externallinkpo
 import PortfolioAddPopup from '../../molecules/portfoliolinkmodal/addportfoliomodal';
 import PortfolioUpdatePopup from '../../molecules/portfoliolinkmodal/updatee';
 import {postCollectionDetails} from '../../common/collection';
+import 'react-native-get-random-values';
 import uuid from 'react-native-uuid';
-import firestore from '@react-native-firebase/firestore';
 import TextAreaInputComponent from '../../atoms/textAreaInput/textAreaInput-component';
 import {envConfig} from '../../assets/helpers/envApi';
 

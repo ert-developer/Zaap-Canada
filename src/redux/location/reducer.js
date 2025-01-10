@@ -25,7 +25,6 @@ const locationReducer = (state = initialState, action) => {
       };
 
     case LATLANG:
-      console.log('latlang-reducer', action.payload);
       return {
         ...state,
         latlang: action.payload,

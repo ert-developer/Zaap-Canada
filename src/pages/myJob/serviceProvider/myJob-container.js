@@ -7,6 +7,7 @@ import {fetchServiceProviderDetails} from '../../../redux/providerstatus/action'
 import {fetchSelectedJobs} from '../../../redux/selectedjobs/action';
 import {updateProviderStatus} from '../../../redux/providerstatus/action';
 import {fetchSelectedProfileDetails} from '../../../redux/selectedprofiledetails/action';
+import {fetchAppliedJobs} from '../../../redux/appliedjobs/action';
 
 const MyJobServiceContainer = () => {
   const selectedJobs = useSelector(state => state.selectedJobs.selectedJobs);
@@ -19,7 +20,7 @@ const MyJobServiceContainer = () => {
   // const isVerified = user?.isServiceProvider;
   // console.log("providerVerify",providerVerify,providerStatus)
   const dispatch = useDispatch();
-  const {jobs, categories} = useSelector(state => state.home);
+  const {jobs} = useSelector(state => state.home);
   // const jobss= jobs.slice(0,3)
 
   const userId = user.userId;
@@ -27,6 +28,7 @@ const MyJobServiceContainer = () => {
 
   useEffect(() => {
     setIsLoading(true);
+    dispatch(fetchAppliedJobs());
     dispatch(fetchSelectedJobs());
     dispatch(fetchSelectedProfileDetails());
     setIsLoading(false);

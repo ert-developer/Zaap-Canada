@@ -12,6 +12,7 @@ import {
   ActivityIndicator,
   TouchableWithoutFeedback,
   Keyboard,
+  Text,
 } from 'react-native';
 import CustomText from '../../atoms/text/textComponent';
 import HomeStyles from './home-styles';

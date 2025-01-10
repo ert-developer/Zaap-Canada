@@ -17,7 +17,7 @@ import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import {InvoiceNumber} from 'invoice-number';
 import {setEditJobStatus} from '../../redux/editjob/action';
-import {getDoc, doc, updateDoc} from 'firebase/firestore';
+import {getDoc, doc, updateDoc, collection, where, getDocs, query} from 'firebase/firestore';
 import {db} from '../../../firebaseDb';
 
 const initialFormData = Object.freeze({
@@ -656,12 +656,15 @@ const PostJobContainer = () => {
     try {
       // Reference to the job document
       const jobRef = doc(db, envConfig.Jobs, jobId);
+
       // Fetch existing job details
       const jobSnap = await getDoc(jobRef);
       if (!jobSnap.exists()) {
         throw new Error('Job does not exist');
       }
+
       const jobDetails = jobSnap.data();
+
       // Destructure formData
       const {
         jobTitle,
@@ -677,6 +680,19 @@ const PostJobContainer = () => {
         description,
         images,
       } = formData;
+
+      if (Number(salary) < jobDetails.data.salary) {
+        Alert.alert(
+          'Error',
+          'Budget cannot be less than previous budget. If you still want to reduce the budget, kindly delete the job and repost the job',
+          [
+            {
+              text: 'OK',
+            },
+          ],
+        );
+        return;
+      }
 
       // Prepare the update data
       const updatedJobDetails = {
@@ -709,12 +725,66 @@ const PostJobContainer = () => {
       };
       // Update the job document in Firestore
       await updateDoc(jobRef, updatedJobDetails);
-      Alert.alert('Job Details updated successfully');
-      navigation.navigate('HomeScreen');
-      setFormData(initialFormData);
-      dispatch(setEditJobStatus({jobId: null, editJobStatus: false}));
+
+      const appliedJobsCollection = collection(db, envConfig.AppliedJobs);
+      // Query the appliedJobs collection to find documents with the matching jobId
+      const q = query(appliedJobsCollection, where('items.id', '==', jobId));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        querySnapshot.forEach(async docSnap => {
+          const appliedJobRef = doc(db, envConfig.AppliedJobs, docSnap.id);
+
+          // Extract the existing data
+          const appliedJobData = docSnap.data();
+
+          // Update the relevant fields with the new job details
+          const updatedAppliedJob = {
+            ...appliedJobData,
+            items: {
+              ...appliedJobData.items,
+              address: updatedJobDetails.address,
+              area: updatedJobDetails.area,
+              category: updatedJobDetails.data.category,
+              description: updatedJobDetails.data.jobDescription,
+              imageSource: updatedJobDetails.imageUrls[0], // Use the first image as the primary source
+              imageUrls: [updatedJobDetails.imageUrls[0]],
+              lat: updatedJobDetails.location.lat,
+              lng: updatedJobDetails.location.lng,
+              location: updatedJobDetails.locationDesc.description,
+              price: updatedJobDetails.data.salary,
+              startdate: updatedJobDetails.data.startdate,
+              starttime: updatedJobDetails.data.starttime,
+              subCategory: updatedJobDetails.data.subCategory,
+              title: updatedJobDetails.data.jobTitle,
+            },
+          };
+
+          // Update the appliedJob document in Firestore
+          await updateDoc(appliedJobRef, updatedAppliedJob);
+        });
+      }
+      // Extract data from the query results
+
+      // Show success alert
+      Alert.alert(
+        'Success',
+        'Job details updated successfully',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              // Navigate to the home screen after user clicks "OK"
+              setFormData(initialFormData);
+              dispatch(setEditJobStatus({jobId: null, editJobStatus: false}));
+              navigation.navigate('HomeScreen');
+            },
+          },
+        ],
+        {cancelable: false},
+      );
     } catch (error) {
-      console.error('Error updating job details:', error);
+      console.error('Error updating jobdetails:', error);
     }
   };
 
