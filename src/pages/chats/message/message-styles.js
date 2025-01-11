@@ -12,10 +12,6 @@ function ChatStyles() {
       flex: 1,
       textAlign: 'center',
     },
-    row: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    },
     centeredView: {
       flex: 1,
       justifyContent: 'center',
