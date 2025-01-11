@@ -291,7 +291,7 @@ const ModalComponent = ({isVisible, setModalVisible1, onClose, userWorking}) => 
                     marginTop: heightToDp(1),
                   }}>
                   <CustomText text={'Your Budget'} style={styles.yourBudgetHead} />
-                  <CustomText text={`₹${amount}`} style={styles.yourBudgetHead} />
+                  <CustomText text={`$${amount}`} style={styles.yourBudgetHead} />
                 </View>
               </View>
 
@@ -304,13 +304,13 @@ const ModalComponent = ({isVisible, setModalVisible1, onClose, userWorking}) => 
                 }}>
                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                   <CustomText text={'Platform Fee'} style={styles.platFormFeeHead} />
-                  <CustomText text={`+${platformFee}`} style={styles.platFormFeeHead} />
+                  <CustomText text={`+${platformFee.toFixed(2)}`} style={styles.platFormFeeHead} />
                 </View>
               </View>
               <View style={{padding: heightToDp(2)}}>
                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                   <CustomText text={'Total Pay'} style={styles.totalFeeHead} />
-                  <CustomText text={`₹${amount + platformFee}`} style={styles.totalFeeHead} />
+                  <CustomText text={`$${amount + platformFee}`} style={styles.totalFeeHead} />
                 </View>
               </View>
 
