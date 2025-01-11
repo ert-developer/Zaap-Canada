@@ -5,6 +5,7 @@ import {fetchServiceProviderDetails} from '../../../redux/providerstatus/action'
 import {fetchSelectedJobs} from '../../../redux/selectedjobs/action';
 import {updateProviderStatus} from '../../../redux/providerstatus/action';
 import {fetchSelectedProfileDetails} from '../../../redux/selectedprofiledetails/action';
+import {fetchAppliedJobs} from '../../../redux/appliedjobs/action';
 import moment from 'moment';
 import {ScrollView} from 'react-native-gesture-handler';
 
@@ -27,6 +28,7 @@ const MyJobServiceContainer = () => {
 
       // Fetch necessary data
       dispatch(fetchSelectedJobs());
+      dispatch(fetchAppliedJobs());
       dispatch(fetchSelectedProfileDetails());
 
       if (isVerified === true) {

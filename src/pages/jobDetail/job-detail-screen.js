@@ -133,11 +133,12 @@ const JobDetail = ({
   };
 
   const handleEditJob = jobID => {
-    if (jobApplicantsDetails.length === 0) {
-      navigateToPostJobScreen(jobID);
-    } else {
-      Alert.alert('Warning', 'You cannot edit the job details if you have applicants for your job');
-    }
+    // if (jobApplicantsDetails.length === 0) {
+    //   navigateToPostJobScreen(jobID);
+    // } else {
+    //   Alert.alert('Warning', 'You cannot edit the job details if you have applicants for your job');
+    // }
+    navigateToPostJobScreen(jobID);
   };
 
   return (

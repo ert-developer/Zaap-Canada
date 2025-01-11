@@ -1,88 +1,18 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Text, Pressable} from 'react-native';
+import React from 'react';
+import {View, StyleSheet, Text} from 'react-native';
 import Modal from 'react-native-modal';
-import {CloseIcon} from '../../assets/svgIcons/providerPaymentSvg';
-import {heightToDp, widthToDp} from '../../responsive/responsive';
+import {heightToDp} from '../../responsive/responsive';
 import CustomText from '../../atoms/text/textComponent';
 import CustomButton from '../../atoms/button/buttonComponent';
-import {useNavigation} from '@react-navigation/native';
-import {CancelPopupSvg} from '../../assets/svgImage/bottomDrawer';
 import FastImage from 'react-native-fast-image';
-import {useSelector} from 'react-redux';
-import {deleteDocument, postCollectionDetails} from '../../common/collection';
-import database from '@react-native-firebase/database';
-import {mailSenter} from '../../common/mailSender';
-import {doc, updateDoc, getDoc, FieldValue} from 'firebase/firestore';
-import firestore from '@react-native-firebase/firestore';
-import {db} from '../../../firebaseDb';
 import {Image} from 'react-native';
 
 const WorkDoneModal = ({showWorkDonePopup, onWorkdone, setWorkDonePopup, selectedJobDetails, providerStatus}) => {
   //asdf
   //Customer Work Done cancel
-  const user = useSelector(state => state.Auth.user);
-  const profiledetail = useSelector(state => state.Auth.profileDetail);
 
   const onPressCancelService = async () => {
-    //   try {
-    //     const docRef = doc(db, 'Jobs_dev', selectedJobDetails.jobId);
-    //     const docSnap = await getDoc(docRef);
-    //     const docData = docSnap.data();
-    //     const cancelCandidateDetails = docData.cancelCandidateDetails || [];
-    //     cancelCandidateDetails.push({
-    //       serviceProviderName: providerStatus[0].legal_name_on_id,
-    //       serviceProviderId: selectedJobDetails.candidateUserId,
-    //       customerId: selectedJobDetails.customerId,
-    //       jobID: selectedJobDetails.jobId,
-    //       jobTitle: selectedJobDetails.jobTitle,
-    //       jobSalary: selectedJobDetails.salary,
-    //     });
-    //     await updateDoc(docRef, {
-    //       IsBookingCancel: true,
-    //       IsBookingConfirmed: false,
-    //       cancelCandidateDetails: cancelCandidateDetails,
-    //       // selectedCandidateDetails: FieldValue.delete(),
-    //     });
-
-    //     console.log(selectedJobDetails, 'dcfvtgbhnj');
-    //     database().ref(`myjobs/${selectedJobDetails.customerId}_${selectedJobDetails.jobId}`).child('otpData').update({
-    //       otpValidationStatus: false, // Clear the existing validation status
-    //     });
-
-    //     const selectedProfileRef = firestore().collection('selectedProfiles_dev');
-    //     const snapshot = await selectedProfileRef.where('jobId', '==', selectedJobDetails.jobId).get();
-
-    //     if (snapshot.empty) {
-    //       console.log(`No document with given ID found.`);
-    //       return;
-    //     }
-
-    //     snapshot.forEach(async doc => {
-    //       await doc.ref.delete();
-    //       console.log(`Document with ID ${doc.id} deleted successfully.`);
-    //     });
-
-    //     const to = `sankeertherra01@gmail.com, ${providerStatus[0].email_id}`;
-    //     const subject = 'Service Cancelled';
-    //     const textMsg = 'The service has been cancelled by the customer';
-    //     const bodyText = 'The service has been cancelled by the customer';
-
-    //     mailSenter(to, subject, textMsg, bodyText);
-
-    //     const data = {
-    //       title: 'Service Cancelled',
-    //       message: `Service Cancelled by ${user.displayName} for ${providerStatus[0].legal_name_on_id} on ${jobDetails.jobTitle} with an amount of ${jobDetails.salary}`,
-    //       userId: profiledetail.userId,
-    //       markasread: false,
-    //       time: new Date(),
-    //     };
-    //     await postCollectionDetails('Notifications_dev', data);
-
     setWorkDonePopup(false);
-    //     console.log('Fields added successfully to document & SP deleted from selectedProfiles_dev');
-    //   } catch (error) {
-    //     console.error('Error adding field to document:', error);
-    //   }
   };
 
   return (
@@ -156,7 +86,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
-
     elevation: 2,
   },
   modaltext: {

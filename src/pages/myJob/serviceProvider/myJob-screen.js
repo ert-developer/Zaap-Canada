@@ -179,9 +179,13 @@ const MyJobService = ({filteredJobs, selectedJobs}) => {
     <SafeAreaView style={styles.frameParent}>
       <ScrollView
         refreshControl={<RefreshControl refreshing={load} onRefresh={OnRefreshHandler} />}
-        style={{backgroundColor: Color.colorWhite, height: '190%', paddingTop: 20}}>
+        style={{
+          backgroundColor: 'white',
+          height: isVerified === 'verified' ? selectedJobs.length * 850 : filteredJobs.length * 850,
+          paddingTop: 20,
+        }}>
         {loader ? (
-          <ActivityIndicator color={'black'} size="large" />
+          <ActivityIndicator color={'black'} size="small" />
         ) : (
           <>
             {/* This is customer side flat list */}
@@ -196,7 +200,14 @@ const MyJobService = ({filteredJobs, selectedJobs}) => {
             )}
             {/* This is service provider side flat list */}
             {selectedJobs.length > 0 ? (
-              <FlatList data={selectedJobs} renderItem={renderSelectedJobsItem} keyExtractor={item => item.id} />
+              <>
+                <FlatList data={selectedJobs} renderItem={renderSelectedJobsItem} keyExtractor={item => item.id} />
+                <FlatList data={selectedJobs} renderItem={renderSelectedJobsItem} keyExtractor={item => item.id} />
+                <FlatList data={selectedJobs} renderItem={renderSelectedJobsItem} keyExtractor={item => item.id} />
+                <FlatList data={selectedJobs} renderItem={renderSelectedJobsItem} keyExtractor={item => item.id} />
+
+                <FlatList data={selectedJobs} renderItem={renderSelectedJobsItem} keyExtractor={item => item.id} />
+              </>
             ) : (
               isVerified === 'verified' && (
                 <View style={styles.noDataContainer}>

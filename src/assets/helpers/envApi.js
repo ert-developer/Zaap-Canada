@@ -1,4 +1,4 @@
-const envType = 'prod'; // dev | uat | prod
+const envType = 'dev'; // dev | uat | prod
 let envConfig;
 import {
   GOOGLE_API_KEY_DEV,
@@ -7,6 +7,9 @@ import {
   STRIPE_API_KEY_UAT,
   STRIPE_API_KEY_DEV,
   STRIPE_API_KEY_PROD,
+  STRIPE_SERVER_URL_DEV,
+  STRIPE_SERVER_URL_UAT,
+  STRIPE_SERVER_URL_PROD,
 } from '@env';
 
 switch (envType) {
@@ -39,6 +42,7 @@ switch (envType) {
       selectedProfiles: 'selectedProfiles_dev',
       GOOGLE_API_KEY: GOOGLE_API_KEY_DEV,
       STRIPE_API_KEY: STRIPE_API_KEY_DEV,
+      STRIPE_SERVER_URL: STRIPE_SERVER_URL_DEV,
       message: 'message_dev',
       chatlist: 'chatlist_dev',
       common: 'common_dev',
@@ -78,6 +82,7 @@ switch (envType) {
       // base url will put here
       GOOGLE_API_KEY: GOOGLE_API_KEY_UAT,
       STRIPE_API_KEY: STRIPE_API_KEY_UAT,
+      STRIPE_SERVER_URL: STRIPE_SERVER_URL_UAT,
       message: 'message_uat',
       chatlist: 'chatlist_uat',
       common: 'common_uat',
@@ -117,6 +122,7 @@ switch (envType) {
       // base url will put here
       GOOGLE_API_KEY: GOOGLE_API_KEY_PROD,
       STRIPE_API_KEY: STRIPE_API_KEY_PROD,
+      STRIPE_SERVER_URL: STRIPE_SERVER_URL_PROD,
       message: 'message',
       chatlist: 'chatlist',
       common: 'common',

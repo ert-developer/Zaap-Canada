@@ -409,15 +409,25 @@ const CustomerSidePaymentModel = () => {
     const selectedProfileRef = firestore().collection(envConfig.selectedProfiles);
     const snapshot = await selectedProfileRef.where('jobId', '==', jobDetails.jobId).get();
 
-    if (snapshot.empty) {
+    const appliedProfileRef = firestore().collection(envConfig.AppliedJobs);
+    const snapshot2 = await appliedProfileRef.get();
+    const filteredDocs = snapshot2.docs.filter(doc => doc.data().items?.id === jobDetails.jobId);
+
+    if (filteredDocs.length === 0 || snapshot.empty) {
       console.log(`No document with given ID found.`);
       return;
     }
 
+    filteredDocs.forEach(async doc => {
+      await doc.ref.delete();
+      console.log(`Document with ID ${doc.id} deleted successfully from applied jobs.`);
+    });
+
     snapshot.forEach(async doc => {
       await doc.ref.delete();
-      console.log(`Document with ID ${doc.id} deleted successfully.`);
+      console.log(`Document with ID ${doc.id} deleted successfully from selected jobs`);
     });
+
     // Store the OTP in a common location in the Firebase Realtime Database
   };
 

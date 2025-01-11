@@ -57,6 +57,7 @@ function MyJobStyles() {
       paddingLeft: heightToDp(2),
       paddingRight: heightToDp(3),
       backgroundColor: 'white',
+      height: '100%',
       // paddingBottom: heightToDp(5),
       // backgroundColor: 'white',
     },
