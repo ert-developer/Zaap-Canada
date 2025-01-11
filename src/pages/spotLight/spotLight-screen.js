@@ -11,7 +11,10 @@ const SpotLightScreen = ({handleJobPress, spotLigt, navigation}) => {
     <SafeAreaView style={[styles.safeArea]}>
       <StatusBar barStyle="light-content" />
       <HeaderComponent text={'Spotlight Ads'} backgroundColor={'#EEB92B'} color={'#000'} />
-      <ScrollView style={{marginTop: 10}} keyboardShouldPersistTaps="handled" contentContainerStyle={{flexGrow: 1}}>
+      <ScrollView
+        style={{padding: 10, paddingVertical: 15}}
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{flexGrow: 1}}>
         <View style={styles.container}>
           {spotLigt.length > 0 ? (
             <FlatList

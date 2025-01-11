@@ -14,30 +14,6 @@ const JobsList = ({handleJobPress, filterdJobs, navigation, cat}) => {
       <HeaderComponent text={cat} />
       <ScrollView style={styles.scrollView} keyboardShouldPersistTaps="handled" contentContainerStyle={{flexGrow: 1}}>
         <View style={styles.container}>
-          {/* <View style={[styles.row, styles.backtNtitle]}>
-            <BackIcon onPress={() => navigation.navigate('HomeScreen')} />
-            <View style={styles.row}>
-              {cat ? (
-                <CustomText style={styles.pageTitle} text={cat} />
-              ) : (
-                <CustomText style={styles.pageTitle} text="SEARCHED JOBS" />
-              )}
-            </View>
-          </View> */}
-          {/* {catJobs && (
-            <FlatList
-              data={catJobs}
-              renderItem={({item}) => <JobList item={item} handleJobPress={handleJobPress} />}
-              keyExtractor={item => item.id}
-            />
-          )} */}
-          {/* {cat === 'BEAUTY & WELLNESS' && (
-            <FlatList
-              data={sortedBeauty}
-              renderItem={({item}) => <JobList item={item} handleJobPress={handleJobPress} />}
-              keyExtractor={item => item.id}
-            />
-          )} */}
           {filterdJobs.length > 0 ? (
             <FlatList
               data={filterdJobs}

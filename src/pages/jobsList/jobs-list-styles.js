@@ -11,6 +11,8 @@ function JobsListStyles() {
     scrollView: {
       backgroundColor: Color.colorWhite,
       height: '100%',
+      padding: 10,
+      paddingVertical: 15,
     },
     jobList: {
       padding: 16,
