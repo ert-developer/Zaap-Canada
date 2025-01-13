@@ -646,16 +646,6 @@ const PostJobContainer = () => {
     setSpotlightPayment(value);
   };
 
-  // const onClosePopup = () => {
-  //   setPopUps(false);
-  //   // navigation.navigate('HomeScreen');
-  // };
-
-  // const closeModal = () => {
-  //   // setJobModal(false);
-  //   setPopUps(false);
-  //   navigation.navigate('HomeScreen');
-  // };
   //==================> Update Job Details <=================
   const updateJobDetails = async jobId => {
     try {

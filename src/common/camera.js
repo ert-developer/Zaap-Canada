@@ -1,7 +1,7 @@
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 // Upload the images from camera & gallery
-export const uploadImage = (sourceType,  handleImageResponse, fieldName) => {
+export const uploadImage = (sourceType, handleImageResponse, selectionLimit = 3, fieldName) => {
   const options = {
     title: 'Select Images',
     storageOptions: {
@@ -17,7 +17,7 @@ export const uploadImage = (sourceType,  handleImageResponse, fieldName) => {
     cameraType: 'back',
     videoQuality: 'high',
     durationLimit: 3,
-    selectionLimit: 3, // Set this to 0 for unlimited selection from the gallery
+    selectionLimit: selectionLimit, // Set this to 0 for unlimited selection from the gallery
   };
 
   if (sourceType === 'camera') {

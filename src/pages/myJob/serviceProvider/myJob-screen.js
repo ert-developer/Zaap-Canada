@@ -181,7 +181,7 @@ const MyJobService = ({filteredJobs, selectedJobs}) => {
         refreshControl={<RefreshControl refreshing={load} onRefresh={OnRefreshHandler} />}
         style={{
           backgroundColor: 'white',
-          height: isVerified === 'verified' ? selectedJobs.length * 850 : filteredJobs.length * 850,
+          height: 1000,
           paddingTop: 20,
         }}>
         {loader ? (
