@@ -1,11 +1,9 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Image, ActivityIndicator, Alert} from 'react-native';
-import MapView, {Marker, Callout} from 'react-native-maps';
-import {PermissionsAndroid, Platform} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {ActivityIndicator, AppState, Image, Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import MapView, {Callout, Marker} from 'react-native-maps';
 import {PERMISSIONS, RESULTS, check, openSettings, request} from 'react-native-permissions';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
-import {widthToDp} from '../../responsive/responsive';
 
 const NearMeScreen = () => {
   const defaultIndiaRegion = {
@@ -14,105 +12,73 @@ const NearMeScreen = () => {
     latitudeDelta: 25.0,
     longitudeDelta: 25.0,
   };
+
   const [hasPermission, setHasPermission] = useState(null);
   const [loader, setLoader] = useState(false);
+  const [appState, setAppState] = useState(AppState.currentState);
   const latlang = useSelector(state => state?.location?.latlang);
+
   const {jobs} = useSelector(state => state.home);
-  const [region, setRegion] = useState(
-    latlang
-      ? {
-          latitude: latlang.latitude,
-          longitude: latlang.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }
-      : defaultIndiaRegion,
-  );
+  const [region, setRegion] = useState({
+    latitude: latlang?.latitude ?? defaultIndiaRegion.latitude,
+    longitude: latlang?.longitude ?? defaultIndiaRegion.longitude,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  });
+
+  useEffect(() => {
+    if (latlang) {
+      setRegion({
+        latitude: latlang.latitude,
+        longitude: latlang.longitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      });
+    }
+  }, [latlang]);
   const navigation = useNavigation();
 
   const checkLocationPermission = async () => {
     try {
-      const permissionResult = await check(
-        Platform.OS === 'ios' ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
-      );
+      const permissionType =
+        Platform.OS === 'ios' ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;
 
-      if (permissionResult === 'granted') {
+      const permissionResult = await check(permissionType);
+
+      if (permissionResult === RESULTS.GRANTED) {
         setHasPermission(true);
-      } else if (permissionResult === 'denied') {
-        // If the permission is denied, you might want to request it
-        const requestResult = await request(
-          Platform.OS === 'ios' ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
-        );
-
-        if (requestResult === 'granted') {
-          setHasPermission(true);
-        } else {
-          setHasPermission(false);
-        }
-      } else if (permissionResult === 'blocked') {
-        // Handle the case where permission is blocked
+      } else if (permissionResult === RESULTS.DENIED) {
         setHasPermission(false);
-        // Optionally guide the user to the settings
+        const requestResult = await request(permissionType);
+        setHasPermission(requestResult === RESULTS.GRANTED);
+      } else if (permissionResult === RESULTS.BLOCKED) {
+        setHasPermission(false);
       }
-    } catch (err) {
-      console.warn(err);
+    } catch (error) {
+      console.error('Error checking location permission:', error);
       setHasPermission(false);
     }
   };
 
-  useFocusEffect(
-    React.useCallback(() => {
-      setLoader(true);
-      checkLocationPermission();
-      setLoader(false);
-    }, []),
-  );
-
-  const handleEnableLocation = async () => {
-    try {
-      if (Platform.OS === 'android') {
-        // Request the necessary location permission for Android
-        const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
-
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          setHasPermission(true);
-        } else {
-          console.log('Location permission denied');
-          setHasPermission(false);
-        }
-      } else if (Platform.OS === 'ios') {
-        // Check the current location permission status
-        const checkPermission = await check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
-        if (checkPermission === RESULTS.GRANTED) {
-          setHasPermission(true);
-        } else if (checkPermission === RESULTS.DENIED) {
-          // Request permission if it's currently denied
-          const requestPermission = await request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
-          if (requestPermission === RESULTS.GRANTED) {
-            setHasPermission(true);
-          } else {
-            console.log('Location permission denied');
-            setHasPermission(false);
-          }
-        } else if (checkPermission === RESULTS.BLOCKED) {
-          console.log('Location permission is blocked');
-          setHasPermission(false);
-          // Prompt the user to open the app settings
-          Alert.alert(
-            'Location Permission Blocked',
-            'Please enable location access in settings to use this feature.',
-            [
-              {text: 'Cancel', style: 'cancel'},
-              {text: 'Open Settings', onPress: () => openSettings()},
-            ],
-            {cancelable: true},
-          );
-        }
+  useEffect(() => {
+    const recheckPermissionOnAppStateChange = nextAppState => {
+      if (appState.match(/inactive|background/) && nextAppState === 'active') {
+        // App has come to the foreground
+        checkLocationPermission();
       }
-    } catch (error) {
-      console.error('Error requesting location permission:', error);
-      setHasPermission(false);
-    }
+      setAppState(nextAppState);
+    };
+    checkLocationPermission();
+
+    const appStateListener = AppState.addEventListener('change', recheckPermissionOnAppStateChange);
+
+    return () => {
+      appStateListener.remove();
+    };
+  }, [appState]);
+
+  const handleEnableLocation = () => {
+    openSettings();
   };
 
   const navigatetoLocation = () => {
@@ -121,7 +87,7 @@ const NearMeScreen = () => {
 
   return (
     <View style={styles.container}>
-      {loader && <ActivityIndicator size={20} color={'black'} />}
+      {loader && <ActivityIndicator size={20} color="black" />}
       {hasPermission === false && (
         <View style={styles.imageContainer}>
           <Image
@@ -131,7 +97,6 @@ const NearMeScreen = () => {
             style={styles.image}
             resizeMode="cover"
           />
-
           <Text style={styles.text}>Location Access</Text>
           <Text style={styles.subtext}>Grant location access for a better and personalized app experience</Text>
           <TouchableOpacity style={styles.enableButton} onPress={handleEnableLocation}>
@@ -142,17 +107,16 @@ const NearMeScreen = () => {
           </TouchableOpacity>
         </View>
       )}
-
       {hasPermission === true && (
         <MapView
           style={styles.map}
           initialRegion={region}
           region={region}
-          minZoomLevel={5} // Minimum zoom level
-          maxZoomLevel={13} // Maximum zoom level
-          zoomControlEnabled={true}
-          scrollEnabled={true}
-          pitchEnabled={true}
+          minZoomLevel={5}
+          maxZoomLevel={13}
+          zoomControlEnabled
+          scrollEnabled
+          pitchEnabled
           showsUserLocation>
           {jobs.map((item, index) => {
             const jobCoordinates = {
@@ -160,10 +124,8 @@ const NearMeScreen = () => {
               longitude: item.area.lng,
             };
 
-            // Filter jobs that are in the same area
             const jobsInArea = jobs.filter(job => job.area.lat === item.area.lat && job.area.lng === item.area.lng);
 
-            // Count the number of jobs in the area
             const numberOfJobsInArea = jobsInArea.length;
 
             return (
@@ -187,6 +149,8 @@ const NearMeScreen = () => {
 };
 
 export default NearMeScreen;
+
+// (Styles remain the same as before)
 
 const styles = StyleSheet.create({
   container: {
@@ -254,8 +218,7 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   tooltipContainer: {
-    width: widthToDp(50), // Increased width
-    height: widthToDp(25), // Increased height
+    width: '50%',
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 10,
@@ -264,21 +227,16 @@ const styles = StyleSheet.create({
   },
   jobTitle: {
     color: '#473369',
-    fontSize: widthToDp(4), // Adjusted font size
+    fontSize: 14,
     fontWeight: 'bold',
-    textAlign: 'center', // Center text
   },
   jobSubtitle: {
     color: '#473369',
-    fontSize: widthToDp(3), // Adjusted font size
-    textAlign: 'center', // Center text
+    fontSize: 12,
   },
   viewDetailsText: {
     color: '#473369',
     fontWeight: 'bold',
-    fontSize: widthToDp(4), // Adjusted font size
     textDecorationLine: 'underline',
-    textDecorationColor: '#473369',
-    textAlign: 'center', // Center text
   },
 });

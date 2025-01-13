@@ -1,21 +1,7 @@
-import React, {useEffect, useMemo, useRef} from 'react';
-import {View, ScrollView, SafeAreaView} from 'react-native';
-import CustomText from '../../atoms/text/textComponent';
-import CategoriesListStyles from './categories-list-styles';
-import CustomLoader from '../../organisms/customLoader';
-import {BackIcon} from '../../assets/svgImage/sideDrawer';
-import CategoryAccordian from '../../organisms/categoryaccordian/categoryaccordian';
-import {
-  Appliance,
-  Beauty,
-  Delivery,
-  Entertainers,
-  Events,
-  Others,
-  Photographers,
-  Tech,
-  VideoMakers,
-} from '../../assets/svgImage/popularCategories';
+import React, {useEffect, useRef} from 'react';
+import {FlatList, SafeAreaView} from 'react-native';
+
+import {Color} from '../../assets/static/globalStyles';
 import {
   Architect,
   Cleaner,
@@ -34,19 +20,34 @@ import {
   Translation,
   Tutor,
 } from '../../assets/svgImage/categories';
+import {
+  Appliance,
+  Beauty,
+  Delivery,
+  Entertainers,
+  Events,
+  Others,
+  Photographers,
+  Tech,
+  VideoMakers,
+} from '../../assets/svgImage/popularCategories';
 import HeaderComponent from '../../atoms/header/headerComponent';
-import {Color} from '../../assets/static/globalStyles';
-const CategoryList = ({categoriesData, selectedCategory, navigation, loader}) => {
-  const styles = useMemo(() => CategoriesListStyles(), []);
-  const scrollViewRef = useRef();
+import CategoryAccordian from '../../organisms/categoryaccordian/categoryaccordian';
+import CustomLoader from '../../organisms/customLoader';
+import {heightToDp} from '../../responsive/responsive';
+
+const CategoryList = ({categoriesData, selectedCategory, loader}) => {
+  const flatListRef = useRef();
 
   useEffect(() => {
-    if (scrollViewRef.current && selectedCategory) {
+    if (selectedCategory && flatListRef.current) {
       const index = categoriesData.findIndex(item => item.apiName === selectedCategory);
       if (index !== -1) {
-        const categoryHeight = 100;
-        const yOffset = index * categoryHeight;
-        scrollViewRef.current.scrollTo({y: yOffset, animated: true});
+        flatListRef.current.scrollToIndex({
+          index,
+          animated: true,
+          viewPosition: 0.5, // Center the selected item
+        });
       }
     }
   }, [selectedCategory, categoriesData]);
@@ -69,8 +70,6 @@ const CategoryList = ({categoriesData, selectedCategory, navigation, loader}) =>
         return <Beauty width={30} height={30} />;
       case 'VIDEO MAKERS':
         return <VideoMakers width={30} height={30} />;
-      // case 'BEAUTY & WELLNESS MEN':
-      //   return <Beauty width={30} height={30} />;
       case 'ENTERTAINERS':
         return <Entertainers width={30} height={30} />;
       case 'MECHANIC':
@@ -105,8 +104,6 @@ const CategoryList = ({categoriesData, selectedCategory, navigation, loader}) =>
         return <Photographers width={30} height={30} />;
       case 'DELIVERY':
         return <Delivery width={30} height={30} />;
-      // case 'BEAUTY & WELLNESS WOMEN':
-      //   return <Beauty width={30} height={30} />;
       case 'OTHER':
         return <Others width={30} height={30} />;
       default:
@@ -114,31 +111,41 @@ const CategoryList = ({categoriesData, selectedCategory, navigation, loader}) =>
     }
   };
 
-  const renderCategories = () => {
-    return categoriesData.map(item => {
-      const sortedSubCategories = item.SubCategories.slice().sort();
-      return (
-        <CategoryAccordian
-          // key={item}
-          categoryName={item.apiName}
-          SubCategories={sortedSubCategories}
-          renderCategoryIcon={renderCategoryIcon}
-          selectedCategory={selectedCategory}
-          scrollViewRef={scrollViewRef}
-          category={item}
-          key={item.apiName}
-        />
-      );
-    });
+  // Render individual category items
+  const renderCategoryItem = ({item}) => {
+    const sortedSubCategories = item.SubCategories.slice().sort();
+    return (
+      <CategoryAccordian
+        categoryName={item.apiName}
+        SubCategories={sortedSubCategories}
+        renderCategoryIcon={renderCategoryIcon}
+        selectedCategory={selectedCategory}
+        category={item}
+      />
+    );
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: Color.colorWhite}}>
       <CustomLoader visible={loader} />
       <HeaderComponent text={'Choose category'} />
-      <ScrollView ref={scrollViewRef} style={{backgroundColor: Color.colorWhite}}>
-        {renderCategories()}
-      </ScrollView>
+      <FlatList
+        ref={flatListRef}
+        data={categoriesData}
+        renderItem={renderCategoryItem}
+        keyExtractor={item => item.apiName}
+        contentContainerStyle={{paddingBottom: heightToDp(40), backgroundColor: Color.colorWhite}}
+        showsVerticalScrollIndicator={false}
+        initialNumToRender={categoriesData.length} // Render all initially
+        onScrollToIndexFailed={info => {
+          setTimeout(() => {
+            flatListRef.current?.scrollToIndex({
+              index: info.index,
+              animated: true,
+            });
+          }, 500);
+        }}
+      />
     </SafeAreaView>
   );
 };
