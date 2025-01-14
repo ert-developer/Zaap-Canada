@@ -3,7 +3,6 @@ import {View, Text, TouchableOpacity, StyleSheet, ScrollView, FlatList} from 're
 import Collapsible from 'react-native-collapsible';
 import SvgComponentClose from '../../assets/svgIcons/close/close-container';
 import Opensvg from '../../assets/svgIcons/open/open-container';
-import CustomText from '../../atoms/text/textComponent';
 import {heightToDp} from '../../responsive/responsive';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
@@ -48,16 +47,12 @@ const CategoryAccordian = ({selectedCategory, categoryName, SubCategories, rende
       </TouchableOpacity>
 
       <Collapsible collapsed={collapsed}>
-        <ScrollView style={styles.scrollContainer}>
-          <View>
-            <FlatList
-              data={SubCategories}
-              renderItem={renderSubCategoryItem}
-              keyExtractor={item => item}
-              style={styles.scrollContainer}
-            />
-          </View>
-        </ScrollView>
+        <FlatList
+          data={SubCategories}
+          renderItem={renderSubCategoryItem}
+          keyExtractor={item => item}
+          style={styles.scrollContainer}
+        />
       </Collapsible>
     </View>
   );
@@ -68,6 +63,9 @@ const styles = StyleSheet.create({
     fontSize: heightToDp(2),
     color: '#464183',
     padding: 5,
+  },
+  scrollContainer: {
+    height: 'auto',
   },
   categoryAndIconCOntainer: {
     flexDirection: 'row',

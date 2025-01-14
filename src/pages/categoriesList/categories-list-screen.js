@@ -134,7 +134,7 @@ const CategoryList = ({categoriesData, selectedCategory, loader}) => {
         data={categoriesData}
         renderItem={renderCategoryItem}
         keyExtractor={item => item.apiName}
-        contentContainerStyle={{paddingBottom: heightToDp(40), backgroundColor: Color.colorWhite}}
+        contentContainerStyle={{paddingBottom: heightToDp(100), backgroundColor: Color.colorWhite}}
         showsVerticalScrollIndicator={false}
         initialNumToRender={categoriesData.length} // Render all initially
         onScrollToIndexFailed={info => {
