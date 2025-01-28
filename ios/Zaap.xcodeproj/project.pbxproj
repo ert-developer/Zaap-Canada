@@ -548,7 +548,6 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.zaap-canada-ios";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = "org.reactjs.native.example.zaap-canada-ios";
 				PRODUCT_NAME = Zaap;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -585,7 +584,6 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.zaap-canada-ios";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = "org.reactjs.native.example.zaap-canada-ios";
 				PRODUCT_NAME = Zaap;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

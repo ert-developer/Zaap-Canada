@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Platform, SafeAreaView, StatusBar} from 'react-native';
-import 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
 import NavigationStack from './src/navigation/authentication/navigation';
 import {StripeProvider} from '@stripe/stripe-react-native';

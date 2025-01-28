@@ -79,6 +79,8 @@ import {tr} from 'date-fns/locale';
 import FastImage from 'react-native-fast-image';
 import {envConfig} from '../../assets/helpers/envApi';
 import {Image} from 'react-native';
+import messaging from '@react-native-firebase/messaging';
+import notifee from '@notifee/react-native';
 
 const HomeScreen = ({
   navigation,
@@ -134,6 +136,22 @@ const HomeScreen = ({
   //     navigation.navigate('HomeScreen'); // Replace 'HomeScreen' with your actual screen name
   //   }
   // }, [locationPermissionGranted]);
+
+  useEffect(() => {
+    // Foreground handler
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      console.log('Foreground notification:', remoteMessage);
+      await notifee.displayNotification({
+        title: remoteMessage.notification.title,
+        body: remoteMessage.notification.body,
+        ios: {
+          sound: 'default',
+        },
+      });
+    });
+
+    return unsubscribe;
+  }, []);
 
   const renderSvgIcon = iconName => {
     switch (iconName) {
